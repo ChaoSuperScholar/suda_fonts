@@ -1,0 +1,32 @@
+{
+	"items":{
+		"totalAssets" : "556677.2122",
+		"myname" : "一段非常长的名字，而且长度一定会超标"
+	},
+  "lists": [
+    {
+			"imgUrl" : "../../static/images/indexNew_09.png",
+      "title" : "ETH",
+      "priceOther" : "1541.1154",
+			"priceChina" : "726.734",
+			"priceConversion" : "2644.123",
+			"ratio" : "-1.66%"
+    },
+		{
+			"imgUrl" : "../../static/images/indexNew_10.png",
+			"title" : "USDT",
+			"priceOther" : "1541.1154",
+			"priceChina" : "726.734",
+			"priceConversion" : "2644.123",
+			"ratio" : "-1.66%"
+		},
+		{
+			"imgUrl" : "../../static/images/indexNew_11.png",
+			"title" : "SDT",
+			"priceOther" : "1541.1154",
+			"priceChina" : "726.734",
+			"priceConversion" : "2644.123",
+			"ratio" : "-1.66%"
+		}
+  ]
+}

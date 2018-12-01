@@ -140,15 +140,15 @@
 			},
 			/* 选择ETH钱包类型 */
 			routerETH (){
-				
+				console.log("选择ETH钱包类型");
 			},
 			/* 选择USDT钱包类型 */
 			routerUSDT (){
-				
+				console.log("选择USDT钱包类型");
 			},
 			/* 选择SDT钱包类型 */
 			routerSDT (){
-				
+				console.log("选择SDT钱包类型");
 			},
   		}
     }
