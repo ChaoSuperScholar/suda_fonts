@@ -5,7 +5,9 @@
 				<router-link to="receivables">
 					<img src="../../static/images/indexNew_06.png" alt="">
 				</router-link>
-				<img src="../../static/images/indexNew_07.png" alt="">
+				<router-link to="addAssets">
+					<img src="../../static/images/indexNew_07.png" alt="">
+				</router-link>
 			</div>
 			<h4 class="text-line-1">{{myname}}</h4>
 			<h5><span>{{totalAssets}}</span>总资产(￥)</h5>
@@ -159,8 +161,8 @@
 		height: 0.5rem;
 	}
 	.list-left img{
-		width: 0.28rem;
-		height: 0.4rem;
+		width: 0.42rem;
+		height: 0.42rem;
 		margin: 0 0.2rem 0 0.3rem;
 	}
 	.list .list-right{

@@ -5,8 +5,16 @@ import registered from '../page/registered'
 import wallet from '../page/wallet'
 import transaction from '../page/transaction'
 import receivables from '../page/receivables'
+import addAssets from '../page/addAssets'
 import header from '../components/headerBar'
 import footerBar from '../components/footerBar'
+import pageHead from '../components/pageHead'
+import information from '../page/information'
+import application from '../page/application'
+import userCenter from '../page/userCenter'
+import transactionRelease from '../page/transactionRelease'
+import order from '../page/order'
+import orderPage from '../page/orderPage'
 
 import index from '../page/index'
 import createWallet from '../page/createWallet'
@@ -32,6 +40,11 @@ export default new Router({
 			path: '/receivables',
 			name: 'receivables',
 			component: receivables
+		},
+		{
+			path: '/addAssets',
+			name: 'addAssets',
+			component: addAssets
 		},
 		{
 			path: '/wallet',
@@ -67,6 +80,41 @@ export default new Router({
 			path: '/components',
 			name: 'footerBar',
 			component: footerBar
+		},
+		{
+			path: '/components',
+			name: 'pageHead',
+			component: pageHead
+		},
+		{
+			path: '/information',
+			name: 'information',
+			component: information
+		},
+		{
+			path: '/application',
+			name: 'application',
+			component: application
+		},
+		{
+			path: '/userCenter',
+			name: 'userCenter',
+			component: userCenter
+		},
+		{
+			path: '/transactionRelease',
+			name: 'transactionRelease',
+			component: transactionRelease
+		},
+		{
+			path: '/order',
+			name: 'order',
+			component: order
+		},
+		{
+			path: '/orderPage',
+			name: 'orderPage',
+			component: orderPage
 		}
   ]
 })

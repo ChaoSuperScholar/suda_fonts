@@ -3,20 +3,20 @@
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="body  flex-col">
 			<div @click="selectList" class="select flex-row">
-				<h4>选择币种：<span>SDT</span></h4>
+				<h4>选择币种：<span>{{chooseTitle}}</span></h4>
 				<img src="../../static/images/receivables_01.png" alt="">
 			</div>
-			<div v-show="isShowSelect" v-for="list in lists" class="select-options flex-row">
+			<div v-show="isShowSelect" v-for="list in lists" class="select-options flex-row" @click="choose(list)">
 				<h4>{{list.title}}</h4>
 			</div>
 			<div class="wallet-address flex-col">
 				<h4>钱包地址</h4>
-				<h5>0x33162AaFcD9149B2f73a8c923Eb24C76A 922804D</h5>
+				<h5 class="tag-read">{{address}}</h5>
 			</div>
 			<div class="qr-code flex-col">
 				<img src="../../static/images/receivables_02.png" alt="">
 			</div>
-			<div @click="createBtn" class="create-btn flex-col">
+			<div id="copy-btn" class="create-btn flex-col">
 				复制钱包地址
 			</div>
 		</div>
@@ -25,15 +25,24 @@
 
 <script>
 	import headerBar from '../components/headerBar'
+	import Clipboard from 'clipboard'
 	export default{
         name: 'receivables',
         data(){
             return {
             	indexTitle : "收款",
 				lists : [],
-				isShowSelect : false
+				isShowSelect : false,
+				address : "",
+				chooseTitle : "",
+				clipboardObj: null
             }
         },
+		watch: {
+			address: function() {
+				this.initCopyBtn();
+			}			
+		},
         // 创建之前
   		beforeCreate: function () {
   			
@@ -48,10 +57,9 @@
   		},
   		// 挂载之后
   		mounted: function(){
-  			this.$nextTick(function(){
-  				
-  			})
+			
   		},
+		// 注册组件
 		components:{
 			headerBar
 		},
@@ -65,6 +73,8 @@
 							console.log(data);
 							let res = data.data;
 							this.lists = res.lists;
+							this.address = res.items.address;
+							this.chooseTitle = res.lists[0].title;
 						} else {
 							this.layers("請求失敗");
 						}
@@ -76,11 +86,31 @@
 							},4000)
 					});
 			},
-  			createBtn (){
-				console.log("点击了复制钱包地址")
+  			initCopyBtn () {
+				var self = this;
+				var clipboard = new Clipboard('#copy-btn', {
+					text: function() {
+						return self.address;
+					}
+				}).on('success', e => {
+					this.layers('复制成功');
+		          	console.log('复制成功')
+		          	// 释放内存
+		        }).on('error', e => {
+		          	// 不支持复制
+					this.layers('复制失败，请手动复制！');
+		          	console.log('该浏览器不支持自动复制')
+		          	// 释放内存
+		        })
 			},
 			selectList (){
 				this.isShowSelect = !this.isShowSelect; 
+			},
+			choose(list){
+				console.log(list);
+				console.log(list.title);
+				this.chooseTitle = list.title;
+				this.isShowSelect = false;
 			}
   		},
     }
@@ -133,6 +163,7 @@
 	.wallet-address h5{
 		font-size: 0.26rem;
 		color: #616161;
+		word-break: break-all;
 	}
 	.qr-code{
 		width: 100%;
@@ -146,7 +177,7 @@
 	.create-btn{
 		width: 6.9rem;
 		height: 0.94rem;
-		border-radius: 0.2rem;
+		border-radius: 0.1rem;
 		background-color: #4a7cee;
 		font-size: 0.32rem;
 		color: #FFFFFF;

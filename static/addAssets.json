@@ -1,0 +1,34 @@
+{ 
+  "lists": [
+		{
+			"id" : "14",
+			"imgUrl" : "../../static/images/addAssets_01.png",
+			"title" : "BTC - Bitcoin",
+			"state" : "2"
+		},
+		{
+			"id" : "3",
+			"imgUrl" : "../../static/images/addAssets_02.png",
+			"title" : "LTC - Litecoin",
+			"state" : "2"
+		},
+		{
+			"id" : "20",
+			"imgUrl" : "../../static/images/addAssets_03.png",
+			"title" : "BCH - Bitcoin Cash",
+			"state" : "2"
+		},
+		{
+			"id" : "31",
+			"imgUrl" : "../../static/images/addAssets_04.png",
+			"title" : "ACT - Achain",
+			"state" : "1"
+		},
+		{
+			"id" : "46",
+			"imgUrl" : "../../static/images/addAssets_05.png",
+			"title" : "ETH - Ethereum",
+			"state" : "1"
+		}
+  ]
+}

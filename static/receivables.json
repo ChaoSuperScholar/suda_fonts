@@ -1,13 +1,19 @@
-{
+{ 
+	"items" : {
+		"address" : "0x33162AaFcD9149B2f73a8c923Eb24C76A922804Df73a8c923Eb24C76A922804D"
+	},
   "lists": [
     {
-		"title" : "ETH"
+			"id" : "1",
+			"title" : "ETH"
     },
-	{
-		"title" : "USDT"
-	},
-	{
-		"title" : "SDT"
-	}
+		{
+			"id" : "2",
+			"title" : "USDT"
+		},
+		{
+			"id" : "3",
+			"title" : "SDT"
+		}
   ]
 }

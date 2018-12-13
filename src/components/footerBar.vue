@@ -1,6 +1,5 @@
 <template>
-	<div class="footerBar">
-		<div class="footer flex-row">
+	<div class="footerBar flex-row">
 			<router-link to="/wallet">
 				<div class="img-1">
 					<img :src="img1" alt="">
@@ -11,16 +10,21 @@
 					<img :src="img2" alt="">
 				</div>
 			</router-link>
-			<div class="img-3">
-				<img :src="img3" alt="">
-			</div>
-			<div class="img-4">
-				<img :src="img4" alt="">
-			</div>
-			<div class="img-5">
-				<img :src="img5" alt="">
-			</div>
-		</div>
+			<router-link to="application">
+				<div class="img-3">
+					<img :src="img3" alt="">
+				</div>
+			</router-link>
+			<router-link to="information">
+				<div class="img-4">
+					<img :src="img4" alt="">
+				</div>
+			</router-link>
+			<router-link to="userCenter">
+				<div class="img-5">
+					<img :src="img5" alt="">
+				</div>
+			</router-link>
 	</div>
 </template>
 
@@ -62,16 +66,17 @@
 </script>
 
 <style scoped>
-	.footer{
+	.footerBar{
 		width: 100%;
 		height: 1rem;
-		border-top: 0.01rem solid #c3c9d5;
-		position: absolute;
+		/* border-top: 0.01rem solid #c3c9d5; */
+		position: fixed;
 		left: 0;
 		bottom: 0;
 		justify-content: space-between;
+		background-color: #FFFFFF;
 	}
-	.footer div{
+	.footerBar div{
 		width: 0.5rem;
 		height: 0.64rem;
 	}

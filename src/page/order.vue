@@ -1,5 +1,5 @@
 <template>
-	<div class="transaction">
+	<div class="order">
 		<div class="top-module flex-row">
 			<h4></h4>
 			<div class="top-tab flex-row">
@@ -10,10 +10,10 @@
 					<h3>出售</h3>
 				</div>
 			</div>
-			<router-link to="order">
+			<router-link to="transaction">
 				<div class="top-right flex-row">
-					<img src="../../static/images/transaction_01.png" alt="">
-					<h3>订单</h3>
+					<img src="../../static/images/order_01.png" alt="">
+					<h3>广告</h3>
 				</div>
 			</router-link>
 		</div>
@@ -29,18 +29,46 @@
 			<!-- 需要切换的部分 -->
 			<div class="tab-card" style="display: block;">
 				<!-- 循环列表list -->
+				<router-link to="orderPage">
+					<div class="list flex-col">
+						<div class="list-top flex-row">
+							<div class="list-top-left flex-row">
+								<img src="../../static/images/userCenter_01.png" alt="">
+								<h4>全部模拟数据</h4>
+							</div>
+							<h4 class="h4-blue">待付款</h4>
+						</div>
+						<div class="list-bottom flex-col">
+							<div class="list-bottom-top flex-row">
+								<h4>金额&nbsp;826.80CNY</h4>
+								<h5>购买数量:&nbsp;15402</h5>
+							</div>
+							<div class="list-bottom-bottom flex-row">
+								<div class="bottom-left flex-row">
+									<img src="../../static/images/transaction_03.png" alt="">
+									<img src="../../static/images/transaction_04.png" alt="">
+									<img src="../../static/images/transaction_05.png" alt="">
+								</div>
+								<h5>购买单价:&nbsp;827.00</h5>
+							</div>
+						</div>
+					</div>
+				</router-link>
+			</div>
+			<div class="tab-card">
+				<!-- 循环列表list -->
 				<div class="list flex-col">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<img src="../../static/images/userCenter_01.png" alt="">
-							<h4>小熊奥西商家</h4>
+							<h4>待付款模拟数据</h4>
 						</div>
-						<h5>成交&nbsp;326</h5>
+						<h4 class="h4-blue">待付款</h4>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
-							<h4>单价&nbsp;826.80CNY</h4>
-							<h5>剩余数量:&nbsp;15402</h5>
+							<h4>金额&nbsp;826.80CNY</h4>
+							<h5>购买数量:&nbsp;15402</h5>
 						</div>
 						<div class="list-bottom-bottom flex-row">
 							<div class="bottom-left flex-row">
@@ -48,34 +76,7 @@
 								<img src="../../static/images/transaction_04.png" alt="">
 								<img src="../../static/images/transaction_05.png" alt="">
 							</div>
-							<div class="btn-blue flex-col">
-								购买
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- 循环列表list  end -->
-				<div class="list flex-col">
-					<div class="list-top flex-row">
-						<div class="list-top-left flex-row">
-							<img src="../../static/images/userCenter_01.png" alt="">
-							<h4>及时收款商家</h4>
-						</div>
-						<h5>成交&nbsp;326</h5>
-					</div>
-					<div class="list-bottom flex-col">
-						<div class="list-bottom-top flex-row">
-							<h4>单价&nbsp;826.80CNY</h4>
-							<h5>剩余数量:&nbsp;15402</h5>
-						</div>
-						<div class="list-bottom-bottom flex-row">
-							<div class="bottom-left flex-row">
-								<img src="../../static/images/transaction_03.png" alt="">
-								<img src="../../static/images/transaction_04.png" alt="">
-							</div>
-							<div class="btn-blue flex-col">
-								购买
-							</div>
+							<h5>购买单价:&nbsp;827.00</h5>
 						</div>
 					</div>
 				</div>
@@ -86,14 +87,14 @@
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<img src="../../static/images/userCenter_01.png" alt="">
-							<h4>SDT测试数据</h4>
+							<h4>已付款模拟数据</h4>
 						</div>
-						<h5>成交&nbsp;326</h5>
+						<h4 class="h4-blue">等待放行</h4>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
-							<h4>单价&nbsp;826.80CNY</h4>
-							<h5>剩余数量:&nbsp;15402</h5>
+							<h4>金额&nbsp;826.80CNY</h4>
+							<h5>购买数量:&nbsp;15402</h5>
 						</div>
 						<div class="list-bottom-bottom flex-row">
 							<div class="bottom-left flex-row">
@@ -101,9 +102,7 @@
 								<img src="../../static/images/transaction_04.png" alt="">
 								<img src="../../static/images/transaction_05.png" alt="">
 							</div>
-							<div class="btn-blue flex-col">
-								购买
-							</div>
+							<h5>购买单价:&nbsp;827.00</h5>
 						</div>
 					</div>
 				</div>
@@ -114,14 +113,14 @@
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<img src="../../static/images/userCenter_01.png" alt="">
-							<h4>USDT测试数据</h4>
+							<h4>申诉中模拟数据</h4>
 						</div>
-						<h5>成交&nbsp;326</h5>
+						<h4 class="h4-red">申诉中</h4>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
-							<h4>单价&nbsp;826.80CNY</h4>
-							<h5>剩余数量:&nbsp;15402</h5>
+							<h4>金额&nbsp;826.80CNY</h4>
+							<h5>购买数量:&nbsp;15402</h5>
 						</div>
 						<div class="list-bottom-bottom flex-row">
 							<div class="bottom-left flex-row">
@@ -129,9 +128,7 @@
 								<img src="../../static/images/transaction_04.png" alt="">
 								<img src="../../static/images/transaction_05.png" alt="">
 							</div>
-							<div class="btn-blue flex-col">
-								购买
-							</div>
+							<h5>购买单价:&nbsp;827.00</h5>
 						</div>
 					</div>
 				</div>
@@ -142,14 +139,14 @@
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<img src="../../static/images/userCenter_01.png" alt="">
-							<h4>BTC测试数据</h4>
+							<h4>已取消模拟数据</h4>
 						</div>
-						<h5>成交&nbsp;326</h5>
+						<h4 class="h4-gray">已取消</h4>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
-							<h4>单价&nbsp;826.80CNY</h4>
-							<h5>剩余数量:&nbsp;15402</h5>
+							<h4>金额&nbsp;826.80CNY</h4>
+							<h5>购买数量:&nbsp;15402</h5>
 						</div>
 						<div class="list-bottom-bottom flex-row">
 							<div class="bottom-left flex-row">
@@ -157,37 +154,7 @@
 								<img src="../../static/images/transaction_04.png" alt="">
 								<img src="../../static/images/transaction_05.png" alt="">
 							</div>
-							<div class="btn-blue flex-col">
-								购买
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="tab-card">
-				<!-- 循环列表list -->
-				<div class="list flex-col">
-					<div class="list-top flex-row">
-						<div class="list-top-left flex-row">
-							<img src="../../static/images/userCenter_01.png" alt="">
-							<h4>EOS测试数据</h4>
-						</div>
-						<h5>成交&nbsp;326</h5>
-					</div>
-					<div class="list-bottom flex-col">
-						<div class="list-bottom-top flex-row">
-							<h4>单价&nbsp;826.80CNY</h4>
-							<h5>剩余数量:&nbsp;15402</h5>
-						</div>
-						<div class="list-bottom-bottom flex-row">
-							<div class="bottom-left flex-row">
-								<img src="../../static/images/transaction_03.png" alt="">
-								<img src="../../static/images/transaction_04.png" alt="">
-								<img src="../../static/images/transaction_05.png" alt="">
-							</div>
-							<div class="btn-blue flex-col">
-								购买
-							</div>
+							<h5>购买单价:&nbsp;827.00</h5>
 						</div>
 					</div>
 				</div>
@@ -208,14 +175,14 @@
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<img src="../../static/images/userCenter_01.png" alt="">
-							<h4>ETH出售订单测试数据</h4>
+							<h4>全部模拟数据</h4>
 						</div>
-						<h5>成交&nbsp;326</h5>
+						<h4 class="h4-blue">等待付款</h4>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
-							<h4>单价&nbsp;826.80CNY</h4>
-							<h5>剩余数量:&nbsp;15402</h5>
+							<h4>金额&nbsp;826.80CNY</h4>
+							<h5>购买数量:&nbsp;15402</h5>
 						</div>
 						<div class="list-bottom-bottom flex-row">
 							<div class="bottom-left flex-row">
@@ -223,9 +190,7 @@
 								<img src="../../static/images/transaction_04.png" alt="">
 								<img src="../../static/images/transaction_05.png" alt="">
 							</div>
-							<div class="btn-red flex-col">
-								出售
-							</div>
+							<h5>购买单价:&nbsp;827.00</h5>
 						</div>
 					</div>
 				</div>
@@ -236,14 +201,14 @@
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<img src="../../static/images/userCenter_01.png" alt="">
-							<h4>SDT出售订单测试数据</h4>
+							<h4>未付款模拟数据</h4>
 						</div>
-						<h5>成交&nbsp;326</h5>
+						<h4 class="h4-blue">等待付款</h4>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
-							<h4>单价&nbsp;826.80CNY</h4>
-							<h5>剩余数量:&nbsp;15402</h5>
+							<h4>金额&nbsp;826.80CNY</h4>
+							<h5>购买数量:&nbsp;15402</h5>
 						</div>
 						<div class="list-bottom-bottom flex-row">
 							<div class="bottom-left flex-row">
@@ -251,9 +216,7 @@
 								<img src="../../static/images/transaction_04.png" alt="">
 								<img src="../../static/images/transaction_05.png" alt="">
 							</div>
-							<div class="btn-red flex-col">
-								出售
-							</div>
+							<h5>购买单价:&nbsp;827.00</h5>
 						</div>
 					</div>
 				</div>
@@ -264,14 +227,14 @@
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<img src="../../static/images/userCenter_01.png" alt="">
-							<h4>USDT出售订单测试数据</h4>
+							<h4>已付款模拟数据</h4>
 						</div>
-						<h5>成交&nbsp;326</h5>
+						<h4 class="h4-blue">待放行</h4>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
-							<h4>单价&nbsp;826.80CNY</h4>
-							<h5>剩余数量:&nbsp;15402</h5>
+							<h4>金额&nbsp;826.80CNY</h4>
+							<h5>购买数量:&nbsp;15402</h5>
 						</div>
 						<div class="list-bottom-bottom flex-row">
 							<div class="bottom-left flex-row">
@@ -279,20 +242,64 @@
 								<img src="../../static/images/transaction_04.png" alt="">
 								<img src="../../static/images/transaction_05.png" alt="">
 							</div>
-							<div class="btn-red flex-col">
-								出售
+							<h5>购买单价:&nbsp;827.00</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-card2">
+				<!-- 循环列表list -->
+				<div class="list flex-col">
+					<div class="list-top flex-row">
+						<div class="list-top-left flex-row">
+							<img src="../../static/images/userCenter_01.png" alt="">
+							<h4>申诉中模拟数据</h4>
+						</div>
+						<h4 class="h4-blue">申述中</h4>
+					</div>
+					<div class="list-bottom flex-col">
+						<div class="list-bottom-top flex-row">
+							<h4>金额&nbsp;826.80CNY</h4>
+							<h5>购买数量:&nbsp;15402</h5>
+						</div>
+						<div class="list-bottom-bottom flex-row">
+							<div class="bottom-left flex-row">
+								<img src="../../static/images/transaction_03.png" alt="">
+								<img src="../../static/images/transaction_04.png" alt="">
+								<img src="../../static/images/transaction_05.png" alt="">
 							</div>
+							<h5>购买单价:&nbsp;827.00</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-card2">
+				<!-- 循环列表list -->
+				<div class="list flex-col">
+					<div class="list-top flex-row">
+						<div class="list-top-left flex-row">
+							<img src="../../static/images/userCenter_01.png" alt="">
+							<h4>已取消模拟数据</h4>
+						</div>
+						<h4 class="h4-blue">已取消</h4>
+					</div>
+					<div class="list-bottom flex-col">
+						<div class="list-bottom-top flex-row">
+							<h4>金额&nbsp;826.80CNY</h4>
+							<h5>购买数量:&nbsp;15402</h5>
+						</div>
+						<div class="list-bottom-bottom flex-row">
+							<div class="bottom-left flex-row">
+								<img src="../../static/images/transaction_03.png" alt="">
+								<img src="../../static/images/transaction_04.png" alt="">
+								<img src="../../static/images/transaction_05.png" alt="">
+							</div>
+							<h5>购买单价:&nbsp;827.00</h5>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- 发布币种 -->
-		<router-link to="transactionRelease">
-			<div class="release-fixed">
-				<img src="../../static/images/transaction_02.png" alt="">
-			</div>
-		</router-link>
 		<footerBar></footerBar>
 	</div>
 </template>
@@ -300,53 +307,61 @@
 <script>
 	import footerBar from '../components/footerBar'
 	export default{
-        name: 'transaction',
+        name: 'order',
         data(){
             return {
-            	img1 : require('../../static/images/indexNew_01.png'),
-            	img2 : require('../../static/images/indexNew_02_de.png'),
-            	img3 : require('../../static/images/indexNew_03.png'),
-            	img4 : require('../../static/images/indexNew_04.png'),
-            	img5 : require('../../static/images/indexNew_05.png'),
-				isTabLeft : true,
-				isTabRight : false,
-				showLeft : true,
-				showRight : false,
+            	isTabLeft : true,
+            	isTabRight : false,
+            	showLeft : true,
+            	showRight : false,
+				img1 : require('../../static/images/indexNew_01.png'),
+				img2 : require('../../static/images/indexNew_02_de.png'),
+				img3 : require('../../static/images/indexNew_03.png'),
+				img4 : require('../../static/images/indexNew_04.png'),
+				img5 : require('../../static/images/indexNew_05.png'),
 				tabsName: [
 					{  
-						name: "ETH",  
+						name: "全部",  
 						isActive: true  
 					},
 					{  
-						name: "SDT",  
+						name: "未付款",  
 						isActive: false
 					},
 					{  
-						name: "USDT",  
+						name: "已付款",  
 						isActive: false
 					},
 					{  
-						name: "BTC",  
+						name: "申述中",  
 						isActive: false
 					},
 					{  
-						name: "EOS",  
+						name: "已取消",  
 						isActive: false
 					}
 				],  
 				active: false,
 				tabsName2:[
-					{
-						name: "ETH",  
-						isActive: true
+					{  
+						name: "全部",  
+						isActive: true  
 					},
-					{
-						name: "SDT",  
+					{  
+						name: "未付款",  
 						isActive: false
 					},
-					{
-						name: "USDT",  
+					{  
+						name: "已付款",  
 						isActive: false
+					},
+					{  
+						name: "申述中",  
+						isActive: false
+					},
+					{  
+						name: "已取消",  
+						isActive: false,
 					}
 				],
 				active2: false
@@ -364,30 +379,30 @@
   		beforeMount: function (){
   			
   		},
-		//注册组件
-		components : {
-			footerBar
-		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
   				
   			})
   		},
+		//注册组件
+		components : {
+			footerBar
+		},
   		//实例方法
   		methods: {
   			clickTabLeft (){
-				this.isTabLeft = true;
-				this.isTabRight = false;
-				this.showLeft = true;
-				this.showRight = false;
-			},
-			clickTabRight (){
-				this.isTabLeft = false;
-				this.isTabRight = true;
-				this.showLeft = false;
-				this.showRight = true
-			},
+  				this.isTabLeft = true;
+  				this.isTabRight = false;
+  				this.showLeft = true;
+  				this.showRight = false;
+  			},
+  			clickTabRight (){
+  				this.isTabLeft = false;
+  				this.isTabRight = true;
+  				this.showLeft = false;
+  				this.showRight = true
+  			},
 			tabsSwitch: function(tabIndex) {  
 					let tabCardCollection = document.querySelectorAll(".tab-card"),  
 						len = tabCardCollection.length;  
@@ -408,12 +423,13 @@
 					this.tabsName2[tabIndex2].isActive = true;  
 					tabCardCollection2[tabIndex2].style.display = "block";  
 			}
+			
   		}
     }
 </script>
 
-<style scoped="scoped">
-	.transaction{
+<style scoped>
+	.order{
 		min-height: 100vh;
 		background-color: #e8eaee;
 		justify-content: flex-start!important;
@@ -459,23 +475,23 @@
 		margin-right: 0.3rem;
 	}
 	.top-right img{
-		width: 0.28rem;
-		height: 0.34rem;
+		width: 0.3rem;
+		height: 0.3rem;
 		margin-right: 0.2rem;
 	}
 	.top-right h3{
 		color: #FFFFFF;
-	}
-	.tab-card,.tab-card2{
-		width: 100%;
-		height: auto;
-		display: none;
 	}
 	.tab-left,.tab-right{
 		width: 100%;
 		height: auto;
 		margin-bottom: 1rem;
 		background-color: #e8eaee;
+	}
+	.tab-card,.tab-card2{
+		width: 100%;
+		height: auto;
+		display: none;
 	}
 	.tab-father{
 		width: 100%;
@@ -512,7 +528,7 @@
 		border-radius: 50%;
 		margin: 0 0.16rem 0 0.3rem;
 	}
-	.list-top h5{
+	.list h5{
 		margin-right: 0.3rem;
 	}
 	.list-bottom-top,.list-bottom-bottom{
@@ -523,9 +539,6 @@
 	}
 	.list-bottom-top h4{
 		margin-left: 0.3rem;
-	}
-	.list-bottom-top h5{
-		margin-right: 0.3rem;
 	}
 	.list-bottom-bottom{
 		margin-top: 0.3rem;
@@ -538,29 +551,23 @@
 	.list-bottom-bottom img:first-child{
 		margin-left: 0.3rem;
 	}
-	.list-bottom-bottom .btn-blue,.btn-red{
-		width: 1.6rem;
-		height: 0.66rem;
-		border-radius: 0.1rem;
-		background-color: #4779e3;
-		font-size: 0.32rem;
-		color: #FFFFFF;
+	.list-bottom-top h4{
+		font-weight: 600;
+		color: #2a2d35;
+	}
+	.h4-blue{
+		font-weight: 600;
+		color: #3f74e3;
 		margin-right: 0.3rem;
 	}
-	.release-fixed{
-		width: 1.08rem;
-		height: 1.08rem;
-		position: fixed;
-		right: 0.26rem;
-		bottom: 1.8rem;
+	.h4-gray{
+		font-weight: 600;
+		color: #535d72;
+		margin-right: 0.3rem;
 	}
-	.btn-red{
-		width: 1.6rem;
-		height: 0.66rem;
-		border-radius: 0.1rem;
-		background-color: #e55656;
-		font-size: 0.32rem;
-		color: #FFFFFF;
+	.h4-red{
+		font-weight: 600;
+		color: #e94949;
 		margin-right: 0.3rem;
 	}
 </style>
