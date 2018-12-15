@@ -10,56 +10,64 @@
 				</div>
 			</div>
 			<div class="bottom flex-row">
-				<div class="bottom-list flex-col">
+				<div class="bottom-list flex-col" @click="nodata()">
 					<img src="../../static/images/userCenter_02.png" alt="">
 					<h4>推广</h4>
 				</div>
-				<div class="bottom-list flex-col">
-					<img src="../../static/images/userCenter_03.png" alt="">
-					<h4>团队</h4>
-				</div>
-				<div class="bottom-list flex-col">
+				<router-link to="myTeam">
+					<div class="bottom-list flex-col">
+						<img src="../../static/images/userCenter_03.png" alt="">
+						<h4>团队</h4>
+					</div>
+				</router-link>
+				<div class="bottom-list flex-col" @click="nodata()">
 					<img src="../../static/images/userCenter_04.png" alt="">
 					<h4>记录</h4>
 				</div>
 			</div>
 		</div>
 		<div class="list flex-row">
-			<div class="list-left flex-row">
+			<div class="list-left flex-row" @click="nodata()">
 				<img src="../../static/images/userCenter_05.png" alt="">
 				<h4>身份认证</h4>
 			</div>
 			<img src="../../static/images/receivables_01.png" alt="">
 		</div>
-		<div class="list flex-row">
+		<div class="list flex-row" @click="nodata()">
 			<div class="list-left flex-row">
 				<img src="../../static/images/userCenter_06.png" alt="">
 				<h4>收款方式</h4>
 			</div>
 			<img src="../../static/images/receivables_01.png" alt="">
 		</div>
-		<div class="list flex-row">
-			<div class="list-left flex-row">
-				<img src="../../static/images/userCenter_07.png" alt="">
-				<h4>安全中心</h4>
+		<router-link to="securityCenter">
+			<div class="list flex-row">
+				<div class="list-left flex-row">
+					<img src="../../static/images/userCenter_07.png" alt="">
+					<h4>安全中心</h4>
+				</div>
+				<img src="../../static/images/receivables_01.png" alt="">
 			</div>
-			<img src="../../static/images/receivables_01.png" alt="">
-		</div>
-		<div class="list flex-row">
-			<div class="list-left flex-row">
-				<img src="../../static/images/userCenter_08.png" alt="">
-				<h4>关于我们</h4>
+		</router-link>
+		<router-link to="aboutUs">
+			<div class="list flex-row">
+				<div class="list-left flex-row">
+					<img src="../../static/images/userCenter_08.png" alt="">
+					<h4>关于我们</h4>
+				</div>
+				<img src="../../static/images/receivables_01.png" alt="">
 			</div>
-			<img src="../../static/images/receivables_01.png" alt="">
-		</div>
-		<div class="list flex-row">
-			<div class="list-left flex-row">
-				<img src="../../static/images/userCenter_09.png" alt="">
-				<h4>更多信息</h4>
+		</router-link>
+		<router-link to="moreInformation">
+			<div class="list flex-row">
+				<div class="list-left flex-row">
+					<img src="../../static/images/userCenter_09.png" alt="">
+					<h4>更多信息</h4>
+				</div>
+				<img src="../../static/images/receivables_01.png" alt="">
 			</div>
-			<img src="../../static/images/receivables_01.png" alt="">
-		</div>
-		<div class="list list-last flex-row">
+		</router-link>
+		<div class="list list-last flex-row" @click="returnAccount()">
 			<div class="list-left flex-row">
 				<img src="../../static/images/userCenter_10.png" alt="">
 				<h4>退出账户</h4>
@@ -109,7 +117,29 @@
 		},
   		//实例方法
   		methods: {
-  			
+			nodata (){
+				this.layers("暂未开放!");
+			},
+  			returnAccount (){
+				let that = this;
+				this.axios.post('/index/suda_password/Logout')
+				.then(({data}) => {
+					if (data.status == 200) {
+						this.layers(data.message);
+						setTimeout(() =>{
+							this.$router.replace({name : 'indexNew'})
+						},2000)
+					} else{
+						this.layers(data.message);
+					}
+				})
+				.catch(function (error) {
+					setTimeout(() => {
+							console.log(error.message);
+							/* that.layers(error.message); */
+						},4000)
+				});
+			}
   		}
     }
 </script>

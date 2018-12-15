@@ -95,6 +95,26 @@
 				<h4>58468468464646</h4>
 			</div>
 		</div>
+		<div class="line-block"></div>
+		<div class="alert-text-father flex-col">
+			<div class="alert-text flex-col">
+				<h4>交易提醒</h4>
+				<p>1.您所出售的数字资产，已交由平台托管冻结。请确定收到对方付款后点击“确认放行”支付数字资产！</p>
+				<p>2.请不要相信任何催促放币的理由，确认收到款项后再释放数字资产，避免造成损失。</p>
+				<p>3.在收到短信后，请务必登录网上银行或手机银行确认款项是否入账，避免因收到诈骗短信错误释放数字资产！</p>
+			</div>
+		</div>
+		<div class="bottom-btn flex-row">
+			<div class="btn-left flex-col">
+				<img src="../../static/images/orderPage_01.png" alt="">
+			</div>
+			<div class="btn-center btn flex-col">
+				发起申述
+			</div>
+			<div class="btn-right btn flex-col">
+				确认放行
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -138,6 +158,7 @@
 		min-height: 100vh;
 		background-color: #e8eaee;
 		justify-content: flex-start!important;
+		margin-bottom: 1rem;
 	}
 	h3{
 		font-size: 0.32rem;
@@ -228,5 +249,50 @@
 		width: 0.46rem;
 		height: 0.46rem;
 		margin-right: 0.2rem;
+	}
+	.alert-text-father{
+		width: 100%;
+		height: auto;
+		background-color: #FFFFFF;
+	}
+	.alert-text{
+		width: 6.9rem;
+		height: auto;
+		align-items: flex-start;
+		padding: 0.3rem 0;
+	}
+	.alert-text p{
+		font-size: 0.28rem;
+		color: #696c74;
+	}
+	.bottom-btn{
+		width: 100%;
+		height: 1rem;
+		background-color: #f4f5fa;
+		position: fixed;
+		left: 0;
+		bottom: 0;
+	}
+	.btn-left{
+		width: auto;
+		height: 100%;
+		flex: auto;
+	}
+	.btn-left img{
+		width: 0.49rem;
+		height: 0.45rem;
+	}
+	.btn{
+		width: 2.8rem;
+		height: 100%;
+		font-size: 0.32rem;
+	}
+	.btn-center{
+		background-color: #d1d5e9;
+		color: #525c7b;
+	}
+	.btn-right{
+		background-color: #5174e7;
+		color: #FFFFFF;
 	}
 </style>

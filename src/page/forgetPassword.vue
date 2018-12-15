@@ -1,5 +1,5 @@
 <template>
-	<div class="registered">
+	<div class="forgetPassword">
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="list-father flex-col">
 			<!-- 手机号 -->
@@ -33,19 +33,12 @@
 			<div class="list flex-row">
 				<div class="list-left flex-row">
 					<img class="phoneimg" src="../../static/images/registered_01.png" alt="">
-					<h4>交易密码：</h4>
+					<h4>重新输入：</h4>
 				</div>
-				<input v-model="transactionPassword" type="password" value="" placeholder="用于交易与转账"/>
-			</div>
-			<div class="agree-clause flex-row">
-				<div class="agree-check flex-col" @click="agreeBtn">
-					<img src="../../static/images/registered_04.png" alt="" v-show="isShowAgree">
-				</div>
-				<h4>我已仔细阅读并同意</h4>
-				<h5>《服务与隐私条款》</h5>
+				<input v-model="transactionPassword" type="password" value="" placeholder="再次输入登录密码"/>
 			</div>
 			<div @click="createBtn" class="create-btn flex-col">
-				创建钱包
+				确认
 			</div>
 		</div>
 	</div>
@@ -54,16 +47,14 @@
 <script>
 	import headerBar from '../components/headerBar'
 	export default{
-        name: 'registered',
+        name: 'forgetPassword',
         data(){
             return {
-            	indexTitle : "注册账户",
-				isShow : true,
+            	indexTitle : "找回密码",
 				phone : "",
 				code : "",
 				loginPassword : "",
 				transactionPassword : "",
-				isShowAgree : true
             }
         },
         // 创建之前
@@ -89,15 +80,12 @@
 		},
   		//实例方法
   		methods: {
-  			agreeBtn (){
-  				this.isShowAgree = !this.isShowAgree;
-  			},
 			getCode (){
 				console.log("发送获取验证码");
 				let that = this;
 				this.axios.post('/index/suda_sms/send',{
 					phone : this.phone,
-					event : "register"
+					event : "resetpwd"
 				})
 				.then(({data}) =>{
 					console.log(data);
@@ -118,24 +106,20 @@
 					this.layers("请输入验证码！");
 				}else if(!this.loginPassword){
 					this.layers("请输入登录密码！");
-				} else if(!this.transactionPassword){
-					this.layers("请输入交易密码！");
-				} else if(this.isShowAgree == false){
-					this.layers("请点击同意服务与隐私条款!");
+				} else if(this.loginPassword != this.transactionPassword){
+					this.layers("两次输入的密码不一致！");
 				} else{
-					console.log(this.phone,this.code,this.loginPassword,this.transactionPassword);
+					/* console.log("创建成功!"); */
 					let that = this;
-					this.axios.post('/index/suda_login/register',
+					this.axios.post('/index/suda_password/forget_password',
 						{
 							phone : this.phone,
 							code : this.code,
-							password : this.loginPassword,
-							two_password : this.transactionPassword,
-							direct_token : "FDG34T"
+							new_pwd : this.loginPassword,
+							re_pwd : this.transactionPassword
 						})
 						.then(({data}) => {
 							if (data.status === 200) {
-								console.log(data.status);
 								this.layers(data.message);
 								setTimeout(() => {
 									this.$router.go(-1);
@@ -150,6 +134,8 @@
 									/* that.layers(error.message); */
 								},4000)
 						});
+					
+					
 					/* this.layers("创建成功!")
 					setTimeout(() => {
 						this.$router.go(-1);
@@ -199,37 +185,6 @@
 		height: 1.1rem;
 		justify-content: flex-start;
 	}
-	.agree-clause{
-		width: 6.9rem;
-		height: 1.2rem;
-		justify-content: flex-start;
-		margin-bottom: 0.2rem;
-	}
-	.agree-check{
-		width: 0.28rem;
-		height: 0.28rem;
-		border: 0.02rem solid #c3c8d1;
-		border-radius: 0.06rem;
-		margin-right: 0.1rem;
-		background-color: #4a7cee;
-	}
-	.agree-check img{
-		width: 0.17rem;
-		height: 0.12rem;
-	}
-	.agreeCheck{
-		background-image: url(../../static/images/registered_04.png);
-		background-size: 100%;
-		background-repeat: no-repeat;
-	}
-	.agree-clause h4{
-		font-size: 0.28rem;
-		color: #7c7c7c;
-	}
-	.agree-clause h5{
-		font-size: 0.28rem;
-		color: #4579ee;
-	}
 	.create-btn{
 		width: 6.9rem;
 		height: 0.94rem;
@@ -237,5 +192,6 @@
 		background-color: #4a7cee;
 		font-size: 0.32rem;
 		color: #FFFFFF;
+		margin-top: 0.8rem;
 	}
 </style>

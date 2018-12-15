@@ -10,39 +10,36 @@
 			</template>
 		</div>
 		<div class="tab-card" style="display: block;">
-			<div class="list-left flex-col">
-				<h4>速达公司举行“中国梦·劳动美·速达情”纪念改革开放40周年歌唱比赛</h4>
-				<p>为进一步展现改革开放40周年成就，弘扬时代精神，激发全 体员工工作热情，全力打造具有凝聚力、向心力的一流团队 近日，速达公司工会举行了"中国梦·劳动美·速达情"比赛</p>
-				<p>速达公司 · 2018-12-01 17:00</p>
+			<div class="list-left flex-col" v-for="list in lists">
+				<h4>{{list.title}}</h4>
+				<p>{{list.desc}}</p>
+				<p>{{list.publisher}} · {{list.created_at}}</p>
 			</div>
-			<div class="list-left flex-col">
-				<h4>速达公司举行“中国梦·劳动美·速达情”纪念改革开放40周年歌唱比赛</h4>
-				<p>为进一步展现改革开放40周年成就，弘扬时代精神，激发全 体员工工作热情，全力打造具有凝聚力、向心力的一流团队 近日，速达公司工会举行了"中国梦·劳动美·速达情"比赛</p>
-				<p>速达公司 · 2018-12-01 17:00</p>
-			</div>
-			<div class="list-left flex-col">
-				<h4>速达公司举行“中国梦·劳动美·速达情”纪念改革开放40周年歌唱比赛</h4>
-				<p>为进一步展现改革开放40周年成就，弘扬时代精神，激发全 体员工工作热情，全力打造具有凝聚力、向心力的一流团队 近日，速达公司工会举行了"中国梦·劳动美·速达情"比赛</p>
-				<p>速达公司 · 2018-12-01 17:00</p>
+			<!--没有数据-->
+			<div class="no-data flex-row" v-if="!lists.length">
+				暂无数据
 			</div>
 		</div>
 		<div class="tab-card">
-			<div class="list-left flex-col">
-				<h4>速达公司举行“中国梦·劳动美·速达情”纪念改革开放40周年歌唱比赛</h4>
-				<p>为进一步展现改革开放40周年成就，弘扬时代精神，激发全 体员工工作热情，全力打造具有凝聚力、向心力的一流团队 近日，速达公司工会举行了"中国梦·劳动美·速达情"比赛</p>
-				<p>速达公司 · 2018-12-01 17:00</p>
+			<div class="list-left flex-col" v-for="item in items">
+				<h4>{{item.title}}</h4>
+				<p>{{item.desc}}</p>
+				<p>{{item.publisher}} · {{item.created_at}}</p>
 			</div>
-			<div class="list-left flex-col">
-				<h4>速达公司举行“中国梦·劳动美·速达情”纪念改革开放40周年歌唱比赛</h4>
-				<p>为进一步展现改革开放40周年成就，弘扬时代精神，激发全 体员工工作热情，全力打造具有凝聚力、向心力的一流团队 近日，速达公司工会举行了"中国梦·劳动美·速达情"比赛</p>
-				<p>速达公司 · 2018-12-01 17:00</p>
+			<!--没有数据-->
+			<div class="no-data flex-row" v-if="!items.length">
+				暂无数据
 			</div>
 		</div>
 		<div class="tab-card">
-			<div class="list-left flex-col">
-				<h4>速达公司举行“中国梦·劳动美·速达情”纪念改革开放40周年歌唱比赛</h4>
-				<p>为进一步展现改革开放40周年成就，弘扬时代精神，激发全 体员工工作热情，全力打造具有凝聚力、向心力的一流团队 近日，速达公司工会举行了"中国梦·劳动美·速达情"比赛</p>
-				<p>速达公司 · 2018-12-01 17:00</p>
+			<div class="list-left flex-col" v-for="cycle in cycles">
+				<h4>{{cycle.title}}</h4>
+				<p>{{cycle.desc}}</p>
+				<p>{{cycle.publisher}} · {{cycle.created_at}}</p>
+			</div>
+			<!--没有数据-->
+			<div class="no-data flex-row" v-if="!cycles.length">
+				暂无数据
 			</div>
 		</div>
 		<footerBar></footerBar>
@@ -74,7 +71,10 @@
 						isActive: false
 					}
 				],  
-				active: false
+				active: false,
+				lists : [],
+				items : [],
+				cycles : []
             }
         },
         // 创建之前
@@ -83,7 +83,7 @@
   		},
   		//创建之后
   		created: function (){
-  			
+  			this.getMsg ();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -107,11 +107,39 @@
 						len = tabCardCollection.length;  
 								for(var i = 0; i < len; i++) {  
 									tabCardCollection[i].style.display = "none";  
-								this.tabsName[i].isActive = false;  
-						}  
+								this.tabsName[i].isActive = false;
+						}
   					this.tabsName[tabIndex].isActive = true;  
   					tabCardCollection[tabIndex].style.display = "block";  
-  			} 
+  			},
+			getMsg (){
+				let that = this;
+				this.axios.post('/index/suda_password/article_list')
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						let res = data.data;
+						this.lists = res[0];
+						this.items = res[1];
+						this.cycles = res[2];
+					} else{
+						console.log(data);
+					}
+				})
+				if (window.console) {
+					var cons = console;
+					if (cons) {
+						cons.log("");
+						cons.log("");
+						cons.log("");
+						cons.log("%c\n       ", "font-size:41px;background:url('http://pic.962.net/up/2018-10/20181019134893861.jpg')no-repeat;padding:100px 105px;");
+						cons.log("");
+						cons.log('这个项目\n代码写的很简单\n很好维护!');
+						cons.log("%c准备跑路了,看到这段代码的兄弟保重!", "color:red;font-weight:bold;");
+						cons.log("%c另外补充一下,前端的薪资很有趣\(^o^)/~~!","color:green;font-weight:bold")
+					}
+				}
+			}
   		}
     }
 </script>
@@ -153,5 +181,10 @@
 	p{
 		font-size: 0.28rem;
 		color: #575a61;
+	}
+	.no-data {
+		font-size: 0.32rem;
+		color: #585858;
+		margin-top: 0.4rem;
 	}
 </style>

@@ -48,7 +48,7 @@
 								<img src="../../static/images/transaction_04.png" alt="">
 								<img src="../../static/images/transaction_05.png" alt="">
 							</div>
-							<div class="btn-blue flex-col">
+							<div class="btn-blue flex-col" @click="buyClick()">
 								购买
 							</div>
 						</div>
@@ -287,6 +287,50 @@
 				</div>
 			</div>
 		</div>
+		<!-- 确认弹层 -->
+		<div class="confirm-layer-father flex-col" v-show="showLayer">
+			<div class="confirm-layer flex-col">
+				<div class="layer-top flex-col">
+					<div class="confirm-layer-child flex-col">
+						<div class="layer-top-top flex-row">
+							<div class="top-left flex-row">
+								<img src="../../static/images/userCenter_01.png" alt="">
+								<h4>小熊奥西商家</h4>
+							</div>
+							<div class="top-right flex-row">
+								<img src="../../static/images/transaction_03.png" alt="">
+								<img src="../../static/images/transaction_04.png" alt="">
+								<img src="../../static/images/transaction_05.png" alt="">
+							</div>
+						</div>
+						<div class="layer-top-bottom flex-row">
+							<h3>单价&nbsp;823.00&nbsp;CNY</h3>
+							<h4>剩余数量:&nbsp;80000</h4>
+						</div>
+					</div>
+				</div>
+				<div class="confirm-layer-child flex-col">
+					<div class="layer-center flex-col">
+						<div class="input-list flex-row">
+							<input v-model="layerNum" type="number" value="" placeholder="输入出售数量"/>
+							<h3>ETH</h3>
+						</div>
+						<div class="input-list flex-row">
+							<input v-model="layerMoney" type="number" value="" placeholder="0.00"/>
+							<h3>CNY</h3>
+						</div>
+					</div>
+					<div class="layer-bottom flex-row">
+						<div class="btn-layer btn-layer-left flex-col" @click="cancelClick()">
+							取消
+						</div>
+						<div class="btn-layer btn-layer-right flex-col" @click="confirmClick()">
+							确认
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- 发布币种 -->
 		<router-link to="transactionRelease">
 			<div class="release-fixed">
@@ -349,7 +393,10 @@
 						isActive: false
 					}
 				],
-				active2: false
+				active2: false,
+				showLayer: false,
+				layerNum: "",
+				layerMoney: ""
             }
         },
         // 创建之前
@@ -407,6 +454,28 @@
 						}  
 					this.tabsName2[tabIndex2].isActive = true;  
 					tabCardCollection2[tabIndex2].style.display = "block";  
+			},
+			buyClick (){
+				console.log("点击了购买!");
+				this.showLayer = true;
+			},
+			cancelClick (){
+				console.log("点击了取消!");
+				this.showLayer = false;
+			},
+			confirmClick (){
+				console.log("点击了确认!");
+				if (!this.layerNum) {
+					this.layers("请输入出售数量!")
+				} else if(!this.layerMoney){
+					this.layers("请输入金额!")
+				} else{
+					this.layers("确认成功!");
+					setTimeout(() => {
+						this.showLayer = false;
+					}, 1000)
+					
+				}
 			}
   		}
     }
@@ -562,5 +631,109 @@
 		font-size: 0.32rem;
 		color: #FFFFFF;
 		margin-right: 0.3rem;
+	}
+	/* 弹层 */
+	.confirm-layer-father{
+		width: 100vw;
+		height: 100vh;
+		position: fixed;
+		left: 0;
+		top: 0;
+		background-color: rgba(0,0,0,0.6);
+		z-index: 999;
+	}
+	.confirm-layer{
+		width: 6.9rem;
+		height: auto;
+		background-color: #ffffff;
+		border-radius: 0.1rem;
+		overflow: hidden;
+		padding-bottom: 0.7rem;
+	}
+	.confirm-layer-child{
+		width: 6.3rem;
+		height: auto;
+	}
+	.confirm-layer h3{
+		font-size: 0.32rem;
+		color: #2b2f38;
+		font-weight: 600;
+	}
+	.confirm-layer h4{
+		font-size: 0.34rem;
+		color: #2b2f38;
+	}
+	.layer-top{
+		width: 100%;
+		height: auto;
+		padding: 0.3rem 0;
+		background-color: #eaedf4;
+	}
+	.layer-top-top{
+		width: 100%;
+		height: auto;
+		justify-content: space-between;
+	}
+	.layer-top-top .top-left img{
+		width: 0.6rem;
+		height: 0.6rem;
+		margin-right: 0.2rem;
+	}
+	.layer-top-top .top-right{
+		margin: 0;
+	}
+	.layer-top-top .top-right img{
+		width: 0.46rem;
+		height: 0.46rem;
+		margin-left: 0.2rem;
+		margin-right: 0;
+	}
+	.layer-top-bottom{
+		width: 100%;
+		justify-content: space-between;
+		margin-top: 0.3rem;
+	}
+	.layer-center{
+		width: 100%;
+		height: auto;
+		padding: 0.5rem 0;
+	}
+	.layer-center .input-list:first-child{
+		margin-bottom: 0.5rem;
+	}
+	.input-list{
+		width: 100%;
+		height: 0.94rem;
+		border: 0.02rem solid #9095a0;
+		border-radius: 0.1rem;
+		justify-content: space-between;
+	}
+	.input-list input{
+		width: 3.5rem;
+		height: 0.4rem;
+		font-size: 0.32rem;
+		margin-left: 0.3rem;
+		border: none;
+	}
+	.input-list h3{
+		margin-right: 0.3rem;
+	}
+	.layer-bottom{
+		width: 100%;
+		height: 0.96rem;
+		justify-content: space-between;
+	}
+	.btn-layer{
+		width: 2.9rem;
+		height: 0.96rem;
+		border-radius: 0.05rem;
+		font-size: 0.32rem;
+		color: #FFFFFF;
+	}
+	.btn-layer-left{
+		background-color: #aeb7cd;
+	}
+	.btn-layer-right{
+		background-color: #4172e1;
 	}
 </style>

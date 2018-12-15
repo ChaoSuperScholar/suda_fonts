@@ -16,7 +16,7 @@ Vue.config.productionTip = false
 // 创建axios
 export const baseURL = process.env.NODE_ENV === 'production' ? '/' : '/api';
 Vue.prototype.axios = axios.create({
-  baseURL: /*'//api.popc-token.net'*/ baseURL,
+  baseURL: 'http://admin.suda66888.com' /* baseURL */,
   timeout: 10000,
   withCredentials: true,
   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

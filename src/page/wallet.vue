@@ -30,6 +30,10 @@
 				</div>
 			</div>
 		</div>
+		<!--没有数据-->
+		<div class="no-data flex-row" v-if="!lists.length">
+			暂无数据
+		</div>
 		<footerBar></footerBar>
 	</div>
 </template>
@@ -40,8 +44,8 @@
         name: 'wallet',
         data(){
             return {
-				myname : "",
-            	totalAssets : "",
+				myname : "名字的默认显示",
+            	totalAssets : "0",
 				lists : [],
 				imgUrl : [],
 				img1 : require('../../static/images/indexNew_01_de.png'),
@@ -77,15 +81,15 @@
   		methods: {
   			getMsg (){
 				let that = this;
-				this.axios.get('../static/indexNew.json')
+				this.axios.post('/index/suda_wallet/total_coin')
 					.then((data) => {
 						if (data.status === 200) {
 							console.log(data);
 							let res = data.data;
-							this.lists = res.lists;
-							this.myname = res.items.myname;
-							this.totalAssets = res.items.totalAssets;
-							this.imgUrl = res.lists.imgUrl;
+							this.lists = res.list;
+							this.myname = res.total.nickname;
+							this.totalAssets = res.total.money;
+							/* this.imgUrl = res.lists.imgUrl; */
 						} else {
 							this.layers("請求失敗");
 						}
@@ -93,7 +97,7 @@
 					.catch(function (error) {
 						setTimeout(() => {
 								console.log(error.message);
-								that.layers(error.message);
+								/* that.layers(error.message); */
 							},4000)
 					});
 			}
@@ -186,5 +190,10 @@
 	}
 	.list-right .bottom h5:last-child{
 		color: #e93e3e;
+	}
+	.no-data {
+		font-size: 0.32rem;
+		color: #585858;
+		margin-top: 0.4rem;
 	}
 </style>

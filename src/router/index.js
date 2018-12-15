@@ -15,6 +15,11 @@ import userCenter from '../page/userCenter'
 import transactionRelease from '../page/transactionRelease'
 import order from '../page/order'
 import orderPage from '../page/orderPage'
+import forgetPassword from '../page/forgetPassword'
+import securityCenter from '../page/securityCenter'
+import moreInformation from '../page/moreInformation'
+import aboutUs from '../page/aboutUs'
+import myTeam from '../page/myTeam'
 
 import index from '../page/index'
 import createWallet from '../page/createWallet'
@@ -115,6 +120,31 @@ export default new Router({
 			path: '/orderPage',
 			name: 'orderPage',
 			component: orderPage
+		},
+		{
+			path: '/forgetPassword',
+			name: 'forgetPassword',
+			component: forgetPassword
+		},
+		{
+			path: '/securityCenter',
+			name: 'securityCenter',
+			component: securityCenter
+		},
+		{
+			path: '/moreInformation',
+			name: 'moreInformation',
+			component: moreInformation
+		},
+		{
+			path: '/aboutUs',
+			name: 'aboutUs',
+			component: aboutUs
+		},
+		{
+			path: '/myTeam',
+			name: 'myTeam',
+			component: myTeam
 		}
   ]
 })

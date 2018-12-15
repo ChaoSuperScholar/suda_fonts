@@ -17,7 +17,9 @@
 				<input type="password" value="" placeholder="输入账号密码" v-model="password"/>
 			</div>
 			<div class="list-text flex-row">
-				<h4>忘记密码</h4>
+				<router-link to="forgetPassword">
+					<h4>忘记密码</h4>
+				</router-link>
 				<router-link to="registered">
 					<h4>注册账户></h4>
 				</router-link>
@@ -66,8 +68,30 @@
 				} else if(!this.password){
 					this.layers("请输入账号密码！")
 				} else{
-					console.log("登录成功！")
-					this.$router.replace({name : 'wallet'})
+					console.log("登录成功！");
+					let that = this;
+					this.axios.post('/index/suda_login/login',
+						{
+							phone : this.phone,
+							password : this.password
+						})
+						.then(({data}) => {
+							if (data.status === 200) {
+								console.log(data);
+								this.layers(data.message);
+								 setTimeout(() => {
+									this.$router.replace({name : 'wallet'})
+								},2000)
+							} else {
+								that.layers(data.message);
+							}
+						})
+						.catch(function (error) {
+							setTimeout(() => {
+									console.log(error.message);
+									/* that.layers(error.message); */
+								},4000)
+						});
 				}
 			}
   		}
