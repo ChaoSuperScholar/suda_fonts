@@ -14,19 +14,19 @@
 		</div>
 		<div class="list flex-row" v-for="list in lists">
 			<div class="list-left flex-col">
-				<img :src="list.imgUrl" alt="">
+				<img :src="list.img" alt="">
 			</div>
 			<div class="list-right flex-col">
 				<div class="list-text top flex-row">
 					<h4>{{list.title}}</h4>
 				</div>
 				<div class="list-text center flex-row">
-					<h5>{{list.priceOther}}</h5>
-					<h5>￥{{list.priceChina}}</h5>
+					<h5>{{list.num}}</h5>
+					<h5>￥{{list.price}}</h5>
 				</div>
 				<div class="list-text bottom flex-row">
-					<h5>≈￥{{list.priceConversion}}</h5>
-					<h5>{{list.ratio}}</h5>
+					<h5>≈￥{{list.money}}</h5>
+					<h5>{{list.up_down}}</h5>
 				</div>
 			</div>
 		</div>
@@ -81,13 +81,17 @@
   		methods: {
   			getMsg (){
 				let that = this;
-				this.axios.post('/index/suda_wallet/total_coin')
-					.then((data) => {
+				this.axios.get('/index/suda_wallet/total_coin')
+					.then(({data}) => {
 						if (data.status === 200) {
 							console.log(data);
 							let res = data.data;
 							this.lists = res.list;
-							this.myname = res.total.nickname;
+							if (res.total.nickname == '') {
+								return this.myname;
+							} else{
+								this.myname = res.total.nickname;
+							}
 							this.totalAssets = res.total.money;
 							/* this.imgUrl = res.lists.imgUrl; */
 						} else {

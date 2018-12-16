@@ -4,13 +4,13 @@
 		<div class="list-father flex-col" v-for="list in lists">
 			<div class="list flex-row">
 				<div class="list-left flex-row">
-					<img :src="list.imgUrl" alt="">
+					<img :src="list.img" alt="">
 					{{list.title}}
 				</div>
-				<div class="checkbox flex-col" v-if="list.state == 1" @click="addWallet(list)">
+				<div class="checkbox flex-col" v-if="list.status == 2" @click="addWallet(list)">
 					<div class="checkCircle"></div>
 				</div>
-				<div class="checkboxActive flex-col" v-if="list.state == 2" @click="addWallet(list)">
+				<div class="checkboxActive flex-col" v-if="list.status == 1" @click="addWallet(list)">
 					<div class="checkCircle"></div>
 				</div>
 			</div>
@@ -55,27 +55,43 @@
   		methods: {
   			getMsg (){
 				let that = this;
-				this.axios.get('../static/addAssets.json')
+				this.axios.get('/index/suda_wallet/assets')
 					.then((data) => {
 						if (data.status === 200) {
 							console.log(data);
 							let res = data.data;
-							this.lists = res.lists;
-							this.imgUrl = res.lists.imgUrl;
+							this.lists = res.data.lists;
 						} else {
-							this.layers("請求失敗");
+							this.layers("请求失败");
 						}
 					})
 					.catch(function (error) {
 						setTimeout(() => {
 								console.log(error.message);
-								that.layers(error.message);
 							},4000)
 					});
 			},
 			addWallet (addItem){
 				let that = this;
 				console.log(addItem.id);
+				this.axios.post('/index/suda_wallet/add_assets',{
+					id : addItem.id
+				})
+				.then((data) => {
+					if (data.status === 200) {
+						let res =data.data;
+						console.log(res.message);
+						this.layers(res.message);
+						this.getMsg();
+					} else{
+						this.layers(res.message);
+					}
+				})
+				.catch(function (error) {
+					setTimeout(() => {
+							console.log(error.message);
+						},4000)
+				});
 			}
   		}
     }

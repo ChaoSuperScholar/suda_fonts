@@ -36,7 +36,7 @@
   		},
   		//创建之后
   		created: function (){
-  			
+  			this.getMsg ();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -54,7 +54,23 @@
 		},
   		//实例方法
   		methods: {
-  			
+  			getMsg (){
+				let that = this;
+				this.axios.get('/index/suda_team/my_team')
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+					} else{
+						console.log(data.message);
+					}
+				})
+				.catch(function (error) {
+					setTimeout(() => {
+							console.log(error.message);
+							/* that.layers(error.message); */
+						},4000)
+				});
+			}
   		}
     }
 </script>

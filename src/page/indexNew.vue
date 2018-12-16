@@ -11,10 +11,10 @@
 		<!-- 主体 -->
 		<div class="list-father flex-col">
 			<div class="list flex-col">
-				<input type="tel" value="" placeholder="输入手机号码" maxlength="11" v-model="phone"/>
+				<input type="tel" value="" placeholder="输入手机号码" maxlength="11" v-model.trim="phone"/>
 			</div>
 			<div class="list flex-col">
-				<input type="password" value="" placeholder="输入账号密码" v-model="password"/>
+				<input type="password" value="" placeholder="输入账号密码" v-model.trim="password"/>
 			</div>
 			<div class="list-text flex-row">
 				<router-link to="forgetPassword">
