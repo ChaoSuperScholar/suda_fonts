@@ -9,7 +9,7 @@
 					<img src="../../static/images/indexNew_07.png" alt="">
 				</router-link>
 			</div>
-			<h4 class="text-line-1">{{myname}}</h4>
+			<h4>{{myname}}</h4>
 			<h5><span>{{totalAssets}}</span>总资产(￥)</h5>
 		</div>
 		<div class="list flex-row" v-for="list in lists">

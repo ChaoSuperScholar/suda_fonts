@@ -457,6 +457,7 @@
 		border: 0.02rem solid #8a9cc2;
 		border-radius: 0.1rem;
 		margin-left: 1rem;
+		overflow: hidden;
 	}
 	.top-tab-list{
 		width: 50%;

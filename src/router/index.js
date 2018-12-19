@@ -20,6 +20,11 @@ import securityCenter from '../page/securityCenter'
 import moreInformation from '../page/moreInformation'
 import aboutUs from '../page/aboutUs'
 import myTeam from '../page/myTeam'
+import start from '../page/start'
+import personalData from '../page/personalData'
+import financial from '../page/financial'
+import myInvestment from '../page/myInvestment'
+import tenpay from '../page/tenpay'
 
 import index from '../page/index'
 import createWallet from '../page/createWallet'
@@ -31,6 +36,11 @@ Vue.use(Router)
 export default new Router({
   /*mode:'history',*/
   routes: [
+  	/*{
+			path: '/',
+			name: 'start',
+			component: start
+		},*/
 		{
 			path: '/',
 			name: 'indexNew',
@@ -145,6 +155,26 @@ export default new Router({
 			path: '/myTeam',
 			name: 'myTeam',
 			component: myTeam
+		},
+		{
+			path: '/personalData',
+			name: 'personalData',
+			component: personalData
+		},
+		{
+			path: '/financial',
+			name: 'financial',
+			component: financial
+		},
+		{
+			path: '/myInvestment',
+			name: 'myInvestment',
+			component: myInvestment
+		},
+		{
+			path: '/tenpay',
+			name: 'tenpay',
+			component: tenpay
 		}
   ]
 })

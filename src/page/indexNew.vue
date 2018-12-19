@@ -1,15 +1,9 @@
 <template>
 	<div class="indexNew">
-		<!-- 背景 -->
-		<div class="background-img flex-col">
-			<img src="../../static/images/index_01.png" alt="">
-			<img src="../../static/images/index_02.png" alt="">
-			<img src="../../static/images/index_03.png" alt="">
-			<img src="../../static/images/index_04.png" alt="">
-			<img src="../../static/images/index_05.png" alt="">
-		</div>
 		<!-- 主体 -->
 		<div class="list-father flex-col">
+			<img class="img-top" src="../../static/images/index_10.png"/>
+			<img class="img-center" src="../../static/images/index_11.png"/>
 			<div class="list flex-col">
 				<input type="tel" value="" placeholder="输入手机号码" maxlength="11" v-model.trim="phone"/>
 			</div>
@@ -55,11 +49,16 @@
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+  				document.onscroll = this.toggleHead;
   			})
   		},
   		//实例方法
   		methods: {
+			toggleHead: function (e) {
+				if (this.scrollRouteArr.indexOf(this.$route.name) === -1) return false;
+				let scrollBottom = document.body.clientHeight - e.target.scrollingElement.scrollTop - window.innerHeight;
+				if (scrollBottom <= 50) this.$store.commit('setwithBottom', scrollBottom);
+			},
   			goLogin (){
 				if (!this.phone) {
 					this.layers("请输入手机号码！")
@@ -99,16 +98,27 @@
 </script>
 
 <style scoped>
-	.background-img,.list-father{
-		width: 100vw;
-		height: 100vh;
-	}
 	.list-father{
+		width: 100vw;
+		min-height: 100vh;
 		position: absolute;
 		left: 0;
 		top: 0;
-		z-index: 10;
 		justify-content: flex-start;
+		background-image: url(http://suda66888.com/static/img/index_09.png);
+		background-size: 100%;
+		background-repeat: no-repeat;
+		background-color: #070707;
+	}
+	.img-top{
+		width: 2.47rem;
+		height: 2.79rem;
+		margin-top: 1.1rem;
+	}
+	.img-center{
+		width: 3.54rem;
+		height: 0.55rem;
+		margin: 0.66rem 0 0.66rem 0;
 	}
 	.list-father .list{
 		width: 5.8rem;
@@ -116,9 +126,7 @@
 		border: 0.02rem solid #cdd0da;
 		border-radius: 0.1rem;
 		background-color: #2f343e;
-	}
-	.list-father .list:first-child{
-		margin: 6rem 0 0.7rem 0;
+		margin-bottom: 0.4rem;
 	}
 	.list input{
 		width: 4.8rem;

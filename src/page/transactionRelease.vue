@@ -23,7 +23,7 @@
 		<div class="tab-left flex-col" v-show="showLeft">
 			<div class="list-title flex-row">
 				<h4>购买订单</h4>
-				<h5>当前ETH价格&emsp;832.22</h5>
+				<h5>当前{{chooseTitle}}价格&emsp;{{textNum}}</h5>
 			</div>
 			<div class="list flex-row">
 				<h5>价格</h5>
@@ -35,7 +35,11 @@
 			</div>
 			<div class="list flex-row">
 				<h5>金额</h5>
-				<input type="number" placeholder="请输入交易金额" v-model="money">
+				<input type="number" readonly="readonly" placeholder="0.00" v-model="money">
+			</div>
+			<div class="list flex-row">
+				<h5>密码</h5>
+				<input type="password" placeholder="请输入交易密码" v-model="password">
 			</div>
 			<div class="btn-blue flex-col" @click="clickLeft()">
 				确认发布
@@ -44,7 +48,7 @@
 		<div class="tab-right flex-col" v-show="showRight">
 			<div class="list-title flex-row">
 				<h4>出售订单</h4>
-				<h5>当前ETH价格&emsp;832.22</h5>
+				<h5>当前{{chooseTitle}}价格&emsp;{{textNum}}</h5>
 			</div>
 			<div class="list flex-row">
 				<h5>价格</h5>
@@ -56,7 +60,11 @@
 			</div>
 			<div class="list flex-row">
 				<h5>金额</h5>
-				<input type="number" placeholder="请输入交易金额" v-model="money2">
+				<input type="number" readonly="readonly" placeholder="请输入交易金额" v-model="money2">
+			</div>
+			<div class="list flex-row">
+				<h5>密码</h5>
+				<input type="password" placeholder="请输入交易密码" v-model="password2">
 			</div>
 			<div class="btn-blue flex-col" @click="clickRight()">
 				确认出售
@@ -89,10 +97,11 @@
 				],
 				price : '',
 				num : '',
-				money : '',
 				price2 : '',
 				num2 : '',
-				money2 : ''
+				password : '',
+				password2 : '',
+				textNum : ''
             }
         },
         // 创建之前
@@ -101,7 +110,7 @@
   		},
   		//创建之后
   		created: function (){
-  			
+  			this.getMsg();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -113,6 +122,15 @@
   				
   			})
   		},
+		// 计算属性
+		computed: {
+			money() {
+				return this.price * this.num;
+			},
+			money2() {
+				return this.price2 * this.num2;
+			}
+		},
   		//实例方法
   		methods: {
 			return_page (){
@@ -137,16 +155,39 @@
 				console.log(list.title);
 				this.chooseTitle = list.title;
 				this.isShowSelect = false;
+				this.axios.post('/index/suda_wallet/getPrice',{
+					coin : this.chooseTitle
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						this.textNum = data.data;
+					} else{
+						this.layers(data.message);
+					}
+				})
 			},
 			clickLeft (){
 				if (!this.price) {
 					this.layers("请输入交易价格!")
 				} else if(!this.num){
 					this.layers("请输入交易数量!")
-				}else if(!this.money){
-					this.layers("请输入交易金额")
-				}else{
-					console.log(this.price,this.num,this.money);
+				} else if(!this.password){
+					this.layers("请输入交易密码!")
+				} else{
+					this.axios.post('/index/suda_order_buy/release',{
+						type : "1",
+						price : this.price,
+						num : this.num,
+						password : this.password,
+						coin : this.chooseTitle
+					})
+					.then(({data}) => {
+						if (data.status == 200) {
+							this.layers(data.message);
+						} else{
+							this.layers(data.message);
+						}
+					})
 				}
 			},
 			clickRight (){
@@ -154,11 +195,36 @@
 					this.layers("请输入交易价格!")
 				} else if(!this.num2){
 					this.layers("请输入交易数量!")
-				}else if(!this.money2){
-					this.layers("请输入交易金额")
-				}else{
-					console.log(this.price2,this.num2,this.money2);
+				} else if(!this.password2){
+					this.layers("请输入交易密码!")
+				} else{
+					this.axios.post('/index/suda_order_buy/release',{
+						type : "2",
+						price : this.price2,
+						num : this.num2,
+						password : this.password2,
+						coin : this.chooseTitle
+					})
+					.then(({data}) => {
+						if (data.status == 200) {
+							this.layers(data.message);
+						} else{
+							this.layers(data.message);
+						}
+					})
 				}
+			},
+			getMsg (){
+				this.axios.post('/index/suda_wallet/getPrice',{
+					coin : 'ETH'
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						this.textNum = data.data;
+					} else{
+						this.layers(data.message);
+					}
+				})
 			}
   		}
     }

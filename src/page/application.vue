@@ -19,14 +19,14 @@
 			</template>
 		</div>
 		<div class="tab-card" style="display: block;">
-			<div class="list flex-row">
+			<div class="list flex-row" @click="noData()">
 				<img src="../../static/images/application_04.png" alt="">
 				<div class="list-right flex-col">
 					<h4>汽车大亨</h4>
 					<p>模拟经营自动收益游戏，采用流行“IDLE”游戏模式，为游戏玩家带来极佳的游玩体验。</p>
 				</div>
 			</div>
-			<div class="list flex-row">
+			<div class="list flex-row"  @click="goFinancial()">
 				<img src="../../static/images/application_05.png" alt="">
 				<div class="list-right flex-col">
 					<h4>理财</h4>
@@ -167,7 +167,13 @@
 						}  
   					this.tabsName[tabIndex].isActive = true;  
   					tabCardCollection[tabIndex].style.display = "block";  
-  			}
+  			},
+			noData (){
+				this.layers("暂未开放")
+			},
+			goFinancial (){
+				this.$router.replace('Financial');
+			}
   		}
     }
 </script>
@@ -175,26 +181,21 @@
 <style scoped>
 	.swiper-father{
 		width: 100%;
-		height: 3.2rem;
+		height: auto;
 		margin-top: 1rem;
-	}
-	.swiper-wrapper{
-		width: 100%;
-		height: 3.2rem;
 	}
 	.swiper-slide{
 		width: 100%;
-		height: 3.2rem;
+		height: auto;
 	}
-	.swiper-pagination-bullets{
+	/* .swiper-pagination-bullets{
 		width: 1.36rem;
 		height: 0.26rem;
-		/* background-color: #333763; */
 		border-radius: 0.14rem;
 		bottom: 0.32rem;
 		left: 50%;
 		margin-left: -0.86rem;
-	}
+	} */
 	.swiper-pagination-bullet{
 		width: 0.14rem;
 		height: 0.14rem;

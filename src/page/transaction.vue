@@ -21,36 +21,37 @@
 			<!-- 购买顶部切换 -->
 			<div class="tab-father flex-row">
 				<template v-for="(tab,index) in tabsName">
-					<div class="tab-btn flex-col" @click="tabsSwitch(index)" v-bind:class="{active:tab.isActive}">
+					<div class="tab-btn flex-col"  @click="tabsSwitch(tab,index)" v-bind:class="{active:tab.isActive}">
 						{{tab.name}}
 					</div>
+					<h4 v-show="false">{{tab.coin}}</h4>
 				</template>
 			</div>
 			<!-- 需要切换的部分 -->
 			<div class="tab-card" style="display: block;">
 				<!-- 循环列表list -->
-				<div class="list flex-col" v-for="eth in eths">
+				<div class="list flex-col" v-for="list in lists">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<div class="avatar">
-								<img :src="eth.avatar" alt="">
+								<img :src="list.avatar" alt="">
 							</div>
-							<h4>{{eth.nickname}}</h4>
+							<h4>{{list.nickname}}</h4>
 						</div>
-						<h5>成交&nbsp;{{eth.deal_num}}</h5>
+						<h5>成交&nbsp;{{list.deal_num}}</h5>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
-							<h4>单价&nbsp;{{eth.price|numFilter}}CNY</h4>
-							<h5>剩余数量:&nbsp;{{eth.num|numFilter}}</h5>
+							<h4>单价&nbsp;{{list.price|numFilter}}CNY</h4>
+							<h5>剩余数量:&nbsp;{{list.num|numFilter}}</h5>
 						</div>
 						<div class="list-bottom-bottom flex-row">
 							<div class="bottom-left flex-row">
-								<img src="../../static/images/transaction_03.png" alt="" v-show="eth.bank == 1">
-								<img src="../../static/images/transaction_04.png" alt="" v-show="eth.alipay == 1">
-								<img src="../../static/images/transaction_05.png" alt="" v-show="eth.wechat == 1">
+								<img src="../../static/images/transaction_03.png" alt="" v-show="list.bank == 1">
+								<img src="../../static/images/transaction_04.png" alt="" v-show="list.alipay == 1">
+								<img src="../../static/images/transaction_05.png" alt="" v-show="list.wechat == 1">
 							</div>
-							<div class="btn-blue flex-col" @click="buyClick(eth)">
+							<div class="btn-blue flex-col" @click="buyClick(list)">
 								购买
 							</div>
 						</div>
@@ -59,28 +60,28 @@
 			</div>
 			<div class="tab-card">
 				<!-- 循环列表list -->
-				<div class="list flex-col">
+				<div class="list flex-col" v-for="list in lists">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<div class="avatar">
-								<img src="" alt="">
+								<img :src="list.avatar" alt="">
 							</div>
-							<h4>SDT测试数据</h4>
+							<h4>{{list.nickname}}</h4>
 						</div>
-						<h5>成交&nbsp;326</h5>
+						<h5>成交&nbsp;{{list.deal_num}}</h5>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
-							<h4>单价&nbsp;826.80CNY</h4>
-							<h5>剩余数量:&nbsp;15402</h5>
+							<h4>单价&nbsp;{{list.price|numFilter}}CNY</h4>
+							<h5>剩余数量:&nbsp;{{list.num|numFilter}}</h5>
 						</div>
 						<div class="list-bottom-bottom flex-row">
 							<div class="bottom-left flex-row">
-								<img src="../../static/images/transaction_03.png" alt="">
-								<img src="../../static/images/transaction_04.png" alt="">
-								<img src="../../static/images/transaction_05.png" alt="">
+								<img src="../../static/images/transaction_03.png" alt="" v-show="list.bank == 1">
+								<img src="../../static/images/transaction_04.png" alt="" v-show="list.alipay == 1">
+								<img src="../../static/images/transaction_05.png" alt="" v-show="list.wechat == 1">
 							</div>
-							<div class="btn-blue flex-col">
+							<div class="btn-blue flex-col" @click="buyClick(list)">
 								购买
 							</div>
 						</div>
@@ -110,35 +111,35 @@
 			<!-- 出售顶部切换 -->
 			<div class="tab-father flex-row">
 				<template v-for="(tab2,index) in tabsName2">
-					<div class="tab-btn flex-col" @click="tabsSwitch2(index)" v-bind:class="{active2:tab2.isActive}">
+					<div class="tab-btn flex-col" @click="tabsSwitch2(tab2,index)" v-bind:class="{active2:tab2.isActive}">
 						{{tab2.name}}
 					</div>
 				</template>
 			</div>
 			<div class="tab-card2" style="display: block;">
 				<!-- 循环列表list -->
-				<div class="list flex-col">
+				<div class="list flex-col" v-for="item in items">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<div class="avatar">
-								<img src="" alt="">
+								<img :src="item.avatar" alt="">
 							</div>
-							<h4>ETH出售订单测试数据</h4>
+							<h4>{{item.nickname}}</h4>
 						</div>
-						<h5>成交&nbsp;326</h5>
+						<h5>成交&nbsp;{{item.deal_num}}</h5>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
-							<h4>单价&nbsp;826.80CNY</h4>
-							<h5>剩余数量:&nbsp;15402</h5>
+							<h4>单价&nbsp;{{item.price|numFilter}}CNY</h4>
+							<h5>剩余数量:&nbsp;{{item.num|numFilter}}</h5>
 						</div>
 						<div class="list-bottom-bottom flex-row">
 							<div class="bottom-left flex-row">
-								<img src="../../static/images/transaction_03.png" alt="">
-								<img src="../../static/images/transaction_04.png" alt="">
-								<img src="../../static/images/transaction_05.png" alt="">
+								<img src="../../static/images/transaction_03.png" alt="" v-show="item.bank == 1">
+								<img src="../../static/images/transaction_04.png" alt="" v-show="item.alipay == 1">
+								<img src="../../static/images/transaction_05.png" alt="" v-show="item.wechat == 1">
 							</div>
-							<div class="btn-red flex-col">
+							<div class="btn-red flex-col" @click="sellClick(item)">
 								出售
 							</div>
 						</div>
@@ -147,28 +148,28 @@
 			</div>
 			<div class="tab-card2">
 				<!-- 循环列表list -->
-				<div class="list flex-col">
+				<div class="list flex-col" v-for="item in items">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<div class="avatar">
-								<img src="" alt="">
+								<img :src="item.avatar" alt="">
 							</div>
-							<h4>SDT出售订单测试数据</h4>
+							<h4>{{item.nickname}}</h4>
 						</div>
-						<h5>成交&nbsp;326</h5>
+						<h5>成交&nbsp;{{item.deal_num}}</h5>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
-							<h4>单价&nbsp;826.80CNY</h4>
-							<h5>剩余数量:&nbsp;15402</h5>
+							<h4>单价&nbsp;{{item.price|numFilter}}CNY</h4>
+							<h5>剩余数量:&nbsp;{{item.num|numFilter}}</h5>
 						</div>
 						<div class="list-bottom-bottom flex-row">
 							<div class="bottom-left flex-row">
-								<img src="../../static/images/transaction_03.png" alt="">
-								<img src="../../static/images/transaction_04.png" alt="">
-								<img src="../../static/images/transaction_05.png" alt="">
+								<img src="../../static/images/transaction_03.png" alt="" v-show="item.bank == 1">
+								<img src="../../static/images/transaction_04.png" alt="" v-show="item.alipay == 1">
+								<img src="../../static/images/transaction_05.png" alt="" v-show="item.wechat == 1">
 							</div>
-							<div class="btn-red flex-col">
+							<div class="btn-red flex-col" @click="sellClick(item)">
 								出售
 							</div>
 						</div>
@@ -183,7 +184,7 @@
 			</div>
 		</div>
 		<transition name="slide-fade">
-			<!-- 确认弹层 -->
+			<!-- 购买确认弹层 -->
 			<div class="confirm-layer-father flex-col" v-show="showLayer">
 				<div class="confirm-layer flex-col">
 					<div class="layer-top flex-col">
@@ -210,11 +211,11 @@
 					<div class="confirm-layer-child flex-col">
 						<div class="layer-center flex-col">
 							<div class="input-list flex-row">
-								<input v-model="layerNum" type="number" value="" placeholder="输入出售数量"/>
-								<h3>ETH</h3>
+								<input v-model="layerNum" type="number" value="" placeholder="输入购买数量"/>
+								<h3>{{coins}}</h3>
 							</div>
 							<div class="input-list flex-row">
-								<input v-model="layerMoney" type="number" value="" placeholder="0.00"/>
+								<input v-model="layerMoney" readonly="readonly" type="number" value="" placeholder="0.00"/>
 								<h3>CNY</h3>
 							</div>
 						</div>
@@ -223,6 +224,57 @@
 								取消
 							</div>
 							<div class="btn-layer btn-layer-right flex-col" @click="confirmClick()">
+								确认
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</transition>
+		<transition name="slide-fade">
+			<!-- 出售确认弹层 -->
+			<div class="confirm-layer-father flex-col" v-show="showLayer2">
+				<div class="confirm-layer flex-col">
+					<div class="layer-top flex-col">
+						<div class="confirm-layer-child flex-col">
+							<div class="layer-top-top flex-row">
+								<div class="top-left flex-row">
+									<div class="avatar">
+										<img :src="avatarLayer2" alt="">
+									</div>
+									<h4>{{nicknameLayer2}}</h4>
+								</div>
+								<div class="top-right flex-row">
+									<img src="../../static/images/transaction_03.png" alt="" v-show="showBankETH2">
+									<img src="../../static/images/transaction_04.png" alt="" v-show="showAlipaykETH2">
+									<img src="../../static/images/transaction_05.png" alt="" v-show="showWechatETH2">
+								</div>
+							</div>
+							<div class="layer-top-bottom flex-row">
+								<h3>单价&nbsp;{{priceLayer2|numFilter}}&nbsp;CNY</h3>
+								<h4>剩余数量:&nbsp;{{numLayer2|numFilter}}</h4>
+							</div>
+						</div>
+					</div>
+					<div class="confirm-layer-child flex-col">
+						<div class="layer-center flex-col">
+							<div class="input-list flex-row">
+								<input v-model="layerNum2" type="number" value="" placeholder="输入出售数量"/>
+								<h3>{{coins2}}</h3>
+							</div>
+							<div class="input-list flex-row">
+								<input v-model="layerMoney2" readonly="readonly" type="number" value="" placeholder="0.00"/>
+								<h3>CNY</h3>
+							</div>
+							<div class="input-list flex-row">
+								<input v-model="layerPassword" type="password" value="" placeholder="请输入交易密码"/>
+							</div>
+						</div>
+						<div class="layer-bottom flex-row">
+							<div class="btn-layer btn-layer-left flex-col" @click="cancelClick2()">
+								取消
+							</div>
+							<div class="btn-layer btn-layer-right flex-col" @click="confirmClick2()">
 								确认
 							</div>
 						</div>
@@ -258,52 +310,72 @@
 				tabsName: [
 					{  
 						name: "ETH",  
-						isActive: true  
+						isActive: true,
+						coin: "eth"
 					},
 					{  
 						name: "SDT",  
-						isActive: false
+						isActive: false,
+						coin: "sdt"
 					},
 					{  
 						name: "USDT",  
-						isActive: false
+						isActive: false,
+						coin: "usdt"
 					},
 					{  
 						name: "BTC",  
-						isActive: false
+						isActive: false,
+						coin: "btc"
 					},
 					{  
 						name: "EOS",  
-						isActive: false
+						isActive: false,
+						coin: "eos"
 					}
 				],  
 				active: false,
 				tabsName2:[
 					{
 						name: "ETH",  
-						isActive: true
+						isActive: true,
+						coin: "eth"
 					},
 					{
 						name: "SDT",  
-						isActive: false
+						isActive: false,
+						coin: "sdt"
 					},
 					{
 						name: "USDT",  
-						isActive: false
+						isActive: false,
+						coin: "usdt"
 					}
 				],
 				active2: false,
 				showLayer: false,
+				showLayer2: false,
 				layerNum: "",
-				layerMoney: "",
-				eths : [],
+				layerNum2: "",
+				lists : [],
+				items : [],
 				avatarLayer : "",
+				avatarLayer2 : "",
 				nicknameLayer : "",
+				nicknameLayer2 : "",
 				priceLayer : "",
+				priceLayer2 : "",
 				numLayer : "",
+				numLayer2 : "",
 				showBankETH : false,
+				showBankETH2 : false,
 				showAlipaykETH : false,
-				showWechatETH : false
+				showAlipaykETH2 : false,
+				showWechatETH : false,
+				showWechatETH2 : false,
+				coins : "",
+				coins2 : "",
+				layerPassword : ""
             }
         },
         // 创建之前
@@ -313,6 +385,7 @@
   		//创建之后
   		created: function (){
   			this.getPayETH();
+			this.getSellETH();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -321,6 +394,14 @@
 		//注册组件
 		components : {
 			footerBar
+		},
+		computed: {
+			layerMoney() {
+				return this.layerNum * this.priceLayer; 
+			},
+			layerMoney2() {
+				return this.layerNum2 * this.priceLayer2;
+			}
 		},
 		filters: {
 		/*小数点后面保留2位*/
@@ -350,7 +431,7 @@
 				this.showLeft = false;
 				this.showRight = true
 			},
-			tabsSwitch: function(tabIndex) {  
+			tabsSwitch: function(tab,tabIndex) {
 					let tabCardCollection = document.querySelectorAll(".tab-card"),  
 						len = tabCardCollection.length;  
 							for(var i = 0; i < len; i++) {  
@@ -358,9 +439,23 @@
 							this.tabsName[i].isActive = false;  
 						}  
 					this.tabsName[tabIndex].isActive = true;  
-					tabCardCollection[tabIndex].style.display = "block";  
+					tabCardCollection[tabIndex].style.display = "block";
+					let that = this;
+					this.axios.post('/index/suda_order_buy/ad_list',{
+						page : '1',
+						type : '2',
+						coin : tab.coin
+					})
+					.then(({data}) => {
+						if (data.status == 200) {
+							console.log(data);
+							this.lists = data.data;
+						} else{
+							this.layers(data.message);
+						}
+					})
 			},
-			tabsSwitch2: function(tabIndex2) {  
+			tabsSwitch2: function(tab2,tabIndex2) {  
 					let tabCardCollection2 = document.querySelectorAll(".tab-card2"),  
 						len = tabCardCollection2.length;  
 							for(var i = 0; i < len; i++) {  
@@ -368,53 +463,150 @@
 							this.tabsName2[i].isActive = false;  
 						}  
 					this.tabsName2[tabIndex2].isActive = true;  
-					tabCardCollection2[tabIndex2].style.display = "block";  
+					tabCardCollection2[tabIndex2].style.display = "block";
+					  let that = this;
+					  this.axios.post('/index/suda_order_buy/ad_list',{
+					  	page : '1',
+					  	type : '1',
+					  	coin : tab2.coin
+					  })
+					  .then(({data}) => {
+					  	if (data.status == 200) {
+					  		this.items = data.data;
+					  	} else{
+					  		this.layers(data.message);
+					  	}
+					  })
 			},
-			buyClick (eth){
-				console.log(eth);
+			/* 购买分页的购买 */
+			buyClick (list){
 				this.showLayer = true;
-				this.avatarLayer = eth.avatar;
-				this.nicknameLayer = eth.nickname;
-				this.priceLayer = eth.price;
-				this.numLayer = eth.num;
-				if (eth.bank == 1) {
+				this.avatarLayer = list.avatar;
+				this.nicknameLayer = list.nickname;
+				this.priceLayer = list.price;
+				this.numLayer = list.num;
+				this.coins = list.coin;
+				this.adid = list.id;
+				console.log(this.adid)
+				if (list.bank == 1) {
 					this.showBankETH = true
 				} else{
 					return false;
 				};
-				if (eth.alipay == 1) {
+				if (list.alipay == 1) {
 					this.showAlipaykETH = true
 				} else{
 					return false;
 				};
-				if (eth.wechat == 1) {
+				if (list.wechat == 1) {
 					this.showWechatETH = true
 				} else{
 					return false;
 				}
 			},
+			/* 出售分页的出售 */
+			sellClick (item){
+				console.log(item);
+				this.showLayer2 = true;
+				this.avatarLayer2 = item.avatar;
+				this.nicknameLayer2 = item.nickname;
+				this.priceLayer2 = item.price;
+				this.numLayer2 = item.num;
+				this.coins2 = item.coin;
+				this.adid2 = item.id;
+				console.log(this.adid2)
+				if (item.bank == 1) {
+					this.showBankETH2 = true
+				} else{
+					return false;
+				};
+				if (item.alipay == 1) {
+					this.showAlipaykETH2 = true
+				} else{
+					return false;
+				};
+				if (item.wechat == 1) {
+					this.showWechatETH2 = true
+				} else{
+					return false;
+				}
+				
+			},
+			/* 购买页的取消和确认 */
 			cancelClick (){
-				console.log("点击了取消!");
 				this.showLayer = false;
 			},
 			confirmClick (){
-				console.log("点击了确认!");
 				if (!this.layerNum) {
 					this.layers("请输入出售数量!")
-				} else if(!this.layerMoney){
-					this.layers("请输入金额!")
 				} else{
-					this.layers("确认成功!");
-					console.log(this.layerNum,this.layerMoney);
-					setTimeout(() => {
-						this.showLayer = false;
-					}, 1000)
-					this.layerNum = "";
-					this.layerMoney = "";
+					this.axios.post('/index/suda_order_sell/buy',{
+						num : this.layerNum,
+						adid : this.adid
+					})
+					.then(({data}) => {
+						if (data.status == 200) {
+							this.layers(data.message);
+							setTimeout(() => {
+								this.showLayer = false;
+							}, 1000)
+							this.layerNum = "";
+							this.layerMoney = "";
+						} else{
+							this.layers(data.message);
+						}
+					})
 				}
 			},
+			/* 出售页的取消和确认 */
+			cancelClick2 (){
+				console.log("点击了取消!");
+				this.showLayer2 = false;
+			},
+			confirmClick2 (){
+				console.log("点击了确认!");
+				if (!this.layerNum2) {
+					this.layers("请输入出售数量!")
+				} else if(!this.layerPassword){
+					this.layers("请输入交易密码!")
+				} else{
+					this.axios.post('/index/suda_order_sell/buy',{
+						num : this.layerNum2,
+						adid : this.adid2,
+						password : this.layerPassword
+					})
+					.then(({data}) => {
+						if (data.status == 200) {
+							this.layers(data.message);
+							setTimeout(() => {
+								this.showLayer = false;
+							}, 1000)
+							this.layerNum2 = "";
+							this.layerMoney2 = "";
+						} else{
+							this.layers(data.message);
+						}
+					})
+				}
+			},
+			// 获取购买列表
 			getPayETH (){
-				let that = this;
+				this.axios.post('/index/suda_order_buy/ad_list',{
+					page : '1',
+					type : '2',
+					coin : 'eth'
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						this.lists = data.data;
+					} else{
+						this.layers(data.message);
+					}
+				})
+			},
+			// 获取出售列表
+			getSellETH (){
 				this.axios.post('/index/suda_order_buy/ad_list',{
 					page : '1',
 					type : '1',
@@ -423,12 +615,12 @@
 				.then(({data}) => {
 					if (data.status == 200) {
 						console.log(data);
-						this.eths = data.data;
+						this.items = data.data;
 					} else{
 						this.layers(data.message);
 					}
 				})
-			}
+			},
   		}
     }
 </script>
@@ -474,6 +666,7 @@
 		border: 0.02rem solid #8a9cc2;
 		border-radius: 0.1rem;
 		margin-left: 1rem;
+		overflow: hidden;
 	}
 	.top-tab-list{
 		width: 50%;
@@ -573,7 +766,7 @@
 		height: 0.46rem;
 		margin-right: 0.18rem;
 	}
-	.list-bottom-bottom img:first-child{
+	.list-bottom-bottom .bottom-left{
 		margin-left: 0.3rem;
 	}
 	.list-bottom-bottom .btn-blue,.btn-red{
@@ -668,8 +861,8 @@
 		height: auto;
 		padding: 0.5rem 0;
 	}
-	.layer-center .input-list:first-child{
-		margin-bottom: 0.5rem;
+	.layer-center .input-list:last-child{
+		margin-bottom: 0;
 	}
 	.input-list{
 		width: 100%;
@@ -677,6 +870,7 @@
 		border: 0.02rem solid #9095a0;
 		border-radius: 0.1rem;
 		justify-content: space-between;
+		margin-bottom: 0.5rem;
 	}
 	.input-list input{
 		width: 3.5rem;

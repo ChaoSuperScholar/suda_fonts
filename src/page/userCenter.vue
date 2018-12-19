@@ -6,7 +6,9 @@
 				<img src="../../static/images/userCenter_01.png" alt="">
 				<div class="top-title flex-col">
 					<h3>小熊奥西商家<span>已认证</span></h3>
-					<h5>点击编辑个人资料</h5>
+					<router-link to="personalData">
+						<h5>点击编辑个人资料</h5>
+					</router-link>
 				</div>
 			</div>
 			<div class="bottom flex-row">
@@ -182,7 +184,7 @@
 		width: auto;
 		height: auto;
 		padding: 0.06rem 0.2rem;
-		border: 0.01rem solid #5174e7;
+		border: 0.02rem solid #5174e7;
 		border-radius: 0.3rem;
 		font-size: 0.26rem;
 		color: #5174e7;

@@ -77,8 +77,8 @@
 		background-color: #FFFFFF;
 	}
 	.footerBar div{
-		width: 0.5rem;
-		height: 0.64rem;
+		width: 0.48rem;
+		height: 0.74rem;
 	}
 	.img-1{
 		margin-left: 0.8rem;

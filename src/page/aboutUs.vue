@@ -91,7 +91,7 @@
 	.new-prompt{
 		width: 1rem;
 		height: 0.4rem;
-		border: 0.01rem solid #da4545;
+		border: 0.02rem solid #da4545;
 		font-size: 0.24rem;
 		color: #da4545;
 		border-radius: 0.2rem;

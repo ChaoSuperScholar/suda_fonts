@@ -7,7 +7,7 @@
 				<img src="../../static/images/receivables_01.png" alt="">
 			</div>
 			<div v-show="isShowSelect" v-for="list in lists" class="select-options flex-row" @click="choose(list)">
-				<h4>{{list.title}}</h4>
+				<h4>{{list}}</h4>
 			</div>
 			<div class="wallet-address flex-col">
 				<h4>钱包地址</h4>
@@ -34,7 +34,7 @@
 				lists : [],
 				isShowSelect : false,
 				address : "",
-				chooseTitle : "",
+				chooseTitle : "ETH",
 				clipboardObj: null
             }
         },
@@ -50,6 +50,7 @@
   		//创建之后
   		created: function (){
   			this.getMsg();
+			this.getAssets();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -67,24 +68,44 @@
   		methods: {
 			getMsg (){
 				let that = this;
-				this.axios.get('../static/receivables.json')
-					.then((data) => {
-						if (data.status === 200) {
-							console.log(data);
-							let res = data.data;
-							this.lists = res.lists;
-							this.address = res.items.address;
-							this.chooseTitle = res.lists[0].title;
-						} else {
-							this.layers("請求失敗");
-						}
-					})
-					.catch(function (error) {
-						setTimeout(() => {
-								console.log(error.message);
-								that.layers(error.message);
-							},4000)
-					});
+				this.axios.post('/index/suda_wallet/receivable',{
+					type : "eth"
+				})
+				.then(({data}) => {
+					if (data.status === 200) {
+						console.log(data);
+						this.address = data.data;
+						/* this.chooseTitle = res.lists[0].title; */
+					} else {
+						this.layers("請求失敗");
+					}
+				})
+				.catch(function (error) {
+					setTimeout(() => {
+							console.log(error.message);
+							that.layers(error.message);
+						},4000)
+				});
+			},
+			getAssets (){
+				let that = this;
+				this.axios.get('/index/suda_wallet/getAssets')
+				.then(({data}) => {
+					if (data.status === 200) {
+						console.log(data);
+						this.chooseTitle = data.data[0];
+						this.lists = data.data;
+						/* this.chooseTitle = res.lists[0].title; */
+					} else {
+						this.layers("請求失敗");
+					}
+				})
+				.catch(function (error) {
+					setTimeout(() => {
+							console.log(error.message);
+							that.layers(error.message);
+						},4000)
+				});
 			},
   			initCopyBtn () {
 				var self = this;
@@ -107,10 +128,28 @@
 				this.isShowSelect = !this.isShowSelect; 
 			},
 			choose(list){
-				console.log(list);
 				console.log(list.title);
-				this.chooseTitle = list.title;
+				this.chooseTitle = list;
 				this.isShowSelect = false;
+				let that = this;
+				this.axios.post('/index/suda_wallet/receivable',{
+					type : this.chooseTitle
+				})
+				.then(({data}) => {
+					if (data.status === 200) {
+						console.log(data);
+						this.address = data.data;
+						/* this.chooseTitle = res.lists[0].title; */
+					} else {
+						this.layers("请求失败");
+					}
+				})
+				.catch(function (error) {
+					setTimeout(() => {
+							console.log(error.message);
+							that.layers(error.message);
+						},4000)
+				});
 			}
   		},
     }

@@ -38,7 +38,7 @@
 	.top-title{
 		width: 100%;
 		height: 0.9rem;
-		padding-right: 0.3rem;
+		/*padding-right: 0.3rem;*/
 		justify-content: space-between;
 	}
 	.top-title img{
