@@ -11,34 +11,36 @@
 		</div>
 		<div class="top-text flex-col">
 			<div class="top-top flex-col">
-				<h3>15.00%</h3>
+				<h3>{{profit_rate}}%</h3>
 				<h5>预期年化</h5>
 			</div>
 			<div class="top-center flex-row">
 				<div class="top-center-btn flex-col">
-					<h4>15天</h4>
+					<h4 v-if="profit_cycle_type == 1">{{profit_cycle}}天</h4>
+					<h4 v-if="profit_cycle_type == 2">{{profit_cycle}}月</h4>
+					<h4 v-if="profit_cycle_type == 3">{{profit_cycle}}年</h4>
 					<h5>投资周期</h5>
 				</div>
 				<div class="top-center-btn flex-col">
-					<h4>1000ETH</h4>
+					<h4>{{invest_min}}{{type}}</h4>
 					<h5>起购金额</h5>
 				</div>
 				<div class="top-center-btn flex-col">
-					<h4>5000ETH</h4>
+					<h4>{{profit_toal|numFilter}}{{type}}</h4>
 					<h5>剩余金额</h5>
 				</div>
 			</div>
 		</div>
 		<div class="center-module-father flex-col">
 			<div class="center-module flex-col">
-				<h3>投资金额<span>(剩余可投1500ETH)</span></h3>
+				<h3>投资金额<span>(剩余可投{{surplus}}{{type}})</span></h3>
 				<div class="center-module-input flex-row">
-					<h3>ETH</h3>
-					<input type="number" value="" placeholder="100元起投"/>
+					<h3>{{type}}</h3>
+					<input type="number" value="" v-model="inputNumber" placeholder="100元起投"/>
 				</div>
 				<div class="center-module-text flex-row">
 					<h4>预估收益</h4>
-					<h4>0.00</h4>
+					<h4>{{showInputNum|numFilter6}}</h4>
 				</div>
 			</div>
 		</div>
@@ -51,36 +53,36 @@
 		<div class="list-module flex-col">
 			<div class="list-father flex-row">
 				<div class="list flex-row">
-					<h4>项目金额</h4>
-					<h4>s5484财富通</h4>
+					<h4>项目名称</h4>
+					<h4>{{title}}</h4>
 				</div>
 			</div>
 			<div class="list-father flex-row">
 				<div class="list flex-row">
-					<h4>项目名称</h4>
-					<h4>5000 ETH</h4>
+					<h4>项目金额</h4>
+					<h4>{{profit_toal|numFilter}} {{type}}</h4>
 				</div>
 			</div>
 			<div class="list-father flex-row">
 				<div class="list flex-row">
 					<h4>起投金额</h4>
-					<h4>100 ETH</h4>
+					<h4>{{invest_min}} {{type}}</h4>
 				</div>
 			</div>
 			<div class="list-father flex-row">
 				<div class="list flex-row">
 					<h4>认购时间</h4>
-					<h4>2018-12-03</h4>
+					<h4>{{open_start}}</h4>
 				</div>
 			</div>
 			<div class="list-father flex-row">
 				<div class="list flex-row">
 					<h4>到期时间</h4>
-					<h4>2018-12-18</h4>
+					<h4>{{open_end}}</h4>
 				</div>
 			</div>
 		</div>
-		<div class="btn-blue flex-col">
+		<div class="btn-blue flex-col" @click="clickInvestment()">
 			立即投资
 		</div>
 	</div>
@@ -91,7 +93,16 @@
         name: 'tenpay',
         data(){
             return {
-            	
+            	profit_rate : "",
+				profit_cycle : "",
+				profit_cycle_type : "",
+				invest_min : "",
+				type : "",
+				profit_toal : "",
+				title : "",
+				open_start : "",
+				open_end : "",
+				inputNumber : ""
             }
         },
         // 创建之前
@@ -100,7 +111,8 @@
   		},
   		//创建之后
   		created: function (){
-  			
+			this.getMsg();
+			this.getMoney();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -112,9 +124,112 @@
   				
   			})
   		},
+		computed: {
+			surplus() {
+				return this.profit_toal - this.numed; 
+			},
+			showInputNum (){
+				/* return this.inputNumber * 5; */
+				if (this.profit_cycle_type == 1) {
+					return this.inputNumber * this.profit_rate /36500;
+				} else if(this.profit_cycle_type == 2){
+					return this.inputNumber * this.profit_rate /1200;
+				} else {
+					return this.inputNumber * this.profit_rate /100;
+				}
+			}
+		},
+		filters: {
+			/*小数点后面保留2位*/
+		  	numFilter(num, len){
+				var len = len || 2;
+				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
+				return Number.isInteger(result) ? result.toFixed(len) : result;
+			},
+			/* 小数点后面保留6位 */
+			numFilter6(num,len){
+				var len = len || 6;
+				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
+				return Number.isInteger(result) ? result.toFixed(len) : result;
+			}
+		},
   		//实例方法
   		methods: {
-  			
+  			getMsg (){
+				console.log(this.$route.query.id);
+				let pageId = this.$route.query.id;
+				this.axios.post('/index/suda_financial/FinancialInfo',{
+					id : pageId
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						let res = data.data;
+						this.profit_rate = res.profit_rate;
+						this.profit_cycle = res.profit_cycle;
+						this.profit_cycle_type = res.profit_cycle_type;
+						this.invest_min = res.invest_min;
+						this.type =res.type;
+						this.profit_toal = res.profit_toal;
+						this.title = res.title;
+						this.numed = res.numed;
+						this.open_start = res.open_start;
+						this.open_end = res.open_end;
+					} else{
+						this.layers(data.message);
+					}
+				})
+			},
+			/* getMoney (){
+				this.axios.post('/index/suda_financial/EstimatedRevenue',{
+					id : this.$route.query.id,
+					num : 200
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data + "123");
+					} else{
+						this.layers(data.message);
+					}
+				})
+			}, */
+			clickInvestment (){
+				this.axios.post('/index/suda_financial/SubInvestment',{
+					id : this.$route.query.id,
+					num : this.inputNumber
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						this.layers(data.message);
+						setTimeout(() =>{
+							this.$router.replace('myInvestment');
+						},1500)
+					} else{
+						this.layers(data.message);
+					}
+				})
+			}
+			/* inputNum (event){
+				if (event.data!= null) {
+					let number = event.currentTarget.value;
+					console.log(number);
+				} else{
+					let number = event.currentTarget.value;
+					console.log(number);
+					this.axios.post('/index/suda_financial/EstimatedRevenue',{
+						id : this.$route.query.id,
+						num : this.number
+					})
+					.then(({data}) => {
+						if (data.status == 200) {
+							console.log(data + "123");
+						} else{
+							this.layers(data.message);
+						}
+					})
+				}
+			} */
   		}
     }
 </script>

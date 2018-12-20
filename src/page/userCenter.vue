@@ -5,7 +5,7 @@
 			<div class="top flex-row">
 				<img src="../../static/images/userCenter_01.png" alt="">
 				<div class="top-title flex-col">
-					<h3>小熊奥西商家<span>已认证</span></h3>
+					<h3>{{nickname}}<span>已认证</span></h3>
 					<router-link to="personalData">
 						<h5>点击编辑个人资料</h5>
 					</router-link>
@@ -91,7 +91,8 @@
             	img2 : require('../../static/images/indexNew_02.png'),
             	img3 : require('../../static/images/indexNew_03.png'),
             	img4 : require('../../static/images/indexNew_04.png'),
-            	img5 : require('../../static/images/indexNew_05_de.png')
+            	img5 : require('../../static/images/indexNew_05_de.png'),
+				nickname : ''
             }
         },
         // 创建之前
@@ -100,7 +101,7 @@
   		},
   		//创建之后
   		created: function (){
-  			
+  			this.getMsg();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -131,6 +132,25 @@
 						setTimeout(() =>{
 							this.$router.replace({name : 'indexNew'})
 						},2000)
+					} else{
+						this.layers(data.message);
+					}
+				})
+				.catch(function (error) {
+					setTimeout(() => {
+							console.log(error.message);
+							/* that.layers(error.message); */
+						},4000)
+				});
+			},
+			getMsg (){
+				let that = this;
+				this.axios.get('/index/suda_user/user_info')
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						let res = data.data;
+						this.nickname = res.nickname;
 					} else{
 						this.layers(data.message);
 					}

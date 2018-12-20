@@ -2,59 +2,33 @@
 	<div class="myInvestment">
 		<headerBar :title="indexTitle"></headerBar>
 		<!-- 循环数据 -->
-		<div class="list flex-col">
+		<div class="list flex-col" v-for="list in lists">
 			<div class="list-top flex-row">
-				<h4>S15465&emsp;财富通</h4>
+				<h4>{{list.title}}</h4>
 				<div class="list-top-right flex-row">
-					<img src="../../static/images/indexNew_09.png" alt="">
-					<h4>ETH</h4>
+					<img :src="list.icon" alt="">
+					<h4>{{list.type}}</h4>
 				</div>
 			</div>
 			<div class="list-bottom flex-col">
 				<div class="list-bottom-top flex-row">
 					<div class="list-tab flex-col">
-						<h4>5000</h4>
+						<h4>{{list.num|numFilter}}</h4>
 						<h5>投资数量</h5>
 					</div>
 					<div class="list-tab flex-col">
-						<h4>2018-12-19</h4>
+						<h4>{{list.start}}</h4>
 						<h5>开始时间</h5>
 					</div>
 					<div class="list-tab flex-col">
-						<h4>20天</h4>
+						<h4>{{list.cycle}}天</h4>
 						<h5>周期时间</h5>
 					</div>
 				</div>
-				<div class="list-btn flex-col">
-					剩余周期8天
+				<div class="list-btn flex-col" v-if="list.status == 1">
+					剩余周期{{list.surplus}}天
 				</div>
-			</div>
-		</div>
-		<!-- 循环数据 -->
-		<div class="list flex-col">
-			<div class="list-top flex-row">
-				<h4>S15465&emsp;财富通</h4>
-				<div class="list-top-right flex-row">
-					<img src="../../static/images/indexNew_09.png" alt="">
-					<h4>ETH</h4>
-				</div>
-			</div>
-			<div class="list-bottom flex-col">
-				<div class="list-bottom-top flex-row">
-					<div class="list-tab flex-col">
-						<h4>5000</h4>
-						<h5>投资数量</h5>
-					</div>
-					<div class="list-tab flex-col">
-						<h4>2018-12-19</h4>
-						<h5>开始时间</h5>
-					</div>
-					<div class="list-tab flex-col">
-						<h4>20天</h4>
-						<h5>周期时间</h5>
-					</div>
-				</div>
-				<div class="list-btn btnBlue flex-col">
+				<div class="list-btn btnBlue flex-col" v-if="list.status == 2" @click="expiration(list)">
 					到期转出
 				</div>
 			</div>
@@ -68,7 +42,8 @@
         name: 'myInvestment',
         data(){
             return {
-            	indexTitle : "我的投资"
+            	indexTitle : "我的投资",
+				lists : []
             }
         },
         // 创建之前
@@ -77,7 +52,7 @@
   		},
   		//创建之后
   		created: function (){
-  			
+  			this.getMsg();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -87,6 +62,14 @@
 		components:{
 			headerBar
 		},
+		filters: {
+			/*小数点后面保留2位*/
+		  	numFilter(num, len){
+				var len = len || 2;
+				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
+				return Number.isInteger(result) ? result.toFixed(len) : result;
+			}
+		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
@@ -95,7 +78,32 @@
   		},
   		//实例方法
   		methods: {
-  			
+  			getMsg (){
+				this.axios.post('/index/suda_financial/MyInvestment',{
+					page : "1"
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						this.lists = data.data;
+					} else{
+						this.layers(data.message);
+					}
+				})
+			},
+			expiration (list){
+				this.axios.post('/index/suda_financial/Profit',{
+					id : list.id
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						this.layers(data.message);
+					} else{
+						this.layers(data.message);
+					}
+				})
+			}
   		}
     }
 </script>

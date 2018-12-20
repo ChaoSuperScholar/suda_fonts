@@ -13,7 +13,7 @@
 				<h4>钱包地址</h4>
 				<h5 class="tag-read">{{address}}</h5>
 			</div>
-			<div class="qr-code flex-col">
+			<div class="qr-code flex-col" v-show="false">
 				<img src="../../static/images/receivables_02.png" alt="">
 			</div>
 			<div id="copy-btn" class="create-btn flex-col">
@@ -220,5 +220,6 @@
 		background-color: #4a7cee;
 		font-size: 0.32rem;
 		color: #FFFFFF;
+		margin-top: 0.7rem;
 	}
 </style>

@@ -25,6 +25,11 @@ import personalData from '../page/personalData'
 import financial from '../page/financial'
 import myInvestment from '../page/myInvestment'
 import tenpay from '../page/tenpay'
+import walletDetails from '../page/walletDetails'
+import walletTransfer from '../page/walletTransfer'
+import contacts from '../page/contacts'
+import modifyContact from '../page/modifyContact'
+import addContact from '../page/addContact'
 
 import index from '../page/index'
 import createWallet from '../page/createWallet'
@@ -175,6 +180,31 @@ export default new Router({
 			path: '/tenpay',
 			name: 'tenpay',
 			component: tenpay
+		},
+		{
+			path: '/walletDetails',
+			name: 'walletDetails',
+			component: walletDetails
+		},
+		{
+			path: '/walletTransfer',
+			name: 'walletTransfer',
+			component: walletTransfer
+		},
+		{
+			path: '/contacts',
+			name: 'contacts',
+			component: contacts
+		},
+		{
+			path: '/modifyContact',
+			name: 'modifyContact',
+			component: modifyContact
+		},
+		{
+			path: '/addContact',
+			name: 'addContact',
+			component: addContact
 		}
   ]
 })

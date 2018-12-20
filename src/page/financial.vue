@@ -12,34 +12,36 @@
 		<div class="tab-father flex-row">
 			<div class="tab tab-left flex-col">
 				<h4>总资产</h4>
-				<h3>￥1002.00</h3>
+				<h3>￥{{leftMoney|numFilter}}</h3>
 			</div>
 			<div class="tab tab-right flex-col">
 				<h4>上周收益</h4>
-				<h3>￥1002.00</h3>
+				<h3>￥{{rightMoney|numFilter}}</h3>
 			</div>
 		</div>
-		<div class="list flex-col" @click="goTenpay()">
+		<div class="list flex-col" v-for="list in lists" @click="goTenpay(list.id)">
 			<div class="list-top flex-row">
-				<h4>S15465&emsp;财富通</h4>
+				<h4>{{list.title}}</h4>
 				<div class="list-top-right flex-row">
-					<img src="../../static/images/indexNew_09.png" alt="">
-					<h4>ETH</h4>
+					<img :src="list.imgUrl" alt="">
+					<h4>{{list.type}}</h4>
 				</div>
 			</div>
 			<div class="list-bottom flex-row">
 				<div class="list-bottom-left flex-col">
-					<h3 class="h3-red">15.00%</h3>
+					<h3 class="h3-red">{{list.profit_rate}}%</h3>
 					<h4 class="h4-gray">预期年化</h4>
 				</div>
 				<div class="list-bottom-right flex-col">
 					<div class="bottom-right-top flex-row">
-						<h4><span>15</span>天</h4>
+						<h4 v-if="list.profit_cycle_type ==1"><span>{{list.profit_cycle}}</span>天</h4>
+						<h4 v-if="list.profit_cycle_type ==2"><span>{{list.profit_cycle}}</span>月</h4>
+						<h4 v-if="list.profit_cycle_type ==3"><span>{{list.profit_cycle}}</span>年</h4>
 						<div class="line"></div>
-						<h4><span>100</span>起购</h4>
+						<h4><span>{{list.invest_min}}</span>起购</h4>
 					</div>
 					<div class="list-btn flex-col">
-						<h4 class="h4-blue">剩余60%</h4>
+						<h4 class="h4-blue">剩余{{list.surplus}}%</h4>
 					</div>
 				</div>
 			</div>
@@ -52,7 +54,9 @@
         name: 'financial',
         data(){
             return {
-            	
+            	leftMoney : "",
+				rightMoney : "",
+				lists : []
             }
         },
         // 创建之前
@@ -62,6 +66,7 @@
   		//创建之后
   		created: function (){
   			this.getMsg();
+			this.getList();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -73,13 +78,51 @@
   				
   			})
   		},
+		filters: {
+		/*小数点后面保留2位*/
+		  	numFilter(num, len){
+				var len = len || 2;
+				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
+				return Number.isInteger(result) ? result.toFixed(len) : result;
+			}
+		},
   		//实例方法
   		methods: {
-			goTenpay (){
-				this.$router.replace('tenpay');
+			goTenpay (id){
+				/* this.$router.replace('tenpay'); */
+				this.$router.push({
+					path : '/tenpay',
+					query : {
+						id : id
+					}
+				})
 			},
 			getMsg (){
-				
+				this.axios.get('/index/suda_financial/total_coin')
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						let res = data.data;
+						this.leftMoney = res[0];
+						this.rightMoney = res[1];
+					} else{
+						this.layers(data.message);
+					}
+				})
+			},
+			getList (){
+				this.axios.post('/index/suda_financial/FinancialList',{
+					page : "1"
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						let res = data.data;
+						this.lists = res;
+					} else{
+						this.layers(data.message);
+					}
+				})
 			}
   		}
     }

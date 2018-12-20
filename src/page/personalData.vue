@@ -5,25 +5,29 @@
 			<div class="img-father">
 				<img src="../../static/images/userCenter_01.png" alt="">
 			</div>
-			<h3>默认的名字显示</h3>
+			<h3>{{nickname}}</h3>
 		</div>
 		<div class="list flex-row">
 			<h4>账户昵称:</h4>
-			<input type="text" value="" placeholder="输入账号昵称"/>
+			<input type="text" value="" placeholder="输入账号昵称" v-model="newName"/>
 		</div>
 		<div class="list flex-row">
-			<h4>账户昵称:</h4>
-			<h4>18638442189</h4>
+			<h4>手机号码:</h4>
+			<h4>{{phone}}</h4>
 		</div>
-		<div class="list flex-row">
-			<h4>修改登录密码:</h4>
-			<img src="../../static/images/receivables_01.png" alt="">
-		</div>
-		<div class="list flex-row">
-			<h4>修改交易密码:</h4>
-			<img src="../../static/images/receivables_01.png" alt="">
-		</div>
-		<div class="create-btn flex-col">
+		<router-link to="securityCenter">
+			<div class="list flex-row">
+				<h4>修改登录密码:</h4>
+				<img src="../../static/images/receivables_01.png" alt="">
+			</div>
+		</router-link>
+		<router-link to="securityCenter">
+			<div class="list flex-row">
+				<h4>修改交易密码:</h4>
+				<img src="../../static/images/receivables_01.png" alt="">
+			</div>
+		</router-link>
+		<div class="create-btn flex-col" @click="btnClick()">
 			确认修改
 		</div>
 	</div>
@@ -35,7 +39,10 @@
         name: 'personalData',
         data(){
             return {
-            	indexTitle : "个人资料"
+            	indexTitle : "个人资料",
+				nickname : '',
+				phone : '',
+				newName : ''
             }
         },
         // 创建之前
@@ -44,7 +51,7 @@
   		},
   		//创建之后
   		created: function (){
-  			
+  			this.getMsg();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -62,7 +69,43 @@
 		},
   		//实例方法
   		methods: {
-  			
+  			getMsg (){
+				let that = this;
+				this.axios.get('/index/suda_user/user_info')
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						let res = data.data;
+						this.nickname = res.nickname;
+						this.phone = res.phone;
+					} else{
+						this.layers(data.message);
+					}
+				})
+				.catch(function (error) {
+					setTimeout(() => {
+							console.log(error.message);
+							/* that.layers(error.message); */
+						},4000)
+				});
+			},
+			btnClick (){
+				this.axios.post('/index/suda_user/user_info',{
+					nickname : this.newName,
+					avatar : ''
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						this.layers(data.message);
+						setTimeout(() => {
+							this.getMsg();
+						},1500)
+					} else{
+						this.layers(data.message);
+					}
+				})
+			}
   		}
     }
 </script>

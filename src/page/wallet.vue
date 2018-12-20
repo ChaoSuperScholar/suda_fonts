@@ -12,7 +12,7 @@
 			<h4>{{myname}}</h4>
 			<h5><span>{{totalAssets}}</span>总资产(￥)</h5>
 		</div>
-		<div class="list flex-row" v-for="list in lists">
+		<div class="list flex-row" v-for="list in lists" @click="goDetails(list)">
 			<div class="list-left flex-col">
 				<img :src="list.img" alt="">
 			</div>
@@ -104,6 +104,15 @@
 								/* that.layers(error.message); */
 							},4000)
 					});
+			},
+			goDetails (list){
+				this.$router.push({
+					path : '/walletDetails',
+					query : {
+						type : list.type,
+						title : list.title
+					}
+				})
 			}
   		}
     }
