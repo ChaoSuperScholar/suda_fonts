@@ -31,7 +31,7 @@
 				<!-- 循环列表list -->
 				<!-- <router-link to="orderPage"> -->
 				<!-- </router-link> -->
-				<div class="list flex-col" v-for="list in lists">
+				<div class="list flex-col" v-for="list in lists" @click="goDetails(list)">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<div class="avatar">
@@ -40,10 +40,10 @@
 							<h4>{{list.nickname}}</h4>
 						</div>
 						<h4 class="h4-blue" v-if="list.status == 1">待付款</h4>
-						<h4 class="h4-blue" v-if="list.status == 2">待确认</h4>
+						<h4 class="h4-blue" v-if="list.status == 2">等待放行</h4>
 						<h4 class="h4-blue" v-if="list.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="list.status == -1">撤销</h4>
-						<h4 class="h4-red" v-if="list.status == 4">申述中</h4>
+						<h4 class="h4-red" v-if="list.status == 4">申诉中</h4>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
@@ -67,7 +67,7 @@
 			</div>
 			<div class="tab-card">
 				<!-- 循环列表list -->
-				<div class="list flex-col" v-for="list in lists">
+				<div class="list flex-col" v-for="list in lists" @click="goDetails(list)">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<div class="avatar">
@@ -76,10 +76,10 @@
 							<h4>{{list.nickname}}</h4>
 						</div>
 						<h4 class="h4-blue" v-if="list.status == 1">待付款</h4>
-						<h4 class="h4-blue" v-if="list.status == 2">待确认</h4>
+						<h4 class="h4-blue" v-if="list.status == 2">等待放行</h4>
 						<h4 class="h4-blue" v-if="list.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="list.status == -1">撤销</h4>
-						<h4 class="h4-red" v-if="list.status == 4">申述中</h4>
+						<h4 class="h4-red" v-if="list.status == 4">申诉中</h4>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
@@ -103,7 +103,7 @@
 			</div>
 			<div class="tab-card">
 				<!-- 循环列表list -->
-				<div class="list flex-col" v-for="list in lists">
+				<div class="list flex-col" v-for="list in lists" @click="goDetails(list)">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<div class="avatar">
@@ -112,10 +112,10 @@
 							<h4>{{list.nickname}}</h4>
 						</div>
 						<h4 class="h4-blue" v-if="list.status == 1">待付款</h4>
-						<h4 class="h4-blue" v-if="list.status == 2">待确认</h4>
+						<h4 class="h4-blue" v-if="list.status == 2">等待放行</h4>
 						<h4 class="h4-blue" v-if="list.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="list.status == -1">撤销</h4>
-						<h4 class="h4-red" v-if="list.status == 4">申述中</h4>
+						<h4 class="h4-red" v-if="list.status == 4">申诉中</h4>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
@@ -139,7 +139,7 @@
 			</div>
 			<div class="tab-card">
 				<!-- 循环列表list -->
-				<div class="list flex-col" v-for="list in lists">
+				<div class="list flex-col" v-for="list in lists" @click="goDetails(list)">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<div class="avatar">
@@ -148,10 +148,10 @@
 							<h4>{{list.nickname}}</h4>
 						</div>
 						<h4 class="h4-blue" v-if="list.status == 1">待付款</h4>
-						<h4 class="h4-blue" v-if="list.status == 2">待确认</h4>
+						<h4 class="h4-blue" v-if="list.status == 2">等待放行</h4>
 						<h4 class="h4-blue" v-if="list.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="list.status == -1">撤销</h4>
-						<h4 class="h4-red" v-if="list.status == 4">申述中</h4>
+						<h4 class="h4-red" v-if="list.status == 4">申诉中</h4>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
@@ -175,7 +175,7 @@
 			</div>
 			<div class="tab-card">
 				<!-- 循环列表list -->
-				<div class="list flex-col" v-for="list in lists">
+				<div class="list flex-col" v-for="list in lists" @click="goDetails(list)">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<div class="avatar">
@@ -184,10 +184,10 @@
 							<h4>{{list.nickname}}</h4>
 						</div>
 						<h4 class="h4-blue" v-if="list.status == 1">待付款</h4>
-						<h4 class="h4-blue" v-if="list.status == 2">待确认</h4>
+						<h4 class="h4-blue" v-if="list.status == 2">等待放行</h4>
 						<h4 class="h4-blue" v-if="list.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="list.status == -1">撤销</h4>
-						<h4 class="h4-red" v-if="list.status == 4">申述中</h4>
+						<h4 class="h4-red" v-if="list.status == 4">申诉中</h4>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
@@ -221,7 +221,7 @@
 			</div>
 			<div class="tab-card2" style="display: block;">
 				<!-- 循环列表list -->
-				<div class="list flex-col" v-for="item in items">
+				<div class="list flex-col" v-for="item in items" @click="goDetails(item)">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<div class="avatar">
@@ -229,11 +229,11 @@
 							</div>
 							<h4>{{item.nickname}}</h4>
 						</div>
-						<h4 class="h4-blue" v-if="item.status == 1">待付款</h4>
-						<h4 class="h4-blue" v-if="item.status == 2">待确认</h4>
+						<h4 class="h4-blue" v-if="item.status == 1">等待付款</h4>
+						<h4 class="h4-blue" v-if="item.status == 2">待放行</h4>
 						<h4 class="h4-blue" v-if="item.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="item.status == -1">撤销</h4>
-						<h4 class="h4-red" v-if="item.status == 4">申述中</h4>
+						<h4 class="h4-red" v-if="item.status == 4">申诉中</h4>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
@@ -257,7 +257,7 @@
 			</div>
 			<div class="tab-card2">
 				<!-- 循环列表list -->
-				<div class="list flex-col" v-for="item in items">
+				<div class="list flex-col" v-for="item in items" @click="goDetails(item)">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<div class="avatar">
@@ -265,11 +265,11 @@
 							</div>
 							<h4>{{item.nickname}}</h4>
 						</div>
-						<h4 class="h4-blue" v-if="item.status == 1">待付款</h4>
-						<h4 class="h4-blue" v-if="item.status == 2">待确认</h4>
+						<h4 class="h4-blue" v-if="item.status == 1">等待付款</h4>
+						<h4 class="h4-blue" v-if="item.status == 2">待放行</h4>
 						<h4 class="h4-blue" v-if="item.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="item.status == -1">撤销</h4>
-						<h4 class="h4-red" v-if="item.status == 4">申述中</h4>
+						<h4 class="h4-red" v-if="item.status == 4">申诉中</h4>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
@@ -293,7 +293,7 @@
 			</div>
 			<div class="tab-card2">
 				<!-- 循环列表list -->
-				<div class="list flex-col" v-for="item in items">
+				<div class="list flex-col" v-for="item in items" @click="goDetails(item)">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<div class="avatar">
@@ -301,11 +301,11 @@
 							</div>
 							<h4>{{item.nickname}}</h4>
 						</div>
-						<h4 class="h4-blue" v-if="item.status == 1">待付款</h4>
-						<h4 class="h4-blue" v-if="item.status == 2">待确认</h4>
+						<h4 class="h4-blue" v-if="item.status == 1">等待付款</h4>
+						<h4 class="h4-blue" v-if="item.status == 2">待放行</h4>
 						<h4 class="h4-blue" v-if="item.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="item.status == -1">撤销</h4>
-						<h4 class="h4-red" v-if="item.status == 4">申述中</h4>
+						<h4 class="h4-red" v-if="item.status == 4">申诉中</h4>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
@@ -329,7 +329,7 @@
 			</div>
 			<div class="tab-card2">
 				<!-- 循环列表list -->
-				<div class="list flex-col" v-for="item in items">
+				<div class="list flex-col" v-for="item in items" @click="goDetails(item)">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<div class="avatar">
@@ -337,11 +337,11 @@
 							</div>
 							<h4>{{item.nickname}}</h4>
 						</div>
-						<h4 class="h4-blue" v-if="item.status == 1">待付款</h4>
-						<h4 class="h4-blue" v-if="item.status == 2">待确认</h4>
+						<h4 class="h4-blue" v-if="item.status == 1">等待付款</h4>
+						<h4 class="h4-blue" v-if="item.status == 2">待放行</h4>
 						<h4 class="h4-blue" v-if="item.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="item.status == -1">撤销</h4>
-						<h4 class="h4-red" v-if="item.status == 4">申述中</h4>
+						<h4 class="h4-red" v-if="item.status == 4">申诉中</h4>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
@@ -365,7 +365,7 @@
 			</div>
 			<div class="tab-card2">
 				<!-- 循环列表list -->
-				<div class="list flex-col" v-for="item in items">
+				<div class="list flex-col" v-for="item in items" @click="goDetails(item)">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
 							<div class="avatar">
@@ -373,11 +373,11 @@
 							</div>
 							<h4>{{item.nickname}}</h4>
 						</div>
-						<h4 class="h4-blue" v-if="item.status == 1">待付款</h4>
-						<h4 class="h4-blue" v-if="item.status == 2">待确认</h4>
+						<h4 class="h4-blue" v-if="item.status == 1">等待付款</h4>
+						<h4 class="h4-blue" v-if="item.status == 2">待放行</h4>
 						<h4 class="h4-blue" v-if="item.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="item.status == -1">撤销</h4>
-						<h4 class="h4-red" v-if="item.status == 4">申述中</h4>
+						<h4 class="h4-red" v-if="item.status == 4">申诉中</h4>
 					</div>
 					<div class="list-bottom flex-col">
 						<div class="list-bottom-top flex-row">
@@ -436,7 +436,7 @@
 						status : "3"
 					},
 					{  
-						name: "申述中",  
+						name: "申诉中",  
 						isActive: false,
 						status : "4"
 					},
@@ -464,7 +464,7 @@
 						status : "3"
 					},
 					{  
-						name: "申述中",  
+						name: "申诉中",  
 						isActive: false,
 						status : "4"
 					},
@@ -605,6 +605,24 @@
 					}
 				})
 			},
+			goDetails (list){
+				console.log(list.id);
+				this.$router.push({
+					path : '/orderPage',
+					query : {
+						id : list.id
+					}
+				})
+			},
+			goDetails (item){
+				console.log(item.id);
+				this.$router.push({
+					path : '/orderPage',
+					query : {
+						id : item.id
+					}
+				})
+			}
   		}
     }
 </script>

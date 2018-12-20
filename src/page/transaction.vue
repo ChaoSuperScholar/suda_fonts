@@ -570,7 +570,7 @@
 				} else if(!this.layerPassword){
 					this.layers("请输入交易密码!")
 				} else{
-					this.axios.post('/index/suda_order_sell/buy',{
+					this.axios.post('/index/suda_order_sell/sell',{
 						num : this.layerNum2,
 						adid : this.adid2,
 						password : this.layerPassword
@@ -579,7 +579,7 @@
 						if (data.status == 200) {
 							this.layers(data.message);
 							setTimeout(() => {
-								this.showLayer = false;
+								this.showLayer2 = false;
 							}, 1000)
 							this.layerNum2 = "";
 							this.layerMoney2 = "";

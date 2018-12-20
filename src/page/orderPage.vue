@@ -14,24 +14,30 @@
 		<div class="list-father flex-col">
 			<div class="list flex-col">
 				<div class="list-top flex-row">
-					<h3>购买ETH</h3>
-					<h3 class="h3-blue">待放行</h3>
+					<h3>{{list.title}}</h3>
+					<h3 class="h3-blue" v-if="list.status == 1&&list.type == 1">待付款</h3>
+					<h3 class="h3-blue" v-if="list.status == 1&&list.type == 2">等待付款</h3>
+					<h3 class="h3-blue" v-if="list.status == 2&&list.type == 1">等待放行</h3>
+					<h3 class="h3-blue" v-if="list.status == 2&&list.type == 2">待放行</h3>
+					<h3 class="h3-blue" v-if="list.status == 3">完成</h3>
+					<h3 class="h3-gray" v-if="list.status == -1">撤销</h3>
+					<h3 class="h3-red" v-if="list.status == 4">申诉中</h3>
 				</div>
 				<div class="list-bottom flex-row">
-					<h4>金额&nbsp;2400.00</h4>
-					<h4>购买数量&nbsp;100</h4>
+					<h4>金额&nbsp;{{list.total|numFilter}}</h4>
+					<h4>购买数量&nbsp;{{list.num|numFilter}}</h4>
 				</div>
 			</div>
 		</div>
 		<div class="list-father flex-col">
 			<div class="list flex-row">
 				<h4>付款备注码</h4>
-				<h4>156441</h4>
+				<h4>{{list.remark}}</h4>
 			</div>
 		</div>
 		<div class="line-block"></div>
 		<!-- 中间的循环数据 -->
-		<div class="list-father flex-col">
+		<div class="list-father flex-col" v-if="list.bank != ''">
 			<div class="list flex-col">
 				<div class="list-top flex-row">
 					<div class="list-top-left flex-row">
@@ -40,38 +46,38 @@
 					</div>
 				</div>
 				<div class="list-bottom flex-row">
-					<h4>名称:&nbsp;诺克商家</h4>
-					<h4>账户:&nbsp;nuokeshangjia</h4>
+					<h4>名称:&nbsp;{{list.bank.name}}</h4>
+					<h4>账户:&nbsp;{{list.bank.account}}</h4>
 				</div>
 			</div>
 		</div>
-		<div class="list-father flex-col">
+		<div class="list-father flex-col" v-if="list.alipay != ''">
 			<div class="list flex-col">
 				<div class="list-top flex-row">
 					<div class="list-top-left flex-row">
 						<img src="../../static/images/transaction_04.png" alt="">
 						<h4>支付宝</h4>
 					</div>
-					<img src="../../static/images/orderPage_02.png" alt="">
+					<img src="../../static/images/orderPage_02.png" alt="" v-show="false">
 				</div>
 				<div class="list-bottom flex-row">
-					<h4>名称:&nbsp;诺克商家</h4>
-					<h4>账户:&nbsp;nuokeshangjia</h4>
+					<h4>名称:&nbsp;{{list.alipay.name}}</h4>
+					<h4>账户:&nbsp;{{list.alipay.account}}</h4>
 				</div>
 			</div>
 		</div>
-		<div class="list-father flex-col">
+		<div class="list-father flex-col" v-if="list.wechat != ''">
 			<div class="list flex-col">
 				<div class="list-top flex-row">
 					<div class="list-top-left flex-row">
 						<img src="../../static/images/transaction_05.png" alt="">
 						<h4>微信</h4>
 					</div>
-					<img src="../../static/images/orderPage_02.png" alt="">
+					<img src="../../static/images/orderPage_02.png" alt="" v-show="false">
 				</div>
 				<div class="list-bottom flex-row">
-					<h4>名称:&nbsp;诺克商家</h4>
-					<h4>账户:&nbsp;nuokeshangjia</h4>
+					<h4>名称:&nbsp;{{list.wechat.name}}</h4>
+					<h4>账户:&nbsp;{{list.wechat.account}}</h4>
 				</div>
 			</div>
 		</div>
@@ -80,13 +86,13 @@
 		<div class="list-father flex-col">
 			<div class="list flex-row">
 				<h4>单价</h4>
-				<h4>832.00 CNY/ETH</h4>
+				<h4>{{list.price}} CNY/ETH</h4>
 			</div>
 		</div>
 		<div class="list-father flex-col">
 			<div class="list flex-row">
 				<h4>订单时间</h4>
-				<h4>2018-11-30 17:29</h4>
+				<h4>{{list.created_at}}</h4>
 			</div>
 		</div>
 		<div class="list-father flex-col">
@@ -108,11 +114,33 @@
 			<div class="btn-left flex-col">
 				<img src="../../static/images/orderPage_01.png" alt="">
 			</div>
-			<div class="btn-center btn flex-col">
+			<div class="btn-center btn flex-col" v-if="list.status == 1&&list.type == 1" @click="payMoney(list)">
+				确认付款
+			</div>
+			<div class="btn-center btn flex-col" v-else="">
 				发起申述
 			</div>
-			<div class="btn-right btn flex-col">
+			<div class="btn-right btn flex-col" v-if="list.status == 1&&list.type == 1" @click="cancelBtn(list)">
+				取消订单
+			</div>
+			<div class="btn-right btn flex-col" v-if="list.status == 1&&list.type == 2" @click="cancelBtn(list)">
+				取消订单
+			</div>
+			<div class="btn-right btn-gray btn flex-col" v-if="list.status == 2&&list.type == 1">
+				我已付款
+			</div>
+			<div class="btn-right btn flex-col" v-if="list.status == 2&&list.type == 2" @click="confirmRelease
+(list)">
 				确认放行
+			</div>
+			<div class="btn-right btn-gray btn flex-col" v-if="list.status == 3">
+				完成
+			</div>
+			<div class="btn-right btn-gray btn flex-col" v-if="list.status == -1">
+				撤销
+			</div>
+			<div class="btn-right btn flex-col" v-if="list.status == 4">
+				申述中
 			</div>
 		</div>
 	</div>
@@ -123,7 +151,7 @@
         name: 'orderPage',
         data(){
             return {
-            	
+            	list : []
             }
         },
         // 创建之前
@@ -132,7 +160,7 @@
   		},
   		//创建之后
   		created: function (){
-  			
+  			this.getMsg();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -144,11 +172,84 @@
   				
   			})
   		},
+		filters: {
+			/*小数点后面保留2位*/
+		  	numFilter(num, len){
+				var len = len || 2;
+				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
+				return Number.isInteger(result) ? result.toFixed(len) : result;
+			}
+		},
   		//实例方法
   		methods: {
   			return_page (){
 				this.$router.go(-1);
-			}
+			},
+			getMsg (){
+				this.axios.post('/index/suda_order_buy/order_info',{
+					id : this.$route.query.id
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						this.list = data.data;
+					} else{
+						this.layers(data.message);
+					}
+				})
+			},
+			payMoney (list){
+				this.axios.post('/index/suda_order_sell/confirmPayment',{
+					oid : this.$route.query.id,
+					adid : list.adid
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						this.layers(data.message);
+						setTimeout(() => {
+							this.$router.replace('order');
+						},1500)
+					} else{
+						this.layers(data.message);
+					}
+				})
+			},
+			cancelBtn (list){
+				this.axios.post('/index/suda_order_buy/revoke_order',{
+					id : this.$route.query.id,
+					adid : list.adid
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						this.layers(data.message);
+						setTimeout(() => {
+							this.$router.replace('order');
+						},1500)
+					} else{
+						this.layers(data.message);
+					}
+				})
+			},
+			confirmRelease (list){
+				this.axios.post('/index/suda_order_buy/receive_ad',{
+					oid : this.$route.query.id,
+					adid : list.adid
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						this.layers(data.message);
+						setTimeout(() => {
+							this.$router.replace('order');
+						},1500)
+					} else{
+						this.layers(data.message);
+					}
+				})
+			},
+			
   		}
     }
 </script>
@@ -294,5 +395,8 @@
 	.btn-right{
 		background-color: #5174e7;
 		color: #FFFFFF;
+	}
+	.btn-gray{
+		background-color: #e3e5eb;
 	}
 </style>
