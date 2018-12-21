@@ -25,6 +25,10 @@ Vue.prototype.axios = axios.create({
     return data;
   }]
 });
+Vue.prototype.$http = axios.create({
+  baseUrl: '',
+  timeout: 20000
+});
 //请求拦截器
 let cancel,promiseArr = {};
 axios.interceptors.request.use(config=>{

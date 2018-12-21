@@ -3,7 +3,10 @@
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="top-module flex-col">
 			<div class="img-father">
-				<img src="../../static/images/userCenter_01.png" alt="">
+				<label class="user">
+					<img :src="userImg ? userImg : require('../../static/images/userCenter_01.png')" alt="">
+					<input type="file" class="img_input" ref="" @change="selectImg">
+				</label>
 			</div>
 			<h3>{{nickname}}</h3>
 		</div>
@@ -42,7 +45,8 @@
             	indexTitle : "个人资料",
 				nickname : '',
 				phone : '',
-				newName : ''
+				newName : '',
+				userImg : ''
             }
         },
         // 创建之前
@@ -78,6 +82,7 @@
 						let res = data.data;
 						this.nickname = res.nickname;
 						this.phone = res.phone;
+						this.userImg = res.avatar;
 					} else{
 						this.layers(data.message);
 					}
@@ -92,7 +97,7 @@
 			btnClick (){
 				this.axios.post('/index/suda_user/user_info',{
 					nickname : this.newName,
-					avatar : ''
+					avatar : this.upImg1
 				})
 				.then(({data}) => {
 					if (data.status == 200) {
@@ -105,7 +110,38 @@
 						this.layers(data.message);
 					}
 				})
-			}
+			},
+			// 图片选择，赋值给file
+			selectImg: function (e) {
+				this.hasImg = false;
+				this.file = e.target.files[0];
+				let reader = new FileReader();
+				reader.addEventListener('load', () => {
+					this.userImg = reader.result;
+				}, false);
+				if (this.file) {
+					reader.readAsDataURL(this.file);
+				}
+				console.log(this.file);
+				let fm = new window.FormData();
+				fm.append('avatar', this.file);
+				let config = {
+					headers: {
+						'Content-Type': 'multipart/form-data'
+					}
+				};
+				this.$http.post('http://admin.suda66888.com/index/uploadfile/uploadPic',fm,config)
+				.then(({data}) => {
+					if (data.status === 200) {
+						console.log(data.data);
+						this.hasImg = true;
+						this.upImg1 = data.data;
+						this.layers(data.message);
+					} else {
+						this.layers(data.message);
+					}
+				})
+			},
   		}
     }
 </script>
@@ -123,17 +159,21 @@
 		width: 100%;
 		height: auto;
 		background-color: #393f4c;
+		padding-top: 0.4rem;
 	}
-	.top-module .img-father{
+	/* .top-module .img-father{
 		width: 1.1rem;
 		height: 1.1rem;
 		border-radius: 50%;
 		border: 0.04rem solid #9ca5b7;
 		overflow: hidden;
 		margin: 0.4rem 0;
-	}
+	} */
 	.top-module h3{
-		margin-bottom: 0.5rem;
+		margin: 0.4rem 0 0.5rem 0;
+	}
+	.top-title{
+		margin-bottom: 0.4rem;
 	}
 	.list{
 		width: 6.9rem;
@@ -162,5 +202,25 @@
 		font-size: 0.32rem;
 		color: #FFFFFF;
 		margin-top: 0.72rem;
+	}
+	.user{
+		position: relative;
+		overflow: hidden;
+		width: 1.1rem;
+		height: 1.1rem;
+		border-radius: 50%;
+		/* border: 0.04rem solid #9ca5b7; */
+		overflow: hidden;
+		/* margin: 0.4rem 0; */
+	}
+	.user img{
+		width: 1.1rem;
+		height: 1.1rem;
+		border-radius: 50%;
+	}
+	.img_input{
+		position: absolute;
+		left: -20rem;
+		top: 0.6rem;
 	}
 </style>

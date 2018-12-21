@@ -111,13 +111,13 @@
 			</div>
 		</div>
 		<div class="bottom-btn flex-row">
-			<div class="btn-left flex-col">
+			<div class="btn-left flex-col" @click="noData()">
 				<img src="../../static/images/orderPage_01.png" alt="">
 			</div>
 			<div class="btn-center btn flex-col" v-if="list.status == 1&&list.type == 1" @click="payMoney(list)">
 				确认付款
 			</div>
-			<div class="btn-center btn flex-col" v-else="">
+			<div class="btn-center btn flex-col" v-else="" @click="noData()">
 				发起申述
 			</div>
 			<div class="btn-right btn flex-col" v-if="list.status == 1&&list.type == 1" @click="cancelBtn(list)">
@@ -249,7 +249,9 @@
 					}
 				})
 			},
-			
+			noData (){
+				this.layers("暂未开放")
+			}
   		}
     }
 </script>

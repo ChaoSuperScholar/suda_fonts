@@ -3,9 +3,10 @@
 		<pageHead>我的</pageHead>
 		<div class="top-module flex-col">
 			<div class="top flex-row">
-				<img src="../../static/images/userCenter_01.png" alt="">
+				<img :src="avatar" alt="">
 				<div class="top-title flex-col">
-					<h3>{{nickname}}<span>已认证</span></h3>
+					<h3 v-if="auth == 1">{{nickname}}<span>已认证</span></h3>
+					<h3 v-if="auth == 2">{{nickname}}<span class="span-de">未认证</span></h3>
 					<router-link to="personalData">
 						<h5>点击编辑个人资料</h5>
 					</router-link>
@@ -28,20 +29,22 @@
 				</div>
 			</div>
 		</div>
-		<div class="list flex-row">
-			<div class="list-left flex-row" @click="nodata()">
+		<div class="list flex-row" @click="goIdentity()">
+			<div class="list-left flex-row">
 				<img src="../../static/images/userCenter_05.png" alt="">
 				<h4>身份认证</h4>
 			</div>
 			<img src="../../static/images/receivables_01.png" alt="">
 		</div>
-		<div class="list flex-row" @click="nodata()">
-			<div class="list-left flex-row">
-				<img src="../../static/images/userCenter_06.png" alt="">
-				<h4>收款方式</h4>
+		<router-link to="paymentMethod">
+			<div class="list flex-row">
+				<div class="list-left flex-row">
+					<img src="../../static/images/userCenter_06.png" alt="">
+					<h4>收款方式</h4>
+				</div>
+				<img src="../../static/images/receivables_01.png" alt="">
 			</div>
-			<img src="../../static/images/receivables_01.png" alt="">
-		</div>
+		</router-link>
 		<router-link to="securityCenter">
 			<div class="list flex-row">
 				<div class="list-left flex-row">
@@ -92,7 +95,9 @@
             	img3 : require('../../static/images/indexNew_03.png'),
             	img4 : require('../../static/images/indexNew_04.png'),
             	img5 : require('../../static/images/indexNew_05_de.png'),
-				nickname : ''
+				nickname : '',
+				auth : '',
+				avatar : ''
             }
         },
         // 创建之前
@@ -151,6 +156,8 @@
 						console.log(data);
 						let res = data.data;
 						this.nickname = res.nickname;
+						this.auth = res.auth;
+						this.avatar = res.avatar;
 					} else{
 						this.layers(data.message);
 					}
@@ -161,6 +168,9 @@
 							/* that.layers(error.message); */
 						},4000)
 				});
+			},
+			goIdentity (){
+				this.$router.replace('identity');
 			}
   		}
     }
@@ -184,6 +194,7 @@
 		width: 0.92rem;
 		height: 0.92rem;
 		margin-right: 0.2rem;
+		border-radius: 50%;
 	}
 	.top-title{
 		align-items: flex-start;
@@ -208,6 +219,16 @@
 		border-radius: 0.3rem;
 		font-size: 0.26rem;
 		color: #5174e7;
+		margin-left: 0.2rem;
+	}
+	.span-de{
+		width: auto;
+		height: auto;
+		padding: 0.06rem 0.2rem;
+		border: 0.02rem solid #828fac;
+		border-radius: 0.3rem;
+		font-size: 0.26rem;
+		color: #828fac;
 		margin-left: 0.2rem;
 	}
 	.bottom{

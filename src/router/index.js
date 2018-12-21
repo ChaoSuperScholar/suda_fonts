@@ -30,6 +30,9 @@ import walletTransfer from '../page/walletTransfer'
 import contacts from '../page/contacts'
 import modifyContact from '../page/modifyContact'
 import addContact from '../page/addContact'
+import identity from '../page/identity'
+import paymentMethod from '../page/paymentMethod'
+import addPayment from '../page/addPayment'
 
 import index from '../page/index'
 import createWallet from '../page/createWallet'
@@ -205,6 +208,21 @@ export default new Router({
 			path: '/addContact',
 			name: 'addContact',
 			component: addContact
+		},
+		{
+			path: '/identity',
+			name: 'identity',
+			component: identity
+		},
+		{
+			path: '/paymentMethod',
+			name: 'paymentMethod',
+			component: paymentMethod
+		},
+		{
+			path: '/addPayment',
+			name: 'addPayment',
+			component: addPayment
 		}
   ]
 })
