@@ -11,10 +11,10 @@
 					<h4>生产力</h4>
 					<h4>业绩</h4>
 				</div>
-				<div class="list flex-row">
-					<h5>13144571984</h5>
-					<h5>3.45</h5>
-					<h5>1500</h5>
+				<div class="list flex-row" v-for="list in lists">
+					<h5>{{list.phone}}</h5>
+					<h5>{{list.productivity}}</h5>
+					<h5>{{list.achievement}}</h5>
 				</div>
 			</div>
 		</div>
@@ -27,7 +27,8 @@
         name: 'myTeam',
         data(){
             return {
-            	indexTitle : "我的团队"
+            	indexTitle : "我的团队",
+				lists : []
             }
         },
         // 创建之前
@@ -56,12 +57,13 @@
   		methods: {
   			getMsg (){
 				let that = this;
-				this.axios.get('/index/suda_team/my_team')
+				this.axios.get('/index/suda_team/myTeam')
 				.then(({data}) => {
 					if (data.status == 200) {
 						console.log(data);
+						this.lists = data.data;
 					} else{
-						console.log(data.message);
+						this.layers(data.message);
 					}
 				})
 				.catch(function (error) {

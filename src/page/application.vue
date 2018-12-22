@@ -19,13 +19,6 @@
 			</template>
 		</div>
 		<div class="tab-card" style="display: block;">
-			<div class="list flex-row" @click="noData()">
-				<img src="../../static/images/application_04.png" alt="">
-				<div class="list-right flex-col">
-					<h4>汽车大亨</h4>
-					<p>模拟经营自动收益游戏，采用流行“IDLE”游戏模式，为游戏玩家带来极佳的游玩体验。</p>
-				</div>
-			</div>
 			<div class="list flex-row"  @click="goFinancial()">
 				<img src="../../static/images/application_05.png" alt="">
 				<div class="list-right flex-col">
@@ -35,15 +28,21 @@
 			</div>
 		</div>
 		<div class="tab-card">
-			<!-- 沒有數據 -->
-			<div class="no-data flex-row">
-				暫無數據
+			<div class="list flex-row" @click="noData()" v-show="false">
+				<img src="../../static/images/application_04.png" alt="">
+				<div class="list-right flex-col">
+					<h4>汽车大亨</h4>
+					<p>模拟经营自动收益游戏，采用流行“IDLE”游戏模式，为游戏玩家带来极佳的游玩体验。</p>
+				</div>
 			</div>
 		</div>
 		<div class="tab-card">
-			<!-- 沒有數據 -->
-			<div class="no-data flex-row">
-				暫無數據
+			<div class="list flex-row"  @click="goFinancial()">
+				<img src="../../static/images/application_05.png" alt="">
+				<div class="list-right flex-col">
+					<h4>理财</h4>
+					<p>有效的、合理的处理和运用钱财，让自己的钱财花费发挥最大的效果。</p>
+				</div>
 			</div>
 		</div>
 		<div class="tab-card">
