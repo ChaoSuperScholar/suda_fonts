@@ -107,6 +107,7 @@
 						},4000)
 				});
 			},
+			//复制
   			initCopyBtn () {
 				var self = this;
 				var clipboard = new Clipboard('#copy-btn', {

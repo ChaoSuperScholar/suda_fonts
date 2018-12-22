@@ -87,6 +87,7 @@
 					}
 				})
 			},
+			//转账
 			goTransfer (){
 				console.log(this.title);
 				this.$router.push({
@@ -97,6 +98,7 @@
 					}
 				})
 			},
+			//收款
 			goReceivables (){
 				this.$router.push({
 					path : '/receivables',
