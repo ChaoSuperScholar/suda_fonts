@@ -14,8 +14,8 @@
 			</div>
 		</div>
 		<div class="top-pic flex-col">
-			<img src="../../static/images/transferRecord_01.png" alt="">
-			<h2>ETH</h2>
+			<img :src="img" alt="">
+			<h2>{{chooseTitle}}</h2>
 		</div>
 		<div class="top-tab flex-row">
 			<div class="top-tab-list flex-col" :class="{activeTab:isTabLeft}" @click="clickTabLeft()">
@@ -26,21 +26,31 @@
 			</div>
 		</div>
 		<div class="list-left flex-col" v-show="showLeft">
-			<div class="list flex-col">
-				<h5>6848646846</h5>
+			<div class="list flex-col" v-for="transfer in transfers">
+				<h5>{{transfer.created_at}}</h5>
 				<div class="list-bottom flex-row">
-					<h4>ijiojiljkuhuyjgyjgoijkl</h4>
-					<h4 class="h4-red">-6554684648</h4>
+					<h4>{{transfer.addr}}</h4>
+					<h4 class="h4-red" v-if="transfer.num < 0">{{transfer.num}}</h4>
+					<h4 class="h4-green" v-else>{{transfer.num}}</h4>
 				</div>
+			</div>
+			<!--没有数据-->
+			<div class="no-data flex-row" v-if="!transfers.length">
+				暂无数据
 			</div>
 		</div>	
 		<div class="list-right flex-col" v-show="showRight">
-			<div class="list flex-col">
-				<h5>6848646846</h5>
+			<div class="list flex-col" v-for="transfer in transfers">
+				<h5>{{transfer.created_at}}</h5>
 				<div class="list-bottom flex-row">
-					<h4>ijiojiljkuhuyjgyjgoijkl</h4>
-					<h4 class="h4-green">+6554684648</h4>
+					<h4>{{transfer.addr}}</h4>
+					<h4 class="h4-red" v-if="transfer.num < 0">{{transfer.num}}</h4>
+					<h4 class="h4-green" v-else>{{transfer.num}}</h4>
 				</div>
+			</div>
+			<!--没有数据-->
+			<div class="no-data flex-row" v-if="!transfers.length">
+				暂无数据
 			</div>
 		</div>
 	</div>
@@ -68,6 +78,8 @@
 				isTabRight : false,
 				showLeft : true,
 				showRight : false,
+				img : '',
+				transfers : []
             }
         },
         // 创建之前
@@ -76,7 +88,7 @@
   		},
   		//创建之后
   		created: function (){
-  			
+  			this.getMsg();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -98,12 +110,38 @@
 				this.isTabRight = false;
 				this.showLeft = true;
 				this.showRight = false;
+				this.axios.post('/index/suda_user/transfer_log',{
+					page : '1',
+					type : this.chooseTitle
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						let res = data.data;
+						this.transfers = res.log;
+					} else{
+						this.layers(data.message);
+					}
+				})
 			},
 			clickTabRight (){
 				this.isTabLeft = false;
 				this.isTabRight = true;
 				this.showLeft = false;
-				this.showRight = true
+				this.showRight = true;
+				this.axios.post('/index/suda_user/transaction_log',{
+					page : '1',
+					type : this.chooseTitle
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						let res = data.data;
+						this.transfers = res.log;
+					} else{
+						this.layers(data.message);
+					}
+				})
 			},
 			selectList (){
 				this.isShowSelect = !this.isShowSelect;
@@ -112,12 +150,31 @@
 				console.log(list.title);
 				this.chooseTitle = list.title;
 				this.isShowSelect = false;
-				this.axios.post('/index/suda_wallet/getPrice',{
-					coin : this.chooseTitle
+				this.axios.post('/index/suda_user/transfer_log',{
+					page : '1',
+					type : this.chooseTitle
 				})
 				.then(({data}) => {
 					if (data.status == 200) {
-						this.textNum = data.data;
+						console.log(data);
+						let res = data.data;
+						this.img = res.img;
+					} else{
+						this.layers(data.message);
+					}
+				})
+			},
+			getMsg (){
+				this.axios.post('/index/suda_user/transfer_log',{
+					page : '1',
+					type : 'ETH'
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						let res = data.data;
+						this.img = res.img;
+						this.transfers = res.log;
 					} else{
 						this.layers(data.message);
 					}
@@ -128,6 +185,11 @@
 </script>
 
 <style scoped>
+	.no-data {
+		font-size: 0.32rem;
+		color: #585858;
+		margin-top: 0.4rem;
+	}
 	.top-module{
 		width: 100%;
 		height: 1rem;
@@ -221,6 +283,10 @@
 		width: 100%;
 		height: auto;
 		justify-content: space-between;
+	}
+	.list-bottom h4:first-child{
+		max-width: 4.7rem;
+		word-break: break-all;
 	}
 	.list h5{
 		font-size: 0.28rem;

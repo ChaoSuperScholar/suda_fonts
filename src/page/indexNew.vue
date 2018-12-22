@@ -67,7 +67,6 @@
 				} else if(!this.password){
 					this.layers("请输入账号密码！")
 				} else{
-					console.log("登录成功！");
 					let that = this;
 					this.axios.post('/index/suda_login/login',
 						{
@@ -78,10 +77,11 @@
 							if (data.status === 200) {
 								console.log(data);
 								this.layers(data.message);
+								window.localStorage.setItem('isLogin','yes');
 								 setTimeout(() => {
 									this.$router.replace({name : 'wallet'});
-									this.loginStatus();
 								},2000)
+								console.log("登录成功！");
 							} else {
 								that.layers(data.message);
 							}
@@ -92,23 +92,6 @@
 									/* that.layers(error.message); */
 								},4000)
 						});
-				}
-			},
-			loginStatus (){
-				window.localStorage.setItem('isLogin','yes');
-			},
-			isShowLogin (){
-				let ls = window.localStorage;
-				if(ls.getItem('isLogin') == 'no'){
-					return false;
-				}
-				return false;
-			},
-			getMsg (){
-				let that = this;
-				if (that.isShowLogin()) {
-					this.$router.replace({name : 'wallet'});
-					return false;
 				}
 			}
   		}
