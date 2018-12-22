@@ -136,6 +136,7 @@
 				.then(({data}) => {
 					if (data.status == 200) {
 						this.layers(data.message);
+						window.localStorage.setItem('isLogin','no');
 						setTimeout(() =>{
 							this.$router.replace({name : 'indexNew'})
 						},2000)

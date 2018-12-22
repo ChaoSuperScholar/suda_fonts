@@ -1,12 +1,12 @@
 <template>
-	<div class="start">
+	<div class="noData">
 		
 	</div>
 </template>
 
 <script>
 	export default{
-        name: 'start',
+        name: 'noData',
         data(){
             return {
             	
@@ -18,7 +18,7 @@
   		},
   		//创建之后
   		created: function (){
-			this.getMsg();
+  			
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -27,33 +27,16 @@
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-				
+  				
   			})
   		},
   		//实例方法
   		methods: {
-  			getMsg (){
-				let ls = window.localStorage;
-				/* ls.setItem('isLogin','no'); */
-				if (ls.getItem('isLogin') === 'yes') {
-					this.$router.replace({
-						path:'/wallet',
-						name:'wallet'
-					})
-				} else{
-					this.$router.replace({
-						path:'/indexNew',
-						name:'indexNew'
-					})
-				}
-			}
+  			
   		}
     }
 </script>
 
 <style scoped>
-	.start{
-		width: 100vw;
-		height: 100vh;
-	}
+	
 </style>

@@ -45,13 +45,13 @@ Vue.use(Router)
 export default new Router({
   /*mode:'history',*/
   routes: [
-  	/*{
+  	{
 			path: '/',
 			name: 'start',
 			component: start
-		},*/
+		},
 		{
-			path: '/',
+			path: '/indexNew',
 			name: 'indexNew',
 			component: indexNew
 		},
