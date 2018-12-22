@@ -40,7 +40,7 @@
   		},
   		//创建之后
   		created: function (){
-  			
+  			this.getMsg();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -79,7 +79,8 @@
 								console.log(data);
 								this.layers(data.message);
 								 setTimeout(() => {
-									this.$router.replace({name : 'wallet'})
+									this.$router.replace({name : 'wallet'});
+									this.loginStatus();
 								},2000)
 							} else {
 								that.layers(data.message);
@@ -91,6 +92,23 @@
 									/* that.layers(error.message); */
 								},4000)
 						});
+				}
+			},
+			loginStatus (){
+				window.localStorage.setItem('isLogin','yes');
+			},
+			isShowLogin (){
+				let ls = window.localStorage;
+				if(ls.getItem('isLogin') == 'no'){
+					return false;
+				}
+				return false;
+			},
+			getMsg (){
+				let that = this;
+				if (that.isShowLogin()) {
+					this.$router.replace({name : 'wallet'});
+					return false;
 				}
 			}
   		}

@@ -23,10 +23,12 @@
 						<h4>团队</h4>
 					</div>
 				</router-link>
-				<div class="bottom-list flex-col" @click="nodata()">
-					<img src="../../static/images/userCenter_04.png" alt="">
-					<h4>记录</h4>
-				</div>
+				<router-link to="transferRecord">
+					<div class="bottom-list flex-col">
+						<img src="../../static/images/userCenter_04.png" alt="">
+						<h4>记录</h4>
+					</div>
+				</router-link>
 			</div>
 		</div>
 		<div class="list flex-row" @click="goIdentity()">

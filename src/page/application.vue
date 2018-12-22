@@ -19,6 +19,13 @@
 			</template>
 		</div>
 		<div class="tab-card" style="display: block;">
+			<div class="list flex-row" @click="noData()">
+				<img src="../../static/images/application_04.png" alt="">
+				<div class="list-right flex-col">
+					<h4>汽车大亨</h4>
+					<p>模拟经营自动收益游戏，采用流行“IDLE”游戏模式，为游戏玩家带来极佳的游玩体验。</p>
+				</div>
+			</div>
 			<div class="list flex-row"  @click="goFinancial()">
 				<img src="../../static/images/application_05.png" alt="">
 				<div class="list-right flex-col">
@@ -28,7 +35,7 @@
 			</div>
 		</div>
 		<div class="tab-card">
-			<div class="list flex-row" @click="noData()" v-show="false">
+			<div class="list flex-row" @click="noData()">
 				<img src="../../static/images/application_04.png" alt="">
 				<div class="list-right flex-col">
 					<h4>汽车大亨</h4>
@@ -93,13 +100,16 @@
 				// swiper图片
 				swiperImg: [
 					{
-						image: require('../../static/images/application_01.jpg'),
+						image: require('../../static/images/application_01.png'),
 					},
 					{
-						image: require('../../static/images/application_01.jpg'),
+						image: require('../../static/images/application_02.png'),
 					},
 					{
-						image: require('../../static/images/application_01.jpg'),
+						image: require('../../static/images/application_03.png'),
+					},
+					{
+						image: require('../../static/images/application_06.png'),
 					}
 				],
 				tabsName: [{  
@@ -256,5 +266,8 @@
 		font-size: 0.32rem;
 		color: #585858;
 		margin-top: 0.4rem;
+	}
+	.swiper-pagination-bullets{
+		bottom: 0.4rem;
 	}
 </style>

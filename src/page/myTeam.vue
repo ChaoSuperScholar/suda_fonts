@@ -110,7 +110,7 @@
 		margin-bottom: 0.6rem;
 		padding: 0.6rem 0;
 		justify-content: flex-start;
-		border: 0.01rem solid #cb1a15;
+		border: 0.02rem solid #cb1a15;
 		border-radius: 0.4rem;
 		position: relative;
 	}

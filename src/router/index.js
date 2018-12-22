@@ -33,6 +33,7 @@ import addContact from '../page/addContact'
 import identity from '../page/identity'
 import paymentMethod from '../page/paymentMethod'
 import addPayment from '../page/addPayment'
+import transferRecord from '../page/transferRecord'
 
 import index from '../page/index'
 import createWallet from '../page/createWallet'
@@ -223,6 +224,11 @@ export default new Router({
 			path: '/addPayment',
 			name: 'addPayment',
 			component: addPayment
+		},
+		{
+			path: '/transferRecord',
+			name: 'transferRecord',
+			component: transferRecord
 		}
   ]
 })
