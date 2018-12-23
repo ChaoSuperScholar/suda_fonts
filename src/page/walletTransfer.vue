@@ -3,7 +3,8 @@
 		<div class="top-module flex-row">
 			<img class="img-left" @click="return_page()" src="../../static/images/return.png"/>
 			<h3>{{title}}转账</h3>
-			<img class="img-right" src="../../static/images/walletTransfer_01.png" alt="">
+			<img class="img-right" src="../../static/images/walletTransfer_01.png" alt="" v-show="false">
+			<h4></h4>
 		</div>
 		<div class="list flex-row">
 			<!-- <h4>{{address}}</h4> -->
@@ -144,7 +145,7 @@
 	}
 	.top-module h3{
 		font-weight: 500;
-		margin-left: 0.6rem;
+		/* margin-left: 0.6rem; */
 		color: #ffffff;
 	}
 	.img-left{
