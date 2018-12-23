@@ -13,10 +13,12 @@
 				</div>
 			</div>
 			<div class="bottom flex-row">
-				<div class="bottom-list flex-col" @click="nodata()">
-					<img src="../../static/images/userCenter_02.png" alt="">
-					<h4>推广</h4>
-				</div>
+				<router-link to="popularize">
+					<div class="bottom-list flex-col">
+						<img src="../../static/images/userCenter_02.png" alt="">
+						<h4>推广</h4>
+					</div>
+				</router-link>
 				<router-link to="myTeam">
 					<div class="bottom-list flex-col">
 						<img src="../../static/images/userCenter_03.png" alt="">

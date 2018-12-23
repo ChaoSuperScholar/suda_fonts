@@ -241,8 +241,8 @@
 		background-color: #393f4c;
 	}
 	.top-pic img{
-		width: 0.69rem;
-		height: 1.13rem;
+		width: 1.14rem;
+		height: 1.14rem;
 	}
 	.top-pic h2{
 		font-size: 0.38rem;

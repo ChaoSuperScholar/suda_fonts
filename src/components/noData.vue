@@ -1,6 +1,9 @@
 <template>
 	<div class="noData">
-		
+		<!--没有数据-->
+		<div class="no-data flex-row">
+			暂无数据
+		</div>
 	</div>
 </template>
 
@@ -38,5 +41,9 @@
 </script>
 
 <style scoped>
-	
+	.no-data {
+		font-size: 0.32rem;
+		color: #585858;
+		margin-top: 0.4rem;
+	}
 </style>

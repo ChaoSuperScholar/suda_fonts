@@ -78,7 +78,7 @@
 	import { swiper, swiperSlide } from 'vue-awesome-swiper'
 	import pageHead from '../components/pageHead'
 	import footerBar from '../components/footerBar'
-	/* require('swiper/dist/css/swiper.css'); */
+	require('swiper/dist/css/swiper.css');
 	export default{
         name: 'application',
         data(){
@@ -205,6 +205,9 @@
 		left: 50%;
 		margin-left: -0.86rem;
 	} */
+	.swiper-pagination-bullets{
+		bottom: 0.4rem;
+	}
 	.swiper-pagination-bullet{
 		width: 0.14rem;
 		height: 0.14rem;

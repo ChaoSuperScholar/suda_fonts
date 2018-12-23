@@ -34,6 +34,7 @@ import identity from '../page/identity'
 import paymentMethod from '../page/paymentMethod'
 import addPayment from '../page/addPayment'
 import transferRecord from '../page/transferRecord'
+import popularize from '../page/popularize'
 
 import index from '../page/index'
 import createWallet from '../page/createWallet'
@@ -229,6 +230,11 @@ export default new Router({
 			path: '/transferRecord',
 			name: 'transferRecord',
 			component: transferRecord
+		},
+		{
+			path: '/popularize',
+			name: 'popularize',
+			component: popularize
 		}
   ]
 })

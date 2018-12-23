@@ -16,6 +16,7 @@
 					<h5>{{list.productivity}}</h5>
 					<h5>{{list.achievement}}</h5>
 				</div>
+				<nodata v-if="!lists.length"></nodata>
 			</div>
 		</div>
 	</div>
