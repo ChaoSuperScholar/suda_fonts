@@ -155,7 +155,7 @@
   							for(var i = 0; i < len; i++) {  
   								tabCardCollection[i].style.display = "none";  
   							this.tabsName[i].isActive = false;  
-  						}  
+  						}
   					this.tabsName[tabIndex].isActive = true;  
   					tabCardCollection[tabIndex].style.display = "block";  
   			},

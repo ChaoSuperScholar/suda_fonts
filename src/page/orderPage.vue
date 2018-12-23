@@ -117,7 +117,7 @@
 			<div class="btn-center btn flex-col" v-if="list.status == 1&&list.type == 1" @click="payMoney(list)">
 				确认付款
 			</div>
-			<div class="btn-center btn flex-col" v-else="" @click="noData()">
+			<div class="btn-center btn flex-col" v-else="" @click="appeal()">
 				发起申述
 			</div>
 			<div class="btn-right btn flex-col" v-if="list.status == 1&&list.type == 1" @click="cancelBtn(list)">
@@ -251,6 +251,18 @@
 			},
 			noData (){
 				this.layers("暂未开放")
+			},
+			//点击 发起申诉 按钮操作
+			appeal () {
+				let that = this;
+				let orderId = that.$route.query.id;
+				this.$router.push('appeal')
+				this.$router.push({
+					path: 'appeal',
+					query: {
+						orderId: orderId
+					}
+				})
 			}
   		}
     }

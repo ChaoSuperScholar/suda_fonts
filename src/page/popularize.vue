@@ -12,8 +12,8 @@
 						复制
 					</div>
 				</div>
-				<div class="qr-code" id="qrcode">
-					
+				<div class="qr-code" id="qrcode" ref="qrcode">
+
 				</div>
 				<h4>邀请码 {{code}}</h4>
 				<div class="btn-red btn-de flex-col" id="copy-btn2" @click="codeCopyBtn()">
@@ -27,61 +27,73 @@
 <script>
 	import headerBar from '../components/headerBar'
 	import Clipboard from 'clipboard'
-	export default{
-        name: 'popularize',
-        data(){
-            return {
-            	indexTitle : "推广好友",
-							link : "",
-							code : ""
-            }
-        },
-        // 创建之前
-  		beforeCreate: function () {
-  			
-  		},
-  		//创建之后
-  		created: function (){
-  			this.getMsg();
-  		},
-  		//挂载之前
-  		beforeMount: function (){
-  			
-  		},
-  		// 挂载之后
-  		mounted: function(){
-  			this.$nextTick(function(){
-  				this.getQRcode();
-  			})
-  		},
+	import QRCode from 'qrcodejs2'
+	export default {
+		name: 'popularize',
+		data() {
+			return {
+				indexTitle: "推广好友",
+				link: "",
+				code: ""
+			}
+		},
+		// 创建之前
+		beforeCreate: function() {
+
+		},
+		//创建之后
+		created: function() {
+			this.getMsg();
+		},
+		//挂载之前
+		beforeMount: function() {
+
+		},
+		// 挂载之后
+		mounted: function() {
+			this.$nextTick(function() {
+				
+			})
+		},
 		// 注册组件
-		components:{
+		components: {
 			headerBar
 		},
 		watch: {
-			link () {
+			link() {
 				this.linkCopyBtn();
 			},
-			code (){
+			code() {
 				this.codeCopyBtn();
-			} 
+			}
 		},
-  		//实例方法
-  		methods: {
-  			getMsg (){
+		//实例方法
+		methods: {
+			getMsg() {
 				this.axios.get('/index/suda_user/user_extension')
-				.then(({data}) => {
-					if (data.status === 200) {
-						console.log(data);
-						let res = data.data;
-						this.link = res.link;
-						this.code = res.code;
-					} else {
-						this.layers(data.message);
-					}
-				})
+					.then(({
+						data
+					}) => {
+						if (data.status === 200) {
+							console.log(data);
+							let res = data.data;
+							this.link = res.link;
+							this.code = res.code;
+							console.log(this.link);
+							var qrcode = new QRCode('qrcode', {
+								text: this.link,
+								width: 256,
+								height: 256,
+								colorDark: '#000000',
+								colorLight: '#ffffff',
+							});
+							console.log(qrcode);
+						} else {
+							this.layers(data.message);
+						}
+					})
 			},
-			linkCopyBtn (){
+			linkCopyBtn() {
 				let that = this;
 				var clipboard = new Clipboard('#copy-btn', {
 					text: function() {
@@ -89,16 +101,16 @@
 					}
 				}).on('success', e => {
 					this.layers('复制成功');
-		          	console.log('复制成功')
-		          	// 释放内存
-		        }).on('error', e => {
-		          	// 不支持复制
+					console.log('复制成功')
+					// 释放内存
+				}).on('error', e => {
+					// 不支持复制
 					this.layers('复制失败，请手动复制！');
-		          	console.log('该浏览器不支持自动复制')
-		          	// 释放内存
-		        })
+					console.log('该浏览器不支持自动复制')
+					// 释放内存
+				})
 			},
-			codeCopyBtn (){
+			codeCopyBtn() {
 				let that = this;
 				var clipboard = new Clipboard('#copy-btn2', {
 					text: function() {
@@ -106,43 +118,35 @@
 					}
 				}).on('success', e => {
 					this.layers('复制成功');
-		          	console.log('复制成功')
-		          	// 释放内存
-		        }).on('error', e => {
-		          	// 不支持复制
+					console.log('复制成功')
+					// 释放内存
+				}).on('error', e => {
+					// 不支持复制
 					this.layers('复制失败，请手动复制！');
-		          	console.log('该浏览器不支持自动复制')
-		          	// 释放内存
-		        })
-			},
-			getQRcode () {
-				var qrcode = new QRCode('qrcode', {
-				  text: 'your content',
-				  width: 256,
-				  height: 256,
-				  colorDark : '#000000',
-				  colorLight : '#ffffff',
-				});
-				console.log(qrcode);
+					console.log('该浏览器不支持自动复制')
+					// 释放内存
+				})
 			}
-  		}
-    }
+		}
+	}
 </script>
 
 <style scoped>
-	h4{
+	h4 {
 		font-size: 0.32rem;
 		font-weight: bolder;
 		color: #393f4c;
 		margin: 0.3rem 0;
 	}
-	h5{
+
+	h5 {
 		font-size: 0.28rem;
 		color: #e16a0b;
 		max-width: 4.7rem;
 		word-break: break-all;
 	}
-	.background-color{
+
+	.background-color {
 		width: 100vw;
 		height: 100vh;
 		position: fixed;
@@ -151,12 +155,14 @@
 		background-color: #ffe6b0;
 		z-index: -999;
 	}
-	.bg-color{
+
+	.bg-color {
 		width: 100%;
 		height: auto;
 		justify-content: flex-start;
 	}
-	.center-list{
+
+	.center-list {
 		width: 6.9rem;
 		height: auto;
 		min-height: 6rem;
@@ -167,20 +173,23 @@
 		border-radius: 0.4rem;
 		position: relative;
 	}
-	.center-list img{
+
+	.center-list img {
 		width: 4.3rem;
 		height: 0.8rem;
 		margin: 0;
 		position: absolute;
 		top: -0.4rem;
 	}
-	.link-father{
+
+	.link-father {
 		width: 6.5rem;
 		height: auto;
 		justify-content: space-between;
 		margin: 0.3rem 0;
 	}
-	.btn-red{
+
+	.btn-red {
 		width: 1.24rem;
 		height: 0.66rem;
 		background-color: #f2593b;
@@ -188,12 +197,14 @@
 		font-size: 0.32rem;
 		color: #FFFFFF;
 	}
-	.qr-code{
+
+	.qr-code {
 		width: 3.34rem;
 		height: 3.34rem;
 		background-color: #FFFFFF;
 	}
-	.btn-de{
+
+	.btn-de {
 		width: 3.3rem;
 		height: 0.78rem;
 	}

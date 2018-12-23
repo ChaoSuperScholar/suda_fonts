@@ -13,8 +13,8 @@
 				<h4>钱包地址</h4>
 				<h5 class="tag-read">{{address}}</h5>
 			</div>
-			<div class="qr-code flex-col" v-show="false">
-				<img src="../../static/images/receivables_02.png" alt="">
+			<div class="qr-code" id="qrcode" ref="qrcode">
+			
 			</div>
 			<div id="copy-btn" class="create-btn flex-col">
 				复制钱包地址
@@ -26,6 +26,7 @@
 <script>
 	import headerBar from '../components/headerBar'
 	import Clipboard from 'clipboard'
+	import QRCode from 'qrcodejs2'
 	export default{
         name: 'receivables',
         data(){
@@ -75,6 +76,14 @@
 					if (data.status === 200) {
 						console.log(data);
 						this.address = data.data;
+						var qrcode = new QRCode('qrcode', {
+							text: this.address,
+							width: 256,
+							height: 256,
+							colorDark: '#000000',
+							colorLight: '#ffffff',
+						});
+						console.log(qrcode);
 						/* this.chooseTitle = res.lists[0].title; */
 					} else {
 						this.layers("請求失敗");
@@ -107,6 +116,7 @@
 						},4000)
 				});
 			},
+			//复制
   			initCopyBtn () {
 				var self = this;
 				var clipboard = new Clipboard('#copy-btn', {
@@ -205,13 +215,10 @@
 		word-break: break-all;
 	}
 	.qr-code{
-		width: 100%;
-		height: auto;
-		margin: 0.6rem 0;
-	}
-	.qr-code img{
 		width: 3.34rem;
 		height: 3.34rem;
+		background-color: #FFFFFF;
+		margin: 0.6rem 0;
 	}
 	.create-btn{
 		width: 6.9rem;

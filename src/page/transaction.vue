@@ -57,6 +57,7 @@
 						</div>
 					</div>
 				</div>
+				<nodata v-if="!lists.length"></nodata>
 			</div>
 			<div class="tab-card">
 				<!-- 循环列表list -->
@@ -87,24 +88,19 @@
 						</div>
 					</div>
 				</div>
+				<nodata v-if="!lists.length"></nodata>
 			</div>
 			<div class="tab-card">
 				<!--没有数据-->
-				<div class="no-data flex-row">
-					暂无数据
-				</div>
+				<nodata></nodata>
 			</div>
 			<div class="tab-card">
 				<!--没有数据-->
-				<div class="no-data flex-row">
-					暂无数据
-				</div>
+				<nodata></nodata>
 			</div>
 			<div class="tab-card">
 				<!--没有数据-->
-				<div class="no-data flex-row">
-					暂无数据
-				</div>
+				<nodata></nodata>
 			</div>
 		</div>
 		<div class="tab-right flex-col" v-show="showRight">
@@ -175,12 +171,12 @@
 						</div>
 					</div>
 				</div>
+				<!-- 没有数据 -->
+				<nodata v-if="!items.length"></nodata>
 			</div>
 			<div class="tab-card2">
 				<!--没有数据-->
-				<div class="no-data flex-row">
-					暂无数据
-				</div>
+				<nodata></nodata>
 			</div>
 		</div>
 		<transition name="slide-fade">
