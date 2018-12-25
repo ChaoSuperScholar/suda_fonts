@@ -1,51 +1,54 @@
 <template>
 	<div class="registered">
-		<headerBar :title="indexTitle"></headerBar>
-		<div class="list-father flex-col">
-			<!-- 手机号 -->
-			<div class="list flex-row">
-				<div class="list-left flex-row">
-					<img class="phoneimg" src="../../static/images/registered_01.png" alt="">
-					<h4>手机号：</h4>
+		<div class="block flex-col">
+			<headerBar :title="indexTitle"></headerBar>
+			<div class="list-father flex-col">
+				<!-- 手机号 -->
+				<div class="list flex-row">
+					<div class="list-left flex-row">
+						<img class="phoneimg" src="../../static/images/registered_01.png" alt="">
+						<h4>手机号：</h4>
+					</div>
+					<input v-model="phone" type="tel" value="" maxlength="11" placeholder="输入您的手机号码"/>
 				</div>
-				<input v-model="phone" type="tel" value="" maxlength="11" placeholder="输入您的手机号码"/>
-			</div>
-			<!-- 验证码 -->
-			<div class="list flex-row">
-				<div class="list-left flex-row">
-					<img class="phoneimg" src="../../static/images/registered_02.png" alt="">
-					<h4>验证码：</h4>
+				<!-- 验证码 -->
+				<div class="list flex-row">
+					<div class="list-left flex-row">
+						<img class="phoneimg" src="../../static/images/registered_02.png" alt="">
+						<h4>验证码：</h4>
+					</div>
+					<input v-model="code" type="text" value="" maxlength="11" placeholder="输入您的验证码"/>
+					<div @click="getCode" class="code-btn flex-col">
+						获取验证码
+					</div>
 				</div>
-				<input v-model="code" type="text" value="" maxlength="11" placeholder="输入您的验证码"/>
-				<div @click="getCode" class="code-btn flex-col">
-					获取验证码
+				<!-- 登录密码 -->
+				<div class="list flex-row">
+					<div class="list-left flex-row">
+						<img class="phoneimg" src="../../static/images/registered_01.png" alt="">
+						<h4>登录密码：</h4>
+					</div>
+					<input v-model="loginPassword" type="password" value="" placeholder="输入您的登录密码"/>
 				</div>
-			</div>
-			<!-- 登录密码 -->
-			<div class="list flex-row">
-				<div class="list-left flex-row">
-					<img class="phoneimg" src="../../static/images/registered_01.png" alt="">
-					<h4>登录密码：</h4>
+				<!-- 交易密码 -->
+				<div class="list flex-row">
+					<div class="list-left flex-row">
+						<img class="phoneimg" src="../../static/images/registered_01.png" alt="">
+						<h4>交易密码：</h4>
+					</div>
+					<input v-model="transactionPassword" type="password" value="" placeholder="用于交易与转账"/>
 				</div>
-				<input v-model="loginPassword" type="password" value="" placeholder="输入您的登录密码"/>
-			</div>
-			<!-- 交易密码 -->
-			<div class="list flex-row">
-				<div class="list-left flex-row">
-					<img class="phoneimg" src="../../static/images/registered_01.png" alt="">
-					<h4>交易密码：</h4>
+				<div class="agree-clause flex-row">
+					<div class="agree-check flex-col" @click="agreeBtn">
+						<img src="../../static/images/registered_04.png" alt="" v-show="isShowAgree">
+					</div>
+					<h4>我已仔细阅读并同意</h4>
+					<h5>《服务与隐私条款》</h5>
 				</div>
-				<input v-model="transactionPassword" type="password" value="" placeholder="用于交易与转账"/>
-			</div>
-			<div class="agree-clause flex-row">
-				<div class="agree-check flex-col" @click="agreeBtn">
-					<img src="../../static/images/registered_04.png" alt="" v-show="isShowAgree">
+				<div @click="createBtn" class="create-btn flex-col">
+					创建钱包
 				</div>
-				<h4>我已仔细阅读并同意</h4>
-				<h5>《服务与隐私条款》</h5>
-			</div>
-			<div @click="createBtn" class="create-btn flex-col">
-				创建钱包
+				<h3 @click="goDownload()">前往下载APP ></h3>
 			</div>
 		</div>
 	</div>
@@ -81,7 +84,7 @@
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+  				document.onscroll = this.toggleHead;
   			})
   		},
 		components:{
@@ -89,6 +92,11 @@
 		},
   		//实例方法
   		methods: {
+			toggleHead: function (e) {
+				if (this.scrollRouteArr.indexOf(this.$route.name) === -1) return false;
+				let scrollBottom = document.body.clientHeight - e.target.scrollingElement.scrollTop - window.innerHeight;
+				if (scrollBottom <= 50) this.$store.commit('setwithBottom', scrollBottom);
+			},
   			agreeBtn (){
   				this.isShowAgree = !this.isShowAgree;
   			},
@@ -155,12 +163,29 @@
 						this.$router.go(-1);
 					},2000) */
 				}
+			},
+			goDownload () {
+				window.location.href = 'http://www.suda66888.com/app/io.dcloud.H5497CB1E.apk';
 			}
   		}
     }
 </script>
 
 <style scoped>
+	h3{
+		font-size: 0.28rem;
+		color: #517cf4;
+		align-self: flex-end;
+		margin-top: 0.4rem;
+	}
+	.block{
+		width: 100vw;
+		min-height: 100vh;
+		position: absolute;
+		left: 0;
+		top: 0;
+		justify-content: flex-start;
+	}
 	.list-father{
 		width: 7rem;
 		height: auto;
@@ -185,6 +210,7 @@
 		width: 2.7rem;
 		height: 0.5rem;
 		border: none;
+		background-color: transparent;
 	}
 	.code-btn{
 		width: 1.6rem;

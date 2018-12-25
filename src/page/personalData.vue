@@ -46,7 +46,8 @@
 				nickname : '',
 				phone : '',
 				newName : '',
-				userImg : ''
+				userImg : '',
+				upImg1 : ''
             }
         },
         // 创建之前
@@ -104,7 +105,7 @@
 						console.log(data);
 						this.layers(data.message);
 						setTimeout(() => {
-							this.getMsg();
+							this.$router.replace('userCenter');
 						},1500)
 					} else{
 						this.layers(data.message);

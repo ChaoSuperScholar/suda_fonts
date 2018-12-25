@@ -175,7 +175,14 @@
 				});
 			},
 			goIdentity (){
-				this.$router.replace('identity');
+				this.axios.get('/index/suda_user/auth')
+				.then(({data}) => {
+					if (data.status == 200) {
+						this.$router.replace('identity');
+					} else{
+						this.layers(data.message);
+					}
+				})
 			}
   		}
     }

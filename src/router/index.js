@@ -42,6 +42,16 @@ import createWallet from '../page/createWallet'
 import importWallet from '../page/importWallet'
 import appeal from '../page/appeal'
 
+/* 游戏模块 */
+import game_index from '../page/game/game_index'
+import game_play from '../page/game/game_play'
+import game_setUp from '../page/game/game_setUp'
+import game_announcement from '../page/game/game_announcement'
+import game_announcement_details from '../page/game/game_announcement_details'
+import game_ranking from '../page/game/game_ranking'
+import game_data from '../page/game/game_data'
+import game_pay from '../page/game/game_pay'
+
 Vue.use(Router)
 
 export default new Router({
@@ -240,6 +250,46 @@ export default new Router({
 			path: '/popularize',
 			name: 'popularize',
 			component: popularize
+		},
+		{
+			path: '/game_index',
+			name: 'game_index',
+			component: game_index
+		},
+		{
+			path: '/game_play',
+			name: 'game_play',
+			component: game_play
+		},
+		{
+			path: '/game_setUp',
+			name: 'game_setUp',
+			component: game_setUp
+		},
+		{
+			path: '/game_announcement',
+			name: 'game_announcement',
+			component: game_announcement
+		},
+		{
+			path: '/game_announcement_details',
+			name: 'game_announcement_details',
+			component: game_announcement_details
+		},
+		{
+			path: '/game_ranking',
+			name: 'game_ranking',
+			component: game_ranking
+		},
+		{
+			path: '/game_data',
+			name: 'game_data',
+			component: game_data
+		},
+		{
+			path: '/game_pay',
+			name: 'game_pay',
+			component: game_pay
 		}
     ]
 })

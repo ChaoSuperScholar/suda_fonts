@@ -184,6 +184,9 @@
 					.then(({data}) => {
 						if (data.status == 200) {
 							this.layers(data.message);
+							setTimeout(() => {
+								this.$router.replace('transaction')
+							},1500)
 						} else{
 							this.layers(data.message);
 						}
@@ -208,6 +211,9 @@
 					.then(({data}) => {
 						if (data.status == 200) {
 							this.layers(data.message);
+							setTimeout(() => {
+								this.$router.replace('transaction')
+							},1500)
 						} else{
 							this.layers(data.message);
 						}

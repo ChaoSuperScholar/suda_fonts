@@ -16,7 +16,7 @@
 			<h4>≈￥{{showInputNum}}</h4>
 		</div>
 		<div class="list flex-row">
-			<input type="number" placeholder="输入钱包密码" v-model="passWord">
+			<input type="password" placeholder="输入钱包密码" v-model="passWord">
 		</div>
 		<div class="btn-blue flex-col" @click="btnClick()">
 			确认转账
@@ -97,6 +97,16 @@
 					.then(({data}) => {
 						if (data.status == 200) {
 							console.log(data);
+							this.layers(data.message);
+							setTimeout(() => {
+								this.$router.push({
+									path : '/walletDetails',
+									query : {
+										title : this.$route.query.title,
+										type : this.$route.query.type
+									}
+								})
+							},1500)
 						} else{
 							this.layers(data.message);
 						}

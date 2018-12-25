@@ -19,13 +19,15 @@
 			</template>
 		</div>
 		<div class="tab-card" style="display: block;">
-			<div class="list flex-row" @click="noData()">
-				<img src="../../static/images/application_04.png" alt="">
-				<div class="list-right flex-col">
-					<h4>汽车大亨</h4>
-					<p>模拟经营自动收益游戏，采用流行“IDLE”游戏模式，为游戏玩家带来极佳的游玩体验。</p>
+			<router-link to="game_index">
+				<div class="list flex-row">
+					<img src="../../static/images/application_04.png" alt="">
+					<div class="list-right flex-col">
+						<h4>汽车大亨</h4>
+						<p>模拟经营自动收益游戏，采用流行“IDLE”游戏模式，为游戏玩家带来极佳的游玩体验。</p>
+					</div>
 				</div>
-			</div>
+			</router-link>
 			<div class="list flex-row"  @click="goFinancial()">
 				<img src="../../static/images/application_05.png" alt="">
 				<div class="list-right flex-col">

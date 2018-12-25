@@ -15,10 +15,10 @@
 			<div class="list flex-col">
 				<div class="list-top flex-row">
 					<h3>{{list.title}}</h3>
-					<h3 class="h3-blue" v-if="list.status == 1&&list.type == 1">待付款</h3>
-					<h3 class="h3-blue" v-if="list.status == 1&&list.type == 2">等待付款</h3>
-					<h3 class="h3-blue" v-if="list.status == 2&&list.type == 1">等待放行</h3>
-					<h3 class="h3-blue" v-if="list.status == 2&&list.type == 2">待放行</h3>
+					<h3 class="h3-blue" v-if ="list.status == 1&&list.uid == list.buyer_uid">待付款</h3>
+					<h3 class="h3-blue" v-if="list.status == 1&&list.uid == list.seller_uid">等待付款</h3>
+					<h3 class="h3-blue" v-if="list.status == 2&&list.uid == list.buyer_uid">等待放行</h3>
+					<h3 class="h3-blue" v-if="list.status == 2&&list.uid == list.seller_uid">待放行</h3>
 					<h3 class="h3-blue" v-if="list.status == 3">完成</h3>
 					<h3 class="h3-gray" v-if="list.status == -1">撤销</h3>
 					<h3 class="h3-red" v-if="list.status == 4">申诉中</h3>
@@ -114,10 +114,14 @@
 			<div class="btn-left flex-col" @click="noData()">
 				<img src="../../static/images/orderPage_01.png" alt="">
 			</div>
-			<div class="btn-center btn flex-col" v-if="list.status == 1&&list.type == 1" @click="payMoney(list)">
+			<div class="btn-center btn flex-col" v-if="list.status == 1&&list.uid == list.buyer_uid" @click="payMoney(list)">
 				确认付款
 			</div>
-			<div class="btn-center btn flex-col" v-else="" @click="appeal()">
+			<div class="btn-center btn flex-col" v-else="" @click="noData()">
+				发起申述
+			</div>
+			<!-- 申述跳转 -->
+			<div class="btn-center btn flex-col" v-else="" @click="appeal()" v-show="false">
 				发起申述
 			</div>
 			<div class="btn-right btn flex-col" v-if="list.status == 1&&list.type == 1" @click="cancelBtn(list)">
@@ -126,10 +130,10 @@
 			<div class="btn-right btn flex-col" v-if="list.status == 1&&list.type == 2" @click="cancelBtn(list)">
 				取消订单
 			</div>
-			<div class="btn-right btn-gray btn flex-col" v-if="list.status == 2&&list.type == 1">
+			<div class="btn-right btn-gray btn flex-col" v-if="list.status == 2&&list.uid == list.buyer_uid">
 				我已付款
 			</div>
-			<div class="btn-right btn flex-col" v-if="list.status == 2&&list.type == 2" @click="confirmRelease
+			<div class="btn-right btn flex-col" v-if="list.status == 2&&list.uid == list.seller_uid" @click="confirmRelease
 (list)">
 				确认放行
 			</div>

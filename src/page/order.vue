@@ -39,8 +39,10 @@
 							</div>
 							<h4>{{list.nickname}}</h4>
 						</div>
-						<h4 class="h4-blue" v-if="list.status == 1">待付款</h4>
-						<h4 class="h4-blue" v-if="list.status == 2">等待放行</h4>
+						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.buyer_uid">待付款</h4>
+						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.buyer_uid">等待放行</h4>
+						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.seller_uid">等待付款</h4>
+						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.seller_uid">待放行</h4>
 						<h4 class="h4-blue" v-if="list.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="list.status == -1">撤销</h4>
 						<h4 class="h4-red" v-if="list.status == 4">申诉中</h4>
@@ -75,8 +77,10 @@
 							</div>
 							<h4>{{list.nickname}}</h4>
 						</div>
-						<h4 class="h4-blue" v-if="list.status == 1">待付款</h4>
-						<h4 class="h4-blue" v-if="list.status == 2">等待放行</h4>
+						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.buyer_uid">待付款</h4>
+						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.buyer_uid">等待放行</h4>
+						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.seller_uid">等待付款</h4>
+						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.seller_uid">待放行</h4>
 						<h4 class="h4-blue" v-if="list.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="list.status == -1">撤销</h4>
 						<h4 class="h4-red" v-if="list.status == 4">申诉中</h4>
@@ -111,8 +115,10 @@
 							</div>
 							<h4>{{list.nickname}}</h4>
 						</div>
-						<h4 class="h4-blue" v-if="list.status == 1">待付款</h4>
-						<h4 class="h4-blue" v-if="list.status == 2">等待放行</h4>
+						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.buyer_uid">待付款</h4>
+						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.buyer_uid">等待放行</h4>
+						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.seller_uid">等待付款</h4>
+						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.seller_uid">待放行</h4>
 						<h4 class="h4-blue" v-if="list.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="list.status == -1">撤销</h4>
 						<h4 class="h4-red" v-if="list.status == 4">申诉中</h4>
@@ -147,8 +153,10 @@
 							</div>
 							<h4>{{list.nickname}}</h4>
 						</div>
-						<h4 class="h4-blue" v-if="list.status == 1">待付款</h4>
-						<h4 class="h4-blue" v-if="list.status == 2">等待放行</h4>
+						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.buyer_uid">待付款</h4>
+						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.buyer_uid">等待放行</h4>
+						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.seller_uid">等待付款</h4>
+						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.seller_uid">待放行</h4>
 						<h4 class="h4-blue" v-if="list.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="list.status == -1">撤销</h4>
 						<h4 class="h4-red" v-if="list.status == 4">申诉中</h4>
@@ -183,8 +191,10 @@
 							</div>
 							<h4>{{list.nickname}}</h4>
 						</div>
-						<h4 class="h4-blue" v-if="list.status == 1">待付款</h4>
-						<h4 class="h4-blue" v-if="list.status == 2">等待放行</h4>
+						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.buyer_uid">待付款</h4>
+						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.buyer_uid">等待放行</h4>
+						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.seller_uid">等待付款</h4>
+						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.seller_uid">待放行</h4>
 						<h4 class="h4-blue" v-if="list.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="list.status == -1">撤销</h4>
 						<h4 class="h4-red" v-if="list.status == 4">申诉中</h4>
@@ -229,8 +239,10 @@
 							</div>
 							<h4>{{item.nickname}}</h4>
 						</div>
-						<h4 class="h4-blue" v-if="item.status == 1">等待付款</h4>
-						<h4 class="h4-blue" v-if="item.status == 2">待放行</h4>
+						<h4 class="h4-blue" v-if="item.status == 1&&item.uid == item.buyer_uid">待付款</h4>
+						<h4 class="h4-blue" v-if="item.status == 2&&item.uid == item.buyer_uid">等待放行</h4>
+						<h4 class="h4-blue" v-if="item.status == 1&&item.uid == item.seller_uid">等待付款</h4>
+						<h4 class="h4-blue" v-if="item.status == 2&&item.uid == item.seller_uid">待放行</h4>
 						<h4 class="h4-blue" v-if="item.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="item.status == -1">撤销</h4>
 						<h4 class="h4-red" v-if="item.status == 4">申诉中</h4>
@@ -265,8 +277,10 @@
 							</div>
 							<h4>{{item.nickname}}</h4>
 						</div>
-						<h4 class="h4-blue" v-if="item.status == 1">等待付款</h4>
-						<h4 class="h4-blue" v-if="item.status == 2">待放行</h4>
+						<h4 class="h4-blue" v-if="item.status == 1&&item.uid == item.buyer_uid">待付款</h4>
+						<h4 class="h4-blue" v-if="item.status == 2&&item.uid == item.buyer_uid">等待放行</h4>
+						<h4 class="h4-blue" v-if="item.status == 1&&item.uid == item.seller_uid">等待付款</h4>
+						<h4 class="h4-blue" v-if="item.status == 2&&item.uid == item.seller_uid">待放行</h4>
 						<h4 class="h4-blue" v-if="item.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="item.status == -1">撤销</h4>
 						<h4 class="h4-red" v-if="item.status == 4">申诉中</h4>
@@ -301,8 +315,10 @@
 							</div>
 							<h4>{{item.nickname}}</h4>
 						</div>
-						<h4 class="h4-blue" v-if="item.status == 1">等待付款</h4>
-						<h4 class="h4-blue" v-if="item.status == 2">待放行</h4>
+						<h4 class="h4-blue" v-if="item.status == 1&&item.uid == item.buyer_uid">待付款</h4>
+						<h4 class="h4-blue" v-if="item.status == 2&&item.uid == item.buyer_uid">等待放行</h4>
+						<h4 class="h4-blue" v-if="item.status == 1&&item.uid == item.seller_uid">等待付款</h4>
+						<h4 class="h4-blue" v-if="item.status == 2&&item.uid == item.seller_uid">待放行</h4>
 						<h4 class="h4-blue" v-if="item.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="item.status == -1">撤销</h4>
 						<h4 class="h4-red" v-if="item.status == 4">申诉中</h4>
@@ -337,8 +353,10 @@
 							</div>
 							<h4>{{item.nickname}}</h4>
 						</div>
-						<h4 class="h4-blue" v-if="item.status == 1">等待付款</h4>
-						<h4 class="h4-blue" v-if="item.status == 2">待放行</h4>
+						<h4 class="h4-blue" v-if="item.status == 1&&item.uid == item.buyer_uid">待付款</h4>
+						<h4 class="h4-blue" v-if="item.status == 2&&item.uid == item.buyer_uid">等待放行</h4>
+						<h4 class="h4-blue" v-if="item.status == 1&&item.uid == item.seller_uid">等待付款</h4>
+						<h4 class="h4-blue" v-if="item.status == 2&&item.uid == item.seller_uid">待放行</h4>
 						<h4 class="h4-blue" v-if="item.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="item.status == -1">撤销</h4>
 						<h4 class="h4-red" v-if="item.status == 4">申诉中</h4>
@@ -373,8 +391,10 @@
 							</div>
 							<h4>{{item.nickname}}</h4>
 						</div>
-						<h4 class="h4-blue" v-if="item.status == 1">等待付款</h4>
-						<h4 class="h4-blue" v-if="item.status == 2">待放行</h4>
+						<h4 class="h4-blue" v-if="item.status == 1&&item.uid == item.buyer_uid">待付款</h4>
+						<h4 class="h4-blue" v-if="item.status == 2&&item.uid == item.buyer_uid">等待放行</h4>
+						<h4 class="h4-blue" v-if="item.status == 1&&item.uid == item.seller_uid">等待付款</h4>
+						<h4 class="h4-blue" v-if="item.status == 2&&item.uid == item.seller_uid">待放行</h4>
 						<h4 class="h4-blue" v-if="item.status == 3">完成</h4>
 						<h4 class="h4-gray" v-if="item.status == -1">撤销</h4>
 						<h4 class="h4-red" v-if="item.status == 4">申诉中</h4>

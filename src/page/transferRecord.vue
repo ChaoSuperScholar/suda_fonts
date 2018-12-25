@@ -30,8 +30,8 @@
 				<h5>{{transfer.created_at}}</h5>
 				<div class="list-bottom flex-row">
 					<h4>{{transfer.addr}}</h4>
-					<h4 class="h4-red" v-if="transfer.num < 0">{{transfer.num}}</h4>
-					<h4 class="h4-green" v-else>{{transfer.num}}</h4>
+					<h4 class="h4-red" v-if="transfer.num < 0">{{transfer.num|numFilter}}</h4>
+					<h4 class="h4-green" v-else>+{{transfer.num|numFilter}}</h4>
 				</div>
 			</div>
 			<!--没有数据-->
@@ -43,9 +43,9 @@
 			<div class="list flex-col" v-for="transfer in transfers">
 				<h5>{{transfer.created_at}}</h5>
 				<div class="list-bottom flex-row">
-					<h4>{{transfer.addr}}</h4>
-					<h4 class="h4-red" v-if="transfer.num < 0">{{transfer.num}}</h4>
-					<h4 class="h4-green" v-else>{{transfer.num}}</h4>
+					<h4>{{transfer.nickname}}</h4>
+					<h4 class="h4-red" v-if="transfer.num < 0">{{transfer.num|numFilter}}</h4>
+					<h4 class="h4-green" v-else>+{{transfer.num|numFilter}}</h4>
 				</div>
 			</div>
 			<!--没有数据-->
@@ -100,6 +100,14 @@
   				
   			})
   		},
+		filters: {
+		/*小数点后面保留2位*/
+		  	numFilter(num, len){
+				var len = len || 2;
+				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
+				return Number.isInteger(result) ? result.toFixed(len) : result;
+			}
+		},
   		//实例方法
   		methods: {
   			return_page (){

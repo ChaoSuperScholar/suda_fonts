@@ -94,7 +94,9 @@
 							}
 							this.totalAssets = res.total.money;
 							/* this.imgUrl = res.lists.imgUrl; */
-						} else {
+						} else if(data.status === 10001){
+							this.$router.replace('indexNew');
+						} else{
 							this.layers("請求失敗");
 						}
 					})
