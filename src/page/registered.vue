@@ -139,7 +139,7 @@
 							code : this.code,
 							password : this.loginPassword,
 							two_password : this.transactionPassword,
-							direct_token : "FDG34T"
+							direct_token : this.$route.query.direct_token?this.$route.query.direct_token:''
 						})
 						.then(({data}) => {
 							if (data.status === 200) {

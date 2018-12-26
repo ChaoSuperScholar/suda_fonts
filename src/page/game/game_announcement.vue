@@ -9,6 +9,7 @@
 								<h5 class="text-line-1">{{list.title}}</h5>
 								<h5>{{list.created_at}}</h5>
 							</div>
+							<nodata v-if="!lists.length"></nodata>
 						</div>
 					</div>
 					<div class="close-btn" @click="goIndex()">

@@ -20,7 +20,7 @@
 		</div>
 		<div class="tab-card" style="display: block;">
 			<router-link to="game_index">
-				<div class="list flex-row">
+				<div class="list flex-row" @click="getStatus()">
 					<img src="../../static/images/application_04.png" alt="">
 					<div class="list-right flex-col">
 						<h4>汽车大亨</h4>
@@ -28,6 +28,13 @@
 					</div>
 				</div>
 			</router-link>
+			<!-- <div class="list flex-row" @click="noData()">
+				<img src="../../static/images/application_04.png" alt="">
+				<div class="list-right flex-col">
+					<h4>汽车大亨</h4>
+					<p>模拟经营自动收益游戏，采用流行“IDLE”游戏模式，为游戏玩家带来极佳的游玩体验。</p>
+				</div>
+			</div> -->
 			<div class="list flex-row"  @click="goFinancial()">
 				<img src="../../static/images/application_05.png" alt="">
 				<div class="list-right flex-col">
@@ -56,21 +63,15 @@
 		</div>
 		<div class="tab-card">
 			<!-- 沒有數據 -->
-			<div class="no-data flex-row">
-				暫無數據
-			</div>
+			<nodata></nodata>
 		</div>
 		<div class="tab-card">
 			<!-- 沒有數據 -->
-			<div class="no-data flex-row">
-				暫無數據
-			</div>
+			<nodata></nodata>
 		</div>
 		<div class="tab-card">
 			<!-- 沒有數據 -->
-			<div class="no-data flex-row">
-				暫無數據
-			</div>
+			<nodata></nodata>
 		</div>
 		<footerBar></footerBar>
 	</div>
@@ -184,6 +185,16 @@
 			},
 			goFinancial (){
 				this.$router.replace('Financial');
+			},
+			getStatus (){
+				this.axios.get('/index/suda_game/inGame')
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data.message);
+					} else{
+						this.layers(data.message);
+					}
+				})
 			}
   		}
     }
