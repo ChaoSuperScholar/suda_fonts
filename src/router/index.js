@@ -52,6 +52,7 @@ import game_ranking from '../page/game/game_ranking'
 import game_data from '../page/game/game_data'
 import game_pay from '../page/game/game_pay'
 import game_upgrade from '../page/game/game_upgrade'
+import game_ElectricPower from '../page/game/game_ElectricPower'
 
 Vue.use(Router)
 
@@ -296,6 +297,11 @@ export default new Router({
 			path: '/game_upgrade',
 			name: 'game_upgrade',
 			component: game_upgrade
+		},
+		{
+			path: '/game_ElectricPower',
+			name: 'game_ElectricPower',
+			component: game_ElectricPower
 		}
     ]
 })

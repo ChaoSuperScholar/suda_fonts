@@ -55,9 +55,13 @@
 				</div>
 			</div>
 			<div class="bottom-module flex-row">
-				<img src="../../../static/images/game/game_index_12.png" alt="">
+				<img src="../../../static/images/game/game_index_12.png" alt="" v-if="statusList.battery_time == 0" @click="goPower()">
+				<img src="../../../static/images/game/game_index_12_01.png" alt="" v-if="statusList.battery_time > 0&&statusList.battery_time < 6" @click="goPower()">
+				<img src="../../../static/images/game/game_index_12_02.png" alt="" v-if="statusList.battery_time > 6&&statusList.battery_time < 12" @click="goPower()">
+				<img src="../../../static/images/game/game_index_12_03.png" alt="" v-if="statusList.battery_time > 12&&statusList.battery_time < 18" @click="goPower()">
+				<img src="../../../static/images/game/game_index_12_04.png" alt="" v-if="statusList.battery_time > 18&&statusList.battery_time < 24" @click="goPower()">
 				<div class="btn flex-row" @click="getGoldAll()">
-					<h4>领取 {{sum}}</h4>
+					<h4>领取 {{sum|numFilter}}</h4>
 					<img src="../../../static/images/game/game_index_14.png" alt="">
 				</div>
 				<h4></h4>
@@ -68,13 +72,14 @@
 				<img src="../../../static/images/game/game_index_15.png" alt="">
 			</div>
 			<!-- 销售中心 -->
-			<div class="sales-center" @click="btnSales()">
-				<div class="sign sign-1">
+			<div class="sales-center">
+				<div class="sign sign-1"  @click="btnSales()" v-if="statusList.seven_status == 2">
 					<img src="../../../static/images/game/index_sign_07_run.gif" alt="" v-if="statusList.six_status == 1">
 					<img src="../../../static/images/game/index_sign_07.png" alt="" v-if="statusList.six_status == 2">
 				</div>
 				<img src="../../../static/images/game/game_index_16.png" alt="" v-if="statusList.seven_status == 2">
 				<img src="../../../static/images/game/game_index_16_1.png" alt="" v-if="statusList.seven_status == 1">
+				<div class="click click-7" @click="goUpgrade(7)" v-if="statusList.seven_status == 1"></div>
 			</div>
 			<!-- 纯粹装饰 -->
 			<div class="decorations">
@@ -82,45 +87,59 @@
 			</div>
 			<!-- 测试车间和整装工厂 -->
 			<div class="test-workshop">
-				<div class="sign sign-2" @click="btnTestWorkshop_2()">
+				<div class="sign sign-2" @click="btnTestWorkshop_2()" v-if="statusList.six_status == 2">
 					<img src="../../../static/images/game/index_sign_06_run.gif" alt="" v-if="statusList.five_status == 1">
 					<img src="../../../static/images/game/index_sign_06.png" alt="" v-if="statusList.five_status == 2">
 				</div>
-				<div class="sign sign-1" @click="btnTestWorkshop_1()">
+				<div class="sign sign-1" @click="btnTestWorkshop_1()" v-if="statusList.five_status == 2">
 					<img src="../../../static/images/game/index_sign_05_run.gif" alt="" v-if="statusList.four_status == 1">
 					<img src="../../../static/images/game/index_sign_05.png" alt="" v-if="statusList.four_status == 2">
 				</div>
 				<img src="../../../static/images/game/game_index_17.png" alt="" v-if="statusList.five_status == 2">
-				<img src="../../../static/images/game/game_index_17_1.png" alt="" v-if="statusList.five_status == 1">
+				<img src="../../../static/images/game/game_index_17_1.png" alt="" v-if="statusList.five_status == 1&&statusList.six_status == 2">
 				<img src="../../../static/images/game/game_index_17_2.png" alt="" v-if="statusList.six_status == 1">
+				<div class="click click-6" @click="goUpgrade(6)" v-if="statusList.six_status == 1"></div>
+				<div class="click click-5" @click="goUpgrade(5)" v-if="statusList.five_status == 1"></div>
 			</div>
 			<!-- 冲压工厂和焊装工厂和涂装工厂 -->
 			<div class="stamping-plant">
-				<div class="sign sign-3" @click="btnStamping_3()">
+				<div class="sign sign-3" @click="btnStamping_3()" v-if="statusList.four_status == 2">
 					<img src="../../../static/images/game/index_sign_04_run.gif" alt="" v-if="statusList.three_status == 1">
 					<img src="../../../static/images/game/index_sign_04.png" alt="" v-if="statusList.three_status == 2">
 				</div>
-				<div class="sign sign-2" @click="btnStamping_2()">
+				<div class="sign sign-2" @click="btnStamping_2()" v-if="statusList.three_status == 2">
 					<img src="../../../static/images/game/index_sign_03_run.gif" alt="" v-if="statusList.two_status == 1">
 					<img src="../../../static/images/game/index_sign_03.png" alt="" v-if="statusList.two_status == 2">
 				</div>
-				<div class="sign sign-1" @click="btnStamping_1()">
+				<div class="sign sign-1" @click="btnStamping_1()" v-if="statusList.two_status == 2">
 					<img src="../../../static/images/game/index_sign_02_run.gif" alt="" v-if="statusList.one_status == 1">
 					<img src="../../../static/images/game/index_sign_02.png" alt="" v-if="statusList.one_status == 2">
 				</div>
 				<img src="../../../static/images/game/game_index_18.png" alt="" v-if="statusList.two_status == 2">
-				<img src="../../../static/images/game/game_index_18_1.png" alt="" v-if="statusList.two_status == 1">
-				<img src="../../../static/images/game/game_index_18_2.png" alt="" v-if="statusList.three_status == 1">
+				<img src="../../../static/images/game/game_index_18_1.png" alt="" v-if="statusList.two_status == 1&&statusList.three_status == 2">
+				<img src="../../../static/images/game/game_index_18_2.png" alt="" v-if="statusList.three_status == 1&&statusList.four_status ==2">
 				<img src="../../../static/images/game/game_index_18_3.png" alt="" v-if="statusList.four_status == 1">
+				<div class="click click-4" @click="goUpgrade(4)" v-if="statusList.four_status == 1"></div>
+				<div class="click click-3" @click="goUpgrade(3)" v-if="statusList.three_status == 1"></div>
+				<div class="click click-2" @click="goUpgrade(2)" v-if="statusList.two_status == 1"></div>
 			</div>
 			<!-- 研发中心 -->
-			<div class="research-center" @click="goUpgrade_1()">
+			<div class="research-center">
 				<div class="sign" @click="btnResearch()" v-if="statusList.one_status == 2">
 					<img src="../../../static/images/game/index_sign_01_run.gif" alt="">
 				</div>
 				<img src="../../../static/images/game/game_index_19_1.png" alt="" v-if="statusList.one_status == 1">
 				<img src="../../../static/images/game/game_index_19.png" alt="" v-if="statusList.one_status == 2">
+				<div class="click click-1" @click="goUpgrade(1)" v-if="statusList.one_status == 1"></div>
 			</div>
+			<!-- 金币收取 -->
+			<img class="collect collect-1" src="../../../static/images/game/game_index_21.png" alt="" @click.stop="collectCoin(show)" v-for="show in showCoin[1]">
+			<img class="collect collect-2" src="../../../static/images/game/game_index_21.png" alt="" @click.stop="collectCoin(show)" v-for="show in showCoin[2]">
+			<img class="collect collect-3" src="../../../static/images/game/game_index_21.png" alt="" @click.stop="collectCoin(show)" v-for="show in showCoin[3]">
+			<img class="collect collect-4" src="../../../static/images/game/game_index_21.png" alt="" @click.stop="collectCoin(show)" v-for="show in showCoin[4]">
+			<img class="collect collect-5" src="../../../static/images/game/game_index_21.png" alt="" @click.stop="collectCoin(show)" v-for="show in showCoin[5]">
+			<img class="collect collect-6" src="../../../static/images/game/game_index_21.png" alt="" @click.stop="collectCoin(show)" v-for="show in showCoin[6]">
+			<img class="collect collect-7" src="../../../static/images/game/game_index_21.png" alt="" @click.stop="collectCoin(show)" v-for="show in showCoin[7]">
 		</div>
 	</div>
 </template>
@@ -133,7 +152,8 @@
             	money : [],
 				msg : "",
 				statusList : [],
-				sum : ""
+				sum : "",
+				showCoin : []
             }
         },
         // 创建之前
@@ -156,6 +176,14 @@
   				
   			})
   		},
+		filters: {
+			/*小数点后面保留2位*/
+		  	numFilter(num, len){
+				var len = len || 2;
+				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
+				return Number.isInteger(result) ? result.toFixed(len) : result;
+			}
+		},
   		//实例方法
   		methods: {
 			btnSales (){
@@ -305,17 +333,40 @@
 						console.log(data.message);
 						let res = data.data;
 						this.sum = res.sum;
+						this.showCoin = res.list; 
 					} else{
 						this.layers(data.message);
 					}
 				})
 			},
-			goUpgrade_1 (){
-				this.$router.replace('game_upgrade');
+			goUpgrade (index){
 				this.$router.push({
 					path : '/game_upgrade',
 					query : {
-						num : "1"
+						num : index
+					}
+				})
+			},
+			goPower (){
+				this.$router.push({
+					path : '/game_ElectricPower',
+					query : {
+						time : this.statusList.battery_time
+					}
+				})
+			},
+			collectCoin (show){
+				this.axios.post('/index/suda_game/getGold',{
+					id : show.id
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data.message);
+						this.layers(data.message);
+						this.getMsg();
+						this.getGoldList();
+					} else{
+						this.layers(data.message);
 					}
 				})
 			}
@@ -355,6 +406,7 @@
 		justify-content: space-between;
 		position: fixed;
 		top: 0.1rem;
+		z-index: 999;
 	}
 	.top-module h5{
 		font-size: 0.24rem;
@@ -549,5 +601,102 @@
 	.research-center .sign{
 		left: 2.6rem;
 		top: 2.4rem;
+	}
+	/* 点击去升级 */
+	.click{
+		position: absolute;
+		z-index: 998;
+		/* border: 0.03rem solid red; */
+	}
+	.click-1{
+		width: 3.8rem;
+		height: 2.2rem;
+		border-radius: 50%;
+		left: 1.2rem;
+		top: 1.8rem;
+		transform: rotate(15deg);
+	}
+	.click-2{
+		width: 2.8rem;
+		height: 2.2rem;
+		border-radius: 50%;
+		left: 3.8rem;
+		top: 1.2rem;
+		transform: rotate(15deg);
+	}
+	.click-3{
+		width: 2.4rem;
+		height: 1.4rem;
+		border-radius: 50%;
+		left: 0.8rem;
+		top: 1rem;
+		transform: rotate(15deg);
+	}
+	.click-4{
+		width: 1.8rem;
+		height: 1rem;
+		border-radius: 50%;
+		left: 2.5rem;
+		top: 0.3rem;
+		transform: rotate(15deg);
+	}
+	.click-5{
+		width: 1.8rem;
+		height: 1rem;
+		border-radius: 50%;
+		left: 1.7rem;
+		top: 1.2rem;
+		transform: rotate(8deg);
+	}
+	.click-6{
+		width: 1.5rem;
+		height: 0.7rem;
+		border-radius: 50%;
+		left: 0.2rem;
+		top: 1rem;
+		transform: rotate(8deg);
+	}
+	.click-7{
+		width: 2.2rem;
+		height: 1.2rem;
+		border-radius: 50%;
+		left: 0.6rem;
+		bottom: 0.1rem;
+		transform: rotate(-12deg);
+	}
+	/* 金币收取 */
+	.collect{
+		width: 0.47rem;
+		height: 0.48rem;
+		position: absolute;
+		z-index: 999;
+	}
+	.collect-1{
+		left: 2.4rem;
+		bottom: 4.8rem;
+	}
+	.collect-2{
+		left: 4.7rem;
+		bottom: 6.4rem;
+	}
+	.collect-3{
+		left: 2rem;
+		bottom: 7.1rem;
+	}
+	.collect-4{
+		left: 3.6rem;
+		bottom: 7.7rem;
+	}
+	.collect-5{
+		left: 5.7rem;
+		bottom: 8.7rem;
+	}
+	.collect-6{
+		left: 4rem;
+		bottom: 9.2rem;
+	}
+	.collect-7{
+		left: 2rem;
+		bottom: 10rem;
 	}
 </style>
