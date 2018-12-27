@@ -51,6 +51,7 @@ import game_announcement_details from '../page/game/game_announcement_details'
 import game_ranking from '../page/game/game_ranking'
 import game_data from '../page/game/game_data'
 import game_pay from '../page/game/game_pay'
+import game_upgrade from '../page/game/game_upgrade'
 
 Vue.use(Router)
 
@@ -290,6 +291,11 @@ export default new Router({
 			path: '/game_pay',
 			name: 'game_pay',
 			component: game_pay
+		},
+		{
+			path: '/game_upgrade',
+			name: 'game_upgrade',
+			component: game_upgrade
 		}
     ]
 })

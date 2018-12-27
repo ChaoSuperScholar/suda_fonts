@@ -114,7 +114,7 @@
 				<img src="../../../static/images/game/game_index_18_3.png" alt="" v-if="statusList.four_status == 1">
 			</div>
 			<!-- 研发中心 -->
-			<div class="research-center">
+			<div class="research-center" @click="goUpgrade_1()">
 				<div class="sign" @click="btnResearch()" v-if="statusList.one_status == 2">
 					<img src="../../../static/images/game/index_sign_01_run.gif" alt="">
 				</div>
@@ -307,6 +307,15 @@
 						this.sum = res.sum;
 					} else{
 						this.layers(data.message);
+					}
+				})
+			},
+			goUpgrade_1 (){
+				this.$router.replace('game_upgrade');
+				this.$router.push({
+					path : '/game_upgrade',
+					query : {
+						num : "1"
 					}
 				})
 			}
