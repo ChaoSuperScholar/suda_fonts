@@ -18,27 +18,36 @@
           <div class="choose">
             <div class="effects">
               <p>游戏音效</p>
-              <div class="true_li">
-                <span>on</span>
+              <div class="true_li" v-if="effects">
+                <div class="big_box">
+                  <span @click="effects=!effects">on</span>
+                </div>
               </div>
-              <!--<div class="false_li">
-                <span>on</span>
-              </div>-->
+              <div class="false_li" v-else>
+                <div class="big_box">
+                  <span @click="effects=!effects">off</span>
+                </div>
+              </div>
             </div>
             <div class="music">
-              <div class="effects">
-                <p>游戏音效</p>
-                <div class="true_li">
-                  <span>on</span>
+                <p>游戏音乐</p>
+                <div class="true_li" v-if="music">
+                  <div class="big_box">
+                    <span @click="music=!music">on</span>
+                  </div>
                 </div>
-                <!--<div class="false_li">
-                  <span>on</span>
-                </div>-->
+                <div class="false_li" v-else>
+                  <div class="big_box">
+                    <span @click="music=!music">off</span>
+                  </div>
+                </div>
               </div>
-            </div>
           </div>
 				</div>
 			</div>
+      <div class="shadown">
+        <img @click="goIndex()" src="../../../static/images/game/game_play_02.png" alt="">
+      </div>
 		</div>
 	</div>
 </template>
@@ -49,7 +58,9 @@
         data(){
             return {
               name:'454564564564',
-              address:'15135%5313513%%123%123 %123%123%123%123%123%123%123% %123%'
+              address:'15135%5313513%%123%123 %123%123%123%123%123%123%123% %123%',
+              effects:true,//音效
+              music:true
             }
         },
         // 创建之前
@@ -72,7 +83,9 @@
   		},
   		//实例方法
   		methods: {
-
+        goIndex (){
+          this.$router.replace('game_index');
+        },
   		}
     }
 </script>
@@ -155,6 +168,12 @@
     flex-flow: row;
     margin-top: .6rem;
   }
+  .choose .music{
+    width: 2rem;
+    display: flex;
+    flex-flow: row;
+    margin-top: .6rem;
+  }
   .choose .effects p{
     width: .5rem;
     height: .5rem;
@@ -163,5 +182,89 @@
     color: #f2dfac;
     line-height: .25rem;
   }
+  .choose .music p{
+    width: .5rem;
+    height: .5rem;
+    font-size: .2rem;
+    font-weight: 900;
+    color: #f2dfac;
+    line-height: .25rem;
+  }
+.true_li{
+  width: 1.4rem;
+  height: .45rem;
+  background: #9a7025;
+  -moz-box-shadow:0px -5px 11px #333333; -webkit-box-shadow:0px -5px 11px #333333; box-shadow:0px -5px 11px #333333;
+  border-radius: .1rem;
+  border: .02rem solid #000000;
+  position: relative;
+}
+  .true_li .big_box{
+    width: .48rem;
+    height: .48rem;
+    position: absolute;
+    top: -.05rem;
+    background: #b87421;
+    padding: 0 .08rem  .08rem 0;
+    border-radius: .1rem;
+  }
+  .false_li{
+    width: 1.4rem;
+    height: .45rem;
+    background: #ffde3b ;
+    -moz-box-shadow:0px -5px 11px #333333; -webkit-box-shadow:0px -5px 11px #333333; box-shadow:0px -5px 11px #333333;
+    border-radius: .1rem;
+    border: .02rem solid #000000;
+    position: relative;
+  }
+  .false_li .big_box{
+    width: .48rem;
+    height: .48rem;
+    position: absolute;
+    top: -.05rem;
+    right: 0;
+    background: #b87421;
+    padding: 0 .08rem  .08rem 0;
+    border-radius: .1rem;
 
+  }
+  .false_li span{
+    width: .48rem;
+    height: .48rem;
+    text-align: center;
+    line-height: .48rem;
+    color: #463317;
+    background: #fee485;
+    font-size: .16rem;
+    display: block;
+    border-bottom: 0.02rem solid #ffffff;
+    border-right: 0.02rem solid #ffffff;
+    border-radius: .1rem;
+    position: absolute;
+  }
+  .true_li span{
+    width: .48rem;
+    height: .48rem;
+    text-align: center;
+    line-height: .48rem;
+    color: #463317;
+    background: #fee485;
+    font-size: .16rem;
+    display: block;
+    border-bottom: 0.02rem solid #ffffff;
+    border-right: 0.02rem solid #ffffff;
+    border-radius: .1rem;
+    position: absolute;
+  }
+
+
+  .shadown{
+    position: absolute;
+    z-index: 999;
+    bottom: -1.5rem;
+    width: .84rem;
+    height: .84rem;
+    right:  3.15rem;
+
+  }
 </style>
