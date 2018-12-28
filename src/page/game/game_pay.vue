@@ -132,7 +132,7 @@
     top: .1rem;
   }
   .Transformation{
-    width: 4.75rem;
+    width: 4.8rem;
     position: absolute;
     top: .9rem;
   }
