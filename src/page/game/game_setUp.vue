@@ -1,5 +1,8 @@
 <template>
 	<div class="game_setUp">
+    <div class="shadown">
+      <img @click="goIndex()" src="../../../static/images/game/game_play_02.png" alt="">
+    </div>
 		<div class="bg-father">
 			<div class="bg flex-col">
 				<div class="layer-module flex-col">
@@ -43,11 +46,11 @@
                 </div>
               </div>
           </div>
+          <div class="btns">
+            <p>确认</p>
+          </div>
 				</div>
 			</div>
-      <div class="shadown">
-        <img @click="goIndex()" src="../../../static/images/game/game_play_02.png" alt="">
-      </div>
 		</div>
 	</div>
 </template>
@@ -91,6 +94,9 @@
 </script>
 
 <style scoped>
+  body{
+    position: relative;
+  }
 	.bg-father{
 		width: 100vw;
 		height: 100vh;
@@ -261,10 +267,26 @@
   .shadown{
     position: absolute;
     z-index: 999;
-    bottom: -1.5rem;
     width: .84rem;
     height: .84rem;
-    right:  3.15rem;
+    bottom: 2.7rem;
+    left: .23rem;
+  }
+  .btns{
+    position: absolute;
+    z-index: 99999;
+    top: 8rem;
+    background: url("../../../static/images/game/btns.png");
+    width: 2.2rem;
+    height: .76rem;
+    background-size: 100% 100%;
 
+  }
+  .btns p{
+    text-align: center;
+    font-size: .24rem;
+    font-weight: 900;
+    color: #fef3cd;
+    line-height: .5rem;
   }
 </style>

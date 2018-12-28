@@ -4,6 +4,7 @@
 			<div class="bg flex-col">
 				<div class="layer-module flex-col">
             <div class="num_box" v-show="num_data" >
+              <!--收益列表-->
               <div class="num_box_title">
                 <p>日期</p>
                 <p>车厂收益</p>
@@ -19,6 +20,7 @@
                 </ul>
               </div>
             </div>
+          <!--总收益-->
             <div class="summary">
               <p>累计车厂收益：0.55</p>
               <p>累计邀请收益：0.545</p>
@@ -188,13 +190,16 @@
     font-size: .18rem;
     line-height: .4rem;
   }
-  .shadown{
+  body{
     position: relative;
+  }
+  .shadown{
+    position: absolute;
     z-index: 999;
-    bottom: 1.8rem;
+    bottom: .9rem;
     width: .84rem;
     height: .84rem;
-    right:  3.15rem;
+    left:  .2rem;
   }
   .nones{
     font-size: .24rem;
