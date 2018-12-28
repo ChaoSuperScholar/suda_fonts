@@ -26,15 +26,15 @@
               <p>累计邀请收益：0.545</p>
               <p>今日收益：0.15553</p>
             </div>
+          <div class="shadown">
+            <img @click="goIndex()" src="../../../static/images/game/game_play_02.png" alt="">
+          </div>
           <div v-show="num_data==''" class="nones">
             <p>暂无提币记录</p>
           </div>
 				</div>
 			</div>
 		</div>
-    <div class="shadown">
-      <img @click="goIndex()" src="../../../static/images/game/game_play_02.png" alt="">
-    </div>
 	</div>
 
 </template>
@@ -180,26 +180,25 @@
   }
 
   .summary{
-    position: absolute;
-    bottom: .8rem;
     width: 5rem;
+    margin-top: 9rem;
   }
   .summary p{
     width: 50%;
     float: left;
     font-size: .18rem;
     line-height: .4rem;
-  }
-  body{
-    position: relative;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
   }
   .shadown{
     position: absolute;
     z-index: 999;
-    bottom: .9rem;
+    bottom: .8rem;
     width: .84rem;
     height: .84rem;
-    left:  .2rem;
+    left:  .05rem;
   }
   .nones{
     font-size: .24rem;
