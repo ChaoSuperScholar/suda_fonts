@@ -53,6 +53,7 @@ import game_data from '../page/game/game_data'
 import game_pay from '../page/game/game_pay'
 import game_upgrade from '../page/game/game_upgrade'
 import game_ElectricPower from '../page/game/game_ElectricPower'
+import advertising from '../page/advertising'
 
 Vue.use(Router)
 
@@ -302,6 +303,11 @@ export default new Router({
 			path: '/game_ElectricPower',
 			name: 'game_ElectricPower',
 			component: game_ElectricPower
+		},
+		{
+			path: '/advertising',
+			name: 'advertising',
+			component: advertising
 		}
     ]
 })

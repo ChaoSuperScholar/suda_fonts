@@ -1,7 +1,9 @@
 <template>
 	<div class="order">
 		<div class="top-module flex-row">
-			<h4></h4>
+			<router-link to="transaction">
+				<img class="img-left" src="../../static/images/return.png"/>
+			</router-link>
 			<div class="top-tab flex-row">
 				<div class="top-tab-list flex-col" :class="{activeTab:isTabLeft}" @click="clickTabLeft()">
 					<h3>购买</h3>
@@ -10,7 +12,7 @@
 					<h3>出售</h3>
 				</div>
 			</div>
-			<router-link to="transaction">
+			<router-link to="advertising">
 				<div class="top-right flex-row">
 					<img src="../../static/images/order_01.png" alt="">
 					<h3>广告</h3>
@@ -420,12 +422,10 @@
 				</div>
 			</div>
 		</div>
-		<footerBar></footerBar>
 	</div>
 </template>
 
 <script>
-	import footerBar from '../components/footerBar'
 	export default{
         name: 'order',
         data(){
@@ -434,11 +434,6 @@
             	isTabRight : false,
             	showLeft : true,
             	showRight : false,
-				img1 : require('../../static/images/indexNew_01.png'),
-				img2 : require('../../static/images/indexNew_02_de.png'),
-				img3 : require('../../static/images/indexNew_03.png'),
-				img4 : require('../../static/images/indexNew_04.png'),
-				img5 : require('../../static/images/indexNew_05.png'),
 				tabsName: [
 					{  
 						name: "全部",  
@@ -518,10 +513,6 @@
   				
   			})
   		},
-		//注册组件
-		components : {
-			footerBar
-		},
 		filters: {
 			/*小数点后面保留2位*/
 		  	numFilter(num, len){
@@ -648,6 +639,11 @@
 </script>
 
 <style scoped>
+	.img-left{
+		width: 0.18rem;
+		height: 0.32rem;
+		margin-left: 0.3rem;
+	}
 	.avatar{
 		width: 0.6rem;
 		height: 0.6rem;
