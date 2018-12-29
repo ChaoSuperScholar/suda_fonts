@@ -54,6 +54,7 @@ import game_pay from '../page/game/game_pay'
 import game_upgrade from '../page/game/game_upgrade'
 import game_ElectricPower from '../page/game/game_ElectricPower'
 import advertising from '../page/advertising'
+import market from '../page/market'
 
 Vue.use(Router)
 
@@ -308,6 +309,11 @@ export default new Router({
 			path: '/advertising',
 			name: 'advertising',
 			component: advertising
+		},
+		{
+			path: '/market',
+			name: 'market',
+			component: market
 		}
     ]
 })

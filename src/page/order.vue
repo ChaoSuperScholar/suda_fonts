@@ -15,7 +15,7 @@
 			<router-link to="advertising">
 				<div class="top-right flex-row">
 					<img src="../../static/images/order_01.png" alt="">
-					<h3>广告</h3>
+					<h3>详情</h3>
 				</div>
 			</router-link>
 		</div>

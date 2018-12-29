@@ -5,7 +5,7 @@
 				<img class="img-left" src="../../static/images/return.png"/>
 			</router-link>
 			<h3>{{title}}</h3>
-			<div class="top-module-right flex-row">
+			<div class="top-module-right flex-row" @click="goDetails()">
 				<img src="../../static/images/wallet_01.png" alt="">
 				<h4 class="h4-green">{{up_down}}</h4>
 			</div>
@@ -102,6 +102,15 @@
 			goReceivables (){
 				this.$router.push({
 					path : '/receivables',
+					query : {
+						title : this.$route.query.title,
+						type : this.$route.query.type
+					}
+				})
+			},
+			goDetails (){
+				this.$router.push({
+					path : '/market',
 					query : {
 						title : this.$route.query.title,
 						type : this.$route.query.type
