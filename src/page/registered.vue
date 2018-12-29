@@ -26,7 +26,7 @@
 				<!-- 登录密码 -->
 				<div class="list flex-row">
 					<div class="list-left flex-row">
-						<img class="phoneimg" src="../../static/images/registered_01.png" alt="">
+						<img class="phoneimg" src="../../static/images/registered_03.png" alt="">
 						<h4>登录密码：</h4>
 					</div>
 					<input v-model="loginPassword" type="password" value="" placeholder="输入您的登录密码"/>
@@ -34,13 +34,19 @@
 				<!-- 交易密码 -->
 				<div class="list flex-row">
 					<div class="list-left flex-row">
-						<img class="phoneimg" src="../../static/images/registered_01.png" alt="">
+						<img class="phoneimg" src="../../static/images/registered_03.png" alt="">
 						<h4>交易密码：</h4>
 					</div>
 					<input v-model="transactionPassword" type="password" value="" placeholder="用于交易与转账"/>
 				</div>
         <!--输入邀请码-->
-
+      <div class="list flex-row">
+        <div class="list-left flex-row">
+          <img class="phoneimg" src="../../static/images/invition.png" alt="">
+          <h4>邀请码：</h4>
+        </div>
+        <input v-model="Invitation" type="" value="" placeholder="输入邀请码"/>
+      </div>
 				<div class="agree-clause flex-row">
 					<div class="agree-check flex-col" @click="agreeBtn">
 						<img src="../../static/images/registered_04.png" alt="" v-show="isShowAgree">
@@ -64,12 +70,13 @@
         data(){
             return {
             	indexTitle : "注册账户",
-				isShow : true,
-				phone : "",
-				code : "",
-				loginPassword : "",
-				transactionPassword : "",
-				isShowAgree : true,
+				      isShow : true,
+				      phone : "",
+				      code : "",
+				      loginPassword : "",
+				      transactionPassword : "",
+              Invitation:'',  //验证码
+				      isShowAgree : true,
               isCode:true,
               time:60
             }
@@ -220,7 +227,7 @@
 		margin-left: 0.2rem;
 	}
 	.phoneimg{
-		width: 0.26rem;
+		width: 0.38rem;
 		height: 0.38rem;
 	}
 	.list input{
