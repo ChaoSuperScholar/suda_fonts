@@ -3,7 +3,7 @@
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="top-text flex-col">
 			<img src="../../static/images/aboutUs_01.png" alt="">
-			<p>速达钱包S-TOKEN集合了数字钱包系统、OTC场外交易 游戏、商城、竞猜、理财6大功能板块，并基于全球通用 标准ERC20发行速达通证SDT.</p>
+			<p>S-TOKEN钱包S-TOKEN集合了数字钱包系统、OTC场外交易 游戏、商城、竞猜、理财6大功能板块，并基于全球通用 标准ERC20发行S-TOKEN通证SDT.</p>
 		</div>
 		<div class="updata flex-row">
 			<div class="updata-child flex-row">

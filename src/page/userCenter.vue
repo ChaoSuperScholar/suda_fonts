@@ -22,7 +22,7 @@
 				<router-link to="myTeam">
 					<div class="bottom-list flex-col">
 						<img src="../../static/images/userCenter_03.png" alt="">
-						<h4>团队</h4>
+						<h4>社区</h4>
 					</div>
 				</router-link>
 				<router-link to="transferRecord">

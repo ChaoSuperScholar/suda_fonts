@@ -25,22 +25,22 @@
           <!--input box    充值转换-->
           <div class="Transformation">
 						<div class="flex-col" v-show="showLeft">
-							<div class="input_box flex-row">
+							<div class="input_box flex-row" >
 								<span>充值&nbsp;</span>
-								<input type="number" v-model="ETH">
-								<span>&nbsp;ETH &nbsp;=&nbsp;</span>
-								<input type="number" v-model="eths">
+								<input type="number" v-model="SDT" >
+								<span>&nbsp;SDT &nbsp;=&nbsp;</span>
+								<input type="number" v-model="sdts" >
 								<span>&nbsp;金币</span>
 							</div>
 							<!--按钮-->
 							<div class="btns flex-col" @click="btnLeft()"></div>
 						</div>
 						<div class="flex-col" v-show="showRight">
-							<div class="input_box flex-row" >
+							<div class="input_box flex-row">
 								<span>充值&nbsp;</span>
-								<input type="number" v-model="SDT" >
-								<span>&nbsp;SDT &nbsp;=&nbsp;</span>
-								<input type="number" v-model="sdts" >
+								<input type="number" v-model="ETH">
+								<span>&nbsp;ETH &nbsp;=&nbsp;</span>
+								<input type="number" v-model="eths">
 								<span>&nbsp;金币</span>
 							</div>
 							<!--按钮-->
@@ -109,20 +109,6 @@
 				},
 				btnLeft (){
 					this.axios.post('/index/suda_game/rechangeGold',{
-						num : this.ETH,
-						type : "ETH"
-					})
-					.then(({data}) => {
-						if (data.status == 200) {
-							this.layers(data.message);
-							this.ETH = ""
-						} else{
-							this.layers(data.message);
-						}
-					})
-				},
-				btnRight (){
-					this.axios.post('/index/suda_game/rechangeGold',{
 						num : this.SDT,
 						type : "SDT"
 					})
@@ -130,6 +116,20 @@
 						if (data.status == 200) {
 							this.layers(data.message);
 							this.SDT = ""
+						} else{
+							this.layers(data.message);
+						}
+					})
+				},
+				btnRight (){
+					this.axios.post('/index/suda_game/rechangeGold',{
+						num : this.ETH,
+						type : "ETH"
+					})
+					.then(({data}) => {
+						if (data.status == 200) {
+							this.layers(data.message);
+							this.ETH = ""
 						} else{
 							this.layers(data.message);
 						}

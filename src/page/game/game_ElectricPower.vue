@@ -7,19 +7,19 @@
 					<div class="list flex-row">
 						<h4>电力:</h4>
 						<img src="../../../static/images/game/game_ElectricPower_04_00.png" alt="" v-if="this.$route.query.time == 0">
-						<img src="../../../static/images/game/game_ElectricPower_04_01.png" alt="" v-if="this.$route.query.time == 1">
-						<img src="../../../static/images/game/game_ElectricPower_04_02.png" alt="" v-if="this.$route.query.time == 2">
-						<img src="../../../static/images/game/game_ElectricPower_04_03.png" alt="" v-if="this.$route.query.time == 3">
-						<img src="../../../static/images/game/game_ElectricPower_04_04.png" alt="" v-if="this.$route.query.time == 4">
-						<img src="../../../static/images/game/game_ElectricPower_04_05.png" alt="" v-if="this.$route.query.time == 5">
-						<img src="../../../static/images/game/game_ElectricPower_04_06.png" alt="" v-if="this.$route.query.time == 6">
-						<img src="../../../static/images/game/game_ElectricPower_04_07.png" alt="" v-if="this.$route.query.time == 7">
-						<img src="../../../static/images/game/game_ElectricPower_04_08.png" alt="" v-if="this.$route.query.time == 8">
-						<img src="../../../static/images/game/game_ElectricPower_04_09.png" alt="" v-if="this.$route.query.time == 9">
-						<img src="../../../static/images/game/game_ElectricPower_04_10.png" alt="" v-if="this.$route.query.time == 10">
-						<img src="../../../static/images/game/game_ElectricPower_04_11.png" alt="" v-if="this.$route.query.time == 11">
-						<img src="../../../static/images/game/game_ElectricPower_04_12.png" alt="" v-if="this.$route.query.time == 12">
-						<h4>16小时</h4>
+						<img src="../../../static/images/game/game_ElectricPower_04_01.png" alt="" v-if="this.$route.query.time < 3">
+						<img src="../../../static/images/game/game_ElectricPower_04_02.png" alt="" v-if="this.$route.query.time < 5">
+						<img src="../../../static/images/game/game_ElectricPower_04_03.png" alt="" v-if="this.$route.query.time < 7">
+						<img src="../../../static/images/game/game_ElectricPower_04_04.png" alt="" v-if="this.$route.query.time < 9">
+						<img src="../../../static/images/game/game_ElectricPower_04_05.png" alt="" v-if="this.$route.query.time < 11">
+						<img src="../../../static/images/game/game_ElectricPower_04_06.png" alt="" v-if="this.$route.query.time < 13">
+						<img src="../../../static/images/game/game_ElectricPower_04_07.png" alt="" v-if="this.$route.query.time < 15">
+						<img src="../../../static/images/game/game_ElectricPower_04_08.png" alt="" v-if="this.$route.query.time < 17">
+						<img src="../../../static/images/game/game_ElectricPower_04_09.png" alt="" v-if="this.$route.query.time < 19">
+						<img src="../../../static/images/game/game_ElectricPower_04_10.png" alt="" v-if="this.$route.query.time < 21">
+						<img src="../../../static/images/game/game_ElectricPower_04_11.png" alt="" v-if="this.$route.query.time < 23">
+						<img src="../../../static/images/game/game_ElectricPower_04_12.png" alt="" v-if="this.$route.query.time < 25">
+						<h4>{{power}}小时</h4>
 					</div>
 					<div class="list flex-row">
 						<h4>充电:</h4>
@@ -42,7 +42,7 @@
         name: 'game_ElectricPower',
         data(){
             return {
-            	
+            	power : ""
             }
         },
         // 创建之前
@@ -51,7 +51,7 @@
   		},
   		//创建之后
   		created: function (){
-  			
+  			this.getMsg();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -69,19 +69,26 @@
 				this.$router.replace('game_index');
 			},
 			charging (){
-				this.axios.post('/index/suda_game/buyBattery',{
-					num : "1"
-				})
-				.then(({data}) => {
-					if (data.status == 200) {
-						this.layers(data.message);
-						setTimeout(() => {
-							this.$router.replace('game_index');
-						},1500)
-					} else{
-						this.layers(data.message);
-					}
-				})
+				if (this.$route.query.time == 23) {
+					this.layers("电力已满!")
+				} else{
+					this.axios.post('/index/suda_game/buyBattery',{
+						num : "1"
+					})
+					.then(({data}) => {
+						if (data.status == 200) {
+							this.layers(data.message);
+							setTimeout(() => {
+								this.$router.replace('game_index');
+							},1500)
+						} else{
+							this.layers(data.message);
+						}
+					})
+				}
+			},
+			getMsg (){
+				this.power = this.$route.query.time;
 			}
   		}
     }

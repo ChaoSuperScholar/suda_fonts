@@ -13,7 +13,7 @@
 				<img src="../../static/images/moreInformation_02.png" alt="">
 				<h4>新浪微博</h4>
 			</div>
-			<h5>速达钱包官方账户</h5>
+			<h5>S-TOKEN钱包官方账户</h5>
 		</div>
 		<div class="list flex-row">
 			<div class="list-left flex-row">

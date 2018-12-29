@@ -52,6 +52,9 @@
 						<img src="../../../static/images/game/game_index_10.png" alt="">
 					</router-link>
 					<img src="../../../static/images/game/game_index_11.png" alt="" v-show="false">
+					<router-link to="application">
+						<img class="return_img" src="../../../static/images/game/game_play_02.png" alt="">
+					</router-link>
 				</div>
 			</div>
 			<div class="bottom-module flex-row">
@@ -406,6 +409,10 @@
 						this.layers(data.message);
 						this.getMsg();
 						this.getGoldList();
+						this.getStatus1();
+						setTimeout(() => {
+							this.music.game_sound = 2;
+						},2000)
 					} else{
 						this.layers(data.message);
 					}
@@ -531,7 +538,7 @@
 	}
 	.right-module{
 		width: 1.5rem;
-		height: 86vh;
+		height: 88vh;
 		justify-content: space-between;
 		position: fixed;
 		top: 1.4rem;
@@ -547,6 +554,10 @@
 		width: 1.22rem;
 		height: 1.22rem;
 		margin-bottom: 0.2rem;
+	}
+	.return_img{
+		width: 0.9rem!important;
+		height: 0.9rem!important;
 	}
 	.bottom-module{
 		width: 100%;
