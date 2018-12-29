@@ -51,10 +51,10 @@
 								<img src="../../static/images/transaction_04.png" alt="" v-show="list.alipay == 1">
 								<img src="../../static/images/transaction_05.png" alt="" v-show="list.wechat == 1">
 							</div>
-							<div class="btn-red flex-col" @click="withdrawal(list)" v-if="list.status == 1">
+							<!-- <div class="btn-red flex-col" @click="withdrawal(list)" v-if="list.status == 1">
 								撤单
-							</div>
-							<div class="btn-blue flex-col" @click="buyClick(list)" v-if="list.status == 2">
+							</div> -->
+							<div class="btn-blue flex-col" @click="buyClick(list)">
 								购买
 							</div>
 						</div>
@@ -85,10 +85,10 @@
 								<img src="../../static/images/transaction_04.png" alt="" v-show="list.alipay == 1">
 								<img src="../../static/images/transaction_05.png" alt="" v-show="list.wechat == 1">
 							</div>
-							<div class="btn-red flex-col" @click="withdrawal(list)" v-if="list.status == 1">
+							<!-- <div class="btn-red flex-col" @click="withdrawal(list)" v-if="list.status == 1">
 								撤单
-							</div>
-							<div class="btn-blue flex-col" @click="buyClick(list)" v-if="list.status == 2">
+							</div> -->
+							<div class="btn-blue flex-col" @click="buyClick(list)">
 								购买
 							</div>
 						</div>
@@ -141,10 +141,10 @@
 								<img src="../../static/images/transaction_04.png" alt="" v-show="item.alipay == 1">
 								<img src="../../static/images/transaction_05.png" alt="" v-show="item.wechat == 1">
 							</div>
-							<div class="btn-red flex-col" @click="withdrawals(item)" v-if="item.status == 1">
+							<!-- <div class="btn-red flex-col" @click="withdrawals(item)" v-if="item.status == 1">
 								撤单
-							</div>
-							<div class="btn-red flex-col" @click="sellClick(item)" v-if="item.status == 2">
+							</div> -->
+							<div class="btn-red flex-col" @click="sellClick(item)">
 								出售
 							</div>
 						</div>
@@ -174,10 +174,10 @@
 								<img src="../../static/images/transaction_04.png" alt="" v-show="item.alipay == 1">
 								<img src="../../static/images/transaction_05.png" alt="" v-show="item.wechat == 1">
 							</div>
-							<div class="btn-red flex-col" @click="withdrawals(item)" v-if="item.status == 1">
+							<!-- <div class="btn-red flex-col" @click="withdrawals(item)" v-if="item.status == 1">
 								撤单
-							</div>
-							<div class="btn-red flex-col" @click="sellClick(item)" v-if="item.status == 2">
+							</div> -->
+							<div class="btn-red flex-col" @click="sellClick(item)">
 								出售
 							</div>
 						</div>

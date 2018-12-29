@@ -27,9 +27,12 @@
 			<div class="list flex-col" v-for="list in lists">
 				<div class="list-top flex-col">
 					<div class="list-top-top flex-row">
-						<h3>{{list.id}}</h3>
-						<div class="btn-red flex-col" @click="withdrawal(list)">
+						<h3>广告ID {{list.id}}</h3>
+						<div class="btn-red flex-col" @click="withdrawal(list)" v-if="list.status == 1">
 							撤销
+						</div>
+						<div class="btn-grey flex-col" v-if="list.status != 1">
+							已撤销
 						</div>
 					</div>
 					<div class="list-top-bottom flex-row">
@@ -49,7 +52,31 @@
 			<nodata v-if="!lists.length"></nodata>
 		</div>
 		<div class="tab-right flex-col" v-show="showRight">
-			<h2>222</h2>
+			<div class="list flex-col" v-for="item in items">
+				<div class="list-top flex-col">
+					<div class="list-top-top flex-row">
+						<h3>广告ID {{item.id}}</h3>
+						<div class="btn-red flex-col" @click="withdrawals(item)" v-if="item.status == 1">
+							撤销
+						</div>
+						<div class="btn-grey flex-col" v-if="item.status != 1">
+							已撤销
+						</div>
+					</div>
+					<div class="list-top-bottom flex-row">
+						<h4>数量: {{item.num|numFilter}}</h4>
+						<h4>单价: {{item.price|numFilter}}</h4>
+					</div>
+				</div>
+				<div class="list-bottom flex-row">
+					<div class="list-bottom-left flex-row">
+						<img src="../../static/images/transaction_03.png" alt="" v-if="item.bank == 1">
+						<img src="../../static/images/transaction_04.png" alt="" v-if="item.alipay == 1">
+						<img src="../../static/images/transaction_05.png" alt="" v-if="item.wechat == 1">
+					</div>
+					<h4>{{item.created_at}}</h4>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -76,7 +103,8 @@
 						title : "USDT"
 					}
 				],
-				lists : []
+				lists : [],
+				items : []
             }
         },
         // 创建之前
@@ -86,6 +114,7 @@
   		//创建之后
   		created: function (){
   			this.getMsg();
+			this.getMsg2();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -122,6 +151,7 @@
 			selectList (){
 				this.isShowSelect = !this.isShowSelect;
 			},
+			/* 获取默认购买列表 */
 			getMsg (){
 				this.axios.post('/index/suda_order_buy/get_c2c_ad_pc',{
 					page : '1',
@@ -132,6 +162,22 @@
 					if (data.status == 200) {
 						console.log(data);
 						this.lists = data.data;
+					} else{
+						this.layers(data.message);
+					}
+				})
+			},
+			/* 获取默认出售列表 */
+			getMsg2 (){
+				this.axios.post('/index/suda_order_buy/get_c2c_ad_pc',{
+					page : '1',
+					type : "2",
+					coin : "ETH"
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						this.items = data.data;
 					} else{
 						this.layers(data.message);
 					}
@@ -153,6 +199,18 @@
 						this.layers(data.message);
 					}
 				})
+				this.axios.post('/index/suda_order_buy/get_c2c_ad_pc',{
+					page : '1',
+					type : "2",
+					coin : this.chooseTitle
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						this.items = data.data;
+					} else{
+						this.layers(data.message);
+					}
+				})
 			},
 			/* 购买列表撤销订单 */
 			withdrawal (list){
@@ -163,7 +221,46 @@
 				.then(({data}) => {
 					if (data.status == 200) {
 						this.layers(data.message);
-						this.getMsg();
+						this.axios.post('/index/suda_order_buy/get_c2c_ad_pc',{
+							page : '1',
+							type : "1",
+							coin : this.chooseTitle
+						})
+						.then(({data}) => {
+							if (data.status == 200) {
+								console.log(data);
+								this.lists = data.data;
+							} else{
+								this.layers(data.message);
+							}
+						})
+					} else{
+						this.layers(data.message);
+					}
+				})
+			},
+			/* 出售列表撤销订单 */
+			withdrawals (item){
+				console.log(item);
+				this.axios.post('/index/suda_order_buy/revoke',{
+					id : item.id
+				})
+				.then(({data}) => {
+					if (data.status == 200) {
+						this.layers(data.message);
+						this.axios.post('/index/suda_order_buy/get_c2c_ad_pc',{
+							page : '1',
+							type : "2",
+							coin : this.chooseTitle
+						})
+						.then(({data}) => {
+							if (data.status == 200) {
+								console.log(data);
+								this.items = data.data;
+							} else{
+								this.layers(data.message);
+							}
+						})
 					} else{
 						this.layers(data.message);
 					}
@@ -278,6 +375,14 @@
 		width: 1.2rem;
 		height: 0.54rem;
 		background-color: #e66161;
+		font-size: 0.28rem;
+		color: #fceeee;
+		border-radius: 0.1rem;
+	}
+	.btn-grey{
+		width: 1.2rem;
+		height: 0.54rem;
+		background-color: #929292;
 		font-size: 0.28rem;
 		color: #fceeee;
 		border-radius: 0.1rem;
