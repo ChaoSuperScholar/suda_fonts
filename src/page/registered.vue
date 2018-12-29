@@ -18,9 +18,10 @@
 						<h4>验证码：</h4>
 					</div>
 					<input v-model="code" type="text" value="" maxlength="11" placeholder="输入您的验证码"/>
-					<div @click="getCode" class="code-btn flex-col">
+					<div v-if="isCode" @click="getCode" class="flex-col code-btn">
 						获取验证码
 					</div>
+          <div  v-else class="flex-col clickOver">{{time}}</div>
 				</div>
 				<!-- 登录密码 -->
 				<div class="list flex-row">
@@ -66,20 +67,22 @@
 				code : "",
 				loginPassword : "",
 				transactionPassword : "",
-				isShowAgree : true
+				isShowAgree : true,
+              isCode:true,
+              time:60
             }
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
-  			
+
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
@@ -111,6 +114,17 @@
 					console.log(data);
 					if (data.status == 200) {
 						console.log(data);
+						this.isCode=false;
+            let me = this;
+            me.isCode = false;
+            let interval = window.setInterval(function() {
+              --me.time;
+              if(me.time < 0) {
+                me.isCode = true;
+                window.clearInterval(interval);
+                me.time = 60;
+              }
+            }, 1000);
 						this.layers(data.message);
 					} else{
 						this.layers(data.message);
@@ -167,7 +181,8 @@
 			goDownload () {
 				window.location.href = 'http://www.suda66888.com/app/io.dcloud.H5497CB1E.apk';
 			}
-  		}
+  		},
+
     }
 </script>
 
@@ -264,4 +279,12 @@
 		font-size: 0.32rem;
 		color: #FFFFFF;
 	}
+  .clickOver{
+    background: #ddd;
+    width: 1.6rem;
+    height: 0.6rem;
+    font-size: 0.28rem;
+    color: #ffffff;
+    border-radius: 0.1rem;
+  }
 </style>

@@ -26,7 +26,8 @@
 				</div>
 				<div class="list-text bottom flex-row">
 					<h5>≈￥{{list.money}}</h5>
-					<h5>{{list.up_down}}</h5>
+          <h5 v-if="list.up_down >= 0">+{{list.up_down}}</h5>
+					<h5 v-if="list.up_down < 0" class="red">{{list.up_down}}</h5>
 				</div>
 			</div>
 		</div>
@@ -57,7 +58,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -65,12 +66,12 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		//注册组件
@@ -204,8 +205,11 @@
 		color: #767676;
 	}
 	.list-right .bottom h5:last-child{
-		color: #e93e3e;
+		color: #3cc355;
 	}
+  .list-right .bottom .red:last-child{
+    color: #e93e3e;
+  }
 	.no-data {
 		font-size: 0.32rem;
 		color: #585858;
