@@ -4,26 +4,26 @@
 			<div class="bg flex-col">
 				<div class="layer-module flex-col">
             <!--个人资料-->
-          <div class="setUp_box">
+          <!-- <div class="setUp_box">
             <div class="name">
               <img src="../../../static/images/game/header.png" alt="">
-              <p>账号：{{name}}</p>
+              <p>账号：{{list.phone}}</p>
               <h2>默认账号</h2>
             </div>
             <div class="address">
-              <p>钱包地址：{{address}}</p>
+              <p>钱包地址：{{list.address}}</p>
             </div>
-          </div>
+          </div> -->
           <!--按钮开关-->
-          <div class="choose">
+          <!-- <div class="choose">
             <div class="effects">
               <p>游戏音效</p>
-              <div class="true_li" v-if="effects">
+              <div class="true_li" v-if="list.game_sound == 2" @click="closeSound()">
                 <div class="big_box">
                   <span @click="effects=!effects">on</span>
                 </div>
               </div>
-              <div class="false_li" v-else>
+              <div class="false_li" v-else @click="openSound()">
                 <div class="big_box">
                   <span @click="effects=!effects">off</span>
                 </div>
@@ -31,23 +31,53 @@
             </div>
             <div class="music">
                 <p>游戏音乐</p>
-                <div class="true_li" v-if="music">
+                <div class="true_li" v-if="list.game_music == 2" @click="closeMusic()()">
                   <div class="big_box">
                     <span @click="music=!music">on</span>
                   </div>
                 </div>
-                <div class="false_li" v-else>
+                <div class="false_li" v-else @click="openMusic()">
                   <div class="big_box">
                     <span @click="music=!music">off</span>
                   </div>
                 </div>
               </div>
-          </div>
-          <div class="btns">
-            <p>确认</p>
-          </div>
-          <div class="shadown">
-            <img @click="goIndex()" src="../../../static/images/game/game_play_02.png" alt="">
+          </div> -->
+					<div class="layer-child flex-col">
+						<div class="list-father flex-col">
+							<div class="list flex-row">
+								<div class="head-img-father flex-col">
+									<div class="head-img">
+										<div>
+											<div>
+												<img :src="msg.avatar" />
+											</div>
+										</div>
+									</div>
+								</div>
+								<h5>账号:{{list.phone}}</h5>
+								<h2>默认账号</h2>
+							</div>
+							<div class="list flex-row">
+								<h5>钱包地址:{{list.address}}</h5>
+							</div>
+						</div>
+						<div class="choose flex-row">
+							<div class="choose-left flex-row">
+								<h4>游戏音效</h4>
+								<img src="../../../static/images/game/game_setup_01.png" alt="" v-if="list.game_sound == 2" @click="closeSound()">
+								<img src="../../../static/images/game/game_setup_02.png" alt="" v-else @click="openSound()">
+							</div>
+							<div class="choose-right flex-row">
+								<h4>游戏音乐</h4>
+								<img src="../../../static/images/game/game_setup_01.png" alt="" v-if="list.game_music == 2" @click="closeMusic()">
+								<img src="../../../static/images/game/game_setup_02.png" alt="" v-else @click="openMusic()">
+							</div>
+						</div>
+					</div>
+					<div class="sure" @click="goIndex()"></div>
+          <div class="close-btn" @click="goIndex()">
+          	<img src="../../../static/images/game/game_play_02.png" alt="">
           </div>
 				</div>
 			</div>
@@ -60,10 +90,10 @@
         name: 'game_setUp',
         data(){
             return {
-              name:'454564564564',
-              address:'15135%5313513%%123%123 %123%123%123%123%123%123%123% %123%',
-              effects:true,//音效
-              music:true
+							list : [],
+							msg : "",
+							effects : true,
+							music : true
             }
         },
         // 创建之前
@@ -72,7 +102,8 @@
   		},
   		//创建之后
   		created: function (){
-
+				this.getMsg();
+				this.getUserInfo();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -89,6 +120,88 @@
         goIndex (){
           this.$router.replace('game_index');
         },
+				getMsg (){
+					this.axios.get('/index/suda_game/myAccount')
+					.then(({data}) => {
+						if (data.status == 200) {
+							console.log(data);
+							this.list = data.data;
+						} else{
+							this.layers(data.message);
+						}
+					})
+				},
+				closeMusic (){
+					this.axios.post('/index/suda_game/editSet',{
+						keys : "game_music",
+						status : 1
+					})
+					.then(({data}) => {
+						if (data.status == 200) {
+							console.log(data);
+							this.layers(data.message);
+							this.getMsg();
+						} else{
+							this.layers(data.message);
+						}
+					})
+				},
+				openMusic (){
+					this.axios.post('/index/suda_game/editSet',{
+						keys : "game_music",
+						status : 2
+					})
+					.then(({data}) => {
+						if (data.status == 200) {
+							console.log(data);
+							this.layers(data.message);
+							this.getMsg();
+						} else{
+							this.layers(data.message);
+						}
+					})
+				},
+				closeSound (){
+					this.axios.post('/index/suda_game/editSet',{
+						keys : "game_sound",
+						status : 1
+					})
+					.then(({data}) => {
+						if (data.status == 200) {
+							console.log(data);
+							this.layers(data.message);
+							this.getMsg();
+						} else{
+							this.layers(data.message);
+						}
+					})
+				},
+				openSound (){
+					this.axios.post('/index/suda_game/editSet',{
+						keys : "game_sound",
+						status : 2
+					})
+					.then(({data}) => {
+						if (data.status == 200) {
+							console.log(data);
+							this.layers(data.message);
+							this.getMsg();
+						} else{
+							this.layers(data.message);
+						}
+					})
+				},
+				getUserInfo (){
+					this.axios.get('/index/suda_user/user_info')
+					.then(({data}) => {
+						if (data.status == 200) {
+							console.log(data.message);
+							this.msg = data.data;
+						} else{
+							this.layers(data.message);
+						}
+					})
+				}
   		}
     }
 </script>
@@ -111,15 +224,118 @@
 		background-image: url(../../../static/images/game/setUp.png);
 		background-size: 100% 100%;
 		position: relative;
+		justify-content: flex-start;
 	}
+	.choose{
+		width: 4.9rem;
+		height: auto;
+		justify-content: space-between;
+		margin: 0.5rem 0;
+	}
+	.choose h4{
+		font-size: 0.26rem;
+		font-weight: bolder;
+		color: #f2dfac;
+		text-shadow: 0 0 0.06rem ##463317;
+		width: 0.6rem;
+		line-height: 1.4;
+		word-break: break-all;
+	}
+	.choose img{
+		width: 1.4rem;
+		height: 0.6rem;
+		margin-left: 0.2rem;
+	}
+	.sure{
+		width: 2.34rem;
+		height: 0.87rem;
+		background-image: url(../../../static/images/game/game_setup_03.png);
+		background-size: 100% 100%;
+		margin-top: 0.2rem;
+	}
+	.close-btn{
+		width: 0.84rem;
+		height: 0.84rem;
+		position: absolute;
+		left: 0.1rem;
+		bottom: 0.7rem;
+	}
+	.layer-child{
+		width: 5.5rem;
+		height: auto;
+		background-color: #c78c20;
+		border-radius: 0.1rem;
+		border: 0.02rem solid #463317;
+		margin-top: 3.2rem;
+	}
+	.list-father{
+		width: 5.2rem;
+		height: auto;
+		border-radius: 0.1rem;
+		border: 0.02rem solid #463317;
+		background-color: #f9cd76;
+		margin-top: 0.1rem;
+		padding-top: 0.04rem;
+	}
+	.list{
+		width: 100%;
+		height: auto;
+		background-color: #98b74e;
+		margin-bottom: 0.04rem;
+		justify-content: space-between;
+		padding: 0.1rem 0;
+	}
+	.list h5{
+		font-size: 0.24rem;
+		color: #4f4a44;
+		word-break: break-all;
+		line-height: 1.4;
+		margin: 0 0.2rem;
+	}
+	.list h2{
+		font-size: 0.32rem;
+		font-weight: bolder;
+		color: #fdb52d;
+		text-shadow: 0 0 0.06rem #463317;
+		margin-right: 0.2rem;
+	}
+	.head-img-father{
+		width: 0.9rem;
+		height: 1.04rem;
+		background-image: url(../../../static/images/game/game_index_01.png);
+		background-size: 100% 100%;
+		margin-left: 0.2rem;
+	}
+	.head-img {
+		width: 0.7rem;
+		height: 0.6rem;
+		transform: rotate(30deg);
+		overflow: hidden;
+		margin-bottom: 0.1rem;
+	}
+	.head-img div,.head-img img {
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+	.head-img> div {
+		transform: rotate(60deg);
+	}
+	.head-img> div> div {
+		transform: rotate(-120deg);
+	}
+	
+	
+	
   .setUp_box{
     width: 5.2rem;
     height: 2.45rem;
     background: #f9cd76;
     border: .02rem solid #000000;
     border-radius: .1rem;
-    position: absolute;
-    top: 3.3rem;;
+    /* position: absolute; */
+    /* top: 3.3rem;; */
+		margin-top: 3.3rem;
   }
   .setUp_box .name{
     width: 100%;
@@ -156,7 +372,7 @@
     line-height: .35rem;
     background: #98b74e;
   }
-  .choose{
+  /* .choose{
     display: flex;
     flex-flow: row;
     justify-content: space-between;
@@ -282,5 +498,5 @@
     font-weight: 900;
     color: #fef3cd;
     line-height: .5rem;
-  }
+  } */
 </style>

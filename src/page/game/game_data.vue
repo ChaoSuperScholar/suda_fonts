@@ -13,18 +13,18 @@
               <div class="num_list">
                 <ul>
                   <li v-for="item in num_data">
-                    <p>{{item.time}}</p>
-                    <p>{{item.vehicle_Profit}}</p>
-                    <p>{{item.Invited_earnings}}</p>
+                    <p>{{item[0]}}</p>
+                    <p>{{item[1]}}</p>
+                    <p>{{item[2]}}</p>
                   </li>
                 </ul>
               </div>
             </div>
           <!--总收益-->
             <div class="summary">
-              <p>累计车厂收益：0.55</p>
-              <p>累计邀请收益：0.545</p>
-              <p>今日收益：0.15553</p>
+              <p>累计车厂收益：{{list[0]}}</p>
+              <p>累计邀请收益：{{list[1]}}</p>
+              <p>今日收益：{{list[2]}}</p>
             </div>
           <div class="shadown">
             <img @click="goIndex()" src="../../../static/images/game/game_play_02.png" alt="">
@@ -44,23 +44,8 @@
         name: 'game_data',
         data(){
             return {
-                num_data:[
-                  {time:'2018.10.27',vehicle_Profit:'48.3582',Invited_earnings:'564654'},
-                  {time:'2018.10.27',vehicle_Profit:'48.3582',Invited_earnings:'564654'},
-                  {time:'2018.10.27',vehicle_Profit:'48.3582',Invited_earnings:'564654'},
-                  {time:'2018.10.27',vehicle_Profit:'48.3582',Invited_earnings:'564654'},
-                  {time:'2018.10.27',vehicle_Profit:'48.3582',Invited_earnings:'564654'},
-                  {time:'2018.10.27',vehicle_Profit:'48.3582',Invited_earnings:'564654'},
-                  {time:'2018.10.27',vehicle_Profit:'48.3582',Invited_earnings:'564654'},
-                  {time:'2018.10.27',vehicle_Profit:'48.3582',Invited_earnings:'564654'},
-                  {time:'2018.10.27',vehicle_Profit:'48.3582',Invited_earnings:'564654'},
-                  {time:'2018.10.27',vehicle_Profit:'48.3582',Invited_earnings:'564654'},
-                  {time:'2018.10.27',vehicle_Profit:'48.3582',Invited_earnings:'564654'},
-                  {time:'2018.10.27',vehicle_Profit:'48.3582',Invited_earnings:'564654'},
-                  {time:'2018.10.27',vehicle_Profit:'48.3582',Invited_earnings:'564654'},
-                  {time:'2018.10.27',vehicle_Profit:'48.3582',Invited_earnings:'564654'},
-                  {time:'2018.10.27',vehicle_Profit:'48.3582',Invited_earnings:'564654'},
-                    ]
+                num_data : [],
+								list : []
             }
         },
         // 创建之前
@@ -69,7 +54,8 @@
   		},
   		//创建之后
   		created: function (){
-
+				this.getMsg();
+				this.getData();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -86,6 +72,30 @@
         goIndex (){
           this.$router.replace('game_index');
         },
+				getMsg (){
+					this.axios.post('/index/suda_game/profitList',{
+						page : '1'
+					})
+					.then(({data}) => {
+						if (data.status == 200) {
+							console.log(data);
+							this.num_data = data.data;
+						} else{
+							this.layers(data.message);
+						}
+					})
+				},
+				getData (){
+					this.axios.post('/index/suda_game/getProfit')
+					.then(({data}) => {
+						if (data.status == 200) {
+							console.log(data);
+							this.list = data.data;
+						} else{
+							this.layers(data.message);
+						}
+					})
+				}
   		}
     }
 </script>

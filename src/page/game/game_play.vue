@@ -193,7 +193,7 @@
 		font-size: 0.22rem;
 		color: #4e4944;
 		line-height: 1.3;
-		margin: 0.1rem 0;
+		margin: 0.1rem 0.06rem;
 	}
 	.close-btn{
 		width: 0.84rem;

@@ -56,10 +56,10 @@
 			</div>
 			<div class="bottom-module flex-row">
 				<img src="../../../static/images/game/game_index_12.png" alt="" v-if="statusList.battery_time == 0" @click="goPower()">
-				<img src="../../../static/images/game/game_index_12_01.png" alt="" v-if="statusList.battery_time > 0&&statusList.battery_time < 6" @click="goPower()">
-				<img src="../../../static/images/game/game_index_12_02.png" alt="" v-if="statusList.battery_time > 6&&statusList.battery_time < 12" @click="goPower()">
-				<img src="../../../static/images/game/game_index_12_03.png" alt="" v-if="statusList.battery_time > 12&&statusList.battery_time < 18" @click="goPower()">
-				<img src="../../../static/images/game/game_index_12_04.png" alt="" v-if="statusList.battery_time > 18&&statusList.battery_time < 24" @click="goPower()">
+				<img src="../../../static/images/game/game_index_12_01.png" alt="" v-if="statusList.battery_time > 0&&statusList.battery_time < 7" @click="goPower()">
+				<img src="../../../static/images/game/game_index_12_02.png" alt="" v-if="statusList.battery_time > 6&&statusList.battery_time < 13" @click="goPower()">
+				<img src="../../../static/images/game/game_index_12_03.png" alt="" v-if="statusList.battery_time > 12&&statusList.battery_time < 19" @click="goPower()">
+				<img src="../../../static/images/game/game_index_12_04.png" alt="" v-if="statusList.battery_time > 18&&statusList.battery_time < 25" @click="goPower()">
 				<div class="btn flex-row" @click="getGoldAll()">
 					<h4>领取 {{sum|numFilter}}</h4>
 					<img src="../../../static/images/game/game_index_14.png" alt="">
@@ -141,6 +141,14 @@
 			<img class="collect collect-6" src="../../../static/images/game/game_index_21.png" alt="" @click.stop="collectCoin(show)" v-for="show in showCoin[6]">
 			<img class="collect collect-7" src="../../../static/images/game/game_index_21.png" alt="" @click.stop="collectCoin(show)" v-for="show in showCoin[7]">
 		</div>
+		<!-- 背景音乐 -->
+		<div class="music" v-if="music.game_music == 1">
+			<audio src="http://www.suda66888.com/app/BGM.mp3" autoplay="autoplay" loop="loop"></audio>
+		</div>
+		<!-- 收取金币 -->
+		<div class="music" v-if="music.game_sound == 1">
+			<audio src="http://www.suda66888.com/app/gold.mp3" autoplay="autoplay"></audio>
+		</div>
 	</div>
 </template>
 
@@ -153,7 +161,11 @@
 				msg : "",
 				statusList : [],
 				sum : "",
-				showCoin : []
+				showCoin : [],
+				music : {
+					game_music: 2,
+					game_sound: 2
+				}
             }
         },
         // 创建之前
@@ -164,7 +176,8 @@
   		created: function (){
 			this.getMsg();
 			this.getUserInfo();
-			this.getGoldList()
+			this.getGoldList();
+			this.getStatus();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -321,10 +334,38 @@
 					if (data.status == 200) {
 						console.log(data.message);
 						this.layers(data.message);
+						this.getGoldList();
 					} else{
 						this.layers(data.message);
 					}
-				})
+				}),
+// 				this.axios.post('/index/suda_game/editSet',{
+// 					keys : "game_sound",
+// 					status : "1"
+// 				})
+// 				.then(({data}) => {
+// 					if (data.status == 200) {
+						// console.log(data);
+						this.getStatus1();
+						setTimeout(() => {
+							this.music.game_sound = 2;
+// // 							this.axios.post('/index/suda_game/editSet',{
+// // 								keys : "game_sound",
+// // 								status : "2"
+// // 							})
+// // 							.then(({data}) => {
+// // 								if (data.status == 200) {
+// // 									console.log(data);
+// // 								} else{
+// // 									this.layers(data.message);
+// // 								}
+// // 							})
+						},2000)
+						
+// 					} else{
+// 						this.layers(data.message);
+// 					}
+				// })
 			},
 			getGoldList (){
 				this.axios.post('/index/suda_game/getGoldList')
@@ -365,6 +406,32 @@
 						this.layers(data.message);
 						this.getMsg();
 						this.getGoldList();
+					} else{
+						this.layers(data.message);
+					}
+				})
+			},
+			/* 获取背景音乐播放状态 */
+			getStatus (){
+				this.axios.post('/index/suda_game/myAccount')
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data.data.game_music);
+						this.music.game_music = data.data.game_music;
+						this.music.game_sound = 2;
+
+					} else{
+						this.layers(data.message);
+					}
+				})
+			},
+			getStatus1 (){
+				console.log(1)
+				this.axios.post('/index/suda_game/myAccount')
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						this.music.game_sound = data.data.game_sound;
 					} else{
 						this.layers(data.message);
 					}
@@ -412,7 +479,7 @@
 		font-size: 0.24rem;
 		color: #f8f5e8;
 		margin-bottom: 0.14rem;
-		max-width: 0.8rem;
+		max-width: 1.2rem;
 	}
 	.suda-gold h5{
 		max-width: 1.2rem;
@@ -469,7 +536,7 @@
 		position: fixed;
 		top: 1.4rem;
 		right: 0;
-		z-index: 999;
+		z-index: 1000;
 	}
 	.right-module-top img{
 		width: 1.08rem;

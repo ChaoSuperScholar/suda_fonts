@@ -5,23 +5,17 @@
 				<div class="layer-module flex-col">
 					<div class="content flex-col">
 						<div class="content-top flex-row">
-							<h2>头衔</h2>
-							<h2>人数</h2>
+							<h2>排名</h2>
+							<h2>头像</h2>
 							<h2>昵称</h2>
-							<h2>邀请充值</h2>
+							<h2>本周收益</h2>
 						</div>
 						<div class="content-center flex-col">
-							<div class="list flex-row">
-								<h3>理事长</h3>
-								<h4>128563</h4>
-								<h4 class="text-line-1">一个幸运的村落</h4>
-								<h4 class="text-line-1">54513.85787 ETH</h4>
-							</div>
-							<div class="list flex-row">
-								<h3>会长</h3>
-								<h4>128563</h4>
-								<h4 class="text-line-1">一个幸运的村落</h4>
-								<h4 class="text-line-1">54513.85787 ETH</h4>
+							<div class="list flex-row" v-for="(list,index) in lists">
+								<h3>{{index+1}}</h3>
+								<h4 class="flex-col"><img :src="list.avatar" alt=""></h4>
+								<h4 class="text-line-1">{{list.nickname}}</h4>
+								<h4 class="text-line-1">{{list.profit|numFilter}}</h4>
 							</div>
 						</div>
 					</div>
@@ -39,7 +33,7 @@
         name: 'game_ranking',
         data(){
             return {
-            	
+            	lists : []
             }
         },
         // 创建之前
@@ -48,7 +42,7 @@
   		},
   		//创建之后
   		created: function (){
-  			
+  			this.getMsg();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -60,11 +54,30 @@
   				
   			})
   		},
+		filters: {
+		/*小数点后面保留2位*/
+		  	numFilter(num, len){
+				var len = len || 4;
+				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
+				return Number.isInteger(result) ? result.toFixed(len) : result;
+			}
+		},
   		//实例方法
   		methods: {
   			goIndex (){
   				this.$router.replace('game_index');
-  			}
+  			},
+			getMsg (){
+				this.axios.get('/index/suda_game/weekRank')
+				.then(({data}) => {
+					if (data.status == 200) {
+						console.log(data);
+						this.lists = data.data;
+					} else{
+						this.layers(data.message);
+					}
+				})
+			}
   		}
     }
 </script>
@@ -159,5 +172,10 @@
 	}
 	.list h4:last-child{
 		flex: 2;
+	}
+	.list img{
+		width: 0.5rem;
+		height: 0.5rem;
+		border-radius: 50%;
 	}
 </style>

@@ -3,34 +3,53 @@
 		<div class="bg-father">
 			<div class="bg flex-col">
 				<div class="layer-module flex-col">
-          <div class="pay_top">
+          <div class="pay_top flex-col">
             <h2>充值</h2>
             <img @click="goIndex" src="../../../static/images/game/shadown.png" alt="">
           </div>
+					<div class="tab flex-row">
+						<div class="tba-left flex-row" @click="clickLeft()">
+							<h4>选择:</h4>
+							<div class="choose flex-col">
+								<img src="../../../static/images/game/game_pay_03.png" alt="" v-if="activeLeft">
+							</div>
+							<h4>SDT充值</h4>
+						</div>
+						<div class="tab-right flex-row" @click="clickRight()">
+							<div class="choose flex-col">
+								<img src="../../../static/images/game/game_pay_03.png" alt="" v-if="activeRight">
+							</div>
+							<h4>ETH充值</h4>
+						</div>
+					</div>
           <!--input box    充值转换-->
           <div class="Transformation">
-            <div class="input_box">
-              <span>充值&nbsp;</span>
-              <input type="number" v-model="SDT" >
-              <span>&nbsp;SDT &nbsp;=&nbsp;</span>
-              <input type="number" v-model="sdts" >
-              <span>&nbsp;金币</span>
-            </div>
-            <div class="input_box">
-              <span>充值&nbsp;</span>
-              <input type="number" v-model="ETH">
-              <span>&nbsp;ETH &nbsp;=&nbsp;</span>
-              <input type="number" v-model="eths">
-              <span>&nbsp;金币</span>
-            </div>
-          </div>
-          <!--按钮-->
-          <div class="btns">
-            <button>确认充值</button>
+						<div class="flex-col" v-show="showLeft">
+							<div class="input_box flex-row">
+								<span>充值&nbsp;</span>
+								<input type="number" v-model="ETH">
+								<span>&nbsp;ETH &nbsp;=&nbsp;</span>
+								<input type="number" v-model="eths">
+								<span>&nbsp;金币</span>
+							</div>
+							<!--按钮-->
+							<div class="btns flex-col" @click="btnLeft()"></div>
+						</div>
+						<div class="flex-col" v-show="showRight">
+							<div class="input_box flex-row" >
+								<span>充值&nbsp;</span>
+								<input type="number" v-model="SDT" >
+								<span>&nbsp;SDT &nbsp;=&nbsp;</span>
+								<input type="number" v-model="sdts" >
+								<span>&nbsp;金币</span>
+							</div>
+							<!--按钮-->
+							<div class="btns flex-col" @click="btnRight()"></div>
+						</div>
           </div>
           <!--说明-->
-          <div class="Explain">
-            <p>说明：1ETH=1000金币，可充值0.01-119个ETH</p>
+          <div class="Explain flex-col">
+            <p class="text-line-1">说明：1ETH=1000金币</p>
           </div>
 				</div>
 			</div>
@@ -46,8 +65,11 @@
               SDT:'',
               sdts:'',
               ETH:'',
-              eths:''
-
+              eths:'',
+							activeLeft : true,
+							activeRight : false,
+							showLeft : true,
+							showRight : false
             }
         },
         // 创建之前
@@ -73,6 +95,46 @@
         goIndex (){
           this.$router.replace('game_index');
         },
+				clickLeft (){
+					this.activeLeft = true;
+					this.activeRight = false;
+					this.showLeft = true;
+					this.showRight = false;
+				},
+				clickRight (){
+					this.activeLeft = false;
+					this.activeRight = true;
+					this.showLeft = false;
+					this.showRight = true;
+				},
+				btnLeft (){
+					this.axios.post('/index/suda_game/rechangeGold',{
+						num : this.ETH,
+						type : "ETH"
+					})
+					.then(({data}) => {
+						if (data.status == 200) {
+							this.layers(data.message);
+							this.ETH = ""
+						} else{
+							this.layers(data.message);
+						}
+					})
+				},
+				btnRight (){
+					this.axios.post('/index/suda_game/rechangeGold',{
+						num : this.SDT,
+						type : "SDT"
+					})
+					.then(({data}) => {
+						if (data.status == 200) {
+							this.layers(data.message);
+							this.SDT = ""
+						} else{
+							this.layers(data.message);
+						}
+					})
+				}
   		},
       watch:{
         SDT:function () {
@@ -105,18 +167,19 @@
 	}
 	.layer-module{
 		width: 5.8rem;
-		height: 3.95rem;
+		height: auto;
+		padding-bottom: 0.2rem;
     background: #f9cc73;
     border-radius: .1rem;
+		position: relative;
 		background-size: 100% 100%;
-    position: relative;
+		justify-content: flex-start;
 	}
   .pay_top{
     width: 5.8rem;
     height: .6rem;
     background: #98b74e;
-    position: absolute;
-    top: .1rem;
+    margin-top: 0.1rem;
   }
   .pay_top h2{
     text-align: center;
@@ -129,12 +192,12 @@
     width: .44rem;
     height: .44rem;
     right: .2rem;
-    top: .1rem;
+    top: .2rem;
   }
   .Transformation{
-    width: 4.8rem;
-    position: absolute;
-    top: .9rem;
+    width: 5.2rem;
+    height: auto;
+		margin-top: 0.2rem;
   }
   .Transformation .input_box{
     display: flex;
@@ -148,7 +211,7 @@
     font-weight: 900;
   }
   .Transformation .input_box input{
-    width: 1.25rem;
+    width: 1rem;
     padding-left: .08rem;
     height: .45rem;
     border-radius: .1rem;
@@ -160,28 +223,39 @@
   }
   .btns{
     width: 2.88rem;
-    height: .6rem;
-    background: #d28326;
-    border-radius: .1rem;
-    border: 0.02rem solid #463317;
-    position: absolute;
-    top: 2.6rem;
-  }
-  .btns button{
-    width: 2.78rem;
-    height: .5rem;
-    background: #f9cc73;
-    border-radius: .1rem;
-    border: 0.01rem solid #ffffff;
-    color: #ffffff;
-    font-size: .24rem;
-    font-weight: 900;
+    height: .64rem;
+		background-image: url(../../../static/images/game/game_pay_01.png);
+		background-size: 100% 100%;
+		margin-top: 0.2rem;
   }
   .Explain{
-    position: absolute;
-    top: 3.38rem;
+		width: 5.2rem;
+		height: auto;
     font-size: .16rem;
     color: #d28326;
-    font-weight: 800;
+    font-weight: bolder;
+		line-height: 1.2;
+		margin-top: 0.2rem;
   }
+	.tab{
+		width: 4.8rem;
+		height: auto;
+		justify-content: space-between;
+	}
+	.tab h4{
+		font-size: .18rem;
+		color: #463317;
+		font-weight: bolder;
+	}
+	.choose{
+		width: 0.32rem;
+		height: 0.32rem;
+		background-image: url(../../../static/images/game/game_pay_02.png);
+		background-size: 100% 100%;
+		margin: 0 0.1rem;
+	}
+	.choose img{
+		width: 0.25rem;
+		height: 0.25rem;
+	}
 </style>
