@@ -1,6 +1,6 @@
 <template>
 	<div class="userCenter">
-		<pageHead>我的</pageHead>
+		<pageHead>社区</pageHead>
 		<div class="top-module flex-col">
 			<div class="top flex-row">
 				<img :src="avatar" alt="">
@@ -22,7 +22,7 @@
 				<router-link to="myTeam">
 					<div class="bottom-list flex-col">
 						<img src="../../static/images/userCenter_03.png" alt="">
-						<h4>社区</h4>
+						<h4>我的社区</h4>
 					</div>
 				</router-link>
 				<router-link to="transferRecord">
@@ -106,7 +106,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -114,12 +114,12 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		//注册组件

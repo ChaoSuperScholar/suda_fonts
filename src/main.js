@@ -12,7 +12,7 @@ import './assets/js/flexible.js' /*引入公共js文件*/
 import noData from './components/noData.vue'
 Vue.component('nodata',noData);
 /*引入组件*/
-
+require('animate.css');
 
 Vue.config.productionTip = false
 

@@ -39,6 +39,8 @@
 					</div>
 					<input v-model="transactionPassword" type="password" value="" placeholder="用于交易与转账"/>
 				</div>
+        <!--输入邀请码-->
+
 				<div class="agree-clause flex-row">
 					<div class="agree-check flex-col" @click="agreeBtn">
 						<img src="../../static/images/registered_04.png" alt="" v-show="isShowAgree">

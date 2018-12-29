@@ -20,17 +20,17 @@
 				暂无数据
 			</div>
 		</div>
-		<div class="tab-card">
+	<!--	<div class="tab-card">
 			<div class="list-left flex-col" v-for="item in items">
 				<h4>{{item.title}}</h4>
 				<p>{{item.desc}}</p>
 				<p>{{item.publisher}} · {{item.created_at}}</p>
 			</div>
-			<!--没有数据-->
+			&lt;!&ndash;没有数据&ndash;&gt;
 			<div class="no-data flex-row" v-if="!items.length">
 				暂无数据
 			</div>
-		</div>
+		</div>-->
 		<div class="tab-card">
 			<div class="list-left flex-col" v-for="cycle in cycles">
 				<h4>{{cycle.title}}</h4>
@@ -58,19 +58,14 @@
             	img3 : require('../../static/images/indexNew_03.png'),
             	img4 : require('../../static/images/indexNew_04_de.png'),
             	img5 : require('../../static/images/indexNew_05.png'),
-				tabsName: [{  
-						name: "速达信息",  
-						isActive: true  
+				tabsName: [{
+						name: "快讯",
+						isActive: true
 					},
-					{  
-						name: "行业动态",  
+					{
+						name: "攻略",
 						isActive: false
-					},
-					{  
-						name: "活动公告",  
-						isActive: false
-					}
-				],  
+					}],
 				active: false,
 				lists : [],
 				items : [],
@@ -79,7 +74,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -87,12 +82,12 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		//注册组件
@@ -102,15 +97,15 @@
 		},
   		//实例方法
   		methods: {
-  			tabsSwitch: function(tabIndex) {  
-  					var tabCardCollection = document.querySelectorAll(".tab-card"),  
-						len = tabCardCollection.length;  
-								for(var i = 0; i < len; i++) {  
-									tabCardCollection[i].style.display = "none";  
+  			tabsSwitch: function(tabIndex) {
+  					var tabCardCollection = document.querySelectorAll(".tab-card"),
+						len = tabCardCollection.length;
+								for(var i = 0; i < len; i++) {
+									tabCardCollection[i].style.display = "none";
 								this.tabsName[i].isActive = false;
 						}
-  					this.tabsName[tabIndex].isActive = true;  
-  					tabCardCollection[tabIndex].style.display = "block";  
+  					this.tabsName[tabIndex].isActive = true;
+  					tabCardCollection[tabIndex].style.display = "block";
   			},
 			getMsg (){
 				let that = this;
