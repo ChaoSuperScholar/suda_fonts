@@ -19,7 +19,7 @@
 						<h4>推广</h4>
 					</div>
 				</router-link>
-				<router-link to="myTeam">
+				<router-link to="myCommunity">
 					<div class="bottom-list flex-col">
 						<img src="../../static/images/userCenter_03.png" alt="">
 						<h4>我的社区</h4>
@@ -270,6 +270,6 @@
 		margin-right: 0.2rem;
 	}
 	.list-last{
-		margin-bottom: 1rem;
+		margin-bottom: 1.4rem;
 	}
 </style>

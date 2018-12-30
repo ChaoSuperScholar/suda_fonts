@@ -26,8 +26,8 @@
 				</div>
 				<div class="list-text bottom flex-row">
 					<h5>≈￥{{list.money}}</h5>
-          <h5>+{{list.up_down}}</h5>
-
+					<h5 class="h5-green" v-if="list.up_down > 0">+{{list.up_down}}</h5>
+					<h5 class="h5-red" v-if="list.up_down < 0">{{list.up_down}}</h5>
 				</div>
 			</div>
 		</div>
@@ -204,12 +204,18 @@
 	.list-right .bottom h5:first-child{
 		color: #767676;
 	}
-	.list-right .bottom h5:last-child{
+	.list-right .h5-red{
+		color: #ea4242;
+	}
+	.list-right .h5-green{
+		color: #21bb4c;
+	}
+	/* .list-right .bottom h5:last-child{
 		color: #3cc355;
 	}
   .list-right .bottom .red:last-child{
     color: #e93e3e;
-  }
+  } */
 	.no-data {
 		font-size: 0.32rem;
 		color: #585858;

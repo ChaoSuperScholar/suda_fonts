@@ -100,7 +100,7 @@
 	.bg-father{
 		width: 100vw;
 		height: 100vh;
-		background-image: url(../../../static/images/game/bg.png);
+		background-image: url(http://www.suda66888.com/game/bg.png);
 		background-size: 100% 100%;
 	}
 	.bg{
@@ -111,7 +111,7 @@
 	.layer-module{
 		width: 7.2rem;
 		height: 11.7rem;
-		background-image: url(../../../static/images/game/game_ranking_01.png);
+		background-image: url(http://www.suda66888.com/game/game_ranking_01.png);
 		background-size: 100% 100%;
 		position: relative;
 	}

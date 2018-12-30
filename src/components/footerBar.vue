@@ -68,8 +68,8 @@
 <style scoped>
 	.footerBar{
 		width: 100%;
-		height: 1rem;
-		/* border-top: 0.01rem solid #c3c9d5; */
+		height: 1.4rem;
+		border-top: 0.01rem solid #c3c9d5;
 		position: fixed;
 		left: 0;
 		bottom: 0;
@@ -79,6 +79,7 @@
 	.footerBar div{
 		width: 0.48rem;
 		height: 0.74rem;
+		margin-bottom: 0.1rem;
 	}
 	.img-1{
 		margin-left: 0.8rem;

@@ -157,7 +157,7 @@
 	.bg-father{
 		width: 100vw;
 		height: 100vh;
-		background-image: url(../../../static/images/game/bg.png);
+		background-image: url(http://www.suda66888.com/game/bg.png);
 		background-size: 100% 100%;
 	}
 	.bg{
@@ -224,7 +224,7 @@
   .btns{
     width: 2.88rem;
     height: .64rem;
-		background-image: url(../../../static/images/game/game_pay_01.png);
+		background-image: url(http://www.suda66888.com/game/game_pay_01.png);
 		background-size: 100% 100%;
 		margin-top: 0.2rem;
   }
@@ -250,7 +250,7 @@
 	.choose{
 		width: 0.32rem;
 		height: 0.32rem;
-		background-image: url(../../../static/images/game/game_pay_02.png);
+		background-image: url(http://www.suda66888.com/game/game_pay_02.png);
 		background-size: 100% 100%;
 		margin: 0 0.1rem;
 	}

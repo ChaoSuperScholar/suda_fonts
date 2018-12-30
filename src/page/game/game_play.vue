@@ -129,7 +129,7 @@
 	.bg-father{
 		width: 100vw;
 		height: 100vh;
-		background-image: url(../../../static/images/game/bg.png);
+		background-image: url(http://www.suda66888.com/game/bg.png);
 		background-size: 100% 100%;
 	}
 	.bg{
@@ -140,7 +140,7 @@
 	.layer-module{
 		width: 7.2rem;
 		height: 9.5rem;
-		background-image: url(../../../static/images/game/game_play_01.png);
+		background-image: url(http://www.suda66888.com/game/game_play_01.png);
 		background-size: 100% 100%;
 		position: relative;
 	}
@@ -173,7 +173,7 @@
 	.tab .tab-btn{
 		width: 1.22rem;
 		height: 0.66rem;
-		background-image: url(../../../static/images/game/game_play_03.png);
+		background-image: url(http://www.suda66888.com/game/game_play_03.png);
 		background-size: 100% 100%;
 	}
 	.tab-btn h4{
@@ -183,7 +183,7 @@
 		margin: 0 0.1rem 0.1rem 0;
 	}
 	.tab .active{
-		background-image: url(../../../static/images/game/game_play_04.png);
+		background-image: url(http://www.suda66888.com/game/game_play_04.png);
 		background-size: 100% 100%;
 	}
 	.tab .active h4{

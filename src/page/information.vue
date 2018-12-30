@@ -142,7 +142,7 @@
 <style scoped>
 	.tab-card{
 		display: none;
-		margin-bottom: 1rem;
+		margin-bottom: 1.4rem;
 		margin-top: 1.8rem;
 	}
 	.tab-father{

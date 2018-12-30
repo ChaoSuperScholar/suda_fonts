@@ -734,6 +734,7 @@
 		width: 100%;
 		height: auto;
 		display: none;
+		margin-bottom: 1.4rem;
 	}
 	.tab-left,.tab-right{
 		width: 100%;

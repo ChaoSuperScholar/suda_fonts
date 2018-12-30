@@ -3,13 +3,13 @@
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="background-color"></div>
 		<div class="bg-color flex-col">
-			<img src="../../static/images/popularize_01.png" alt="">
+			<img class="bg-img" src="../../static/images/popularize_01.png" alt="">
 			<div class="center-list flex-col">
-				<img src="../../static/images/popularize_02.png" alt="">
+				<img class="img-title" src="../../static/images/popularize_02.png" alt="">
 				<div class="link-father flex-row">
 					<h5>邀请链接: {{link}}</h5>
 					<div class="btn-red flex-col" id="copy-btn" @click="linkCopyBtn()">
-						复制
+						<img src="../../static/images/popularize_03.png" alt="">
 					</div>
 				</div>
 				<div class="qr-code" id="qrcode" ref="qrcode">
@@ -17,7 +17,7 @@
 				</div>
 				<h4>邀请码 {{code}}</h4>
 				<div class="btn-red btn-de flex-col" id="copy-btn2" @click="codeCopyBtn()">
-					复制
+					<img src="../../static/images/popularize_04.png" alt="">
 				</div>
 			</div>
 		</div>
@@ -135,67 +135,67 @@
 	h4 {
 		font-size: 0.32rem;
 		font-weight: bolder;
-		color: #393f4c;
+		color: #ffffff;
 		margin: 0.3rem 0;
 	}
 
 	h5 {
 		font-size: 0.28rem;
-		color: #e16a0b;
-		max-width: 4.7rem;
+		color: #ffffff;	
+		max-width: 4.4rem;
 		word-break: break-all;
 	}
-
 	.background-color {
 		width: 100vw;
 		height: 100vh;
 		position: fixed;
 		left: 0;
 		top: 0;
-		background-color: #ffe6b0;
+		background-color: #282a39;
 		z-index: -999;
 	}
-
 	.bg-color {
 		width: 100%;
 		height: auto;
 		justify-content: flex-start;
 	}
-
+	.bg-img{
+		width: 100%;
+		height: 5.04rem;
+		margin: 0.4rem 0 0.6rem 0;
+	}
 	.center-list {
 		width: 6.9rem;
 		height: auto;
 		min-height: 6rem;
 		margin-bottom: 0.6rem;
 		padding: 0.6rem 0;
+		background-color: #848b9c;
 		justify-content: flex-start;
-		border: 0.02rem solid #cb1a15;
+		border: 0.02rem solid #222531;
 		border-radius: 0.4rem;
 		position: relative;
 	}
 
-	.center-list img {
-		width: 4.3rem;
-		height: 0.8rem;
-		margin: 0;
+	.img-title {
+		width: 4.2rem!important;
+		height: 0.7rem!important;
+		margin: 0!important;
 		position: absolute;
-		top: -0.4rem;
+		top: -0.5rem;
 	}
 
 	.link-father {
 		width: 6.5rem;
 		height: auto;
 		justify-content: space-between;
-		margin: 0.3rem 0;
+		/* margin: 0.3rem 0; */
 	}
 
 	.btn-red {
-		width: 1.24rem;
-		height: 0.66rem;
-		background-color: #f2593b;
+		width: 1.88rem;
+		height: 0.72rem;
 		border-radius: 0.1rem;
-		font-size: 0.32rem;
-		color: #FFFFFF;
 	}
 
 	.qr-code {
@@ -205,7 +205,7 @@
 	}
 
 	.btn-de {
-		width: 3.3rem;
-		height: 0.78rem;
+		width: 2.4rem;
+		height: 0.8rem;
 	}
 </style>

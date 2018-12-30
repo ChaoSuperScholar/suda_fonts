@@ -111,7 +111,7 @@
 	.bg-father{
 		width: 100vw;
 		height: 100vh;
-		background-image: url(../../../static/images/game/bg.png);
+		background-image: url(http://www.suda66888.com/game/bg.png);
 		background-size: 100% 100%;
 	}
 	.bg{
@@ -122,7 +122,7 @@
 	.layer-module{
 		width: 5.86rem;
 		height: 3.96rem;
-		background-image: url(../../../static/images/game/game_ElectricPower_01.png);
+		background-image: url(http://www.suda66888.com/game/game_ElectricPower_01.png);
 		background-size: 100% 100%;
 		position: relative;
 		justify-content: flex-end;
@@ -150,7 +150,7 @@
 		margin-bottom: 0.1rem;
 	}
 	.list .list-input{
-		background-image: url(../../../static/images/game/game_ElectricPower_05.png);
+		background-image: url(http://www.suda66888.com/game/game_ElectricPower_05.png);
 		background-size: 100% 100%;
 	}
 	.list-input h4{

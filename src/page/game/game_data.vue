@@ -109,7 +109,7 @@
 	.bg-father{
 		width: 100vw;
 		height: 100vh;
-		background-image: url(../../../static/images/game/bg.png);
+		background-image: url(http://www.suda66888.com/game/bg.png);
 		background-size: 100% 100%;
 
 	}
@@ -122,7 +122,7 @@
 	.layer-module{
 		width: 7.2rem;
 		height: 11.67rem;
-		background-image: url(../../../static/images/game/num_li.png);
+		background-image: url(http://www.suda66888.com/game/num_li.png);
 		background-size: 100% 100%;
 		position: relative;
     top: .6rem;

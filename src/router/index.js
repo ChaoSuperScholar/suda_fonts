@@ -41,6 +41,8 @@ import index from '../page/index'
 import createWallet from '../page/createWallet'
 import importWallet from '../page/importWallet'
 import appeal from '../page/appeal'
+import myCommunity from '../page/myCommunity'
+import myCommunityChild from '../page/myCommunityChild'
 
 /* 游戏模块 */
 import game_index from '../page/game/game_index'
@@ -314,6 +316,16 @@ export default new Router({
 			path: '/market',
 			name: 'market',
 			component: market
+		},
+		{
+			path: '/myCommunity',
+			name: 'myCommunity',
+			component: myCommunity
+		},
+		{
+			path: '/myCommunityChild',
+			name: 'myCommunityChild',
+			component: myCommunityChild
 		}
     ]
 })

@@ -210,7 +210,7 @@
 	.bg-father{
 		width: 100vw;
 		height: 100vh;
-		background-image: url(../../../static/images/game/bg.png);
+		background-image: url(http://www.suda66888.com/game/bg.png);
 		background-size: 100% 100%;
 	}
 	.bg{
@@ -221,7 +221,7 @@
 	.layer-module{
 		width: 7.2rem;
 		height: 9.5rem;
-		background-image: url(../../../static/images/game/setUp.png);
+		background-image: url(http://www.suda66888.com/game/setUp.png);
 		background-size: 100% 100%;
 		position: relative;
 		justify-content: flex-start;
@@ -249,7 +249,7 @@
 	.sure{
 		width: 2.34rem;
 		height: 0.87rem;
-		background-image: url(../../../static/images/game/game_setup_03.png);
+		background-image: url(http://www.suda66888.com/game/game_setup_03.png);
 		background-size: 100% 100%;
 		margin-top: 0.2rem;
 	}
@@ -302,7 +302,7 @@
 	.head-img-father{
 		width: 0.9rem;
 		height: 1.04rem;
-		background-image: url(../../../static/images/game/game_index_01.png);
+		background-image: url(http://www.suda66888.com/game/game_index_01.png);
 		background-size: 100% 100%;
 		margin-left: 0.2rem;
 	}

@@ -173,7 +173,7 @@
 	.tab-father{
 		width: 100%;
 		height: 3rem;
-		background-image: url(http://www.suda66888.com/static/img/financial_01.png);
+		background-image: url(http://www.suda66888.com/static/images/financial_01.png);
 		background-size: 100%;
 		border-bottom: 0.14rem solid #eceff4;
 	}
