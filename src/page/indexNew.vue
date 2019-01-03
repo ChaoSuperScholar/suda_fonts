@@ -40,7 +40,7 @@
   		},
   		//创建之后
   		created: function (){
-  			this.getMsg();
+			
   		},
   		//挂载之前
   		beforeMount: function (){

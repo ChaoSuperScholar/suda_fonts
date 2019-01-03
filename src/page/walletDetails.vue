@@ -11,8 +11,8 @@
 			</div>
 		</div>
 		<div class="center-module flex-col">
-			<h3>{{num}}</h3>
-			<h4 class="h4-gray">≈￥{{money}}</h4>
+			<h3>{{num|numFilter}}</h3>
+			<h4 class="h4-gray">≈￥{{money|numFilter4}}</h4>
 			<div class="center-module-bottom flex-row">
 				<div class="btn btn-blue flex-row" @click="goReceivables()">
 					<img src="../../static/images/wallet_02.png" alt="">
@@ -33,6 +33,7 @@
 				<h4 class="h4-green" v-if="list.num > 0">+{{list.num}}</h4>
 			</div>
 		</div>
+		<nodata v-if="!lists.length"></nodata>
 	</div>   
 </template>
 
@@ -66,6 +67,21 @@
   				
   			})
   		},
+		// 过滤器
+		filters: {
+			/*小数点后面保留2位*/
+		  	numFilter(num, len){
+				var len = len || 2;
+				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
+				return Number.isInteger(result) ? result.toFixed(len) : result;
+			},
+			/*小数点后面保留4位*/
+		  	numFilter4(num, len){
+				var len = len || 4;
+				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
+				return Number.isInteger(result) ? result.toFixed(len) : result;
+			}
+		},
   		//实例方法
   		methods: {
   			getMsg (){

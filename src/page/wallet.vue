@@ -10,7 +10,7 @@
 				</router-link>
 			</div>
 			<h4>{{myname}}</h4>
-			<h5><span>{{totalAssets}}</span>总资产(￥)</h5>
+			<h5><span>{{totalAssets|numFilter}}</span>总资产(￥)</h5>
 		</div>
 		<div class="list flex-row" v-for="list in lists" @click="goDetails(list)">
 			<div class="list-left flex-col">
@@ -18,11 +18,11 @@
 			</div>
 			<div class="list-right flex-col">
 				<div class="list-text top flex-row">
-					<h4>{{list.title}}</h4>
-					<h5>￥{{list.price}}</h5>
+					<h4>{{list.title}} <span>({{list.num|numFilter4}})</span></h4>
+					<h5>￥{{list.price|numFilter}}</h5>
 				</div>
 				<div class="list-text bottom flex-row">
-					<h5>≈￥{{list.money}}</h5>
+					<h5>≈￥{{list.money|numFilter4}}</h5>
 					<h5 class="h5-green" v-if="list.up_down > 0">+{{list.up_down}}% ↑</h5>
 					<h5 class="h5-red" v-if="list.up_down < 0">{{list.up_down}}% ↓</h5>
 				</div>
@@ -68,12 +68,27 @@
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-
+				
   			})
   		},
-		//注册组件
+		// 注册组件
 		components : {
 			footerBar
+		},
+		// 过滤器
+		filters: {
+			/*小数点后面保留2位*/
+		  	numFilter(num, len){
+				var len = len || 2;
+				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
+				return Number.isInteger(result) ? result.toFixed(len) : result;
+			},
+			/*小数点后面保留4位*/
+		  	numFilter4(num, len){
+				var len = len || 4;
+				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
+				return Number.isInteger(result) ? result.toFixed(len) : result;
+			}
 		},
   		//实例方法
   		methods: {
@@ -194,6 +209,10 @@
 	}
 	.list-right .top h4{
 		color: #454545;
+	}
+	.list-text span{
+		font-size: 0.26rem;
+		color: #767676;
 	}
 	.list-right .center h5{
 		color: #343434;

@@ -41,20 +41,7 @@
   		},
   		//实例方法
   		methods: {
-			getStatus (){
-				this.axios.get('/index/suda_wallet/total_coin')
-				.then(({data}) => {
-					if (data.status === 10001) {
-						console.log(data);
-						this.$router.replace('indexNew');
-					} else if(data.status === 10004){
-						this.$router.replace('indexNew');
-					} else{
-						return false;
-					}
-				})
-			},
-  			getMsg (){
+			getMsg (){
 				let ls = window.localStorage;
 				/* ls.setItem('isLogin','no'); */
 				if (ls.getItem('isLogin') === 'yes') {
@@ -68,6 +55,19 @@
 						name:'indexNew'
 					})
 				}
+			},
+			getStatus (){
+				this.axios.get('/index/suda_wallet/total_coin')
+				.then(({data}) => {
+					if (data.status === 10001) {
+						console.log(data);
+						this.$router.replace('indexNew');
+					} else if(data.status === 10004){
+						this.$router.replace('indexNew');
+					} else{
+						return false;
+					}
+				})
 			}
   		}
     }

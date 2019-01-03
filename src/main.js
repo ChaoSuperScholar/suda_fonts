@@ -107,6 +107,11 @@ Vue.prototype.layers = (msg, show = true) => {
     msg: msg
   });
 };
+/* Vue.prototype.numFilter = (num, len) => {
+	var len = len || 2;
+	var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
+	return Number.isInteger(result) ? result.toFixed(len) : result;
+} */
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
