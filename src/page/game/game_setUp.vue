@@ -56,7 +56,10 @@
 									</div>
 								</div>
 								<h5>账号:{{list.phone}}</h5>
-								<h2>默认账号</h2>
+								<h2 v-if="list.level == 1">普通</h2>
+								<h2 v-if="list.level == 2">理事</h2>
+								<h2 v-if="list.level == 3">秘书长</h2>
+								<h2 v-if="list.level == 4">会长</h2>
 							</div>
 							<div class="list flex-row">
 								<h5>钱包地址:{{list.address}}</h5>

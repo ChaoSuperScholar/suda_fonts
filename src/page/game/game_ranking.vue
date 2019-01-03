@@ -10,12 +10,12 @@
 							<h2>昵称</h2>
 							<h2>本周收益</h2>
 						</div>
-						<div class="content-center flex-col">
+						<div class="content-center">
 							<div class="list flex-row" v-for="(list,index) in lists">
 								<h3>{{index+1}}</h3>
 								<h4 class="flex-col"><img :src="list.avatar" alt=""></h4>
-								<h4 class="text-line-1">{{list.nickname}}</h4>
-								<h4 class="text-line-1">{{list.profit|numFilter}}</h4>
+								<h4 class="text flex-row">{{list.nickname}}</h4>
+								<h4 class="text flex-row">{{list.profit|numFilter}}</h4>
 							</div>
 						</div>
 					</div>
@@ -57,7 +57,7 @@
 		filters: {
 		/*小数点后面保留2位*/
 		  	numFilter(num, len){
-				var len = len || 4;
+				var len = len || 2;
 				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
 				return Number.isInteger(result) ? result.toFixed(len) : result;
 			}
@@ -166,16 +166,22 @@
 		text-shadow: 0 0 0.06rem #463317;
 	}
 	.list h3,.list h4{
-		/* filter: glow(color=block,strength=1); */
 		text-align: center;
 		flex: 1;
 	}
 	.list h4:last-child{
+		text-align: center;
 		flex: 2;
 	}
 	.list img{
 		width: 0.5rem;
 		height: 0.5rem;
 		border-radius: 50%;
+	}
+	.text{
+		display: block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 </style>

@@ -150,7 +150,7 @@
 	.layer-module{
 		width: 7.2rem;
 		height: 11.5rem;
-		background-image: url(http://www.suda66888.com/game_upgrade_01.png);
+		background-image: url(http://www.suda66888.com/game/game_upgrade_01.png);
 		background-size: 100% 100%;
 		position: relative;
 	}

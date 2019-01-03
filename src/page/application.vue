@@ -1,7 +1,7 @@
 <template>
 	<div class="application">
 		<pageHead>应用</pageHead>
-		<div class="swiper-father">
+		<div class="wrapper">
 			<swiper :options="swiperOption" ref="mySwiper">
 				<!-- slides -->
 				<swiperSlide v-for="(item,index) in swiperImg" :key="index">
@@ -25,7 +25,7 @@
 					<img src="../../static/images/application_04.png" alt="">
 					<div class="list-right flex-col">
 						<h4>汽车大亨</h4>
-						<p class="text-line-1">模拟经营自动收益游戏，采用流行“IDLE”游戏模式，为游戏玩家带来极佳的游玩体验。</p>
+						<p>模拟经营自动收益游戏，采用流行“IDLE”游戏模式，为游戏玩家带来极佳的游玩体验。</p>
 					</div>
 				</div>
 			</router-link>
@@ -130,13 +130,15 @@
 		</div>
 		<!-- 游戏 -->
 		<div class="tab-card">
-			<div class="list flex-row" @click="noData()">
-				<img src="../../static/images/application_04.png" alt="">
-				<div class="list-right flex-col">
-					<h4>汽车大亨</h4>
-					<p>模拟经营自动收益游戏，采用流行“IDLE”游戏模式，为游戏玩家带来极佳的游玩体验。</p>
+			<router-link to="game_index">
+				<div class="list flex-row" @click="getStatus()">
+					<img src="../../static/images/application_04.png" alt="">
+					<div class="list-right flex-col">
+						<h4>汽车大亨</h4>
+						<p>模拟经营自动收益游戏，采用流行“IDLE”游戏模式，为游戏玩家带来极佳的游玩体验。</p>
+					</div>
 				</div>
-			</div>
+			</router-link>
 			<div class="list flex-row" @click="noData()">
 				<img src="../../static/images/application_10.png" alt="">
 				<div class="list-right flex-col">
@@ -360,9 +362,11 @@
 </script>
 
 <style scoped>
-	.swiper-father{
+	.wrapper{
 		width: 100%;
-		height: auto;
+		height: 0;
+		overflow: hidden;
+		padding-bottom: 42%;
 		margin-top: 1rem;
 	}
 	.swiper-slide{
@@ -387,9 +391,10 @@
 		background: #acbcd2;
 		border-radius: 50%;
 	}
-	.swiper-pagination-bullet-active{
+	/* 样式穿透 */
+	/* .wrapper >>> .swiper-pagination-bullet-active{
 		background: #ffffff;
-	}
+	} */
 	.tab-card{
 		margin-bottom: 1.4rem;
 		display: none;

@@ -14,7 +14,7 @@
 					<div class="head-img">
 						<div>
 							<div>
-								<img :src="msg.avatar" />
+								<img :src="msg.avatar" @click="goSetUp()"/>
 							</div>
 						</div>
 					</div>
@@ -26,36 +26,35 @@
 					<h5 class="text-line-1">{{money[1]}}</h5>
 				</div>
 				<div class="suda-gold flex-col">
-					<h5 class="text-line-1">{{money[2]}}</h5>
+					<h5 class="text-line-1">{{money[2]|numFilter}}</h5>
 				</div>
 			</div>
 			<div class="right-module flex-col">
-				<div class="right-module-top flex-col">
-					<router-link to="game_setUp">
-						<img src="../../../static/images/game/game_index_05.png" alt="">
-					</router-link>
-					<router-link to="game_play">
-						<img src="../../../static/images/game/game_index_06.png" alt="">
-					</router-link>
-					<router-link to="game_announcement">
-						<img src="../../../static/images/game/game_index_07.png" alt="">
-					</router-link>
-				</div>
-				<div class="right-module-bottom flex-col">
-					<router-link to="game_ranking">
-						<img src="../../../static/images/game/game_index_08.png" alt="">
-					</router-link>
-					<router-link to="game_data">
-						<img src="../../../static/images/game/game_index_09.png" alt="">
-					</router-link>
-					<router-link to="game_pay">
-						<img src="../../../static/images/game/game_index_10.png" alt="">
-					</router-link>
-					<img src="../../../static/images/game/game_index_11.png" alt="" v-show="false">
-					<router-link to="application">
-						<img class="return_img" src="../../../static/images/game/game_play_02.png" alt="">
-					</router-link>
-				</div>
+				<router-link to="game_setUp">
+					<img src="../../../static/images/game/game_index_05.png" alt="">
+				</router-link>
+				<router-link to="game_play">
+					<img src="../../../static/images/game/game_index_06.png" alt="">
+				</router-link>
+				<router-link to="game_announcement">
+					<img src="../../../static/images/game/game_index_07.png" alt="">
+				</router-link>
+				<router-link to="game_bill">
+					<img src="../../../static/images/game/game_index_22.png" alt="">
+				</router-link>
+				<router-link to="game_ranking">
+					<img src="../../../static/images/game/game_index_08.png" alt="">
+				</router-link>
+				<router-link to="game_data">
+					<img src="../../../static/images/game/game_index_09.png" alt="">
+				</router-link>
+				<router-link to="game_pay">
+					<img src="../../../static/images/game/game_index_10.png" alt="">
+				</router-link>
+				<img src="../../../static/images/game/game_index_11.png" alt="" v-show="false">
+				<router-link to="application">
+					<img class="return_img" src="../../../static/images/game/game_play_02.png" alt="">
+				</router-link>
 			</div>
 			<div class="bottom-module flex-row">
 				<img src="../../../static/images/game/game_index_12.png" alt="" v-if="statusList.battery_time == 0" @click="goPower()">
@@ -202,6 +201,9 @@
 		},
   		//实例方法
   		methods: {
+			goSetUp (){
+				this.$router.replace('game_setUp');
+			},
 			btnSales (){
 				console.log("点击了销售中心!");
 				this.axios.post('/index/suda_game/developmentLand',{
@@ -544,6 +546,10 @@
 		top: 1.4rem;
 		right: 0;
 		z-index: 1000;
+	}
+	.right-module img{
+		width: 1.08rem;
+		height: 1.08rem;
 	}
 	.right-module-top img{
 		width: 1.08rem;

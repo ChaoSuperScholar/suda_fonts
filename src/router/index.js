@@ -57,6 +57,7 @@ import game_upgrade from '../page/game/game_upgrade'
 import game_ElectricPower from '../page/game/game_ElectricPower'
 import advertising from '../page/advertising'
 import market from '../page/market'
+import game_bill from '../page/game/game_bill'
 
 Vue.use(Router)
 
@@ -326,6 +327,11 @@ export default new Router({
 			path: '/myCommunityChild',
 			name: 'myCommunityChild',
 			component: myCommunityChild
+		},
+		{
+			path: '/game_bill',
+			name: 'game_bill',
+			component: game_bill
 		}
     ]
 })

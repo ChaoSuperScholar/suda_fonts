@@ -104,11 +104,15 @@ img{
   align-items: center;
 }
 .text-line-1{
-  display: -webkit-box;
+  /* display: -webkit-box;
   word-break: break-all;
   text-overflow: ellipsis;
   overflow: hidden;
   -webkit-box-orient:vertical;
   -webkit-line-clamp: 1;
-  line-height: initial;
+  line-height: initial; */
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

@@ -19,15 +19,12 @@
 			<div class="list-right flex-col">
 				<div class="list-text top flex-row">
 					<h4>{{list.title}}</h4>
-				</div>
-				<div class="list-text center flex-row">
-					<h5  v-if="list.up_down >= 0">{{list.num}}</h5>
-					<h5 v-if="list.up_down < 0" class="red">￥{{list.price}}</h5>
+					<h5>￥{{list.price}}</h5>
 				</div>
 				<div class="list-text bottom flex-row">
 					<h5>≈￥{{list.money}}</h5>
-					<h5 class="h5-green" v-if="list.up_down > 0">+{{list.up_down}}</h5>
-					<h5 class="h5-red" v-if="list.up_down < 0">{{list.up_down}}</h5>
+					<h5 class="h5-green" v-if="list.up_down > 0">+{{list.up_down}}% ↑</h5>
+					<h5 class="h5-red" v-if="list.up_down < 0">{{list.up_down}}% ↓</h5>
 				</div>
 			</div>
 		</div>

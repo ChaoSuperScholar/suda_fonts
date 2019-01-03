@@ -107,7 +107,7 @@
 	.center-module{
 		width: 5.5rem;
 		height: 3.75rem;
-		background-image: url(../../static/images/myCommunity_02.png);
+		background-image: url(http://www.suda66888.com/game/myCommunity_02.png);
 		background-size: 100% 100%;
 		justify-content: flex-end;
 		margin-top: 1rem;
