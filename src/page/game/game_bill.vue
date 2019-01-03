@@ -39,7 +39,7 @@
 							</div>
 							<div class="content-center">
 								<div class="list flex-row" v-for="list in lists">
-									<h4 class="text-line-1">{{list[0]}}</h4>
+									<h4 class="text-line-1"><p>{{list[0]}}</p></h4>
 									<h4 class="text-line-1">{{list[1]}}</h4>
 									<h4 class="text-line-1">{{list[2]|numFilter}}</h4>
 								</div>
@@ -62,7 +62,7 @@
 							</div>
 							<div class="content-center">
 								<div class="list flex-row" v-for="item in items">
-									<h4 class="text-line-1">{{item[0]}}</h4>
+									<h4 class="text-line-1"><p>{{item[0]}}</p></h4>
 									<h4 class="text-line-1">{{item[1]}}</h4>
 									<h4 class="text-line-1">{{item[2]|numFilter}}</h4>
 								</div>
@@ -299,6 +299,39 @@
 		-webkit-line-clamp: 1;
 		line-height: inherit; */
 	}
+  .list h4 p{
+    padding-left: 20px;
+    font-size: 12px;
+    text-overflow: clip!important;
+    color: #000;
+    display: inline-block;
+    white-space: nowrap;
+    animation: 5s wordsLoop linear infinite normal;
+  }
+
+  @keyframes wordsLoop {
+    0% {
+      transform: translateX(10px);
+      -webkit-transform: translateX(10px);
+    }
+    100% {
+      transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+    }
+  }
+
+  @-webkit-keyframes wordsLoop {
+    0% {
+      transform: translateX(10px);
+      -webkit-transform: translateX(10px);
+    }
+    100% {
+      transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+    }
+
+
+  }
 	.list h4:nth-child(2){
 		border-left: 0.03rem solid #768e33;
 		border-right: 0.03rem solid #768e33;

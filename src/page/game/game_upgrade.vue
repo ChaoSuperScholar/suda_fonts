@@ -12,7 +12,8 @@
 									<h4>生产力: {{list_1.product}}</h4>
 									<h4>升级: {{list_1.gold}}金币</h4>
 								</div>
-								<img class="img-2" src="../../../static/images/game_upgrade_05.png" alt="" @click="upgrade(1)">
+								<img v-if="list_1.lv < 10" class="img-2" src="../../../static/images/game_upgrade_05.png" alt="" @click="upgrade(1)">
+                <img v-else class="img-2" src="../../../static/images/0.png" alt="" @click="upgrade(1)">
 							</div>
 							<div class="list flex-row">
 								<img class="img-1" src="../../../static/images/game_upgrade_03.png" alt="">
@@ -21,8 +22,10 @@
 									<h4>生产力: {{list_2.product}}</h4>
 									<h4>升级: {{list_2.gold}}金币</h4>
 								</div>
-								<img class="img-2" src="../../../static/images/game_upgrade_06.png" alt="" @click="upgrade(3)">
-							</div>
+								<img v-if="list_2.lv < 10" class="img-2" src="../../../static/images/game_upgrade_06.png" alt="" @click="upgrade(3)">
+                <img v-else class="img-2" src="../../../static/images/0.png" alt="" @click="upgrade(3)">
+
+              </div>
 							<div class="list flex-row">
 								<img class="img-1" src="../../../static/images/game_upgrade_04.png" alt="">
 								<div class="list-center flex-col">
@@ -30,7 +33,8 @@
 									<h4>生产力: {{list_3.product}}</h4>
 									<h4>升级: {{list_3.gold}}金币</h4>
 								</div>
-								<img class="img-2" src="../../../static/images/game_upgrade_07.png" alt="" @click="upgrade(2)">
+								<img v-if="list_3.lv < 10" class="img-2" src="../../../static/images/game_upgrade_07.png" alt="" @click="upgrade(2)">
+                <img v-else class="img-2" src="../../../static/images/0.png" alt="" @click="upgrade(2)">
 							</div>
 							<div class="list flex-row">
 								<h3>生产力:{{msg.product}}</h3>
@@ -55,6 +59,7 @@
         name: 'game_upgrade',
         data(){
             return {
+                leve:0,
 				msg : [],
 				list_1 : [],
 				list_2 : [],
@@ -63,7 +68,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -71,12 +76,12 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
   		//实例方法
@@ -103,7 +108,12 @@
 			},
 			upgrade (index){
 				console.log(index);
+				if (this.leve==1){
+				    return ;
+        }
+				this.leve=1;
 				this.axios.post('/index/suda_game/upgrade',{
+
 					num : this.$route.query.num,
 					type : index
 				})
@@ -111,7 +121,9 @@
 					if (data.status == 200) {
 						this.layers(data.message);
 						this.getMsg();
+						this.leve=0;
 					} else{
+          this.leve=0;
 						this.layers(data.message);
 					}
 				})
