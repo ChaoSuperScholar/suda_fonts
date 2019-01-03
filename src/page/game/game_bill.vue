@@ -120,7 +120,7 @@
 		filters: {
 			/*小数点后面保留2位*/
 		  	numFilter(num, len){
-				var len = len || 2;
+				var len = len || 4;
 				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
 				return Number.isInteger(result) ? result.toFixed(len) : result;
 			}

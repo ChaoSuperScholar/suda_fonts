@@ -71,7 +71,7 @@
 								<div class="content-center">
 									<div class="list flex-row" v-for="list in lists">
 										<h4>{{list[0]}}</h4>
-										<h4>{{list[1]}}</h4>
+										<h4>{{list[1]|numFilter}}</h4>
 										<h4>{{list[2]|numFilter}}</h4>
 									</div>
 								</div>
@@ -131,7 +131,7 @@
 		filters: {
 			/*小数点后面保留2位*/
 		  	numFilter(num, len){
-				var len = len || 2;
+				var len = len || 4;
 				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
 				return Number.isInteger(result) ? result.toFixed(len) : result;
 			}

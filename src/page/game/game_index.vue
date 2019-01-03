@@ -6,7 +6,7 @@
 			</div>
 		</div>
 		<!-- <div class="module flex-col">
-			
+
 		</div> -->
 		<div class="content container">
 			<div class="top-module flex-row">
@@ -172,7 +172,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -183,18 +183,18 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		filters: {
 			/*小数点后面保留2位*/
 		  	numFilter(num, len){
-				var len = len || 2;
+				var len = len || 4;
 				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
 				return Number.isInteger(result) ? result.toFixed(len) : result;
 			}
@@ -366,7 +366,7 @@
 // // 								}
 // // 							})
 						},2000)
-						
+
 // 					} else{
 // 						this.layers(data.message);
 // 					}
@@ -379,7 +379,7 @@
 						console.log(data.message);
 						let res = data.data;
 						this.sum = res.sum;
-						this.showCoin = res.list; 
+						this.showCoin = res.list;
 					} else{
 						this.layers(data.message);
 					}
@@ -512,11 +512,11 @@
 		height: 100%;
 		overflow: hidden;
 	}
-	 
+
 	.head-img> div {
 		transform: rotate(60deg);
 	}
-	 
+
 	.head-img> div> div {
 		transform: rotate(-120deg);
 	}

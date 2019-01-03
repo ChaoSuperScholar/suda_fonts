@@ -38,7 +38,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -46,18 +46,18 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		filters: {
 		/*小数点后面保留2位*/
 		  	numFilter(num, len){
-				var len = len || 2;
+				var len = len || 4;
 				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
 				return Number.isInteger(result) ? result.toFixed(len) : result;
 			}
