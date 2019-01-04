@@ -45,7 +45,8 @@
 						<img class="phoneimg" src="../../static/images/invition.png" alt="">
 						<h4>邀请码：</h4>
 					</div>
-					<input v-model="Invitation" type="" value="" placeholder="输入邀请码" />
+          <input v-if="direct_token" v-model="direct_token" type="" disabled="disabled" value="" placeholder="输入邀请码" />
+					<input v-else v-model="Invitation" type=""  value="" placeholder="输入邀请码" />
 				</div>
 				<div class="agree-clause flex-row">
 					<div class="agree-check flex-col" @click="agreeBtn">
@@ -76,6 +77,7 @@
 				loginPassword: "",
 				transactionPassword: "",
 				Invitation: '', //验证码
+        direct_token:'',//
 				isShowAgree: true,
 				isCode: true,
 				time: 60
@@ -87,12 +89,13 @@
 		},
 		//创建之后
 		created: function() {
-
+      this.huoqu()
 		},
 		//挂载之前
 		beforeMount: function() {
 
 		},
+
 		// 挂载之后
 		mounted: function() {
 			this.$nextTick(function() {
@@ -102,8 +105,15 @@
 		components: {
 			headerBar
 		},
+    created:function(){
+     this.direct_token = this.$route.query.direct_token;
+    },
 		//实例方法
 		methods: {
+        huoqu:function () {
+          console.log(this.$route.query.direct_token);
+        },
+
 			toggleHead: function(e) {
 				if (this.scrollRouteArr.indexOf(this.$route.name) === -1) return false;
 				let scrollBottom = document.body.clientHeight - e.target.scrollingElement.scrollTop - window.innerHeight;
@@ -143,6 +153,7 @@
 					})
 			},
 			createBtn() {
+
 				if (!this.phone) {
 					this.layers("请输入手机号！");
 				} else if (!/^((13[0-9])|(17[0-1,6-8])|(15[^4,\\D])|(18[0-9]))\d{8}$/.test(this.phone)) {
@@ -184,6 +195,10 @@
 								/* that.layers(error.message); */
 							}, 4000)
 						});
+          if(this.direct_token != ''){
+            this. Invitation = this.direct_token;
+            console.log(this.direct_token);
+          }
 					/* this.layers("创建成功!")
 					setTimeout(() => {
 						this.$router.go(-1);
@@ -192,7 +207,9 @@
 			},
 			goDownload() {
 				window.location.href = 'http://www.suda66888.com/app/io.dcloud.H5497CB1E.apk';
-			}
+			},
+
+
 		},
 
 	}
