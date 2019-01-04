@@ -206,7 +206,7 @@
 				}
 			},
 			goDownload() {
-				window.location.href = 'http://www.suda66888.com/app/io.dcloud.H5497CB1E.apk';
+				window.location.href = 'http://www.suda66888.com/download.html';
 			},
 
 
