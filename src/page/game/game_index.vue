@@ -64,7 +64,7 @@
 				<img src="../../../static/images/game/game_index_12_04.png" alt="" v-if="statusList.battery_time > 18&&statusList.battery_time < 25" @click="goPower()">
 				<div class="btn flex-row" @click="getGoldAll()">
 					<h4>领取 {{sum|numFilter}}</h4>
-					<img src="../../../static/images/game/game_index_14.png" alt="">
+            <img src="../../../static/images/game/game_index_21.png" alt="">
 				</div>
 				<h4></h4>
 			</div>

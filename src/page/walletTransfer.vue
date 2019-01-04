@@ -3,8 +3,8 @@
 		<div class="top-module flex-row">
 			<img class="img-left" @click="return_page()" src="../../static/images/return.png"/>
 			<h3>{{title}}转账</h3>
-			<img class="img-right" src="../../static/images/walletTransfer_01.png" alt="" v-show="false">
-			<h4></h4>
+			<img class="img-right"  src="../../static/images/walletTransfer_01.png" alt="" >
+			<!--<h4></h4>-->
 		</div>
 		<div class="list flex-row">
 			<!-- <h4>{{address}}</h4> -->
@@ -16,7 +16,7 @@
 			<h4>≈￥{{showInputNum}}</h4>
 		</div>
 		<div class="list flex-row">
-			<input type="password" placeholder="输入钱包密码" v-model="passWord">
+			<input type="password" placeholder="输入交易密码" v-model="passWord">
 		</div>
 		<div class="btn-blue flex-col" @click="btnClick()">
 			确认转账
@@ -25,6 +25,19 @@
 </template>
 
 <script>
+
+  let scan = null;
+  //点手机虚拟返回键
+  document.addEventListener("plusready", function() {
+    // 注册返回按键事件
+    plus.key.addEventListener('backbutton', function() {
+      // 事件处理
+      scan.close();//关闭条码识别控件
+      window.history.back();
+    }, false);
+  });
+
+
 	export default{
         name: 'walletTransfer',
         data(){
@@ -38,7 +51,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -47,7 +60,7 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){

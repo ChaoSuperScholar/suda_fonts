@@ -304,7 +304,6 @@
     font-size: 12px;
     text-overflow: clip!important;
     color: #000;
-    display: inline-block;
     white-space: nowrap;
     animation: 5s wordsLoop linear infinite normal;
   }
@@ -315,8 +314,8 @@
       -webkit-transform: translateX(10px);
     }
     100% {
-      transform: translateX(-50%);
-      -webkit-transform: translateX(-50%);
+      transform: translateX(-100%);
+      -webkit-transform: translateX(-100%);
     }
   }
 
@@ -326,8 +325,8 @@
       -webkit-transform: translateX(10px);
     }
     100% {
-      transform: translateX(-50%);
-      -webkit-transform: translateX(-50%);
+      transform: translateX(-100%);
+      -webkit-transform: translateX(-100%);
     }
 
 
