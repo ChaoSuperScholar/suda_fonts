@@ -142,7 +142,9 @@
 						setTimeout(() =>{
 							this.$router.replace({name : 'indexNew'})
 						},2000)
-					} else{
+					} else if(data.status === 10001){
+            this.$router.replace('indexNew');
+          } else{
 						this.layers(data.message);
 					}
 				})

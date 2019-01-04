@@ -117,7 +117,9 @@
 						this.lists = res[0];
 						this.items = res[1];
 						this.cycles = res[2];
-					} else{
+					} else if(data.status === 10001){
+            this.$router.replace('indexNew');
+          }else{
 						console.log(data);
 					}
 				})

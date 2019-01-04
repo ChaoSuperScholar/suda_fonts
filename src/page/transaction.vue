@@ -316,46 +316,46 @@
 				showLeft : true,
 				showRight : false,
 				tabsName: [
-					{  
-						name: "ETH",  
+					{
+						name: "ETH",
 						isActive: true,
 						coin: "eth"
 					},
-					{  
-						name: "SDT",  
+					{
+						name: "SDT",
 						isActive: false,
 						coin: "sdt"
 					},
-					{  
-						name: "USDT",  
+					{
+						name: "USDT",
 						isActive: false,
 						coin: "usdt"
 					},
-					{  
-						name: "BTC",  
+					{
+						name: "BTC",
 						isActive: false,
 						coin: "btc"
 					},
-					{  
-						name: "EOS",  
+					{
+						name: "EOS",
 						isActive: false,
 						coin: "eos"
 					}
-				],  
+				],
 				active: false,
 				tabsName2:[
 					{
-						name: "ETH",  
+						name: "ETH",
 						isActive: true,
 						coin: "eth"
 					},
 					{
-						name: "SDT",  
+						name: "SDT",
 						isActive: false,
 						coin: "sdt"
 					},
 					{
-						name: "USDT",  
+						name: "USDT",
 						isActive: false,
 						coin: "usdt"
 					}
@@ -388,7 +388,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -397,7 +397,7 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
 		//注册组件
 		components : {
@@ -405,7 +405,7 @@
 		},
 		computed: {
 			layerMoney() {
-				return this.layerNum * this.priceLayer; 
+				return this.layerNum * this.priceLayer;
 			},
 			layerMoney2() {
 				return this.layerNum2 * this.priceLayer2;
@@ -422,7 +422,7 @@
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
   		//实例方法
@@ -440,13 +440,13 @@
 				this.showRight = true
 			},
 			tabsSwitch: function(tab,tabIndex) {
-					let tabCardCollection = document.querySelectorAll(".tab-card"),  
-						len = tabCardCollection.length;  
-							for(var i = 0; i < len; i++) {  
-								tabCardCollection[i].style.display = "none";  
-							this.tabsName[i].isActive = false;  
-						}  
-					this.tabsName[tabIndex].isActive = true;  
+					let tabCardCollection = document.querySelectorAll(".tab-card"),
+						len = tabCardCollection.length;
+							for(var i = 0; i < len; i++) {
+								tabCardCollection[i].style.display = "none";
+							this.tabsName[i].isActive = false;
+						}
+					this.tabsName[tabIndex].isActive = true;
 					tabCardCollection[tabIndex].style.display = "block";
 					let that = this;
 					this.axios.post('/index/suda_order_buy/ad_list',{
@@ -463,14 +463,14 @@
 						}
 					})
 			},
-			tabsSwitch2: function(tab2,tabIndex2) {  
-					let tabCardCollection2 = document.querySelectorAll(".tab-card2"),  
-						len = tabCardCollection2.length;  
-							for(var i = 0; i < len; i++) {  
-								tabCardCollection2[i].style.display = "none";  
-							this.tabsName2[i].isActive = false;  
-						}  
-					this.tabsName2[tabIndex2].isActive = true;  
+			tabsSwitch2: function(tab2,tabIndex2) {
+					let tabCardCollection2 = document.querySelectorAll(".tab-card2"),
+						len = tabCardCollection2.length;
+							for(var i = 0; i < len; i++) {
+								tabCardCollection2[i].style.display = "none";
+							this.tabsName2[i].isActive = false;
+						}
+					this.tabsName2[tabIndex2].isActive = true;
 					tabCardCollection2[tabIndex2].style.display = "block";
 					  let that = this;
 					  this.axios.post('/index/suda_order_buy/ad_list',{
@@ -481,7 +481,9 @@
 					  .then(({data}) => {
 					  	if (data.status == 200) {
 					  		this.items = data.data;
-					  	} else{
+					  	} else if(data.status === 10001){
+                this.$router.replace('indexNew');
+              } else{
 					  		this.layers(data.message);
 					  	}
 					  })
@@ -538,7 +540,7 @@
 				} else{
 					return false;
 				}
-				
+
 			},
 			/* 购买页的取消和确认 */
 			cancelClick (){

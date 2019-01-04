@@ -265,37 +265,37 @@
 				},
 				// swiper图片
 				swiperImg: [],
-				tabsName: [{  
-						name: "全部",  
-						isActive: true  
+				tabsName: [{
+						name: "全部",
+						isActive: true
 					},
-					{  
-						name: "游戏",  
+					{
+						name: "游戏",
 						isActive: false
 					},
-					{  
-						name: "理财",  
+					{
+						name: "理财",
 						isActive: false
 					},
-					{  
-						name: "工具",  
+					{
+						name: "工具",
 						isActive: false
 					},
-					{  
-						name: "交易所",  
+					{
+						name: "交易所",
 						isActive: false
 					},
-					{  
-						name: "社交",  
+					{
+						name: "社交",
 						isActive: false
 					}
-				],  
+				],
 				active: false
             }
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -303,12 +303,12 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		//注册组件
@@ -320,15 +320,15 @@
 		},
   		//实例方法
   		methods: {
-  			tabsSwitch: function(tabIndex) {  
-  					var tabCardCollection = document.querySelectorAll(".tab-card"),  
-						len = tabCardCollection.length;  
-							for(var i = 0; i < len; i++) {  
-								tabCardCollection[i].style.display = "none";  
-							this.tabsName[i].isActive = false;  
-						}  
-  					this.tabsName[tabIndex].isActive = true;  
-  					tabCardCollection[tabIndex].style.display = "block";  
+  			tabsSwitch: function(tabIndex) {
+  					var tabCardCollection = document.querySelectorAll(".tab-card"),
+						len = tabCardCollection.length;
+							for(var i = 0; i < len; i++) {
+								tabCardCollection[i].style.display = "none";
+							this.tabsName[i].isActive = false;
+						}
+  					this.tabsName[tabIndex].isActive = true;
+  					tabCardCollection[tabIndex].style.display = "block";
   			},
 			noData (){
 				this.layers("暂未开放")
@@ -352,7 +352,9 @@
 					if (data.status == 200) {
 						console.log(data.message);
 						this.swiperImg = data.data;
-					} else{
+					} else if(data.status === 10001){
+            this.$router.replace('indexNew');
+          } else{
 						this.layers(data.message);
 					}
 				})
