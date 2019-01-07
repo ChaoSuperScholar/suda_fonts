@@ -58,7 +58,8 @@
 			</div>
 			<div class="bottom-module flex-row">
 				<img src="../../../static/images/game/game_index_12.png" alt="" v-if="statusList.battery_time == 0" @click="goPower()">
-				<img src="../../../static/images/game/game_index_12_01.png" alt="" v-if="statusList.battery_time > 0&&statusList.battery_time < 7" @click="goPower()">
+				<img src="../../../static/images/game/game_index_12_01.png" alt="" v-if="statusList.battery_time > 0&&statusList.battery_time < 2" @click="goPower()">
+        <img src="../../../static/images/game/game_index_12_001.png" alt="" v-if="statusList.battery_time > 1&&statusList.battery_time < 7" @click="goPower()">
 				<img src="../../../static/images/game/game_index_12_02.png" alt="" v-if="statusList.battery_time > 6&&statusList.battery_time < 13" @click="goPower()">
 				<img src="../../../static/images/game/game_index_12_03.png" alt="" v-if="statusList.battery_time > 12&&statusList.battery_time < 19" @click="goPower()">
 				<img src="../../../static/images/game/game_index_12_04.png" alt="" v-if="statusList.battery_time > 18&&statusList.battery_time < 25" @click="goPower()">
@@ -397,7 +398,8 @@
 				this.$router.push({
 					path : '/game_ElectricPower',
 					query : {
-						time : this.statusList.battery_time
+						time : this.statusList.battery_time,
+            powers : this.statusList.battery_price
 					}
 				})
 			},

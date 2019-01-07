@@ -26,7 +26,7 @@
 		</div>
 		<!-- 循环数据 -->
 		<div class="list flex-col" v-for="list in lists">
-			<h4 class="h4-gray">{{list.time}}</h4>
+			<h4 class="h4-gray">{{list.created_at}}</h4>
 			<div class="list-bottom flex-row">
 				<h4>{{list.address}}</h4>
 				<h4 class="h4-red" v-if="list.num < 0">{{list.num}}</h4>
@@ -34,7 +34,7 @@
 			</div>
 		</div>
 		<nodata v-if="!lists.length"></nodata>
-	</div>   
+	</div>
 </template>
 
 <script>
@@ -46,12 +46,13 @@
 				up_down : "",
 				num : "",
 				money : "",
+              times:'',
 				lists : []
             }
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -59,12 +60,12 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		// 过滤器
@@ -86,6 +87,7 @@
   		methods: {
   			getMsg (){
 				let page_type = this.$route.query.type;
+
 				this.title = this.$route.query.title;
 				this.axios.post('/index/suda_wallet/one_coin',{
 					type : page_type
@@ -156,6 +158,7 @@
 	}
 	.h4-red{
 		color: #ea4242;
+    text-align: right;
 	}
 	.top-module{
 		width: 100%;

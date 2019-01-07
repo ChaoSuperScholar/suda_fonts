@@ -105,7 +105,7 @@
 		//创建之后
 		created: function() {
 			this.getMsg();
-			this.getData();
+//			this.getData();
 		},
 		//挂载之前
 		beforeMount: function() {

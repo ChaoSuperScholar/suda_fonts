@@ -48,9 +48,7 @@
 						</div>
           </div>
           <!--说明-->
-          <div class="Explain flex-col">
-            <p class="text-line-1">说明：1ETH=1000金币</p>
-          </div>
+
 				</div>
 			</div>
 		</div>

@@ -16,9 +16,9 @@
 
 				</div>
 				<h4>邀请码 {{code}}</h4>
-				<div class="btn-red btn-de flex-col" id="copy-btn2" @click="codeCopyBtn()">
-					<img src="../../static/images/popularize_04.png" alt="">
-				</div>
+				<!--<div class="btn-red btn-de flex-col" id="copy-btn2" @click="codeCopyBtn()">-->
+					<!--<img src="../../static/images/popularize_04.png" alt="">-->
+				<!--</div>-->
 			</div>
 		</div>
 	</div>
@@ -52,7 +52,7 @@
 		// 挂载之后
 		mounted: function() {
 			this.$nextTick(function() {
-				
+
 			})
 		},
 		// 注册组件
@@ -63,9 +63,9 @@
 			link() {
 				this.linkCopyBtn();
 			},
-			code() {
-				this.codeCopyBtn();
-			}
+//			code() {
+//				this.codeCopyBtn();
+//			}
 		},
 		//实例方法
 		methods: {
@@ -141,7 +141,7 @@
 
 	h5 {
 		font-size: 0.28rem;
-		color: #ffffff;	
+		color: #ffffff;
 		max-width: 4.4rem;
 		word-break: break-all;
 	}
@@ -168,8 +168,7 @@
 		width: 6.9rem;
 		height: auto;
 		min-height: 6rem;
-		margin-bottom: 0.6rem;
-		padding: 0.6rem 0;
+		/*padding: 0.6rem 0;*/
 		background-color: #848b9c;
 		justify-content: flex-start;
 		border: 0.02rem solid #222531;

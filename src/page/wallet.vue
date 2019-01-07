@@ -1,39 +1,42 @@
 <template>
-	<div class="wallet">
-		<div class="top-bg flex-col">
-			<div class="top-btn flex-row">
-				<router-link to="receivables">
-					<img src="../../static/images/indexNew_06.png" alt="">
-				</router-link>
-				<router-link to="addAssets">
-					<img src="../../static/images/indexNew_07.png" alt="">
-				</router-link>
-			</div>
-			<h4>{{myname}}</h4>
-			<h5><span>{{totalAssets|numFilter}}</span>总资产(￥)</h5>
-		</div>
-		<div class="list flex-row" v-for="list in lists" @click="goDetails(list)">
-			<div class="list-left flex-col">
-				<img :src="list.img" alt="">
-			</div>
-			<div class="list-right flex-col">
-				<div class="list-text top flex-row">
-					<h4>{{list.title}} <span>({{list.num|numFilter4}})</span></h4>
-					<h5>￥{{list.price|numFilter}}</h5>
-				</div>
-				<div class="list-text bottom flex-row">
-					<h5>≈￥{{list.money|numFilter4}}</h5>
-					<h5 class="h5-green" v-if="list.up_down > 0">+{{list.up_down}}% ↑</h5>
-					<h5 class="h5-red" v-if="list.up_down < 0">{{list.up_down}}% ↓</h5>
-				</div>
-			</div>
-		</div>
-		<!--没有数据-->
-		<div class="no-data flex-row" v-if="!lists.length">
-			暂无数据
-		</div>
-		<footerBar></footerBar>
-	</div>
+  <div class="heig">
+    <div class="wallet">
+      <div class="top-bg flex-col">
+        <div class="top-btn flex-row">
+          <router-link to="receivables">
+            <img src="../../static/images/indexNew_06.png" alt="">
+          </router-link>
+          <router-link to="addAssets">
+            <img src="../../static/images/indexNew_07.png" alt="">
+          </router-link>
+        </div>
+        <h4>{{myname}}</h4>
+        <h5><span>{{totalAssets|numFilter}}</span>总资产(￥)</h5>
+      </div>
+      <div class="list flex-row" v-for="list in lists" @click="goDetails(list)">
+        <div class="list-left flex-col">
+          <img :src="list.img" alt="">
+        </div>
+        <div class="list-right flex-col">
+          <div class="list-text top flex-row">
+            <h4>{{list.title}} <span>({{list.num|numFilter4}})</span></h4>
+            <h5>￥{{list.price|numFilter}}</h5>
+          </div>
+          <div class="list-text bottom flex-row">
+            <h5>≈￥{{list.money|numFilter4}}</h5>
+            <h5 class="h5-green" v-if="list.up_down > 0">+{{list.up_down}}% ↑</h5>
+            <h5 class="h5-red" v-if="list.up_down < 0">{{list.up_down}}% ↓</h5>
+          </div>
+        </div>
+      </div>
+      <!--没有数据-->
+      <div class="no-data flex-row" v-if="!lists.length">
+        暂无数据
+      </div>
+      <footerBar></footerBar>
+    </div>
+  </div>
+
 </template>
 
 <script>
@@ -68,7 +71,7 @@
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-				
+
   			})
   		},
 		// 注册组件
@@ -134,6 +137,10 @@
 </script>
 
 <style scoped>
+
+ .heig{min-height: 13.34rem; height: auto;width: 100%;}
+ .wallet{width: 100%;}
+
 	span{
 		font-size: 0.36rem;
 		color: #FFFFFF;

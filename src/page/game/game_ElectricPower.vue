@@ -7,7 +7,8 @@
 					<div class="list flex-row">
 						<h4>电力:</h4>
 						<img src="../../../static/images/game/game_ElectricPower_04_00.png" alt="" v-if="this.$route.query.time == 0">
-						<img src="../../../static/images/game/game_ElectricPower_04_01.png" alt="" v-if="this.$route.query.time > 0&&this.$route.query.time < 3">
+						<img src="../../../static/images/game/game_ElectricPower_04_01.png" alt="" v-if="this.$route.query.time > 0&&this.$route.query.time < 2">
+            <img src="../../../static/images/game/game_ElectricPower_04_01.png" alt="" v-if="this.$route.query.time > 1&&this.$route.query.time < 3">
 						<img src="../../../static/images/game/game_ElectricPower_04_02.png" alt="" v-if="this.$route.query.time > 2&&this.$route.query.time < 5">
 						<img src="../../../static/images/game/game_ElectricPower_04_03.png" alt="" v-if="this.$route.query.time > 4&&this.$route.query.time < 7">
 						<img src="../../../static/images/game/game_ElectricPower_04_04.png" alt="" v-if="this.$route.query.time > 6&&this.$route.query.time < 9">
@@ -24,13 +25,13 @@
 					<div class="list flex-row">
 						<h4>充电:</h4>
 						<div class="list-input flex-col">
-							<h4 v-if="this.$route.query.time >= 12">3金币</h4>
-							<h4 v-if="this.$route.query.time < 12">5金币</h4>
+							<!--<h4 v-if="this.$route.query.time >= 12">3金币</h4>-->
+							<h4>{{powers}}金币</h4>
 						</div>
 						<h4>24小时</h4>
 					</div>
 					<img class="btn" src="../../../static/images/game/game_ElectricPower_03.png" alt="" @click="charging()">
-					<h5>说明：电力≥12小时需充值3金币，电力<12小时需充值5金币。</h5>
+					<h5></h5>
 				</div>
 			</div>
 		</div>
@@ -42,12 +43,13 @@
         name: 'game_ElectricPower',
         data(){
             return {
-            	power : ""
+            	power : "",
+              powers:'',
             }
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -55,12 +57,12 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
   		//实例方法
@@ -89,7 +91,8 @@
 			},
 			getMsg (){
 				this.power = this.$route.query.time;
-			}
+        this.powers = this.$route.query.powers;
+			},
   		}
     }
 </script>
@@ -103,10 +106,10 @@
 	h5{
 		max-width: 4.8rem;
 		word-break: break-all;
-		line-height: 1.4;
 		font-size: 0.22rem;
 		color: #d28326;
 		margin-bottom: 0.2rem;
+    height: 0.5rem;
 	}
 	.bg-father{
 		width: 100vw;

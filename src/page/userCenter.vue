@@ -191,6 +191,12 @@
 </script>
 
 <style scoped>
+
+  .userCenter{
+    min-height: 13.34rem;
+    overflow: auto;
+  }
+
 	.top-module{
 		width: 100%;
 		height: auto;
