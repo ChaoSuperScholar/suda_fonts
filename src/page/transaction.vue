@@ -751,7 +751,7 @@
 		background-color: #393f4c;
 	}
 	.tab-btn{
-		width: auto;
+		width: 1.5rem;
 		height: 0.8rem;
 		font-size: 0.32rem;
 		color: #b7c6e8;

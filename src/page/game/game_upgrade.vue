@@ -36,8 +36,9 @@
 								<img v-if="list_3.lv < 10" class="img-2" src="../../../static/images/game_upgrade_07.png" alt="" @click="upgrade(2)">
                 <img v-else class="img-2" src="../../../static/images/0.png" alt="" @click="upgrade(2)">
 							</div>
-							<div class="list flex-row">
-								<h3>生产力:{{msg.product}}</h3>
+							<div class="list production">
+                <h3>赠送生产力:{{msg.give}}</h3>
+								<h3>总生产力:{{msg.product}}</h3>
 							</div>
 						</div>
 						<div class="bottom-text flex-row">
@@ -60,6 +61,7 @@
         data(){
             return {
                 leve:0,
+
 				msg : [],
 				list_1 : [],
 				list_2 : [],
@@ -137,7 +139,7 @@
 		font-size: 0.28rem;
 		font-weight: bolder;
 		color: #ffd83b;
-		line-height: 1.4;
+		line-height: 1.5;
 		text-shadow: 0 0 0.06rem #463317;
 	}
 	h4{
@@ -199,6 +201,10 @@
 		margin-bottom: 0.04rem;
 		justify-content: space-between;
 	}
+  .production{
+    display: flex;
+    flex-flow: column;
+  }
 	.list-center{
 		align-items: flex-start;
 	}

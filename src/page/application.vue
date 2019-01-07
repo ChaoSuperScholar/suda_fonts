@@ -341,9 +341,14 @@
 				.then(({data}) => {
 					if (data.status == 200) {
 						console.log(data.message);
-					} else{
+					} else if(data.status == 500){
 						this.layers(data.message);
-					}
+            this.$router.push({
+              path: '/application',
+            })
+					}else {
+            this.layers(data.message);
+          }
 				})
 			},
 			getMsg (){
@@ -353,9 +358,11 @@
 						console.log(data.message);
 						this.swiperImg = data.data;
 					} else if(data.status === 10001){
+					    alert(data.message);
+            this.layers(data.message);
             this.$router.replace('indexNew');
           } else{
-						this.layers(data.message);
+            this.layers(data.message);
 					}
 				})
 			}
@@ -364,6 +371,7 @@
 </script>
 
 <style scoped>
+
 	.wrapper{
 		width: 100%;
 		height: 0;

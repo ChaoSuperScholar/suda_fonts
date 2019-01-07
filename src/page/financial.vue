@@ -61,7 +61,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -70,12 +70,12 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		filters: {
@@ -105,9 +105,14 @@
 						let res = data.data;
 						this.leftMoney = res[0];
 						this.rightMoney = res[1];
-					} else{
+					} else if(data.status==500){
 						this.layers(data.message);
-					}
+            this.$router.push({
+              path: '/application',
+            })
+					}else {
+            this.layers(data.message);
+          }
 				})
 			},
 			getList (){

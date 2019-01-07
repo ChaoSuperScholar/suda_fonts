@@ -257,6 +257,7 @@
 		justify-content: space-around;
 		padding: 0.3rem 0;
 	}
+  .bottom-list{width: 2.3rem}
 	.bottom-list img{
 		width: 0.52rem;
 		height: 0.52rem;

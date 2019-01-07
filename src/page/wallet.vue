@@ -205,14 +205,14 @@
 		margin: 0 0.2rem 0 0.3rem;
 	}
 	.list .list-right{
-		width: 100%;
+		width: 6.3rem;
 		height: auto;
 		margin-right: 0.3rem;
 	}
 	.list-text{
 		width: 100%;
 		height: 0.5rem;
-		justify-content: space-between;
+	justify-content: space-between;
 	}
 	.list-right .top h4{
 		color: #454545;

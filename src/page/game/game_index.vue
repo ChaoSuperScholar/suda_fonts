@@ -318,9 +318,14 @@
 						let res = data.data;
 						this.money = res.balance;
 						this.statusList = res;
-					} else{
+					} else if(data.status==500){
 						this.layers(data.message);
-					}
+            this.$router.push({
+              path: '/application',
+            })
+					}else {
+            this.layers(data.message);
+          }
 				})
 			},
 			getUserInfo (){
