@@ -35,6 +35,9 @@ import paymentMethod from '../page/paymentMethod'
 import addPayment from '../page/addPayment'
 import transferRecord from '../page/transferRecord'
 import popularize from '../page/popularize'
+import scan from '../page/scan'
+
+
 
 
 import index from '../page/index'
@@ -77,6 +80,11 @@ export default new Router({
             path: '/registered',
             name: 'registered',
             component: registered
+        },
+        {
+          path: '/scan',
+          name: 'scan',
+          component: scan
         },
         {
             path: '/receivables',
@@ -253,6 +261,7 @@ export default new Router({
             name: 'appeal',
             component: appeal
         },
+
 		{
 			path: '/popularize',
 			name: 'popularize',

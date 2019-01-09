@@ -6,13 +6,13 @@
 			<p>S-TOKEN集合了数字钱包系统、OTC场外交易 游戏、商城、竞猜、理财6大功能板块，并基于全球通用 标准ERC20发行S-TOKEN通证SDT.</p>
 		</div>
 		<div class="updata flex-row">
-			<div class="updata-child flex-row">
+			<div class="updata-child flex-row" @click="download">
 				<h4>版本更新</h4>
 				<div class="updata-child-right flex-row">
-					<div class="new-prompt flex-col">
+					<div class="new-prompt flex-col" v-show="show">
 						NEW
 					</div>
-					<h5>v1.02</h5>
+					<h5>v{{version}}</h5>
 				</div>
 			</div>
 		</div>
@@ -25,25 +25,30 @@
         name: 'aboutUs',
         data(){
             return {
-            	indexTitle : "关于我们"
+            	indexTitle : "关于我们",
+              show:false,
+              version:'',
+              url:'',
+              num:1
             }
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
-  			
+        this.who();
+        this.getMsg();
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		// 注册组件
@@ -52,7 +57,50 @@
 		},
   		//实例方法
   		methods: {
-  			
+        getMsg() {
+          this.axios.post('/index/suda_user/version', {
+            type : this.num
+          })
+            .then(({data}) => {
+            this.url=data.data.downloadurl;
+            if (data.status == 200) {
+                this.show=true;
+            console.log(data);
+            this.version=data.data.version;
+          } else {
+            this.show=false;
+            this.layers(data.message);
+          }
+        })
+        },
+        download:function () {
+         let _download= confirm('是否前去下载');
+          if(_download){
+              this.axios.post('/index/suda_user/sure', {
+                type : this.num
+              })
+                .then(({data}) => {
+              if (data.status == 200) {
+                console.log(data);
+                window.location.href=this.url
+              } else {
+                this.layers(data.message);
+              }
+            })
+          }
+        },
+        who:function () {
+          let u = navigator.userAgent;
+          let app = navigator.appVersion;
+          let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+          let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+          if (isAndroid) {
+           this.num=1
+          }
+          if (isIOS) {
+            this.num=2
+          }
+        }
   		}
     }
 </script>
