@@ -43,11 +43,12 @@
         data(){
             return {
             	title : "",
-				up_down : "",
-				num : "",
-				money : "",
+				      up_down : "",
+				      num : "",
+				      money : "",
               times:'',
-				lists : []
+				      lists : [],
+              page_type:''
             }
         },
         // 创建之前
@@ -65,7 +66,8 @@
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-
+          this.page_type = this.$route.query.type;
+          this.title = this.$route.query.title;
   			})
   		},
 		// 过滤器
@@ -86,11 +88,10 @@
   		//实例方法
   		methods: {
   			getMsg (){
-				let page_type = this.$route.query.type;
-
+				this.page_type = this.$route.query.type;
 				this.title = this.$route.query.title;
 				this.axios.post('/index/suda_wallet/one_coin',{
-					type : page_type
+					type : this.page_type
 				})
 				.then(({data}) => {
 					if (data.status == 200) {

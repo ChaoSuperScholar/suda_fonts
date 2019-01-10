@@ -656,7 +656,7 @@
 		position: absolute;
 		left: 0;
 		bottom: 0;
-		z-index: 20;
+		z-index: 200;
 	}
 	/* 标识 */
 	.sign{

@@ -1,4 +1,4 @@
-<script src="../../../../mall_order.js"></script>
+
 <template>
   <div class="game_bill">
     <div class="bg-father">
@@ -57,7 +57,7 @@
 
             </div>
           </div>
-          <div class="content flex-col" v-if="showRight">
+          <div class="content flex-col" v-show="showRight">
             <div class="content-top flex-col">
               <div class="content-top-top flex-row">
                 <h2>日期</h2>
@@ -312,6 +312,7 @@
                 var resultData = data.data;
                 for(var i = 0; i < resultData.length; i++) {
                   orderItems.push(resultData[i]);
+
                 }
                 var num = 2;
                 var set = setInterval(function() {

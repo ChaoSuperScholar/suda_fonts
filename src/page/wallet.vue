@@ -166,6 +166,7 @@
 		height: auto;
 		justify-content: space-between;
 		position: absolute;
+    left: .3rem;
 		top: 0.2rem;
 	}
 	.top-btn img:first-child{

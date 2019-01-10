@@ -20,8 +20,10 @@
         ws:null,
         wo:null,
         domready:null,
+        title:'',
         qrcode_content:"",
         qrcode_type:"",
+        types:''
       };
     },
     // 创建之前
@@ -35,7 +37,11 @@
     },
     // 挂载之后
     mounted: function () {
-      this.init();
+
+      this.init(
+
+      );
+
     },
     // 销毁解绑
     beforeDestroy: function () {
@@ -73,6 +79,9 @@
         }else{
           document.addEventListener( "plusready", this.plusReady, false );
         }
+        this.title = this.$route.query.title;
+        this.types = this.$route.query.type;
+
       },
       plusReady() {
         if(this.ws || !window.plus) {
@@ -107,13 +116,15 @@
       cancelScan(){
         if (!window.plus) return
         this.scan.close();
-        // alert("content:"+this.qrcode_content+",type:"+this.qrcode_content);
+//         alert("content:"+this.qrcode_content+",type:"+this.qrcode_content);
         if(typeof this.$route.query.route_name != "undefined"){
           this.$router.push({
-            path:this.$route.query.route_name,
+            path:'/walletTransfer',
             query:{
-                qrcode_type:this.qrcode_type,
-                qrcode_content:this.qrcode_content}
+                qrcode_content:this.qrcode_content,
+                title: this.title,
+                type: this.types
+            }
           });
         }else{
           // alert('路由错误');

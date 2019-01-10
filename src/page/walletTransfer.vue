@@ -43,10 +43,10 @@
         data(){
             return {
             	title : "",
-				address : "",
-				inputNumber : "",
-				passWord : "",
-				proportion : ""
+              address : "",
+              inputNumber : "",
+              passWord : "",
+              proportion : ""
             }
         },
         // 创建之前
@@ -56,7 +56,7 @@
   		//创建之后
   		created: function (){
 			this.getMsg();
-			this.address = this.$route.query.address;
+			this.address = this.$route.query.qrcode_content;
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -64,6 +64,7 @@
   		},
   		// 挂载之后
   		mounted: function(){
+  		    this.init();
   			this.$nextTick(function(){
   				this.title = this.$route.query.title;
   			})
@@ -83,6 +84,9 @@
 		},
   		//实例方法
   		methods: {
+        init(){
+         this.address = this.$route.query.qrcode_content;
+        },
   			return_page (){
 				/* this.$router.replace('walletDetails'); */
 				this.$router.push({
@@ -135,7 +139,7 @@
 						console.log(data);
 						this.proportion = data.data;
 					} else{
-						this.layers(data.message);
+//						this.layers(data.message);
 						console.log(data.message);
 					}
 				})
@@ -150,9 +154,12 @@
 				})
 			},
         goScan:function () {
-          this.$router.push({
-            path : '/scan'
-          })
+          if(window.location.origin=="file://"){
+            window.plus.webview.open(window.location.origin+window.location.pathname+'#/scan?route_name=walletTransfer&title='+this.$route.query.title+'&type='+this.$route.query.type);
+          }else{
+            window.plus.webview.open(window.location.origin+'#/scan?route_name=walletTransfer&title='+this.$route.query.title+'&type='+this.$route.query.type);
+          }
+
         }
   		}
     }
