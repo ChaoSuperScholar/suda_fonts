@@ -5,12 +5,7 @@
 				<img class="img-left" src="../../static/images/return.png"/>
 			</router-link>
 			<div class="top-tab flex-row">
-				<div class="top-tab-list flex-col" :class="{activeTab:isTabLeft}" @click="clickTabLeft()">
-					<h3>购买</h3>
-				</div>
-				<div class="top-tab-list flex-col" :class="{activeTab:isTabRight}" @click="clickTabRight()">
-					<h3>出售</h3>
-				</div>
+					<h3>订单</h3>
 			</div>
 			<router-link to="advertising">
 				<div class="top-right flex-row">
@@ -60,8 +55,11 @@
 								<img src="../../static/images/transaction_04.png" alt="" v-if="list.alipay == 1">
 								<img src="../../static/images/transaction_05.png" alt="" v-if="list.wechat == 1">
 							</div>
-							<h5>购买单价:&nbsp;{{list.price|numFilter}}</h5>
-						</div>
+              <p v-if="list.type==2" style="color: #ff6d3a;font-size: .3rem;padding-right: .3rem">类型：购买</p>
+              <p v-else style="color: #3a64ff;font-size: .3rem;padding-right: .3rem">类型：出售</p>
+              <h5>购买单价:&nbsp;{{list.price|numFilter}}</h5>
+
+            </div>
 					</div>
 				</div>
 				<!--没有数据-->
@@ -222,8 +220,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="tab-right flex-col" v-show="showRight">
-			<!-- 出售顶部切换 -->
+<!--		<div class="tab-right flex-col" v-show="showRight">
+			&lt;!&ndash; 出售顶部切换 &ndash;&gt;
 			<div class="tab-father flex-row">
 				<template v-for="(tab2,index) in tabsName2">
 					<div class="tab-btn flex-col" @click="tabsSwitch2(tab2,index)" v-bind:class="{active2:tab2.isActive}">
@@ -232,7 +230,7 @@
 				</template>
 			</div>
 			<div class="tab-card2" style="display: block;">
-				<!-- 循环列表list -->
+				&lt;!&ndash; 循环列表list &ndash;&gt;
 				<div class="list flex-col" v-for="item in items" @click="goDetails(item)">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
@@ -264,13 +262,13 @@
 						</div>
 					</div>
 				</div>
-				<!--没有数据-->
+				&lt;!&ndash;没有数据&ndash;&gt;
 				<div class="no-data flex-row" v-if="!items.length">
 					暂无数据
 				</div>
 			</div>
 			<div class="tab-card2">
-				<!-- 循环列表list -->
+				&lt;!&ndash; 循环列表list &ndash;&gt;
 				<div class="list flex-col" v-for="item in items" @click="goDetails(item)">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
@@ -302,13 +300,13 @@
 						</div>
 					</div>
 				</div>
-				<!--没有数据-->
+				&lt;!&ndash;没有数据&ndash;&gt;
 				<div class="no-data flex-row" v-if="!items.length">
 					暂无数据
 				</div>
 			</div>
 			<div class="tab-card2">
-				<!-- 循环列表list -->
+				&lt;!&ndash; 循环列表list &ndash;&gt;
 				<div class="list flex-col" v-for="item in items" @click="goDetails(item)">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
@@ -340,13 +338,13 @@
 						</div>
 					</div>
 				</div>
-				<!--没有数据-->
+				&lt;!&ndash;没有数据&ndash;&gt;
 				<div class="no-data flex-row" v-if="!items.length">
 					暂无数据
 				</div>
 			</div>
 			<div class="tab-card2">
-				<!-- 循环列表list -->
+				&lt;!&ndash; 循环列表list &ndash;&gt;
 				<div class="list flex-col" v-for="item in items" @click="goDetails(item)">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
@@ -378,13 +376,13 @@
 						</div>
 					</div>
 				</div>
-				<!--没有数据-->
+				&lt;!&ndash;没有数据&ndash;&gt;
 				<div class="no-data flex-row" v-if="!items.length">
 					暂无数据
 				</div>
 			</div>
 			<div class="tab-card2">
-				<!-- 循环列表list -->
+				&lt;!&ndash; 循环列表list &ndash;&gt;
 				<div class="list flex-col" v-for="item in items" @click="goDetails(item)">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
@@ -416,12 +414,12 @@
 						</div>
 					</div>
 				</div>
-				<!--没有数据-->
+				&lt;!&ndash;没有数据&ndash;&gt;
 				<div class="no-data flex-row" v-if="!items.length">
 					暂无数据
 				</div>
 			</div>
-		</div>
+		</div>-->
 	</div>
 </template>
 
@@ -435,56 +433,56 @@
             	showLeft : true,
             	showRight : false,
 				tabsName: [
-					{  
-						name: "全部",  
+					{
+						name: "全部",
 						isActive: true,
 						status : "1"
 					},
-					{  
-						name: "未付款",  
+					{
+						name: "未付款",
 						isActive: false,
 						status : "2"
 					},
-					{  
-						name: "已付款",  
+					{
+						name: "已付款",
 						isActive: false,
 						status : "3"
 					},
-					{  
-						name: "申诉中",  
+					{
+						name: "申诉中",
 						isActive: false,
 						status : "4"
 					},
-					{  
-						name: "已取消",  
+					{
+						name: "已取消",
 						isActive: false,
 						status : "5"
 					}
-				],  
+				],
 				active: false,
 				tabsName2:[
-					{  
-						name: "全部",  
+					{
+						name: "全部",
 						isActive: true,
 						status : "1"
 					},
-					{  
-						name: "未付款",  
+					{
+						name: "未付款",
 						isActive: false,
 						status : "2"
 					},
-					{  
-						name: "已付款",  
+					{
+						name: "已付款",
 						isActive: false,
 						status : "3"
 					},
-					{  
-						name: "申诉中",  
+					{
+						name: "申诉中",
 						isActive: false,
 						status : "4"
 					},
-					{  
-						name: "已取消",  
+					{
+						name: "已取消",
 						isActive: false,
 						status : "5"
 					}
@@ -496,21 +494,21 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
   			this.getPayETH();
-			this.getSellETH();
+//			this.getSellETH();
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		filters: {
@@ -535,19 +533,18 @@
   				this.showLeft = false;
   				this.showRight = true
   			},
-			tabsSwitch: function(tab,tabIndex) {  
-					let tabCardCollection = document.querySelectorAll(".tab-card"),  
-						len = tabCardCollection.length;  
-							for(var i = 0; i < len; i++) {  
-								tabCardCollection[i].style.display = "none";  
-							this.tabsName[i].isActive = false;  
-						}  
-					this.tabsName[tabIndex].isActive = true;  
+			tabsSwitch: function(tab,tabIndex) {
+					let tabCardCollection = document.querySelectorAll(".tab-card"),
+						len = tabCardCollection.length;
+							for(var i = 0; i < len; i++) {
+								tabCardCollection[i].style.display = "none";
+							this.tabsName[i].isActive = false;
+						}
+					this.tabsName[tabIndex].isActive = true;
 					tabCardCollection[tabIndex].style.display = "block";
 					console.log(tab.status);
 					this.axios.post('/index/suda_order_buy/order_list',{
 						page : '1',
-						type : '1',
 						status : tab.status
 					})
 					.then(({data}) => {
@@ -559,14 +556,14 @@
 						}
 					})
 			},
-			tabsSwitch2: function(tab2,tabIndex2) {  
-					let tabCardCollection2 = document.querySelectorAll(".tab-card2"),  
-						len = tabCardCollection2.length;  
-							for(var i = 0; i < len; i++) {  
-								tabCardCollection2[i].style.display = "none";  
-							this.tabsName2[i].isActive = false;  
-						}  
-					this.tabsName2[tabIndex2].isActive = true;  
+			tabsSwitch2: function(tab2,tabIndex2) {
+					let tabCardCollection2 = document.querySelectorAll(".tab-card2"),
+						len = tabCardCollection2.length;
+							for(var i = 0; i < len; i++) {
+								tabCardCollection2[i].style.display = "none";
+							this.tabsName2[i].isActive = false;
+						}
+					this.tabsName2[tabIndex2].isActive = true;
 					tabCardCollection2[tabIndex2].style.display = "block";
 					console.log(tab2.status);
 					this.axios.post('/index/suda_order_buy/order_list',{
@@ -582,13 +579,12 @@
 							this.layers(data.message);
 						}
 					})
-					
+
 			},
 			// 获取购买列表
 			getPayETH (){
 				this.axios.post('/index/suda_order_buy/order_list',{
 					page : '1',
-					type : '1',
 					status : '1'
 				})
 				.then(({data}) => {
@@ -601,7 +597,7 @@
 				})
 			},
 			// 获取出售列表
-			getSellETH (){
+		/*	getSellETH (){
 				this.axios.post('/index/suda_order_buy/order_list',{
 					page : '1',
 					type : '2',
@@ -615,7 +611,7 @@
 						this.layers(data.message);
 					}
 				})
-			},
+			},*/
 			goDetails (list){
 				console.log(list.id);
 				this.$router.push({
@@ -680,8 +676,8 @@
 	.top-tab{
 		width: 3.5rem;
 		height: 0.64rem;
-		border: 0.02rem solid #8a9cc2;
 		border-radius: 0.1rem;
+    color: #ffffff;
 		margin-left: 1rem;
 		overflow: hidden;
 	}

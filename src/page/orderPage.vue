@@ -44,10 +44,11 @@
 						<img src="../../static/images/transaction_03.png" alt="">
 						<h4>银行卡</h4>
 					</div>
+          <h4>卡号:&nbsp;{{list.bank.account}}</h4>
 				</div>
 				<div class="list-bottom flex-row">
-					<h4>名称:&nbsp;{{list.bank.name}}</h4>
-					<h4>账户:&nbsp;{{list.bank.account}}</h4>
+					<h4>姓名:&nbsp;{{list.bank.name}}</h4>
+					<h4>开户行:&nbsp;{{list.bank.bank}}</h4>
 				</div>
 			</div>
 		</div>
@@ -58,10 +59,13 @@
 						<img src="../../static/images/transaction_04.png" alt="">
 						<h4>支付宝</h4>
 					</div>
-					<img src="../../static/images/orderPage_02.png" alt="" v-show="false">
+					<img class="code" @click="Zshow=!Zshow" :src="list.alipay.code" alt="">
+          <div class="tan flex-col " v-show="Zshow" @click="Zshow=!Zshow">
+            <img class="code " :src="list.alipay.code" alt="">
+          </div>
 				</div>
 				<div class="list-bottom flex-row">
-					<h4>名称:&nbsp;{{list.alipay.name}}</h4>
+					<h4>姓名:&nbsp;{{list.alipay.name}}</h4>
 					<h4>账户:&nbsp;{{list.alipay.account}}</h4>
 				</div>
 			</div>
@@ -73,10 +77,13 @@
 						<img src="../../static/images/transaction_05.png" alt="">
 						<h4>微信</h4>
 					</div>
-					<img src="../../static/images/orderPage_02.png" alt="" v-show="false">
+					<img class="code" @click="Wshow=!Wshow" :src="list.wechat.code" alt="">
+          <div class="tan flex-col " v-show="Wshow" @click="Wshow=!Wshow">
+            <img class="code " :src="list.wechat.code" alt="">
+          </div>
 				</div>
 				<div class="list-bottom flex-row">
-					<h4>名称:&nbsp;{{list.wechat.name}}</h4>
+					<h4>姓名:&nbsp;{{list.wechat.name}}</h4>
 					<h4>账户:&nbsp;{{list.wechat.account}}</h4>
 				</div>
 			</div>
@@ -117,11 +124,11 @@
 			<div class="btn-center btn flex-col" v-if="list.status == 1&&list.uid == list.buyer_uid" @click="payMoney(list)">
 				确认付款
 			</div>
-			<div class="btn-center btn flex-col" v-else="" @click="noData()">
-				发起申述
+			<div class="btn-center btn flex-col" v-if="C" @click="noData()">
+				申述中
 			</div>
 			<!-- 申述跳转 -->
-			<div class="btn-center btn flex-col" v-else="" @click="appeal()" v-show="false">
+			<div class="btn-center btn flex-col" v-if="status==2" @click="appeal()">
 				发起申述
 			</div>
 			<div class="btn-right btn flex-col" v-if="list.status == 1&&list.type == 1" @click="cancelBtn(list)">
@@ -155,12 +162,15 @@
         name: 'orderPage',
         data(){
             return {
-            	list : []
+            	list : [],
+              status:'',
+              Wshow:false,
+              Zshow:false
             }
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -168,12 +178,12 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		filters: {
@@ -197,6 +207,7 @@
 					if (data.status == 200) {
 						console.log(data);
 						this.list = data.data;
+						this.status=data.data.status;
 					} else{
 						this.layers(data.message);
 					}
@@ -322,6 +333,19 @@
 		background-color: #ffffff;
 		border-bottom: 0.01rem solid #dadee6;
 	}
+  .list-father .tan{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+  }
+  .list-father .tan img{
+    height: auto;
+    width: 3.5rem;
+  }
 	.list{
 		width: 6.9rem;
 		height: auto;

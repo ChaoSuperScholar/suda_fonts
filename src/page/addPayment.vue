@@ -3,20 +3,24 @@
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="body  flex-col">
 			<div @click="selectList" class="select flex-row">
-				<h4>选择币种：<span>{{chooseTitle}}</span></h4>
+				<h4>收款方式：<span>{{chooseTitle}}</span></h4>
 				<img src="../../static/images/receivables_01.png" alt="">
 			</div>
 			<div v-show="isShowSelect" v-for="list in lists" class="select-options flex-row" @click="choose(list)">
 				<h4>{{list.card}}</h4>
 			</div>
 			<div class="list flex-row">
-				<h4>名称:</h4>
+				<h4>真实姓名:</h4>
 				<input type="text" value="" placeholder="输入名称" v-model="inputName"/>
 			</div>
 			<div class="list flex-row">
-				<h4>账户:</h4>
+				<h4>账号:</h4>
 				<input type="text" value="" placeholder="输入账户" v-model="inputAccount"/>
 			</div>
+      <div v-show="flag==1" class="list flex-row">
+        <h4>开户行:</h4>
+        <input type="text" value="" placeholder="输入账户" v-model="bank"/>
+      </div>
 			<div class="list flex-row">
 				<h4>交易密码:</h4>
 				<input type="password" value="" placeholder="输入交易密码" v-model="inputPassword"/>
@@ -57,6 +61,7 @@
 				],
 				isShowSelect : false,
 				chooseTitle : "银行卡",
+              bank:'',
 				inputName : '',
 				inputAccount : '',
 				inputPassword : '',
@@ -66,20 +71,20 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
-  			
+
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		// 注册组件
@@ -104,7 +109,8 @@
 					account : this.inputAccount,
 					pay_password : this.inputPassword,
 					flag : this.flag,
-					code : this.upImg1
+					code : this.upImg1,
+          bank:this.bank
 				})
 				.then(({data}) => {
 					if (data.status === 200) {

@@ -128,7 +128,9 @@
           });
         }else{
           // alert('路由错误');
-          this.$router.go(-1);
+          this.$router.push({
+              path:'/walletTransfer'
+          });
         }
       },
       // 开启闪光灯

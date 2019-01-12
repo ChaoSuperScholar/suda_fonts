@@ -7,7 +7,8 @@ import store from './store/store'
 import axios from 'axios'
 import Qs from 'qs'
 import './assets/css/base.css' /*引入公共样式*/
-import './assets/js/flexible.js' /*引入公共js文件*/
+import './assets/js/flexible.js'
+
 
 import noData from './components/noData.vue'
 Vue.component('nodata',noData);

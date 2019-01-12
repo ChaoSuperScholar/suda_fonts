@@ -63,10 +63,11 @@
           })
             .then(({data}) => {
             this.url=data.data.downloadurl;
+              this.version=data.data.version;
             if (data.status == 200) {
                 this.show=true;
             console.log(data);
-            this.version=data.data.version;
+              this.version=data.data.version;
           } else {
             this.show=false;
             this.layers(data.message);
@@ -74,7 +75,7 @@
         })
         },
         download:function () {
-         let _download= confirm('是否前去下载');
+         let _download= confirm('是否前去下载?');
           if(_download){
               this.axios.post('/index/suda_user/sure', {
                 type : this.num
@@ -82,7 +83,7 @@
                 .then(({data}) => {
               if (data.status == 200) {
                 console.log(data);
-                window.location.href=this.url
+                this.JX_download(this.url)
               } else {
                 this.layers(data.message);
               }
@@ -100,7 +101,39 @@
           if (isIOS) {
             this.num=2
           }
-        }
+        },
+        JX_download(url){
+          plus.nativeUI.showWaiting( "下载中..." );
+          //创建下载管理对象
+          var SX_down= plus.downloader.createDownload(url,{}, function ( d, status ) {
+            // 下载完成
+            if ( status == 200 ) {
+              plus.nativeUI.closeWaiting();
+              //下载成功后的回调函数
+              plus.nativeUI.toast( "下载成功，准备安装" + d.filename );
+              plus.runtime.install(
+                d.filename,
+                {},
+                function(){
+                  plus.nativeUI.toast('安装成功');
+                  plus.runtime.restart();
+                },
+                function(e){
+                  plus.nativeUI.toast(d.filename+'安装失败');
+
+                  alert(JSON.stringify(e))
+
+                }
+              );
+            } else {
+              alert( "下载失败 " + status );
+            }
+          });
+
+          //开始下载任务
+
+          SX_down.start();
+        },
   		}
     }
 </script>

@@ -655,8 +655,8 @@
 		height: 6.76rem;
 		position: absolute;
 		left: 0;
-		bottom: 0;
-		z-index: 200;
+		bottom: -.2rem;
+		z-index: 20;
 	}
 	/* 标识 */
 	.sign{
@@ -670,8 +670,8 @@
 		bottom: 0.6rem;
 	}
 	.test-workshop .sign-2{
-		left: 0.8rem;
-		top: 0.6rem;
+		left: 0.9rem;
+		top: 0.45rem;
 	}
 	.test-workshop .sign-1{
 		left: 2.5rem;
@@ -679,7 +679,7 @@
 	}
 	.stamping-plant .sign-3{
 		left: 3.3rem;
-		top: 0;
+		top: -.1rem;
 	}
 	.stamping-plant .sign-2{
 		left: 2.2rem;
