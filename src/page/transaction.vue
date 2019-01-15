@@ -672,7 +672,7 @@
           if (data.status === 200){
 
             }else if(data.status === 202) {
-            let isTrue = confirm("是否前去认证？");
+            let isTrue = confirm("您尚未进行身份认证,是否前去认证？");
             if (isTrue) {
               this.$router.push({
                 path: '/identity',
@@ -681,9 +681,12 @@
           }else if( data.status === 203){
                 this.layers(data.message);
           }else if(data.status === 213) {
-               this.$router.push({
-                   path:'/paymentMethod',
-               })
+            let isBinding = confirm("您尚绑定支付方式,是否前去绑定？");
+            if(isBinding){
+              this.$router.push({
+                path:'/paymentMethod',
+              })
+            }
           }
 
           })

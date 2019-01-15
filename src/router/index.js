@@ -36,6 +36,7 @@ import addPayment from '../page/addPayment'
 import transferRecord from '../page/transferRecord'
 import popularize from '../page/popularize'
 import scan from '../page/scan'
+import news from '../page/news'
 
 
 
@@ -68,8 +69,8 @@ export default new Router({
     /*mode:'history',*/
     routes: [{
             path: '/',
-            name: 'start',
-            component: start
+            name: 'wallet',
+            component: wallet
         },
         {
             path: '/indexNew',
@@ -80,6 +81,11 @@ export default new Router({
             path: '/registered',
             name: 'registered',
             component: registered
+        },
+        {
+          path: '/news',
+          name: 'news',
+          component: news
         },
         {
           path: '/scan',

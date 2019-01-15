@@ -105,7 +105,7 @@
 		<div class="list-father flex-col">
 			<div class="list flex-row">
 				<h4>订单编号</h4>
-				<h4>58468468464646</h4>
+				<h4>{{list.order_sn}}</h4>
 			</div>
 		</div>
 		<div class="line-block"></div>
@@ -124,9 +124,9 @@
 			<div class="btn-center btn flex-col" v-if="list.status == 1&&list.uid == list.buyer_uid" @click="payMoney(list)">
 				确认付款
 			</div>
-			<div class="btn-center btn flex-col" v-if="C" @click="noData()">
+		<!--	<div class="btn-center btn flex-col" v-if="C" @click="noData()">
 				申述中
-			</div>
+			</div>-->
 			<!-- 申述跳转 -->
 			<div class="btn-center btn flex-col" v-if="status==2" @click="appeal()">
 				发起申述
@@ -265,7 +265,12 @@
 				})
 			},
 			noData (){
-				this.layers("暂未开放")
+				this.$router.push({
+				    path:'news',
+            query:{
+              id:this.$route.query.id,
+            }
+        })
 			},
 			//点击 发起申诉 按钮操作
 			appeal () {

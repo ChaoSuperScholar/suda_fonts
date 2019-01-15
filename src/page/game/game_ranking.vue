@@ -26,8 +26,11 @@
 						</div>
 					</div>
           <div class="total">
-
-            <h2>我的社区总人数：{{lists.length}}</h2>
+            <h4 class="types"  v-if="list.level == 1">我的头衔：普通</h4>
+            <h4 class="types"  v-if="list.level == 2">我的头衔：理事长</h4>
+            <h4 class="types"  v-if="list.level == 3">我的头衔：秘书长</h4>
+            <h4 class="types"  v-if="list.level == 4">我的头衔：会长</h4>
+            <h4>我的社区总人数：{{lists.length}}</h4>
           </div>
 					<div class="close-btn" @click="goIndex()">
 						<img src="../../../static/images/game/game_play_02.png" alt="">
@@ -43,7 +46,8 @@
         name: 'game_ranking',
         data(){
             return {
-            	lists : []
+            	lists : [],
+              list:','
             }
         },
         // 创建之前
@@ -53,6 +57,7 @@
   		//创建之后
   		created: function (){
   			this.getMsg();
+  			this.Title();
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -87,7 +92,18 @@
 						this.layers(data.message);
 					}
 				})
-			}
+			},
+        Title(){
+          this.axios.get('/index/suda_game/myAccount')
+            .then(({data}) => {
+              if (data.status == 200) {
+                console.log(data);
+                this.list = data.data;
+              } else{
+                this.layers(data.message);
+              }
+            })
+        }
   		}
     }
 </script>
@@ -196,17 +212,16 @@
 	}
 
   .total{
-    width: 5.46rem;
+    width: 5.26rem;
     height: 1rem;
     display: flex;
     flex-flow: row;
     justify-content: space-between;
   }
-  .total h2{
-    padding-top: .2rem;
+  .total h4{
+    padding-top: .3rem;
+    font-size: .26rem;
     color: #684d46;
-    text-align: center;
-    width: 100%;
 
   }
   h4 img{
