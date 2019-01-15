@@ -79,10 +79,13 @@
 					})
 					.then(({data}) => {
 						if (data.status == 200) {
-							this.layers(data.message);
-							setTimeout(() => {
-								this.$router.replace('game_index');
-							},1500)
+						   let isTrue= confirm('还剩'+this.$route.query.time+'小时，是否前去充电');
+						   if (isTrue){
+                 this.layers(data.message);
+                 setTimeout(() => {
+                   this.$router.replace('game_index');
+               },1500)
+               }
 						} else{
 							this.layers(data.message);
 						}
@@ -161,6 +164,6 @@
 		color: #f9cc73;
 	}
 	.list h4{
-		width: 0.8rem;
+		width: 0.85rem;
 	}
 </style>

@@ -10,7 +10,7 @@
 			<router-link to="advertising">
 				<div class="top-right flex-row">
 					<img src="../../static/images/order_01.png" alt="">
-					<h3>详情</h3>
+					<h3>委托单</h3>
 				</div>
 			</router-link>
 		</div>
@@ -31,10 +31,8 @@
 				<div class="list flex-col" v-for="list in lists" @click="goDetails(list)">
 					<div class="list-top flex-row">
 						<div class="list-top-left flex-row">
-							<div class="avatar">
-								<img :src="list.avatar" alt="">
-							</div>
-							<h4>{{list.nickname}}</h4>
+              <p v-if="list.type==2" style="color: #ed573f; font-weight:600;font-size: .3rem;padding-right: .3rem">购买 <span>{{list.coin}}</span></p>
+              <p v-else style="color: #50c165;font-size: .3rem;font-weight:600;padding-right: .3rem">出售 <span>{{list.coin}}</span></p>
 						</div>
 						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.buyer_uid">待付款</h4>
 						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.buyer_uid">等待放行</h4>
@@ -49,16 +47,17 @@
 							<h4>金额&nbsp;{{list.total|numFilter}}CNY</h4>
 							<h5>购买数量:&nbsp;{{list.num|numFilter}}</h5>
 						</div>
+            <div class="list-bottom-top flex-row">
+              <h4 style="font-weight: normal">商家：{{list.nickname}}</h4>
+              <h5>购买单价:&nbsp;{{list.num|numFilter}}</h5>
+            </div>
 						<div class="list-bottom-bottom flex-row">
 							<div class="bottom-left flex-row">
 								<img src="../../static/images/transaction_03.png" alt="" v-if="list.bank == 1">
 								<img src="../../static/images/transaction_04.png" alt="" v-if="list.alipay == 1">
 								<img src="../../static/images/transaction_05.png" alt="" v-if="list.wechat == 1">
 							</div>
-              <p v-if="list.type==2" style="color: #ff6d3a;font-size: .3rem;padding-right: .3rem">类型：购买</p>
-              <p v-else style="color: #3a64ff;font-size: .3rem;padding-right: .3rem">类型：出售</p>
-              <h5>购买单价:&nbsp;{{list.price|numFilter}}</h5>
-
+              <h5>{{list.created_at}}</h5>
             </div>
 					</div>
 				</div>
@@ -70,35 +69,37 @@
 			<div class="tab-card">
 				<!-- 循环列表list -->
 				<div class="list flex-col" v-for="list in lists" @click="goDetails(list)">
-					<div class="list-top flex-row">
-						<div class="list-top-left flex-row">
-							<div class="avatar">
-								<img :src="list.avatar" alt="">
-							</div>
-							<h4>{{list.nickname}}</h4>
-						</div>
-						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.buyer_uid">待付款</h4>
-						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.buyer_uid">等待放行</h4>
-						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.seller_uid">等待付款</h4>
-						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.seller_uid">待放行</h4>
-						<h4 class="h4-blue" v-if="list.status == 3">完成</h4>
-						<h4 class="h4-gray" v-if="list.status == -1">撤销</h4>
-						<h4 class="h4-red" v-if="list.status == 4">申诉中</h4>
-					</div>
-					<div class="list-bottom flex-col">
-						<div class="list-bottom-top flex-row">
-							<h4>金额&nbsp;{{list.total|numFilter}}CNY</h4>
-							<h5>购买数量:&nbsp;{{list.num|numFilter}}</h5>
-						</div>
-						<div class="list-bottom-bottom flex-row">
-							<div class="bottom-left flex-row">
-								<img src="../../static/images/transaction_03.png" alt="" v-if="list.bank == 1">
-								<img src="../../static/images/transaction_04.png" alt="" v-if="list.alipay == 1">
-								<img src="../../static/images/transaction_05.png" alt="" v-if="list.wechat == 1">
-							</div>
-							<h5>购买单价:&nbsp;{{list.price|numFilter}}</h5>
-						</div>
-					</div>
+          <div class="list-top flex-row">
+            <div class="list-top-left flex-row">
+              <p v-if="list.type==2" style="color: #ed573f; font-weight:600;font-size: .3rem;padding-right: .3rem">购买 <span>{{list.coin}}</span></p>
+              <p v-else style="color: #50c165;font-size: .3rem;font-weight:600;padding-right: .3rem">出售 <span>{{list.coin}}</span></p>
+            </div>
+            <h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.buyer_uid">待付款</h4>
+            <h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.buyer_uid">等待放行</h4>
+            <h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.seller_uid">等待付款</h4>
+            <h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.seller_uid">待放行</h4>
+            <h4 class="h4-blue" v-if="list.status == 3">完成</h4>
+            <h4 class="h4-gray" v-if="list.status == -1">撤销</h4>
+            <h4 class="h4-red" v-if="list.status == 4">申诉中</h4>
+          </div>
+          <div class="list-bottom flex-col">
+            <div class="list-bottom-top flex-row">
+              <h4>金额&nbsp;{{list.total|numFilter}}CNY</h4>
+              <h5>购买数量:&nbsp;{{list.num|numFilter}}</h5>
+            </div>
+            <div class="list-bottom-top flex-row">
+              <h4 style="font-weight: normal">商家：{{list.nickname}}</h4>
+              <h5>购买单价:&nbsp;{{list.num|numFilter}}</h5>
+            </div>
+            <div class="list-bottom-bottom flex-row">
+              <div class="bottom-left flex-row">
+                <img src="../../static/images/transaction_03.png" alt="" v-if="list.bank == 1">
+                <img src="../../static/images/transaction_04.png" alt="" v-if="list.alipay == 1">
+                <img src="../../static/images/transaction_05.png" alt="" v-if="list.wechat == 1">
+              </div>
+              <h5>{{list.created_at}}</h5>
+            </div>
+          </div>
 				</div>
 				<!--没有数据-->
 				<div class="no-data flex-row" v-if="!lists.length">
@@ -108,35 +109,37 @@
 			<div class="tab-card">
 				<!-- 循环列表list -->
 				<div class="list flex-col" v-for="list in lists" @click="goDetails(list)">
-					<div class="list-top flex-row">
-						<div class="list-top-left flex-row">
-							<div class="avatar">
-								<img :src="list.avatar" alt="">
-							</div>
-							<h4>{{list.nickname}}</h4>
-						</div>
-						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.buyer_uid">待付款</h4>
-						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.buyer_uid">等待放行</h4>
-						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.seller_uid">等待付款</h4>
-						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.seller_uid">待放行</h4>
-						<h4 class="h4-blue" v-if="list.status == 3">完成</h4>
-						<h4 class="h4-gray" v-if="list.status == -1">撤销</h4>
-						<h4 class="h4-red" v-if="list.status == 4">申诉中</h4>
-					</div>
-					<div class="list-bottom flex-col">
-						<div class="list-bottom-top flex-row">
-							<h4>金额&nbsp;{{list.total|numFilter}}CNY</h4>
-							<h5>购买数量:&nbsp;{{list.num|numFilter}}</h5>
-						</div>
-						<div class="list-bottom-bottom flex-row">
-							<div class="bottom-left flex-row">
-								<img src="../../static/images/transaction_03.png" alt="" v-if="list.bank == 1">
-								<img src="../../static/images/transaction_04.png" alt="" v-if="list.alipay == 1">
-								<img src="../../static/images/transaction_05.png" alt="" v-if="list.wechat == 1">
-							</div>
-							<h5>购买单价:&nbsp;{{list.price|numFilter}}</h5>
-						</div>
-					</div>
+          <div class="list-top flex-row">
+            <div class="list-top-left flex-row">
+              <p v-if="list.type==2" style="color: #ed573f; font-weight:600;font-size: .3rem;padding-right: .3rem">购买 <span>{{list.coin}}</span></p>
+              <p v-else style="color: #50c165;font-size: .3rem;font-weight:600;padding-right: .3rem">出售 <span>{{list.coin}}</span></p>
+            </div>
+            <h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.buyer_uid">待付款</h4>
+            <h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.buyer_uid">等待放行</h4>
+            <h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.seller_uid">等待付款</h4>
+            <h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.seller_uid">待放行</h4>
+            <h4 class="h4-blue" v-if="list.status == 3">完成</h4>
+            <h4 class="h4-gray" v-if="list.status == -1">撤销</h4>
+            <h4 class="h4-red" v-if="list.status == 4">申诉中</h4>
+          </div>
+          <div class="list-bottom flex-col">
+            <div class="list-bottom-top flex-row">
+              <h4>金额&nbsp;{{list.total|numFilter}}CNY</h4>
+              <h5>购买数量:&nbsp;{{list.num|numFilter}}</h5>
+            </div>
+            <div class="list-bottom-top flex-row">
+              <h4 style="font-weight: normal">商家：{{list.nickname}}</h4>
+              <h5>购买单价:&nbsp;{{list.num|numFilter}}</h5>
+            </div>
+            <div class="list-bottom-bottom flex-row">
+              <div class="bottom-left flex-row">
+                <img src="../../static/images/transaction_03.png" alt="" v-if="list.bank == 1">
+                <img src="../../static/images/transaction_04.png" alt="" v-if="list.alipay == 1">
+                <img src="../../static/images/transaction_05.png" alt="" v-if="list.wechat == 1">
+              </div>
+              <h5>{{list.created_at}}</h5>
+            </div>
+          </div>
 				</div>
 				<!--没有数据-->
 				<div class="no-data flex-row" v-if="!lists.length">
@@ -146,35 +149,37 @@
 			<div class="tab-card">
 				<!-- 循环列表list -->
 				<div class="list flex-col" v-for="list in lists" @click="goDetails(list)">
-					<div class="list-top flex-row">
-						<div class="list-top-left flex-row">
-							<div class="avatar">
-								<img :src="list.avatar" alt="">
-							</div>
-							<h4>{{list.nickname}}</h4>
-						</div>
-						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.buyer_uid">待付款</h4>
-						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.buyer_uid">等待放行</h4>
-						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.seller_uid">等待付款</h4>
-						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.seller_uid">待放行</h4>
-						<h4 class="h4-blue" v-if="list.status == 3">完成</h4>
-						<h4 class="h4-gray" v-if="list.status == -1">撤销</h4>
-						<h4 class="h4-red" v-if="list.status == 4">申诉中</h4>
-					</div>
-					<div class="list-bottom flex-col">
-						<div class="list-bottom-top flex-row">
-							<h4>金额&nbsp;{{list.total|numFilter}}CNY</h4>
-							<h5>购买数量:&nbsp;{{list.num|numFilter}}</h5>
-						</div>
-						<div class="list-bottom-bottom flex-row">
-							<div class="bottom-left flex-row">
-								<img src="../../static/images/transaction_03.png" alt="" v-if="list.bank == 1">
-								<img src="../../static/images/transaction_04.png" alt="" v-if="list.alipay == 1">
-								<img src="../../static/images/transaction_05.png" alt="" v-if="list.wechat == 1">
-							</div>
-							<h5>购买单价:&nbsp;{{list.price|numFilter}}</h5>
-						</div>
-					</div>
+          <div class="list-top flex-row">
+            <div class="list-top-left flex-row">
+              <p v-if="list.type==2" style="color: #ed573f; font-weight:600;font-size: .3rem;padding-right: .3rem">购买 <span>{{list.coin}}</span></p>
+              <p v-else style="color: #50c165;font-size: .3rem;font-weight:600;padding-right: .3rem">出售 <span>{{list.coin}}</span></p>
+            </div>
+            <h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.buyer_uid">待付款</h4>
+            <h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.buyer_uid">等待放行</h4>
+            <h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.seller_uid">等待付款</h4>
+            <h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.seller_uid">待放行</h4>
+            <h4 class="h4-blue" v-if="list.status == 3">完成</h4>
+            <h4 class="h4-gray" v-if="list.status == -1">撤销</h4>
+            <h4 class="h4-red" v-if="list.status == 4">申诉中</h4>
+          </div>
+          <div class="list-bottom flex-col">
+            <div class="list-bottom-top flex-row">
+              <h4>金额&nbsp;{{list.total|numFilter}}CNY</h4>
+              <h5>购买数量:&nbsp;{{list.num|numFilter}}</h5>
+            </div>
+            <div class="list-bottom-top flex-row">
+              <h4 style="font-weight: normal">商家：{{list.nickname}}</h4>
+              <h5>购买单价:&nbsp;{{list.num|numFilter}}</h5>
+            </div>
+            <div class="list-bottom-bottom flex-row">
+              <div class="bottom-left flex-row">
+                <img src="../../static/images/transaction_03.png" alt="" v-if="list.bank == 1">
+                <img src="../../static/images/transaction_04.png" alt="" v-if="list.alipay == 1">
+                <img src="../../static/images/transaction_05.png" alt="" v-if="list.wechat == 1">
+              </div>
+              <h5>{{list.created_at}}</h5>
+            </div>
+          </div>
 				</div>
 				<!--没有数据-->
 				<div class="no-data flex-row" v-if="!lists.length">
@@ -184,35 +189,37 @@
 			<div class="tab-card">
 				<!-- 循环列表list -->
 				<div class="list flex-col" v-for="list in lists" @click="goDetails(list)">
-					<div class="list-top flex-row">
-						<div class="list-top-left flex-row">
-							<div class="avatar">
-								<img :src="list.avatar" alt="">
-							</div>
-							<h4>{{list.nickname}}</h4>
-						</div>
-						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.buyer_uid">待付款</h4>
-						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.buyer_uid">等待放行</h4>
-						<h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.seller_uid">等待付款</h4>
-						<h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.seller_uid">待放行</h4>
-						<h4 class="h4-blue" v-if="list.status == 3">完成</h4>
-						<h4 class="h4-gray" v-if="list.status == -1">撤销</h4>
-						<h4 class="h4-red" v-if="list.status == 4">申诉中</h4>
-					</div>
-					<div class="list-bottom flex-col">
-						<div class="list-bottom-top flex-row">
-							<h4>金额&nbsp;{{list.total|numFilter}}CNY</h4>
-							<h5>购买数量:&nbsp;{{list.num|numFilter}}</h5>
-						</div>
-						<div class="list-bottom-bottom flex-row">
-							<div class="bottom-left flex-row">
-								<img src="../../static/images/transaction_03.png" alt="" v-if="list.bank == 1">
-								<img src="../../static/images/transaction_04.png" alt="" v-if="list.alipay == 1">
-								<img src="../../static/images/transaction_05.png" alt="" v-if="list.wechat == 1">
-							</div>
-							<h5>购买单价:&nbsp;{{list.price|numFilter}}</h5>
-						</div>
-					</div>
+          <div class="list-top flex-row">
+            <div class="list-top-left flex-row">
+              <p v-if="list.type==2" style="color: #ed573f; font-weight:600;font-size: .3rem;padding-right: .3rem">购买 <span>{{list.coin}}</span></p>
+              <p v-else style="color: #50c165;font-size: .3rem;font-weight:600;padding-right: .3rem">出售 <span>{{list.coin}}</span></p>
+            </div>
+            <h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.buyer_uid">待付款</h4>
+            <h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.buyer_uid">等待放行</h4>
+            <h4 class="h4-blue" v-if="list.status == 1&&list.uid == list.seller_uid">等待付款</h4>
+            <h4 class="h4-blue" v-if="list.status == 2&&list.uid == list.seller_uid">待放行</h4>
+            <h4 class="h4-blue" v-if="list.status == 3">完成</h4>
+            <h4 class="h4-gray" v-if="list.status == -1">撤销</h4>
+            <h4 class="h4-red" v-if="list.status == 4">申诉中</h4>
+          </div>
+          <div class="list-bottom flex-col">
+            <div class="list-bottom-top flex-row">
+              <h4>金额&nbsp;{{list.total|numFilter}}CNY</h4>
+              <h5>购买数量:&nbsp;{{list.num|numFilter}}</h5>
+            </div>
+            <div class="list-bottom-top flex-row">
+              <h4 style="font-weight: normal">商家：{{list.nickname}}</h4>
+              <h5>购买单价:&nbsp;{{list.num|numFilter}}</h5>
+            </div>
+            <div class="list-bottom-bottom flex-row">
+              <div class="bottom-left flex-row">
+                <img src="../../static/images/transaction_03.png" alt="" v-if="list.bank == 1">
+                <img src="../../static/images/transaction_04.png" alt="" v-if="list.alipay == 1">
+                <img src="../../static/images/transaction_05.png" alt="" v-if="list.wechat == 1">
+              </div>
+              <h5>{{list.created_at}}</h5>
+            </div>
+          </div>
 				</div>
 				<!--没有数据-->
 				<div class="no-data flex-row" v-if="!lists.length">
@@ -681,6 +688,10 @@
 		margin-left: 1rem;
 		overflow: hidden;
 	}
+  .top-tab h3{
+    font-size: .36rem;
+
+  }
 	.top-tab-list{
 		width: 50%;
 		height: 100%;
@@ -745,12 +756,13 @@
 		justify-content: space-between;
 		border-bottom: 0.01rem solid #e9ebef;
 	}
-	.list-top-left img{
-		width: 0.6rem;
-		height: 0.6rem;
-		border-radius: 50%;
-		/* margin: 0 0.16rem 0 0.3rem; */
+	.list-top-left p{
+    padding-left: .3rem;
 	}
+  .list-top-left p span{
+    font-size: .34rem;
+    color: #40444e;
+  }
 	.list h5{
 		margin-right: 0.3rem;
 	}
@@ -762,9 +774,7 @@
 	}
 	.list-bottom-top h4{
 		margin-left: 0.3rem;
-	}
-	.list-bottom-bottom{
-		margin-top: 0.3rem;
+    color: #727783;
 	}
 	.list-bottom-bottom img{
 		width: 0.46rem;
@@ -776,7 +786,6 @@
 	}
 	.list-bottom-top h4{
 		font-weight: 600;
-		color: #2a2d35;
 	}
 	.h4-blue{
 		font-weight: 600;

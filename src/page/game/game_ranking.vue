@@ -6,19 +6,29 @@
 					<div class="content flex-col">
 						<div class="content-top flex-row">
 							<h2>排名</h2>
-							<h2>头像</h2>
+							<h2>头衔</h2>
 							<h2>昵称</h2>
-							<h2>本周收益</h2>
+							<h2>生产力</h2>
 						</div>
 						<div class="content-center">
-							<div class="list flex-row" v-for="(list,index) in lists">
-								<h3>{{index+1}}</h3>
-								<h4 class="flex-col"><img :src="list.avatar" alt=""></h4>
+							<div class="list flex-row" v-for="(list,index) in lists" v-if="index < 50">
+                <h4 v-if="index==0"><img src="../../../static/images/game/first.png" alt=""></h4>
+                <h4 v-if="index==1"><img  src="../../../static/images/game/second.png" alt=""></h4>
+                <h4 v-if="index==2"><img src="../../../static/images/game/thirdly.png" alt=""></h4>
+								<h3 v-if="index!=0&index!=1&index!=2">{{index+1}}</h3>
+                <h4 class="types" v-if="list.level == 1">普通</h4>
+                <h4 class="types" v-if="list.level == 2">理事长</h4>
+                <h4 class="types" v-if="list.level == 3">秘书长</h4>
+                <h4 class="types" v-if="list.level == 4">会长</h4>
 								<h4 class="text flex-row">{{list.nickname}}</h4>
 								<h4 class="text flex-row">{{list.profit|numFilter}}</h4>
 							</div>
 						</div>
 					</div>
+          <div class="total">
+
+            <h2>我的社区总人数：{{lists.length}}</h2>
+          </div>
 					<div class="close-btn" @click="goIndex()">
 						<img src="../../../static/images/game/game_play_02.png" alt="">
 					</div>
@@ -57,7 +67,7 @@
 		filters: {
 		/*小数点后面保留2位*/
 		  	numFilter(num, len){
-				var len = len || 4;
+				var len = len || 0;
 				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
 				return Number.isInteger(result) ? result.toFixed(len) : result;
 			}
@@ -111,7 +121,7 @@
 	.layer-module{
 		width: 7.2rem;
 		height: 11.7rem;
-		background-image: url(http://www.suda66888.com/game/game_ranking_01.png);
+		background-image: url(http://suda66888.com/img/game_ranking_01.png);
 		background-size: 100% 100%;
 		position: relative;
 	}
@@ -128,7 +138,7 @@
 		background-color: #c78c20;
 		border: 0.02rem solid #463317;
 		border-radius: 0.1rem;
-		margin-top: 1.6rem;
+		margin-top: 2.3rem;
 	}
 	.content-top{
 		width: 5.16rem;
@@ -184,4 +194,25 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
+
+  .total{
+    width: 5.46rem;
+    height: 1rem;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+  }
+  .total h2{
+    padding-top: .2rem;
+    color: #684d46;
+    text-align: center;
+    width: 100%;
+
+  }
+  h4 img{
+    margin: 0 auto;
+  }
+
+
+
 </style>

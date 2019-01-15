@@ -13,8 +13,16 @@
 		</div>
 		<div class="list flex-row">
 			<input type="number" placeholder="输入转账金额" v-model="inputNumber">
-			<h4>≈￥{{showInputNum}}</h4>
+			<h4>≈￥{{showInputNum| numFilter}}</h4>
 		</div>
+    <div class="list flex-row">
+      <h4>总金额</h4>
+      <h4>￥{{num}}</h4>
+    </div>
+    <div class="list flex-row">
+      <h4>剩余金额</h4>
+      <h4>￥{{num-inputNumber}}</h4>
+    </div>
 		<div class="list flex-row">
 			<input type="password" placeholder="输入交易密码" v-model="passWord">
 		</div>
@@ -46,7 +54,8 @@
               address : "",
               inputNumber : "",
               passWord : "",
-              proportion : ""
+              proportion : "",
+              num:''
             }
         },
         // 创建之前
@@ -65,8 +74,9 @@
   		// 挂载之后
   		mounted: function(){
   		    this.init();
-  			this.$nextTick(function(){
+  			  this.$nextTick(function(){
   				this.title = this.$route.query.title;
+  				this.num = this.$route.query.num;
   			})
   		},
 		computed: {
@@ -77,7 +87,7 @@
 		filters: {
 			/*小数点后面保留2位*/
 		  	numFilter(num, len){
-				var len = len || 2;
+				var len = len || 4;
 				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
 				return Number.isInteger(result) ? result.toFixed(len) : result;
 			}
@@ -105,29 +115,35 @@
 				} else if(!this.passWord){
 					this.layers("请输入交易密码");
 				} else { */
-					this.axios.post('/index/suda_wallet/sdt_to_user',{
-						address : this.address,
-						num : this.inputNumber,
-						type : this.$route.query.type,
-						pay_password : this.passWord
-					})
-					.then(({data}) => {
-						if (data.status == 200) {
-							console.log(data);
-							this.layers(data.message);
-							setTimeout(() => {
-								this.$router.push({
-									path : '/walletDetails',
-									query : {
-										title : this.$route.query.title,
-										type : this.$route.query.type
-									}
-								})
-							},1500)
-						} else{
-							this.layers(data.message);
-						}
-					})
+
+				if(this.num-this.inputNumber<0){
+				    alert('转出金额过大');
+        }else {
+          this.axios.post('/index/suda_wallet/sdt_to_user',{
+            address : this.address,
+            num : this.inputNumber,
+            type : this.$route.query.type,
+            pay_password : this.passWord
+          })
+            .then(({data}) => {
+            if (data.status == 200) {
+            console.log(data);
+            this.layers(data.message);
+            setTimeout(() => {
+              this.$router.push({
+              path : '/walletDetails',
+              query : {
+                title : this.$route.query.title,
+                type : this.$route.query.type
+              }
+            })
+          },1500)
+          } else{
+            this.layers(data.message);
+          }
+        })
+        }
+
 				/* } */
 			},
 			getMsg (){
@@ -149,7 +165,8 @@
 					path : '/contacts',
 					query : {
 						title : this.$route.query.title,
-						type : this.$route.query.type
+						type : this.$route.query.type,
+            num:this.$route.query.num
 					}
 				})
 			},

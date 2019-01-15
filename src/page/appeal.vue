@@ -45,15 +45,29 @@
 		</div>
 
 		<div class="loadPic">
-			<div class="savePic">
+			<!--<div class="savePic">
 				<img src="../../static/images/addpics.png" alt="" @click="_changePic($event)"  accept="image/gif,image/jpeg,image/jpg,image/png">
-			<!--  <img src="../../static/images/addpics.png" alt="" @click="_changePic()"  accept="image/gif,image/jpeg,image/jpg,image/png">
-        <img src="../../static/images/addpics.png" alt="" @click="_changePic()"  accept="image/gif,image/jpeg,image/jpg,image/png">-->
+			  <img src="../../static/images/addpics.png" alt="" @click="_changePic()"  accept="image/gif,image/jpeg,image/jpg,image/png">
+        <img src="../../static/images/addpics.png" alt="" @click="_changePic()"  accept="image/gif,image/jpeg,image/jpg,image/png">
 			</div>
-			<input type="file" @change="_loadPics" style="display: none;" ref="loadAppealPic">
+			<input type="file" @change="_loadPics" style="display: none;" ref="loadAppealPic">-->
+
+      <div class="savePic">
+        <img :src="userImg ? userImg : require('../../static/images/addpics.png')" alt="">
+        <input type="file" class="img_input" ref="" @change="selectImg">
+      </div>
+      <div class="savePic">
+        <img :src="userImg2 ? userImg2 : require('../../static/images/addpics.png')" alt="">
+        <input type="file" class="img_input" ref="" @change="selectImg2">
+      </div>
+      <div class="savePic">
+        <img :src="userImg3 ? userImg3 : require('../../static/images/addpics.png')" alt="">
+        <input type="file" class="img_input" ref="" @change="selectImg3">
+      </div>
+
 		</div>
 		<div class="sureBtn">
-			<button type="button" @click="nums()">确认发布</button>
+			<button type="button" @click="btnClick">提交申诉</button>
 		</div>
 
 
@@ -70,8 +84,10 @@
 				//上传的图片(最多三张)
 				picList: [],
         content:'',
-        imgUrl:'',
-//        time:5
+        userImg: '',
+        userImg2: '',
+        userImg3: '',
+
             }
         },
         // 创建之前
@@ -130,7 +146,118 @@
 				});
 			},
 			//点击图片
-			_changePic (e) {
+
+        selectImg: function (e) {
+          this.hasImg = false;
+          this.file = e.target.files[0];
+          let reader = new FileReader();
+          reader.addEventListener('load', () => {
+            this.userImg = reader.result;
+          }, false);
+          if (this.file) {
+            reader.readAsDataURL(this.file);
+          }
+          console.log(this.file);
+          let fm = new window.FormData();
+          fm.append('avatar', this.file);
+          let config = {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          };
+          this.$http.post('http://admin.suda66888.com/index/uploadfile/uploadPic',fm,config)
+            .then(({data}) => {
+              if (data.status === 200) {
+                console.log(data.data);
+                this.hasImg = true;
+                this.upImg = data.data;
+                this.picList.push( this.upImg);
+                this.layers(data.message);
+              } else {
+                this.layers(data.message);
+              }
+            })
+        },
+        selectImg2: function (e) {
+          this.hasImg = false;
+          this.file = e.target.files[0];
+          let reader = new FileReader();
+          reader.addEventListener('load', () => {
+            this.userImg2 = reader.result;
+          }, false);
+          if (this.file) {
+            reader.readAsDataURL(this.file);
+          }
+          console.log(this.file);
+          let fm = new window.FormData();
+          fm.append('avatar', this.file);
+          let config = {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          };
+          this.$http.post('http://admin.suda66888.com/index/uploadfile/uploadPic',fm,config)
+            .then(({data}) => {
+            if (data.status === 200) {
+              console.log(data.data);
+              this.hasImg = true;
+              this.upImg2 = data.data;
+            this.picList.push( this.upImg2);
+              this.layers(data.message);
+            } else {
+              this.layers(data.message);
+            }
+          })
+        },
+        selectImg3: function (e) {
+          this.hasImg = false;
+          this.file = e.target.files[0];
+          let reader = new FileReader();
+          reader.addEventListener('load', () => {
+            this.userImg3 = reader.result;
+          }, false);
+          if (this.file) {
+            reader.readAsDataURL(this.file);
+          }
+          console.log(this.file);
+          let fm = new window.FormData();
+          fm.append('avatar', this.file);
+          let config = {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          };
+          this.$http.post('http://admin.suda66888.com/index/uploadfile/uploadPic',fm,config)
+            .then(({data}) => {
+            if (data.status === 200) {
+              console.log(data.data);
+              this.hasImg = true;
+              this.upImg3 = data.data;
+            this.picList.push( this.upImg3);
+            console.log(this.picList);
+              this.layers(data.message);
+            } else {
+              this.layers(data.message);
+            }
+          })
+        },
+        btnClick:function () {
+          this.axios.post('http://admin.suda66888.com/index/suda_order_buy/complain_submit',{
+            oid : this.$route.query.orderId,
+            complain : this.content,
+            voucher : this.picList
+          }).then(({data}) => {
+            if (data.status == 200) {
+              this.$router.push({
+                path: '/order',
+              })
+          } else {
+            this.layers(data.message);
+          }
+        })
+        }
+
+/*			_changePic (e) {
 				let that = this;
 				that.$refs.loadAppealPic.click();
 				console.log(e)
@@ -150,12 +277,21 @@
 					reader.readAsDataURL(that.file);
           console.log(that.file);
 				};
-			},
+			},*/
       }
     }
 </script>
 
 <style scoped>
+
+  .img_input{
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 95%;
+    height: 100%;
+  }
   .top-module{
     width: 100%;
     height: 1.2rem;
@@ -261,11 +397,13 @@
 	}
 
 	.loadPic {
+    display: flex;
+    flex-flow: row;
 		padding: 10px;
 	}
 
 	.loadPic img {
-		width: 30%;
+		width: 95%;
 	}
 
 	.sureBtn {
@@ -284,8 +422,10 @@
 	}
 
 	.savePic {
+    position: relative;
 		text-align: center;
 		overflow: hidden;
+    flex: 1;
 	}
 
 	.savePic img {

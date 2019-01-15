@@ -388,12 +388,14 @@
         },
         // 创建之前
   		beforeCreate: function () {
-
   		},
   		//创建之后
   		created: function (){
-  			this.getPayETH();
+        this.Monitor();
+
+        this.getPayETH();
 			this.getSellETH();
+
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -660,7 +662,32 @@
 						this.layers(data.message);
 					}
 				})
-			}
+			},
+      // 是否验证\
+        Monitor (){
+          this.axios.post('/index/suda_order_buy/inTrade')
+            .then(({data}) => {
+            console.log(data);
+
+          if (data.status === 200){
+
+            }else if(data.status === 202) {
+            let isTrue = confirm("是否前去认证？");
+            if (isTrue) {
+              this.$router.push({
+                path: '/identity',
+              })
+            }
+          }else if( data.status === 203){
+                this.layers(data.message);
+          }else if(data.status === 213) {
+               this.$router.push({
+                   path:'/paymentMethod',
+               })
+          }
+
+          })
+        },
   		}
     }
 </script>

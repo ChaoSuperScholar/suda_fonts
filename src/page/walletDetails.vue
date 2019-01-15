@@ -113,6 +113,7 @@
 					path : '/walletTransfer',
 					query : {
 						title : this.title,
+            num:this.num,
 						type : this.$route.query.type
 					}
 				})

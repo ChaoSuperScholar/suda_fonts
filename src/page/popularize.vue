@@ -133,7 +133,7 @@
 
 <style scoped>
 	h4 {
-		font-size: 0.32rem;
+		font-size: 0.4rem;
 		font-weight: bolder;
 		color: #ffffff;
 		margin: 0.3rem 0;
@@ -187,9 +187,16 @@
 	.link-father {
 		width: 6.5rem;
 		height: auto;
+    margin-top: .3rem;
 		justify-content: space-between;
 		/* margin: 0.3rem 0; */
 	}
+  .link-father h5{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+  }
+
 
 	.btn-red {
 		width: 1.88rem;
@@ -198,9 +205,10 @@
 	}
 
 	.qr-code {
-		width: 3.34rem;
-		height: 3.34rem;
+		width: 3.4rem;
+		height: 3.4rem;
 		background-color: #FFFFFF;
+    margin-top: .3rem;
 	}
 
 	.btn-de {

@@ -16,7 +16,7 @@
 				<!-- 手机号 -->
 				<div class="list flex-row">
 					<div class="list-left flex-row">
-						<img class="phoneimg" src="../../static/images/registered_01.png" alt="">
+						<!--<img class="phoneimg" src="../../static/images/registered_01.png" alt="">-->
 						<h4>手机号：</h4>
 					</div>
 					<input v-model="phone" type="tel" value="" maxlength="11" placeholder="输入您的手机号码"/>
@@ -24,7 +24,7 @@
 				<!-- 验证码 -->
 				<div class="list flex-row">
 					<div class="list-left flex-row">
-						<img class="phoneimg" src="../../static/images/registered_02.png" alt="">
+						<!--<img class="phoneimg" src="../../static/images/registered_02.png" alt="">-->
 						<h4>验证码：</h4>
 					</div>
 					<input v-model="code" type="text" value="" maxlength="11" placeholder="输入您的验证码"/>
@@ -35,7 +35,7 @@
 				<!-- 旧密码 -->
 				<div class="list flex-row">
 					<div class="list-left flex-row">
-						<img class="phoneimg" src="../../static/images/registered_01.png" alt="">
+						<!--<img class="phoneimg" src="../../static/images/registered_01.png" alt="">-->
 						<h4>新密码：</h4>
 					</div>
 					<input v-model="loginPassword" type="password" value="" placeholder="输入新的登录密码"/>
@@ -43,7 +43,7 @@
 				<!-- 新密码 -->
 				<div class="list flex-row">
 					<div class="list-left flex-row">
-						<img class="phoneimg" src="../../static/images/registered_01.png" alt="">
+						<!--<img class="phoneimg" src="../../static/images/registered_01.png" alt="">-->
 						<h4>再次输入：</h4>
 					</div>
 					<input v-model="newPassword" type="password" value="" placeholder="再次输入新的密码"/>
@@ -58,7 +58,7 @@
 				<!-- 手机号 -->
 				<div class="list flex-row">
 					<div class="list-left flex-row">
-						<img class="phoneimg" src="../../static/images/registered_01.png" alt="">
+						<!--<img class="phoneimg" src="../../static/images/registered_01.png" alt="">-->
 						<h4>手机号：</h4>
 					</div>
 					<input v-model="phone" type="tel" value="" maxlength="11" placeholder="输入您的手机号码"/>
@@ -66,7 +66,7 @@
 				<!-- 验证码 -->
 				<div class="list flex-row">
 					<div class="list-left flex-row">
-						<img class="phoneimg" src="../../static/images/registered_02.png" alt="">
+						<!--<img class="phoneimg" src="../../static/images/registered_02.png" alt="">-->
 						<h4>验证码：</h4>
 					</div>
 					<input v-model="payCode" type="text" value="" maxlength="11" placeholder="输入您的验证码"/>
@@ -77,7 +77,7 @@
 				<!-- 旧密码 -->
 				<div class="list flex-row">
 					<div class="list-left flex-row">
-						<img class="phoneimg" src="../../static/images/registered_01.png" alt="">
+						<!--<img class="phoneimg" src="../../static/images/registered_01.png" alt="">-->
 						<h4>新密码：</h4>
 					</div>
 					<input v-model="oldPayPassword" type="password" value="" placeholder="输入新的交易密码"/>
@@ -85,7 +85,7 @@
 				<!-- 新密码 -->
 				<div class="list flex-row">
 					<div class="list-left flex-row">
-						<img class="phoneimg" src="../../static/images/registered_01.png" alt="">
+						<!--<img class="phoneimg" src="../../static/images/registered_01.png" alt="">-->
 						<h4>再次输入：</h4>
 					</div>
 					<input v-model="newPayPassword" type="password" value="" placeholder="再次输入新的密码"/>
@@ -106,12 +106,12 @@
             return {
             	indexTitle : "安全中心",
 				tabsName: [
-					{  
-						name: "登录密码",  
-						isActive: true  
+					{
+						name: "登录密码",
+						isActive: true
 					},
-					{  
-						name: "交易密码",  
+					{
+						name: "交易密码",
 						isActive: false
 					}
 				],
@@ -127,20 +127,20 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
-  			
+
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		// 注册组件
@@ -149,15 +149,15 @@
 		},
   		//实例方法
   		methods: {
-  			tabsSwitch: function(tabIndex) {  
-  					let tabCardCollection = document.querySelectorAll(".tab-card"),  
-  						len = tabCardCollection.length;  
-  							for(var i = 0; i < len; i++) {  
-  								tabCardCollection[i].style.display = "none";  
-  							this.tabsName[i].isActive = false;  
+  			tabsSwitch: function(tabIndex) {
+  					let tabCardCollection = document.querySelectorAll(".tab-card"),
+  						len = tabCardCollection.length;
+  							for(var i = 0; i < len; i++) {
+  								tabCardCollection[i].style.display = "none";
+  							this.tabsName[i].isActive = false;
   						}
-  					this.tabsName[tabIndex].isActive = true;  
-  					tabCardCollection[tabIndex].style.display = "block";  
+  					this.tabsName[tabIndex].isActive = true;
+  					tabCardCollection[tabIndex].style.display = "block";
   			},
 			getCode (){
 				console.log("发送获取验证码");

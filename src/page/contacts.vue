@@ -33,26 +33,28 @@
         data(){
             return {
             	remark_name : "",
+              num:'',
 				remark_address : "",
 				lists : []
             }
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
   			this.getMsg();
+  			this.num=this.$route.query.num;
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
   		//实例方法
@@ -83,9 +85,10 @@
 				this.$router.push({
 					path : '/walletTransfer',
 					query : {
-						address : list.remark_address,
+            qrcode_content : list.remark_address,
 						title : this.$route.query.title,
-						type : this.$route.query.type
+						type : this.$route.query.type,
+            num:this.$route.query.num
 					}
 				})
 			},
