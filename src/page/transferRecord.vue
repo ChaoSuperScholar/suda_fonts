@@ -38,7 +38,7 @@
 			<div class="no-data flex-row" v-if="!transfers.length">
 				暂无数据
 			</div>
-		</div>	
+		</div>
 		<div class="list-right flex-col" v-show="showRight">
 			<div class="list flex-col" v-for="transfer in transfers">
 				<h5>{{transfer.created_at}}</h5>
@@ -84,7 +84,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -92,12 +92,12 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		filters: {
@@ -158,19 +158,38 @@
 				console.log(list.title);
 				this.chooseTitle = list.title;
 				this.isShowSelect = false;
-				this.axios.post('/index/suda_user/transfer_log',{
-					page : '1',
-					type : this.chooseTitle
-				})
-				.then(({data}) => {
-					if (data.status == 200) {
-						console.log(data);
-						let res = data.data;
-						this.img = res.img;
-					} else{
-						this.layers(data.message);
-					}
-				})
+				if(this.showLeft){
+          this.axios.post('/index/suda_user/transfer_log',{
+            page : '1',
+            type : this.chooseTitle
+          })
+            .then(({data}) => {
+              if (data.status == 200) {
+                console.log(data);
+                let res = data.data;
+                this.img = res.img;
+                this.transfers = res.log;
+              } else{
+                this.layers(data.message);
+              }
+            })
+        }else {
+          this.axios.post('/index/suda_user/transaction_log',{
+            page : '1',
+            type : this.chooseTitle
+          })
+            .then(({data}) => {
+              if (data.status == 200) {
+                console.log(data);
+                let res = data.data;
+                this.transfers = res.log;
+              } else{
+                this.layers(data.message);
+              }
+            })
+        }
+
+
 			},
 			getMsg (){
 				this.axios.post('/index/suda_user/transfer_log',{
@@ -237,7 +256,7 @@
 	}
 	.select-options{
 		width: 1.6rem;
-		height: 0.8rem;	
+		height: 0.8rem;
 	}
 	.select-father .select-options:not(:first-child){
 		border-top: 0.01rem solid #d1d4da;

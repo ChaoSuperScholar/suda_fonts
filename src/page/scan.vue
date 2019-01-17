@@ -123,13 +123,20 @@
             query:{
                 qrcode_content:this.qrcode_content,
                 title: this.title,
-                type: this.types
+                type: this.types,
+                num:this.$route.query.num
             }
           });
         }else{
           // alert('路由错误');
           this.$router.push({
-              path:'/walletTransfer'
+              path:'/walletTransfer',
+            query:{
+              qrcode_content:this.qrcode_content,
+              title: this.title,
+              type: this.types,
+              num:this.$route.query.num
+            }
           });
         }
       },

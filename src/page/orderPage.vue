@@ -118,7 +118,7 @@
 			</div>
 		</div>
 		<div class="bottom-btn flex-row">
-			<div class="btn-left flex-col" @click="noData()">
+			<div class="btn-left flex-col" @click="goNews()">
 				<img src="../../static/images/orderPage_01.png" alt="">
 			</div>
 			<div class="btn-center btn flex-col" v-if="list.status == 1&&list.uid == list.buyer_uid" @click="payMoney(list)">
@@ -264,7 +264,7 @@
 					}
 				})
 			},
-			noData (){
+			goNews (){
 				this.$router.push({
 				    path:'news',
             query:{
@@ -276,13 +276,22 @@
 			appeal () {
 				let that = this;
 				let orderId = that.$route.query.id;
-				this.$router.push('appeal')
-				this.$router.push({
-					path: 'appeal',
-					query: {
-						orderId: orderId
-					}
-				})
+        this.axios.post('/index/suda_order_buy/judgeComplain',{
+          oid : this.$route.query.id,
+        })
+          .then(({data}) => {
+            if (data.status == 200) {
+              console.log(data);
+              this.$router.push({
+                path:'appeal',
+                query:{
+                  orderId: orderId
+                }
+              })
+            } else{
+              this.layers(data.message);
+            }
+          })
 			}
   		}
     }

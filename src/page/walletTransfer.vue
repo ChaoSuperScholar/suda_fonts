@@ -172,9 +172,9 @@
 			},
         goScan:function () {
           if(window.location.origin=="file://"){
-            window.plus.webview.open(window.location.origin+window.location.pathname+'#/scan?route_name=walletTransfer&title='+this.$route.query.title+'&type='+this.$route.query.type);
+            window.plus.webview.open(window.location.origin+window.location.pathname+'#/scan?route_name=walletTransfer&title='+this.$route.query.title+'&type='+this.$route.query.type+'&num='+this.$route.query.num);
           }else{
-            window.plus.webview.open(window.location.origin+'#/scan?route_name=walletTransfer&title='+this.$route.query.title+'&type='+this.$route.query.type);
+            window.plus.webview.open(window.location.origin+'#/scan?route_name=walletTransfer&title='+this.$route.query.title+'&type='+this.$route.query.type+'&num='+this.$route.query.num);
           }
 
         }
