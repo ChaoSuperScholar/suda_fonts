@@ -1,5 +1,6 @@
 <template>
 	<div class="index">
+    <div style="height: auto;width: 100%">
 		<!-- 背景 -->
 		<div class="background-img flex-col">
 			<img src="../../static/images/index_01.png" alt="">
@@ -87,6 +88,7 @@
 				</router-link>
 			</div>
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -101,20 +103,20 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
-  			
+
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
   		//实例方法

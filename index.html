@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="format-detection" content="telephone=no">
@@ -18,60 +19,134 @@
     <meta name="x5-page-mode" content="app">
     <title>钱包</title>
   </head>
-  <body>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
 
+
+
+    document.addEventListener('plusready', function() {
+      var webview = plus.webview.currentWebview();
+      plus.key.addEventListener('backbutton', function() {
+        webview.canBack(function(e) {
+          if(e.canBack) {
+            webview.back();
+          } else {
+            webview.close(); //hide,quit
+            plus.runtime.quit();
+            //首页返回键处理
+            //处理逻辑：1秒内，连续两次按返回键，则退出应用；
+            var first = null;
+            plus.key.addEventListener('backbutton', function() {
+              //首次按键，提示‘再按一次退出应用’
+              if (!first) {
+                first = new Date().getTime();
+                /* console.log('再按一次退出应用'); */
+                this.layers('再按一次退出应用');
+                setTimeout(function() {
+                  first = null;
+                }, 1000);
+              } else {
+                if (new Date().getTime() - first < 1500) {
+                  plus.runtime.quit();
+                }
+              }
+            }, false);
+          }
+        })
+      });
+    });
+
+
+    if($(window).width() === 375 && $(window).height() === 724 && window.devicePixelRatio === 3){
+
+      $(".phonex-pb").css("padding-bottom","34px");
+    }
+
+
+
+
+    /*  let num;
+     let u = navigator.userAgent;
+     let app = navigator.appVersion;
+     let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+     let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+     if (isAndroid) {
+     num=1
+     }
+     if (isIOS) {
+     num=2
+     }*/
+
+
+
+  </script>
+  <body>
+  <style>
+    body{
+      height: 100vh;
+      width: 100%;
+      overflow: auto;
+    }
+    #app{
+      height: 100%;
+      width: 100%;
+      overflow: auto;
+    }
+
+    @media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3){ 
+       body{
+            padding-bottom: constant(safe-area-inset-bottom);
+            padding-bottom: env(safe-area-inset-bottom);
+         }
+
+         .iphonex-pt{
+              padding-top: constant(safe-area-inset-top);
+              padding-top: env(safe-area-inset-top);
+           }
+         .iphonex-pb{
+              padding-bottom: constant(safe-area-inset-bottom);
+              padding-bottom: env(safe-area-inset-bottom);
+           }
+         .iphonex-mt{
+              margin-top: constant(safe-area-inset-top);
+              margin-top: env(safe-area-inset-top);
+           }
+         .iphonex-mb{
+              margin-bottom: constant(safe-area-inset-bottom);
+              margin-bottom: env(safe-area-inset-bottom);
+           }
+         .iphonex-pl{
+              padding-left: constant(safe-area-inset-left);
+              padding-left: env(safe-area-inset-left);
+           }
+         .iphonex-pr{
+              padding-right: constant(safe-area-inset-right);
+              padding-right: env(safe-area-inset-right);
+           }
+         .iphonex-ml{
+              margin-left: constant(safe-area-inset-left);
+              margin-left: env(safe-area-inset-left);
+           }
+         .iphonex-mr{
+              margin-right: constant(safe-area-inset-right);
+              margin-right: env(safe-area-inset-right);
+           }
+         .iphonex-bd-top-bg{
+              border-top: 88px solid transparent;
+           }
+         .iphonex-bd-top{
+              border-top: 44px solid transparent;
+           }
+         .iphonex-bd-bottom{
+              border-bottom: 34px solid transparent;
+           }
+    }
+
+  </style>
 
     <div id="app"></div>
     <!-- built files will be auto injected -->
-<script>
-  document.addEventListener('plusready', function() {
-    var webview = plus.webview.currentWebview();
-    plus.key.addEventListener('backbutton', function() {
-      webview.canBack(function(e) {
-        if(e.canBack) {
-          webview.back();
-        } else {
-          webview.close(); //hide,quit
-          plus.runtime.quit();
-          //首页返回键处理
-          //处理逻辑：1秒内，连续两次按返回键，则退出应用；
-          var first = null;
-          plus.key.addEventListener('backbutton', function() {
-            //首次按键，提示‘再按一次退出应用’
-            if (!first) {
-              first = new Date().getTime();
-              /* console.log('再按一次退出应用'); */
-              this.layers('再按一次退出应用');
-              setTimeout(function() {
-                first = null;
-              }, 1000);
-            } else {
-              if (new Date().getTime() - first < 1500) {
-                plus.runtime.quit();
-              }
-            }
-          }, false);
-        }
-      })
-    });
-  });
 
-/*  let num;
-  let u = navigator.userAgent;
-  let app = navigator.appVersion;
-  let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
-  let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-  if (isAndroid) {
-    num=1
-  }
-  if (isIOS) {
-    num=2
-  }*/
-
-
-
-</script>
   </body>
 
 </html>

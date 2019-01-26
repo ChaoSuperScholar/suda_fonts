@@ -1,5 +1,14 @@
 <template>
 	<div class="aboutUs">
+    <div style="width: 100%;height: auto">
+
+      <div class="tan"  v-if="tanShow" @click="tanShow=!tanShow">
+        <div class="box">
+            <p>{{url}}</p>
+            <h3 id="copy-btn" @click="linkCopyBtn()">复制</h3>
+        </div>
+      </div>
+
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="top-text flex-col">
 			<img src="../../static/images/aboutUs_01.png" alt="">
@@ -16,10 +25,12 @@
 				</div>
 			</div>
 		</div>
+    </div>
 	</div>
 </template>
 
 <script>
+  import Clipboard from 'clipboard'
 	import headerBar from '../components/headerBar'
 	export default{
         name: 'aboutUs',
@@ -29,18 +40,19 @@
               show:false,
               version:'',
               url:'',
-              num:1
+              num:1,
+              tanShow:false
             }
         },
         // 创建之前
   		beforeCreate: function () {
 
-  		},
-  		//创建之后
-  		created: function (){
-        this.who();
-        this.getMsg();
-  		},
+    },
+    //创建之后
+    created: function (){
+      this.who();
+      this.getMsg();
+    },
   		//挂载之前
   		beforeMount: function (){
 
@@ -74,6 +86,23 @@
           }
         })
         },
+        linkCopyBtn() {
+          let that = this;
+          var clipboard = new Clipboard('#copy-btn', {
+            text: function() {
+              return that.url;
+            }
+          }).on('success', e => {
+            this.layers('复制成功');
+            console.log('复制成功')
+            // 释放内存
+          }).on('error', e => {
+            // 不支持复制
+            this.layers('复制失败，请手动复制！');
+            console.log('该浏览器不支持自动复制')
+            // 释放内存
+          })
+        },
         download:function () {
          let _download= confirm('是否前去下载?');
           if(_download){
@@ -103,36 +132,41 @@
           }
         },
         JX_download(url){
-          plus.nativeUI.showWaiting( "下载中..." );
-          //创建下载管理对象
-          var SX_down= plus.downloader.createDownload(url,{}, function ( d, status ) {
-            // 下载完成
-            if ( status == 200 ) {
-              plus.nativeUI.closeWaiting();
-              //下载成功后的回调函数
-              plus.nativeUI.toast( "下载成功，准备安装" + d.filename );
-              plus.runtime.install(
-                d.filename,
-                {},
-                function(){
-                  plus.nativeUI.toast('安装成功');
-                  plus.runtime.restart();
-                },
-                function(e){
-                  plus.nativeUI.toast(d.filename+'安装失败');
+            if (this.num==1){
+              plus.nativeUI.showWaiting( "下载中..." );
+              //创建下载管理对象
+              var SX_down= plus.downloader.createDownload(url,{}, function ( d, status ) {
+                // 下载完成
+                if ( status == 200 ) {
+                  plus.nativeUI.closeWaiting();
+                  //下载成功后的回调函数
+                  plus.nativeUI.toast( "下载成功，准备安装" + d.filename );
+                  plus.runtime.install(
+                    d.filename,
+                    {},
+                    function(){
+                      plus.nativeUI.toast('安装成功');
+                      plus.runtime.restart();
+                    },
+                    function(e){
+                      plus.nativeUI.toast(d.filename+'安装失败');
 
-                  alert(JSON.stringify(e))
+                      alert(JSON.stringify(e))
 
+                    }
+                  );
+                } else {
+                  alert( "下载失败 " + status );
                 }
-              );
-            } else {
-              alert( "下载失败 " + status );
+              });
+
+              //开始下载任务
+
+              SX_down.start();
+            }else {
+                this.tanShow=true;
             }
-          });
 
-          //开始下载任务
-
-          SX_down.start();
         },
   		}
     }
@@ -146,11 +180,13 @@
 	p,h5{
 		font-size: 0.28rem;
 		color: #515662;
+
 	}
 	.top-text{
 		width: 6.9rem;
 		height: auto;
 		padding: 0.5rem 0;
+    margin:0 auto;
 	}
 	.top-text img{
 		width: 1.82rem;
@@ -178,4 +214,37 @@
 		border-radius: 0.2rem;
 		margin-right: 0.2rem;
 	}
+  .tan{
+    position: fixed;
+    width: 7.5rem;
+    height: 13.34rem;
+    background: rgba(0,0,0,0.7);
+    top: 0;
+    left: 0;
+  }
+  .tan .box{
+    width: 5rem;
+    height: 4rem;
+    background: #ffffff;
+    border-radius: .2rem;
+    margin: 3rem auto;
+  }
+  .tan .box p{
+    font-size: .26rem;
+    width: 4rem;
+    text-align: center;
+    padding-top: 1rem;
+  }
+  .tan .box h3{
+
+    width: 4rem;
+    height: .7rem;
+    text-align: center;
+    line-height: .7rem;
+    background: #3c6cda;
+    border-radius: .3rem;
+    margin: 0.5rem auto 0;
+    color: #ffffff;
+    font-size: .32rem;
+  }
 </style>

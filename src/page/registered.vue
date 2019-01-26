@@ -1,5 +1,6 @@
 <template>
 	<div class="registered">
+    <div style="height: auto;width: 100%">
 		<div class="block flex-col">
 			<headerBar :title="indexTitle"></headerBar>
 			<div class="list-father flex-col">
@@ -61,6 +62,7 @@
 				<h3 @click="goDownload()">前往下载APP ></h3>
 			</div>
 		</div>
+    </div>
 	</div>
 </template>
 

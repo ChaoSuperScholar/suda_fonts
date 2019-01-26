@@ -66,6 +66,10 @@
 </script>
 
 <style scoped>
+  body{
+    width: 100%;
+    height:100vh ;
+  }
 	.footerBar{
 		width: 100%;
 		height: 1.4rem;

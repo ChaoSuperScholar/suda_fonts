@@ -1,5 +1,6 @@
 <template>
 	<div class="modifyContact">
+    <div style="height: auto;width: 100%">
 		<div class="top-module flex-row">
 			<img class="img-left" @click="return_page()" src="../../static/images/return.png"/>
 			<h3>修改联系人</h3>
@@ -15,6 +16,7 @@
 		<div class="btn-blue flex-col" @click="btnClick()">
 			确认修改
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -29,7 +31,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -37,12 +39,12 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
   		//实例方法

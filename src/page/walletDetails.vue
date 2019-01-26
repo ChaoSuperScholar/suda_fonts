@@ -1,5 +1,6 @@
 <template>
 	<div class="walletDetails">
+    <div style="height: auto;width: 100%">
 		<div class="top-module flex-row">
 			<router-link to="wallet">
 				<img class="img-left" src="../../static/images/return.png"/>
@@ -7,7 +8,7 @@
 			<h3>{{title}}</h3>
 			<div class="top-module-right flex-row" @click="goDetails()">
 				<img src="../../static/images/wallet_01.png" alt="">
-				<h4 class="h4-green">{{up_down}}</h4>
+				<h4 class="h4-green" v-if="title != 'SDT'">{{up_down}}</h4>
 			</div>
 		</div>
 		<div class="center-module flex-col">
@@ -29,11 +30,12 @@
 			<h4 class="h4-gray">{{list.created_at}}</h4>
 			<div class="list-bottom flex-row">
 				<h4>{{list.address}}</h4>
-				<h4 class="h4-red" v-if="list.num < 0">{{list.num}}</h4>
-				<h4 class="h4-green" v-if="list.num > 0">+{{list.num}}</h4>
+				<h4 class="h4-red" v-if="list.num < 0 ">{{list.num}}</h4>
+				<h4 class="h4-green" v-if="list.num > 0 ">+{{list.num}}</h4>
 			</div>
 		</div>
 		<nodata v-if="!lists.length"></nodata>
+    </div>
 	</div>
 </template>
 
@@ -170,7 +172,7 @@
 	}
 	.top-module h3{
 		font-weight: 500;
-		margin-left: 1.2rem;
+		margin-left: 1rem;
 	}
 	.img-left{
 		width: 0.18rem;
@@ -218,6 +220,7 @@
 		padding: 0.3rem 0;
 		border-bottom: 0.01rem solid #c4c8d2;
 		align-items: flex-start;
+    margin: 0 auto;
 	}
 	.list-bottom{
 		width: 100%;

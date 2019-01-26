@@ -1,5 +1,6 @@
 <template>
   <div id="scan">
+    <div style="height: auto;width: 100%">
     <div id="bcid">
       <div style="height:40%"></div>
       <p class="tip">...载入中...</p>
@@ -8,6 +9,7 @@
       <div class="fbt" @click="cancelScan()">取　 消</div>
       <div class="fbt" @click="scanPicture()">从相册选择二维码</div>
     </footer>
+    </div>
   </div>
 </template>
 <script>
@@ -91,15 +93,15 @@
         // 获取窗口对象
         this.ws = window.plus.webview.currentWebview();
         // 开始扫描
-        this.ws.addEventListener('show', function() {
+//        this.ws.addEventListener('show', function() {
           obj_s.scan = new window.plus.barcode.Barcode('bcid');
           obj_s.scan.onmarked = obj_s.onmarked;
           obj_s.scan.start({
             conserve: true,
             filename: '_doc/barcode/'
           });
-        }, false);
-        this.ws.show('pop-in');
+//        }, false);
+//        this.ws.show('pop-in');
       },
       // 从相册中选择二维码图片
       scanPicture() {

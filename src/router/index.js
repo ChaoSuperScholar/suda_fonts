@@ -37,6 +37,7 @@ import transferRecord from '../page/transferRecord'
 import popularize from '../page/popularize'
 import scan from '../page/scan'
 import news from '../page/news'
+import ConsultationDetails from '../page/ConsultationDetails'
 
 
 
@@ -72,6 +73,11 @@ export default new Router({
             name: 'wallet',
             component: wallet
         },
+      {
+        path: '/ConsultationDetails',
+        name: 'ConsultationDetails',
+        component: ConsultationDetails
+      },
         {
             path: '/indexNew',
             name: 'indexNew',

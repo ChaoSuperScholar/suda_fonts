@@ -1,5 +1,6 @@
 <template>
 	<div class="forgetPassword">
+    <div style="height: auto;width: 100%">
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="list-father flex-col">
 			<!-- 手机号 -->
@@ -41,6 +42,7 @@
 				确认
 			</div>
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -59,20 +61,20 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
-  			
+
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		components:{
@@ -134,8 +136,8 @@
 									/* that.layers(error.message); */
 								},4000)
 						});
-					
-					
+
+
 					/* this.layers("创建成功!")
 					setTimeout(() => {
 						this.$router.go(-1);
@@ -150,6 +152,7 @@
 	.list-father{
 		width: 7rem;
 		height: auto;
+    margin: 0 auto;
 	}
 	.list{
 		width: 100%;

@@ -1,6 +1,6 @@
 <template>
   <div class="heig">
-    <div class="wallet">
+    <div class="wallet" style="height: auto;width: 100%">
       <div class="top-bg flex-col">
         <div class="top-btn flex-row">
           <router-link to="receivables">
@@ -24,8 +24,8 @@
           </div>
           <div class="list-text bottom flex-row">
             <h5>≈￥{{list.money|numFilter4}}</h5>
-            <h5 class="h5-green" v-if="list.up_down > 0">+{{list.up_down}}% ↑</h5>
-            <h5 class="h5-red" v-if="list.up_down < 0">{{list.up_down}}% ↓</h5>
+            <h5 class="h5-green" v-if="list.up_down > 0 & list.title != 'SDT'">+{{list.up_down}}% ↑</h5>
+            <h5 class="h5-red" v-if="list.up_down < 0 & list.title != 'SDT'">{{list.up_down}}% ↓</h5>
           </div>
         </div>
       </div>
@@ -137,8 +137,6 @@
 </script>
 
 <style scoped>
-
- .heig{min-height: 13.34rem; height: auto;width: 100%;}
  .wallet{width: 100%;}
 
 	span{

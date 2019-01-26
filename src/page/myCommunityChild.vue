@@ -1,5 +1,6 @@
 <template>
 	<div class="myCommunityChild">
+    <div style="height: auto;width: 100%">
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="bg"></div>
 		<div class="center-module flex-col">
@@ -20,6 +21,7 @@
 			<!-- 没有数据 -->
 			<nodata v-if="!lists.length"></nodata>
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -36,7 +38,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -44,12 +46,12 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		// 注册组件
@@ -110,7 +112,7 @@
 		background-image: url(http://www.suda66888.com/game/myCommunity_02.png);
 		background-size: 100% 100%;
 		justify-content: flex-end;
-		margin-top: 1rem;
+    margin: 0.1rem auto 0;
 	}
 	.list-father{
 		width: 6.9rem;
@@ -118,8 +120,8 @@
 		min-height: 4.6rem;
 		border: 0.02rem solid #b7b9c5;
 		border-radius: 0.1rem;
-		margin: 0.6rem 0;
 		justify-content: flex-start;
+    margin: .6rem auto 0;
 	}
 	.list{
 		width: 6.4rem;

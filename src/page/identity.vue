@@ -1,5 +1,6 @@
 <template>
 	<div class="identity">
+    <div style="width: 100%;height: auto">
 		<div class="top-module flex-row">
 			<router-link to="userCenter">
 				<img class="img-left" src="../../static/images/return.png"/>
@@ -10,6 +11,8 @@
 		<div class="top-banner">
 			<img src="../../static/images/identity_01.png" alt="">
 		</div>
+
+       <h4 class="fail" v-if="status==204">驳回原因：{{fail}}</h4>
 		<div class="list flex-row">
 			<h3>真实姓名</h3>
 			<input type="text" placeholder="请输入真实姓名" v-model="inputName">
@@ -35,6 +38,7 @@
 		<div class="btn btn-blue flex-col" @click="submit()">
 			提交认证消息
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -47,29 +51,44 @@
 				inputNum : '',
 				userImg: '',
 				userImg2: '',
-				hasImg: true
+				hasImg: true,
+              fail:"",
+              status:''
             }
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
-			
+        let that = this ;
+        that.goIdentity();
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
   		//实例方法
   		methods: {
+        goIdentity (){
+          this.axios.get('/index/suda_user/auth')
+            .then(({data}) => {
+              if (data.status == 204) {
+                this.status=data.status;
+                this.fail = data.message;
+              }
+              console.log(data);
+            })
+        },
+
+
 			// 图片选择，赋值给file
 			selectImg: function (e) {
 				this.hasImg = false;
@@ -152,7 +171,7 @@
 						}
 					})
 				}
-			}
+			},
   			/* initPlUploader() {
 			this.plUploader = new plupload.Uploader({
 			  runtimes: 'html5,flash,silverlight,html4',
@@ -250,7 +269,7 @@
 		background-color: #4a7cee;
 		font-size: 0.34rem;
 		color: #FFFFFF;
-		margin: 0.4rem 0;
+		margin: 0.4rem auto;
 	}
 	.user{
 		position: relative;
@@ -265,4 +284,6 @@
 		left: -20rem;
 		top: 0.6rem;
 	}
+
+  .fail{ font-size: .3rem;width: 6.7rem;margin: .2rem auto ;line-height: .7rem;background: #cccccc;padding:  0 .4rem;color: #cb1a15;}
 </style>

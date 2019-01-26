@@ -1,5 +1,6 @@
 <template>
 	<div class="addContact">
+    <div style="height: auto;width: 100%">
 		<div class="top-module flex-row">
 			<img class="img-left" @click="goContacts()" src="../../static/images/return.png"/>
 			<h3>添加联系人</h3>
@@ -15,6 +16,7 @@
 		<div class="btn-blue flex-col" @click="btnClick()">
 			确认添加
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -29,20 +31,20 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
-  			
+
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
   		//实例方法
@@ -104,6 +106,7 @@
 		padding: 0.3rem 0;
 		border-bottom: 0.01rem solid #b2b6bf;
 		justify-content: space-between;
+    margin: 0 auto;
 	}
 	.list input{
 		width: 5rem;
@@ -129,6 +132,6 @@
 		background-color: #4a7cee;
 		font-size: 0.34rem;
 		color: #FFFFFF;
-		margin-top: 0.7rem;
+    margin: .7rem auto;
 	}
 </style>

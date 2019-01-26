@@ -1,5 +1,6 @@
 <template>
 	<div class="importWallet">
+    <div style="width: 100%;height: auto">
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="tab-father flex-row">
 			<template v-for="(tab,index) in tabsName">
@@ -57,6 +58,7 @@
 					333
 			</div>
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -67,16 +69,16 @@
         data(){
             return {
             	indexTitle : "导入钱包", //向子组件中传入title数据
-				tabsName: [{  
-							name: "Keystore",  
-							isActive: true  
-						}, {  
-							name: "私钥",  
-							isActive: false  
-						},{
-							name: "助记词",  
+				tabsName: [{
+							name: "Keystore",
+							isActive: true
+						}, {
+							name: "私钥",
 							isActive: false
-						}],  
+						},{
+							name: "助记词",
+							isActive: false
+						}],
 				active : false,
 				keystore : "",
 				password : "",
@@ -91,20 +93,20 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
-  			
+
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		components : {  //注册组件
@@ -112,15 +114,15 @@
 		},
   		//实例方法
   		methods: {
-  			tabsSwitch: function(tabIndex) {  
-				var tabCardCollection = document.querySelectorAll(".tab-card"),  
-						len = tabCardCollection.length;  
-								for(var i = 0; i < len; i++) {  
-									tabCardCollection[i].style.display = "none";  
-								this.tabsName[i].isActive = false;  
-						}  
-				this.tabsName[tabIndex].isActive = true;  
-				tabCardCollection[tabIndex].style.display = "block";  
+  			tabsSwitch: function(tabIndex) {
+				var tabCardCollection = document.querySelectorAll(".tab-card"),
+						len = tabCardCollection.length;
+								for(var i = 0; i < len; i++) {
+									tabCardCollection[i].style.display = "none";
+								this.tabsName[i].isActive = false;
+						}
+				this.tabsName[tabIndex].isActive = true;
+				tabCardCollection[tabIndex].style.display = "block";
   			},
 			/* Keystore */
 			agreeBtn (){

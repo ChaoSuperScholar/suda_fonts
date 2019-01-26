@@ -1,5 +1,6 @@
 <template>
 	<div class="tenpay">
+    <div style="height: auto;width: 100%">
 		<div class="top-module flex-row">
 			<router-link to="financial">
 				<img class="img-left" src="../../static/images/return.png"/>
@@ -85,6 +86,7 @@
 		<div class="btn-blue flex-col" @click="clickInvestment()">
 			立即投资
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -107,7 +109,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -116,17 +118,17 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		computed: {
 			surplus() {
-				return this.profit_toal - this.numed; 
+				return this.profit_toal - this.numed;
 			},
 			showInputNum (){
 				/* return this.inputNumber * 5; */

@@ -1,7 +1,7 @@
 <template>
 	<div class="indexNew">
 		<!-- 主体 -->
-		<div class="list-father flex-col">
+		<div class="list-father flex-col" style="width: 100%;height: auto">
 			<img class="img-top" src="../../static/images/index_10.png"/>
 			<img class="img-center" src="../../static/images/index_11.png"/>
 			<div class="list flex-col">

@@ -1,5 +1,6 @@
 <template>
 	<div class="market">
+    <div style="height: auto;width: 100%">
 		<div class="top-module flex-row">
 			<img class="img-left" @click="return_page()" src="../../static/images/return.png"/>
 			<h3>行情</h3>
@@ -17,6 +18,7 @@
 				暂无行情
 			</div>
 		</template>
+    </div>
 	</div>
 </template>
 
@@ -26,25 +28,25 @@
         name: 'market',
         data(){
             return {
-            	
+
             }
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
-			
+
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		// 注册组件

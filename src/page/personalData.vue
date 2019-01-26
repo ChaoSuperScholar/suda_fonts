@@ -1,5 +1,6 @@
 <template>
 	<div class="personalData">
+    <div style="height: auto;width: 100%">
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="top-module flex-col">
 			<div class="img-father">
@@ -33,6 +34,7 @@
 		<div class="create-btn flex-col" @click="btnClick()">
 			确认修改
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -52,7 +54,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -60,12 +62,12 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		// 注册组件
@@ -182,6 +184,7 @@
 		justify-content: space-between;
 		padding: 0.4rem 0;
 		border-bottom: 0.01rem solid #d6dae2;
+    margin: 0 auto;
 	}
 	.list input{
 		width: 3.2rem;
@@ -202,7 +205,7 @@
 		background-color: #4a7cee;
 		font-size: 0.32rem;
 		color: #FFFFFF;
-		margin-top: 0.72rem;
+    margin: .72rem auto;
 	}
 	.user{
 		position: relative;

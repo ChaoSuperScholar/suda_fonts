@@ -1,5 +1,6 @@
 <template>
 	<div class="myInvestment">
+    <div style="height: auto;width: 100%">
 		<headerBar :title="indexTitle"></headerBar>
 		<!-- 循环数据 -->
 		<div class="list flex-col" v-for="list in lists">
@@ -33,6 +34,7 @@
 				</div>
 			</div>
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -48,7 +50,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -56,7 +58,7 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
 		// 注册组件
 		components:{
@@ -73,7 +75,7 @@
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
   		//实例方法

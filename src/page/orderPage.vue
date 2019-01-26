@@ -1,5 +1,6 @@
 <template>
 	<div class="orderPage">
+    <div style="height: auto;width: 100%">
 		<div class="top-module flex-row">
 			<img src="../../static/images/transactionRelease_01.png" alt="" @click="return_page()">
 			<h3>订单详情</h3>
@@ -119,6 +120,7 @@
 		</div>
 		<div class="bottom-btn flex-row">
 			<div class="btn-left flex-col" @click="goNews()">
+        <span v-if="num!=0">{{num}}</span>
 				<img src="../../static/images/orderPage_01.png" alt="">
 			</div>
 			<div class="btn-center btn flex-col" v-if="list.status == 1&&list.uid == list.buyer_uid" @click="payMoney(list)">
@@ -154,7 +156,10 @@
 				申述中
 			</div>
 		</div>
-	</div>
+      <div style="height: 1rem; width: 100%"></div>
+    </div>
+    </div>
+
 </template>
 
 <script>
@@ -165,7 +170,8 @@
             	list : [],
               status:'',
               Wshow:false,
-              Zshow:false
+              Zshow:false,
+              num:''
             }
         },
         // 创建之前
@@ -174,7 +180,10 @@
   		},
   		//创建之后
   		created: function (){
+
   			this.getMsg();
+        this.newsMsy();
+
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -292,14 +301,31 @@
               this.layers(data.message);
             }
           })
-			}
+			},
+      newsMsy:function () {
+        this.axios.post('/index/suda_order_sell/chatNum',{
+          order_id : this.$route.query.id
+        })
+          .then(({data}) => {
+          if (data.status == 200) {
+              console.log(data)
+               this.num=data.data
+          let that=this;
+          setTimeout(function () {
+            that.newsMsy()
+          },3000)
+
+        } else{
+//          this.layers(data.message);
+        }
+      })
+      }
   		}
     }
 </script>
 
 <style scoped>
 	.orderPage{
-		min-height: 100vh;
 		background-color: #e8eaee;
 		justify-content: flex-start!important;
 		margin-bottom: 1rem;
@@ -434,11 +460,23 @@
 		width: auto;
 		height: 100%;
 		flex: auto;
+    position: relative;
 	}
 	.btn-left img{
 		width: 0.49rem;
 		height: 0.45rem;
 	}
+  .btn-left span{
+    position: absolute;
+    right: .3rem;
+    top: .05rem;
+    line-height: 1;
+    font-size: .22rem;
+    padding: 0.03rem .05rem;
+    background: red;
+    border-radius: 50%;
+    color: #ffffff;
+  }
 	.btn{
 		width: 2.8rem;
 		height: 100%;

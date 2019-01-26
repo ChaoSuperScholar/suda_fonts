@@ -1,5 +1,6 @@
 <template>
 	<div class="order">
+    <div style="width: 100%;height: auto">
 		<div class="top-module flex-row">
 			<router-link to="transaction">
 				<img class="img-left" src="../../static/images/return.png"/>
@@ -227,6 +228,7 @@
 				</div>
 			</div>
 		</div>
+
 <!--		<div class="tab-right flex-col" v-show="showRight">
 			&lt;!&ndash; 出售顶部切换 &ndash;&gt;
 			<div class="tab-father flex-row">
@@ -427,6 +429,7 @@
 				</div>
 			</div>
 		</div>-->
+    </div>
 	</div>
 </template>
 

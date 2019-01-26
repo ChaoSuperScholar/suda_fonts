@@ -1,5 +1,6 @@
 <template>
 	<div class="securityCenter">
+    <div style="height: auto;width: 100%">
 		<headerBar :title="indexTitle"></headerBar>
 		<!-- 购买顶部切换 -->
 		<div class="tab-father flex-row">
@@ -95,6 +96,7 @@
 				</div>
 			</div>
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -280,6 +282,7 @@
 		width: 7rem;
 		height: auto;
 		display: none;
+    margin: 0 auto;
 	}
 	.active{
 		color: #3c6cda;
@@ -288,6 +291,7 @@
 	.list-father{
 		width: 7rem;
 		height: auto;
+    margin: 0 auto;
 	}
 	.list{
 		width: 100%;

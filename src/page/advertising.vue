@@ -1,5 +1,6 @@
 <template>
 	<div class="advertising">
+    <div style="height: auto;width: 100%">
 		<div class="bg"></div>
 		<div class="top-module flex-row">
 			<router-link to="transaction">
@@ -78,6 +79,7 @@
 				</div>
 			</div>
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -109,7 +111,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -118,12 +120,12 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		filters: {
@@ -344,7 +346,7 @@
 	}
 	.select-options{
 		width: 1.6rem;
-		height: 0.8rem;	
+		height: 0.8rem;
 	}
 	.select-father .select-options:not(:first-child){
 		border-top: 0.01rem solid #d1d4da;

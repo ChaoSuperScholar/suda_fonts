@@ -1,5 +1,6 @@
 <template>
 	<div class="createWallet">
+    <div style="height: auto;width: 100%">
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="list flex-col">
 			<input v-model="walletTitle" type="text" value="" placeholder="设置钱包名称"/>
@@ -18,6 +19,7 @@
 		<div @click="createBtn" class="create-btn flex-col">
 			创建钱包
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -36,20 +38,20 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
-  			
+
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		components : {  //注册组件
@@ -72,7 +74,7 @@
 				} else if(this.password1!=this.password2){
 					this.layers("两次输入的密码不一样！");
 				} else{
-					console.log("创建成功");	
+					console.log("创建成功");
 				}
 			}
   		}
@@ -85,6 +87,7 @@
 		height: auto;
 		border-bottom: 0.01rem solid #c0bebe;
 		align-items: flex-start;
+    margin:  0 auto;
 	}
 	.list input{
 		width: 6rem;
@@ -97,6 +100,7 @@
 		height: 1.2rem;
 		justify-content: flex-start;
 		margin-bottom: 0.2rem;
+    margin: 0 auto;
 	}
 	.agree-check{
 		width: 0.28rem;
@@ -107,6 +111,7 @@
 	}
 	.agreeCheck{
 		background-color: #4a7cee;
+
 	}
 	.agree-clause h4{
 		font-size: 0.28rem;
@@ -115,6 +120,7 @@
 	.agree-clause h5{
 		font-size: 0.28rem;
 		color: #4579ee;
+
 	}
 	.create-btn{
 		width: 6.9rem;
@@ -123,5 +129,6 @@
 		background-color: #4a7cee;
 		font-size: 0.32rem;
 		color: #FFFFFF;
+    margin: 0 auto;
 	}
 </style>

@@ -1,5 +1,6 @@
 <template>
 	<div class="information">
+    <div style="width: 100%;height: auto">
 		<pageHead>资讯</pageHead>
 		<!-- <div class="top-title flex-row">资讯</div> -->
 		<div class="tab-father flex-row">
@@ -13,9 +14,9 @@
 			</template>
 		</div>
 		<div class="tab-card" v-show="show==1">
-			<div class="list-left flex-col" v-for="list in lists">
+			<div class="list-left flex-col" v-for="(list,index) in lists" @click="listsFun(index)">
 				<h4>{{list.title}}</h4>
-				<p>{{list.desc}}</p>
+				<!--<p>{{list.desc}}</p>-->
 				<p>{{list.publisher}} · {{list.created_at}}</p>
 			</div>
 			<!--没有数据-->
@@ -24,9 +25,9 @@
 			</div>
 		</div>
 		<div class="tab-card"  v-show="show==2">
-			<div class="list-left flex-col" v-for="cycle in items">
+			<div class="list-left flex-col" v-for="(cycle,index) in items" @click="itemsFun(index)">
 				<h4>{{cycle.title}}</h4>
-				<p>{{cycle.desc}}</p>
+				<!--<p>{{cycle.desc}}</p>-->
 				<p>{{cycle.publisher}} · {{cycle.created_at}}</p>
 			</div>
 			<!--没有数据-->
@@ -35,6 +36,7 @@
 			</div>
 		</div>
 		<footerBar></footerBar>
+    </div>
 	</div>
 </template>
 
@@ -80,7 +82,7 @@
 		},
   		//实例方法
   		methods: {
-			getMsg (){
+		  	getMsg (){
 				let that = this;
 				this.axios.post('/index/suda_password/article_list')
 				.then(({data}) => {
@@ -110,20 +112,36 @@
 						cons.log("%c另外补充一下,前端的薪资很有趣\(^o^)/~~!","color:green;font-weight:bold")
 					}
 				}
-			}
+			},
+        listsFun:function (a) {
+        console.log(a)
+          this.$router.push({
+              path:"/ConsultationDetails",
+              query:{
+                  id:a,
+                  num:1
+              }
+          })
+        },
+        itemsFun:function (a) {
+          console.log(a)
+          this.$router.push({
+            path:"/ConsultationDetails",
+            query:{
+              id:a,
+              num:2
+            }
+          })
+        },
   		}
     }
 </script>
 
 <style scoped>
-
-  .information{
-    min-height: 13.34rem;
-    height: auto;
-  }
 	.tab-card{
 		margin-bottom: 1.4rem;
 		margin-top: 1.8rem;
+    height: 13rem;overflow: auto;
 	}
 	.tab-father{
 		width: 100%;
@@ -148,8 +166,11 @@
 		padding: 0.3rem 0;
 		align-items: flex-start;
 		border-bottom: 0.01rem solid #c9d0de;
+    margin: 0 auto;
 	}
+  .list-left h4{font-weight: 600;}
 	h4{
+
 		font-size: 0.32rem;
 		color: #000;
 	}

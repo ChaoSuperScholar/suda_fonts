@@ -1,5 +1,8 @@
 <template>
 	<div class="userCenter">
+    <div style="width: 100%;height: auto">
+
+
 		<pageHead>社区</pageHead>
 		<div class="top-module flex-col">
 			<div class="top flex-row">
@@ -84,6 +87,7 @@
 			<img src="../../static/images/receivables_01.png" alt="">
 		</div>
 		<footerBar></footerBar>
+    </div>
 	</div>
 </template>
 
@@ -180,10 +184,15 @@
 				this.axios.get('/index/suda_user/auth')
 				.then(({data}) => {
 					if (data.status == 200) {
-						this.$router.replace('identity');
-					} else{
-						this.layers(data.message);
-					}
+            this.$router.replace('identity');
+
+            this.layers(data.message);
+					} else if(data.status == 204){
+						this.layers('您的申请已驳回，驳回原因：'+data.message);
+            this.$router.replace('identity');
+					}else {
+            this.layers(data.message);
+          }
 				})
 			}
   		}
@@ -192,10 +201,6 @@
 
 <style scoped>
 
-  .userCenter{
-    min-height: 13.34rem;
-    overflow: auto;
-  }
 
 	.top-module{
 		width: 100%;
@@ -266,6 +271,7 @@
 		width: 6.9rem;
 		height: auto;
 		justify-content: space-between;
+    margin: 0 auto;
 		padding: 0.4rem 0;
 		border-bottom: 0.01rem solid #d6dae2;
 	}

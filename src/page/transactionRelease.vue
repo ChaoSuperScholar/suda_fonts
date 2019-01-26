@@ -1,5 +1,6 @@
 <template>
 	<div class="transactionRelease">
+    <div style="height: auto;width: 100%">
 		<div class="top-module flex-row">
 			<img src="../../static/images/transactionRelease_01.png" alt="" @click="return_page()">
 			<div class="top-tab flex-row">
@@ -70,6 +71,7 @@
 				确认出售
 			</div>
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -106,7 +108,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -114,12 +116,12 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		// 计算属性
@@ -309,7 +311,7 @@
 	}
 	.select-options{
 		width: 1.6rem;
-		height: 0.8rem;	
+		height: 0.8rem;
 	}
 	.select-father .select-options:not(:first-child){
 		border-top: 0.01rem solid #d1d4da;

@@ -1,5 +1,6 @@
 <template>
 	<div class="transaction">
+    <div style="width: 100%;height: auto">
 		<div class="top-module flex-row">
 			<h4></h4>
 			<div class="top-tab flex-row">
@@ -297,6 +298,7 @@
 			</div>
 		</router-link>
 		<footerBar></footerBar>
+    </div>
 	</div>
 </template>
 
@@ -564,6 +566,12 @@
 							}, 1000)
 							this.layerNum = "";
 							this.layerMoney = "";
+							this.$router.push({
+							    path:'/orderPage',
+                  query : {
+                    id:data.data
+                }
+              })
 						} else{
 							this.layers(data.message);
 						}

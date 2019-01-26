@@ -6,21 +6,21 @@
 					<img class="return_page" src="../../../static/images/game/game_ElectricPower_02.png" alt="" @click="return_page()">
 					<div class="list flex-row">
 						<h4>电力:</h4>
-						<img src="../../../static/images/game/game_ElectricPower_04_00.png" alt="" v-if="this.$route.query.time == 0">
-						<img src="../../../static/images/game/game_ElectricPower_04_01.png" alt="" v-if="this.$route.query.time > 0&&this.$route.query.time < 2">
-            <img src="../../../static/images/game/game_ElectricPower_04_01.png" alt="" v-if="this.$route.query.time > 1&&this.$route.query.time < 3">
-						<img src="../../../static/images/game/game_ElectricPower_04_02.png" alt="" v-if="this.$route.query.time > 2&&this.$route.query.time < 5">
-						<img src="../../../static/images/game/game_ElectricPower_04_03.png" alt="" v-if="this.$route.query.time > 4&&this.$route.query.time < 7">
-						<img src="../../../static/images/game/game_ElectricPower_04_04.png" alt="" v-if="this.$route.query.time > 6&&this.$route.query.time < 9">
-						<img src="../../../static/images/game/game_ElectricPower_04_05.png" alt="" v-if="this.$route.query.time > 8&&this.$route.query.time < 11">
-						<img src="../../../static/images/game/game_ElectricPower_04_06.png" alt="" v-if="this.$route.query.time > 10&&this.$route.query.time < 13">
-						<img src="../../../static/images/game/game_ElectricPower_04_07.png" alt="" v-if="this.$route.query.time > 12&&this.$route.query.time < 15">
-						<img src="../../../static/images/game/game_ElectricPower_04_08.png" alt="" v-if="this.$route.query.time > 14&&this.$route.query.time < 17">
-						<img src="../../../static/images/game/game_ElectricPower_04_09.png" alt="" v-if="this.$route.query.time > 16&&this.$route.query.time < 19">
-						<img src="../../../static/images/game/game_ElectricPower_04_10.png" alt="" v-if="this.$route.query.time > 18&&this.$route.query.time < 21">
-						<img src="../../../static/images/game/game_ElectricPower_04_11.png" alt="" v-if="this.$route.query.time > 20&&this.$route.query.time < 23">
-						<img src="../../../static/images/game/game_ElectricPower_04_12.png" alt="" v-if="this.$route.query.time > 22&&this.$route.query.time < 25">
-						<h4>{{power}}小时</h4>
+						<img src="../../../static/images/game/game_ElectricPower_04_00.png" alt="" v-if="this.$route.query.hours == 0">
+						<img src="../../../static/images/game/game_ElectricPower_04_01.png" alt="" v-if="this.$route.query.hours > 0&&this.$route.query.hours < 2">
+            <img src="../../../static/images/game/game_ElectricPower_04_01.png" alt="" v-if="this.$route.query.hours > 1&&this.$route.query.hours < 3">
+						<img src="../../../static/images/game/game_ElectricPower_04_02.png" alt="" v-if="this.$route.query.hours > 2&&this.$route.query.hours < 5">
+						<img src="../../../static/images/game/game_ElectricPower_04_03.png" alt="" v-if="this.$route.query.hours > 4&&this.$route.query.hours < 7">
+						<img src="../../../static/images/game/game_ElectricPower_04_04.png" alt="" v-if="this.$route.query.hours > 6&&this.$route.query.hours < 9">
+						<img src="../../../static/images/game/game_ElectricPower_04_05.png" alt="" v-if="this.$route.query.hours > 8&&this.$route.query.hours < 11">
+						<img src="../../../static/images/game/game_ElectricPower_04_06.png" alt="" v-if="this.$route.query.hours > 10&&this.$route.query.hours < 13">
+						<img src="../../../static/images/game/game_ElectricPower_04_07.png" alt="" v-if="this.$route.query.hours > 12&&this.$route.query.hours < 15">
+						<img src="../../../static/images/game/game_ElectricPower_04_08.png" alt="" v-if="this.$route.query.hours > 14&&this.$route.query.hours < 17">
+						<img src="../../../static/images/game/game_ElectricPower_04_09.png" alt="" v-if="this.$route.query.hours > 16&&this.$route.query.hours < 19">
+						<img src="../../../static/images/game/game_ElectricPower_04_10.png" alt="" v-if="this.$route.query.hours > 18&&this.$route.query.hours < 21">
+						<img src="../../../static/images/game/game_ElectricPower_04_11.png" alt="" v-if="this.$route.query.hours > 20&&this.$route.query.hours < 23">
+						<img src="../../../static/images/game/game_ElectricPower_04_12.png" alt="" v-if="this.$route.query.hours > 22&&this.$route.query.hours < 25">
+						<h4>{{power}}</h4>
 					</div>
 					<div class="list flex-row">
 						<h4>充电:</h4>
@@ -93,7 +93,7 @@
 				}
 			},
 			getMsg (){
-				this.power = this.$route.query.time;
+        this.power = this.$route.query.time;
         this.powers = this.$route.query.powers;
 			},
   		}
@@ -141,7 +141,7 @@
 		right: 0.2rem;
 	}
 	.list{
-		width: 4.5rem;
+		width:5.5rem;
 		height: auto;
 		margin-bottom: 0.1rem;
 		justify-content: space-between;
@@ -164,6 +164,7 @@
 		color: #f9cc73;
 	}
 	.list h4{
-		width: 0.85rem;
+		width: 2rem;
+    text-align: center;
 	}
 </style>

@@ -1,5 +1,6 @@
 <template>
 	<div class="addAssets">
+    <div style="height: auto;width: 100%">
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="list-father flex-col" v-for="list in lists">
 			<div class="list flex-row">
@@ -15,6 +16,7 @@
 				</div>
 			</div>
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -31,7 +33,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -39,12 +41,12 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		// 注册组件

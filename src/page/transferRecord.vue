@@ -1,5 +1,6 @@
 <template>
 	<div class="transferRecord">
+    <div style="height: auto;width: 100%">
 		<div class="top-module flex-row">
 			<img src="../../static/images/transactionRelease_01.png" alt="" @click="return_page()">
 			<h3>记录</h3>
@@ -30,8 +31,8 @@
 				<h5>{{transfer.created_at}}</h5>
 				<div class="list-bottom flex-row">
 					<h4>{{transfer.addr}}</h4>
-					<h4 class="h4-red" v-if="transfer.num < 0">{{transfer.num|numFilter}}</h4>
-					<h4 class="h4-green" v-else>+{{transfer.num|numFilter}}</h4>
+					<h4 class="h4-red" v-if="transfer.num < 0">{{transfer.num}}</h4>
+					<h4 class="h4-green" v-else>+{{transfer.num}}</h4>
 				</div>
 			</div>
 			<!--没有数据-->
@@ -44,8 +45,8 @@
 				<h5>{{transfer.created_at}}</h5>
 				<div class="list-bottom flex-row">
 					<h4>{{transfer.nickname}}</h4>
-					<h4 class="h4-red" v-if="transfer.num < 0">{{transfer.num|numFilter}}</h4>
-					<h4 class="h4-green" v-else>+{{transfer.num|numFilter}}</h4>
+					<h4 class="h4-red" v-if="transfer.num < 0">{{transfer.num}}</h4>
+					<h4 class="h4-green" v-else>+{{transfer.num}}</h4>
 				</div>
 			</div>
 			<!--没有数据-->
@@ -53,6 +54,7 @@
 				暂无数据
 			</div>
 		</div>
+    </div>
 	</div>
 </template>
 

@@ -1,6 +1,11 @@
 <template>
 	<div class="start">
-		
+    <div style="height: auto;width: 100%">
+
+
+
+
+    </div>
 	</div>
 </template>
 
@@ -9,12 +14,12 @@
         name: 'start',
         data(){
             return {
-            	
+
             }
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -23,7 +28,7 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){

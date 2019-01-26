@@ -1,5 +1,6 @@
 <template>
 	<div class="walletTransfer">
+    <div style="height: auto;width: 100%">
 		<div class="top-module flex-row">
 			<img class="img-left" @click="return_page()" src="../../static/images/return.png"/>
 			<h3>{{title}}转账</h3>
@@ -29,6 +30,7 @@
 		<div class="btn-blue flex-col" @click="btnClick()">
 			确认转账
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -216,6 +218,7 @@
 		padding: 0.3rem 0;
 		border-bottom: 0.01rem solid #b2b6bf;
 		justify-content: space-between;
+    margin: 0 auto;
 	}
 	.list img{
 		width: 0.42rem;
@@ -235,6 +238,7 @@
 		background-color: #4a7cee;
 		font-size: 0.34rem;
 		color: #FFFFFF;
-		margin-top: 0.7rem;
+	margin: .7rem auto 0;
+
 	}
 </style>

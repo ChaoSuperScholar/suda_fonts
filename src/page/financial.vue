@@ -1,5 +1,6 @@
 <template>
 	<div class="financial">
+    <div style="width: 100%;height: auto">
 		<div class="top-module flex-row">
 			<router-link to="application">
 				<img class="img-left" src="../../static/images/return.png"/>
@@ -46,6 +47,7 @@
 				</div>
 			</div>
 		</div>
+    </div>
 	</div>
 </template>
 

@@ -1,5 +1,6 @@
 <template>
 	<div class="addPayment">
+    <div style="height: auto;width: 100%">
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="body  flex-col">
 			<div @click="selectList" class="select flex-row">
@@ -35,6 +36,7 @@
 				确认
 			</div>
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -161,6 +163,7 @@
 	.body{
 		width: 7rem;
 		height: auto;
+    margin: 0 auto;
 	}
 	.select{
 		width: 100%;

@@ -1,5 +1,6 @@
 <template>
 	<div class="popularize">
+    <div style="height: auto;width: 100%">
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="background-color"></div>
 		<div class="bg-color flex-col">
@@ -21,6 +22,7 @@
 				<!--</div>-->
 			</div>
 		</div>
+    </div>
 	</div>
 </template>
 

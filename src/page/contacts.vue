@@ -1,5 +1,6 @@
 <template>
 	<div class="contacts">
+    <div style="height: auto;width: 100%">
 		<div class="top-module flex-row">
 			<img class="img-left" @click="return_page()" src="../../static/images/return.png"/>
 			<h3>联系人</h3>
@@ -24,6 +25,7 @@
 		<div class="no-data flex-row" v-if="!lists.length">
 			暂无数据
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -167,6 +169,7 @@
 		padding: 0.2rem 0;
 		border-bottom: 0.01rem solid #c8cdd9;
 		justify-content: space-between;
+    margin:  0 auto;
 	}
 	.list img{
 		width: 0.68rem;

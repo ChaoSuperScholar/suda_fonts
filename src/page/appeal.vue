@@ -1,5 +1,6 @@
 <template>
 	<div class="appeal">
+    <div style="width: 100%;height: auto">
     <div class="top-module flex-row">
       <img src="../../static/images/transactionRelease_01.png" alt="" @click="return_page()">
       <h3>申诉</h3>
@@ -70,7 +71,7 @@
 			<button type="button" @click="btnClick">提交申诉</button>
 		</div>
 
-
+    </div>
 	</div>
 </template>
 

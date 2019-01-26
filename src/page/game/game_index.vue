@@ -57,12 +57,12 @@
 				</router-link>
 			</div>
 			<div class="bottom-module flex-row">
-				<img src="../../../static/images/game/game_index_12.png" alt="" v-if="statusList.battery_time == 0" @click="goPower()">
-				<img src="../../../static/images/game/game_index_12_01.png" alt="" v-if="statusList.battery_time > 0&&statusList.battery_time < 2" @click="goPower()">
-        <img src="../../../static/images/game/game_index_12_001.png" alt="" v-if="statusList.battery_time > 1&&statusList.battery_time < 7" @click="goPower()">
-				<img src="../../../static/images/game/game_index_12_02.png" alt="" v-if="statusList.battery_time > 6&&statusList.battery_time < 13" @click="goPower()">
-				<img src="../../../static/images/game/game_index_12_03.png" alt="" v-if="statusList.battery_time > 12&&statusList.battery_time < 19" @click="goPower()">
-				<img src="../../../static/images/game/game_index_12_04.png" alt="" v-if="statusList.battery_time > 18&&statusList.battery_time < 25" @click="goPower()">
+				<img src="../../../static/images/game/game_index_12.png" alt="" v-if=" hours <= 0" @click="goPower()">
+				<img src="../../../static/images/game/game_index_12_01.png" alt="" v-if=" hours > 0&& hours < 2" @click="goPower()">
+        <img src="../../../static/images/game/game_index_12_001.png" alt="" v-if=" hours > 1&& hours < 7" @click="goPower()">
+				<img src="../../../static/images/game/game_index_12_02.png" alt="" v-if=" hours > 6&& hours < 13" @click="goPower()">
+				<img src="../../../static/images/game/game_index_12_03.png" alt="" v-if=" hours > 12&& hours < 19" @click="goPower()">
+				<img src="../../../static/images/game/game_index_12_04.png" alt="" v-if=" hours > 18&& hours < 25" @click="goPower()">
 				<div class="btn flex-row" @click="getGoldAll()">
 					<h4>领取 {{sum|numFilter}}</h4>
             <img src="../../../static/images/game/game_index_21.png" alt="">
@@ -165,6 +165,8 @@
 				statusList : [],
 				sum : "",
 				showCoin : [],
+              time:'',
+              hours:'',
 				music : {
 					game_music: 2,
 					game_sound: 2
@@ -314,10 +316,12 @@
 				this.axios.get('/index/suda_game/index')
 				.then(({data}) => {
 					if (data.status == 200) {
-						console.log(data.message);
+						console.log(data);
 						let res = data.data;
 						this.money = res.balance;
 						this.statusList = res;
+
+            this.hours=parseInt(this .statusList.battery_time/3600);
 					} else if(data.status==500){
 						this.layers(data.message);
             this.$router.push({
@@ -400,11 +404,16 @@
 				})
 			},
 			goPower (){
-				this.$router.push({
+        let that= this;
+        let Minute= that.statusList.battery_time/60;
+        let Minutes= parseInt(Minute%60);
+        that.time = that.hours +'小时'+Minutes+'分钟'
+        that.$router.push({
 					path : '/game_ElectricPower',
 					query : {
-						time : this.statusList.battery_time,
-            powers : this.statusList.battery_price
+            hours: that.hours,
+						time :  that.time,
+            powers : that.statusList.battery_price
 					}
 				})
 			},

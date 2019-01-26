@@ -1,5 +1,6 @@
 <template>
 	<div class="paymentMethod">
+    <div style="height: auto;width: 100%">
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="list-father flex-col" v-for="list in lists">
 			<div class="list flex-row">
@@ -43,6 +44,7 @@
 				</div>
 			</router-link>
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -58,7 +60,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -66,12 +68,12 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		// 注册组件
@@ -142,7 +144,7 @@
 						}
 					})
 				}
-				
+
 			}
   		}
     }
@@ -162,8 +164,8 @@
 		height: auto;
 		padding-bottom: 0.3rem;
 		border: 0.01rem solid #d7d8da;
-		margin-top: 0.4rem;
 		border-radius: 0.1rem;
+    margin: .4rem auto 0;
 	}
 	.list{
 		width: 6.6rem;
@@ -240,7 +242,8 @@
 		padding: 0.4rem 0;
 		border: 0.01rem solid #aeb4c3;
 		border-radius: 0.1rem;
-		margin-top: 0.4rem;
+	margin: .4rem auto 0;
+
 	}
 	.addPaycard img{
 		width: 0.58rem;

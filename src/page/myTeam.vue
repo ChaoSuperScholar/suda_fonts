@@ -1,5 +1,6 @@
 <template>
 	<div class="myTeam">
+    <div style="height: auto;width: 100%">
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="background-color"></div>
 		<div class="bg-color flex-col">
@@ -19,6 +20,7 @@
 				<nodata v-if="!lists.length"></nodata>
 			</div>
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -34,7 +36,7 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -42,12 +44,12 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		// 注册组件

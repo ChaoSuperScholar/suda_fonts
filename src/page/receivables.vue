@@ -1,5 +1,6 @@
 <template>
 	<div class="receivables">
+    <div style="height: auto;width: 100%">
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="body  flex-col">
 			<div @click="selectList" class="select flex-row">
@@ -14,12 +15,13 @@
 				<h5 class="tag-read">{{address}}</h5>
 			</div>
 			<div class="qr-code" id="qrcode" ref="qrcode">
-			
+
 			</div>
 			<div id="copy-btn" class="create-btn flex-col">
 				复制钱包地址
 			</div>
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -42,11 +44,11 @@
 		watch: {
 			address: function() {
 				this.initCopyBtn();
-			}			
+			}
 		},
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
@@ -55,11 +57,11 @@
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
-			
+
   		},
 		// 注册组件
 		components:{
@@ -135,7 +137,7 @@
 		        })
 			},
 			selectList (){
-				this.isShowSelect = !this.isShowSelect; 
+				this.isShowSelect = !this.isShowSelect;
 			},
 			choose(list){
 				console.log(list.title);
@@ -169,6 +171,7 @@
 	.body{
 		width: 7rem;
 		height: auto;
+    margin: 0 auto;
 	}
 	.select{
 		width: 100%;

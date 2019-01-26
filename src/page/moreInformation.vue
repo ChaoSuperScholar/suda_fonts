@@ -1,5 +1,6 @@
 <template>
 	<div class="moreInformation">
+    <div style="height: auto;width: 100%">
 		<headerBar :title="indexTitle"></headerBar>
 		<div class="list flex-row">
 			<div class="list-left flex-row">
@@ -22,6 +23,7 @@
 			</div>
 			<h5>15648413621</h5>
 		</div>
+    </div>
 	</div>
 </template>
 
@@ -36,20 +38,20 @@
         },
         // 创建之前
   		beforeCreate: function () {
-  			
+
   		},
   		//创建之后
   		created: function (){
-  			
+
   		},
   		//挂载之前
   		beforeMount: function (){
-  			
+
   		},
   		// 挂载之后
   		mounted: function(){
   			this.$nextTick(function(){
-  				
+
   			})
   		},
 		// 注册组件
@@ -58,7 +60,7 @@
 		},
   		//实例方法
   		methods: {
-  			
+
   		}
     }
 </script>

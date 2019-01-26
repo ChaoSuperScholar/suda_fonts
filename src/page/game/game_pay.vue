@@ -64,6 +64,8 @@
               sdts:'',
               ETH:'',
               eths:'',
+              sdt_sdt_rate:'',
+              eth_rate:'',
 							activeLeft : true,
 							activeRight : false,
 							showLeft : true,
@@ -76,7 +78,7 @@
   		},
   		//创建之后
   		created: function (){
-
+            this.getMsg()
   		},
   		//挂载之前
   		beforeMount: function (){
@@ -90,6 +92,21 @@
   		},
   		//实例方法
   		methods: {
+
+        getMsg (){
+          this.axios.get('/index/suda_game/index')
+            .then(({data}) => {
+              if (data.status == 200) {
+                console.log(data.message);
+                let res = data.data;
+                this.eth_rate=res.eth_rate;
+                this.sdt_rate=res.sdt_rate;
+                console.log( this.sdt_rate);
+              } else {
+                this.layers(data.message);
+              }
+            })
+        },
         goIndex (){
           this.$router.replace('game_index');
         },
@@ -134,18 +151,19 @@
 					})
 				}
   		},
+
       watch:{
         SDT:function () {
-          this.sdts=this.SDT*10
+          this.sdts=this.SDT *  Number(this.sdt_rate)
         },
         sdts:function () {
-          this.SDT=this.sdts/10;
+          this.SDT=this.sdts /  Number(this.sdt_rate)
         },
         ETH:function () {
-          this.eths=this.ETH*1000
+          this.eths=this.ETH * Number(this.eth_rate)
         },
         eths:function () {
-          this.ETH=this.eths/1000
+          this.ETH=this.eths / Number(this.eth_rate)
         }
       }
     }
