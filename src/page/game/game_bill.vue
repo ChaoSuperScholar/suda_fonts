@@ -74,7 +74,7 @@
               <div class="list flex-row" v-for="item in orderItems">
                 <h4 class="text-line-1"><p>{{item[0]}}</p></h4>
                 <h4 class="text-line-1">{{item[1]}}</h4>
-                <h4 class="text-line-1">{{item[2]|numFilter}}</h4>
+                <h4 class="text-line-1">{{item[2]|numFilter0}}</h4>
               </div>
 
               <!-- 没有数据 -->
@@ -162,12 +162,18 @@
       });
     },
     filters: {
-      /*小数点后面保留2位*/
+      /*小数点后面保留4位*/
       numFilter(num, len){
         var len = len || 4;
         var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
         return Number.isInteger(result) ? result.toFixed(len) : result;
-      }
+      },
+      /*小数点后面保留0位*/
+      numFilter0(num, len){
+        var len = len || 0;
+        var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
+        return Number.isInteger(result) ? result.toFixed(len) : result;
+      },
     },
     //实例方法
     methods: {

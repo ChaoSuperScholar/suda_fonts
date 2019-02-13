@@ -23,7 +23,7 @@
 					<h5 class="text-line-1">{{money[0]}}</h5>
 				</div>
 				<div class="gold flex-col">
-					<h5 class="text-line-1">{{money[1]}}</h5>
+					<h5 class="text-line-1">{{money[1]|numFilter0}}</h5>
 				</div>
 				<div class="suda-gold flex-col">
 					<h5 class="text-line-1">{{money[2]|numFilter}}</h5>
@@ -200,7 +200,12 @@
 				var len = len || 4;
 				var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
 				return Number.isInteger(result) ? result.toFixed(len) : result;
-			}
+			},
+      numFilter0(num, len){
+        var len = len || 0;
+        var result = parseInt(num * Math.pow(10, len)) / Math.pow(10, len);
+        return Number.isInteger(result) ? result.toFixed(len) : result;
+      }
 		},
   		//实例方法
   		methods: {
@@ -322,6 +327,7 @@
 						this.statusList = res;
 
             this.hours=parseInt(this .statusList.battery_time/3600);
+            console.log(this.hours)
 					} else if(data.status==500){
 						this.layers(data.message);
             this.$router.push({

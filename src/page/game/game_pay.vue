@@ -27,10 +27,11 @@
 						<div class="flex-col" v-show="showLeft">
 							<div class="input_box flex-row" >
 								<span>充值&nbsp;</span>
-								<input type="number" v-model="SDT" >
-								<span>&nbsp;SDT &nbsp;=&nbsp;</span>
-								<input type="number" v-model="sdts" >
-								<span>&nbsp;金币</span>
+								<input type="number" v-model="sdts"  >
+								<span>&nbsp;金币 &nbsp;=&nbsp;</span>
+                <p>{{SDT}}</p>
+								<!--<input type="number" value="SDT " >-->
+								<span>&nbsp;SDT</span>
 							</div>
 							<!--按钮-->
 							<div class="btns flex-col" @click="btnLeft()"></div>
@@ -38,10 +39,11 @@
 						<div class="flex-col" v-show="showRight">
 							<div class="input_box flex-row">
 								<span>充值&nbsp;</span>
-								<input type="number" v-model="ETH">
-								<span>&nbsp;ETH &nbsp;=&nbsp;</span>
-								<input type="number" v-model="eths">
-								<span>&nbsp;金币</span>
+								<input type="number" v-model="eths" >
+								<span>&nbsp;金币 &nbsp;=&nbsp;</span>
+                <p>{{ETH}}</p>
+								<!--<input type="number" value="ETH">-->
+								<span>&nbsp;ETH</span>
 							</div>
 							<!--按钮-->
 							<div class="btns flex-col" @click="btnRight()"></div>
@@ -99,9 +101,9 @@
               if (data.status == 200) {
                 console.log(data.message);
                 let res = data.data;
-                this.eth_rate=res.eth_rate;
-                this.sdt_rate=res.sdt_rate;
-                console.log( this.sdt_rate);
+                this.eth_rate = res.eth_rate;
+                this.sdt_rate = res.sdt_rate;
+                console.log(this.sdt_rate);
               } else {
                 this.layers(data.message);
               }
@@ -110,60 +112,72 @@
         goIndex (){
           this.$router.replace('game_index');
         },
-				clickLeft (){
-					this.activeLeft = true;
-					this.activeRight = false;
-					this.showLeft = true;
-					this.showRight = false;
-				},
-				clickRight (){
-					this.activeLeft = false;
-					this.activeRight = true;
-					this.showLeft = false;
-					this.showRight = true;
-				},
-				btnLeft (){
-					this.axios.post('/index/suda_game/rechangeGold',{
-						num : this.SDT,
-						type : "SDT"
-					})
-					.then(({data}) => {
-						if (data.status == 200) {
-							this.layers(data.message);
-							this.SDT = ""
-						} else{
-							this.layers(data.message);
-						}
-					})
-				},
-				btnRight (){
-					this.axios.post('/index/suda_game/rechangeGold',{
-						num : this.ETH,
-						type : "ETH"
-					})
-					.then(({data}) => {
-						if (data.status == 200) {
-							this.layers(data.message);
-							this.ETH = ""
-						} else{
-							this.layers(data.message);
-						}
-					})
-				}
-  		},
+        clickLeft (){
+          this.activeLeft = true;
+          this.activeRight = false;
+          this.showLeft = true;
+          this.showRight = false;
+        },
+        clickRight (){
+          this.activeLeft = false;
+          this.activeRight = true;
+          this.showLeft = false;
+          this.showRight = true;
+        },
+        btnLeft (){
+          if (this.sdts % 1 != 0) {
+            this.layers('请输入整数');
+            return
+          } else if (this.sdts % 1 === 0) {
+            this.axios.post('/index/suda_game/rechangeGold', {
+              num: this.sdts,
+              type: "SDT"
+            })
+              .then(({data}) => {
+                if (data.status == 200) {
+                  this.layers(data.message);
+                  this.SDT = ""
+                } else {
+                  this.layers(data.message);
+                }
+              })
+          }
+        },
+        btnRight (){
+          if (this.sdts % 1 != 0) {
+            this.layers('请输入整数');
+            return
+          } else if (this.sdts % 1 === 0) {
+            this.axios.post('/index/suda_game/rechangeGold', {
+              num: this.eths,
+              type: "ETH"
+            })
+              .then(({data}) => {
+                if (data.status == 200) {
+                  this.layers(data.message);
+                  this.ETH = ""
+                } else {
+                  this.layers(data.message);
+                }
+
+              })
+          }
+        },
+      },
 
       watch:{
-        SDT:function () {
-          this.sdts=this.SDT *  Number(this.sdt_rate)
-        },
+/*        SDT:function () {
+          this.sdts=this.SDT *  Number(this.sdt_rate) * 100 / 100
+         },*/
         sdts:function () {
-          this.SDT=this.sdts /  Number(this.sdt_rate)
+          this.SDT=Math.ceil(this.sdts /  Number(this.sdt_rate) * 10000 ) / 10000;
+
         },
-        ETH:function () {
-          this.eths=this.ETH * Number(this.eth_rate)
-        },
+/*        ETH:function () {
+          this.eths=this.ETH * Number(this.eth_rate) * 100 / 100
+        },*/
         eths:function () {
-          this.ETH=this.eths / Number(this.eth_rate)
+          this.ETH=Math.ceil(this.eths /  Number(this.eth_rate) * 10000 ) / 10000;
         }
       }
     }
@@ -236,6 +250,19 @@
     font-size: .18rem;
     color: #f9cc73;
     font-weight: 900;
+  }
+  .Transformation .input_box p{
+    width: 1rem;
+    padding-left: .08rem;
+    height: .45rem;
+    border-radius: .1rem;
+    border: .01rem solid #463317;
+    background: #9a7025;
+    font-size: .18rem;
+    color: #f9cc73;
+    font-weight: 900;
+    line-height: .45rem;
+    overflow: auto;
   }
   .btns{
     width: 2.88rem;
