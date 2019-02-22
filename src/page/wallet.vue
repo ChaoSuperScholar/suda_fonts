@@ -111,8 +111,12 @@
 							this.totalAssets = res.total.money;
 							/* this.imgUrl = res.lists.imgUrl; */
 						} else if(data.status === 10001){
-							this.$router.replace('indexNew');
-						} else{
+              this.$router.replace('indexNew');
+            } else if(data.status === 10002){
+						    this.$router.push({
+						        path:'/aboutUs'
+                })
+            }else{
 							this.layers("請求失敗");
 						}
 					})

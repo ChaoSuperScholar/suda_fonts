@@ -364,7 +364,11 @@
 					    alert(data.message);
             this.layers(data.message);
             this.$router.replace('indexNew');
-          } else{
+          } else if(data.status === 10002){
+          this.$router.push({
+            path:'/aboutUs'
+          })
+        }else{
             this.layers(data.message);
 					}
 				})

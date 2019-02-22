@@ -95,6 +95,10 @@
             console.log(this.items);
 					} else if(data.status === 10001){
             this.$router.replace('indexNew');
+          }else if(data.status === 10002){
+            this.$router.push({
+              path:'/aboutUs'
+            })
           }else{
 						console.log(data);
 					}

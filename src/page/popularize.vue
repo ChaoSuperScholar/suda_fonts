@@ -95,23 +95,23 @@
 						}
 					})
 			},
-			linkCopyBtn() {
-				let that = this;
-				var clipboard = new Clipboard('#copy-btn', {
-					text: function() {
-						return that.link;
-					}
-				}).on('success', e => {
-					this.layers('复制成功');
-					console.log('复制成功')
-					// 释放内存
-				}).on('error', e => {
-					// 不支持复制
-					this.layers('复制失败，请手动复制！');
-					console.log('该浏览器不支持自动复制')
-					// 释放内存
-				})
-			},
+        linkCopyBtn() {
+          let that = this;
+          var clipboard = new Clipboard('#copy-btn', {
+            text: function() {
+              return that.link;
+            }
+          }).on('success', e => {
+            this.layers('复制成功');
+            console.log('复制成功')
+            // 释放内存
+          }).on('error', e => {
+            // 不支持复制
+            this.layers('复制失败，请手动复制！');
+            console.log('该浏览器不支持自动复制')
+            // 释放内存
+          })
+        },
 			codeCopyBtn() {
 				let that = this;
 				var clipboard = new Clipboard('#copy-btn2', {

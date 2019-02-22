@@ -49,9 +49,16 @@ axios.interceptors.request.use(config=>{
   return Promise.reject(error)
 })
 //响应拦截器即异常处理
-axios.interceptors.response.use(response =>{
-  return response
-},error => {
+axios.interceptors.response.use(function (response) {
+  const status = response.status
+  if (status ===200){
+return Promise.resolve(response)
+  }else if (status ===10001) {
+    this.layers(response.message)
+  }else
+  return Promise.reject(response)
+  }
+,error => {
   if (error && error.response) {
     switch (error.response.status){ //跨域存在获取不到状态码的问题
       case 400:

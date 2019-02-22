@@ -78,11 +78,30 @@
               this.version=data.data.version;
             if (data.status == 200) {
                 this.show=true;
-            console.log(data);
+                console.log(data);
               this.version=data.data.version;
-          } else {
-            this.show=false;
-            this.layers(data.message);
+          } else if(data.status == 10002){
+              let _download= confirm('是否前去下载?');
+              if(_download){
+                this.axios.post('/index/suda_user/sure', {
+                  type : this.num
+                })
+                  .then(({data}) => {
+                    if (data.status == 200) {
+                      console.log(data);
+                      this.JX_download(this.url)
+                    } else {
+                      this.layers(data.message);
+                    }
+                  })
+              }else {
+                  var webview = plus.webview.currentWebview();
+                  webview.close();//hide,quit
+
+              }
+          }else {
+              this.show=false;
+              this.layers(data.message);
           }
         })
         },

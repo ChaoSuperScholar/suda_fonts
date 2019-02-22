@@ -679,7 +679,11 @@
 
           if (data.status === 200){
 
-            }else if(data.status === 202) {
+            }else if(data.status === 10002){
+            this.$router.push({
+              path:'/aboutUs'
+            })
+          }else if(data.status === 202) {
             let isTrue = confirm("您尚未进行身份认证,是否前去认证？");
             if (isTrue) {
               this.$router.push({
